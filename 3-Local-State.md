@@ -1,5 +1,10 @@
 ## Local State
 
+### Set state
+
+We set the state through the state class property and access to it via: this.state.theProperty.
+We use the state to determine changes in our UI.
+
 What´s the difference between props and state...?
 Props is read-only data.
 
@@ -20,3 +25,41 @@ class App extends Component {
 <!--
 TODO: Explain template literals
 -->
+
+**Every time the state changes the component will re-render**.
+
+We should avoid initializing the state with props.
+For example:
+
+```
+state = {
+  yourName: this.props.userName
+}
+```
+
+Why...?
+
+1. If the props change (aka, are updated) the state will not reflect them.
+2. To avoid data duplication.
+
+### How to "update" or set new state Value
+
+If we don´t care about the previous state, we can do the following...
+
+```
+componentDidMount() {
+  this.setState({
+    yourName: 'Wendy'
+  });
+}
+```
+
+If we care...
+
+```
+componentDidMount() {
+  this.setState(prevState => ({
+    yourName: `Wendy, ex ${prevState.yourName}!`
+  }));
+}
+```
