@@ -100,4 +100,34 @@ Warning: Failed prop type: Invalid prop `yourAge` of type `number` supplied to `
     in App (at index.js:7)
 ```
 
-Excellent! Everything is working as expected. Change other properties and ensure that you understand what´s happening. Once you finish, please, be sure that you are setting the right types.
+Excellent! Everything is working as expected (aka, every time you use a type different than the one defined, you will see a warning in your console). Change other properties and ensure that you understand what´s happening. Once you finish, please, be sure that you are setting the right types.
+
+##### Most used types...
+
+```
+optionalArray: PropTypes.array,
+optionalBool: PropTypes.bool,
+optionalFunc: PropTypes.func,
+optionalNumber: PropTypes.number,
+optionalObject: PropTypes.object,
+optionalString: PropTypes.string,
+optionalSymbol: PropTypes.symbol
+```
+
+You can define IF a property is required with .isRequired
+
+```
+Child.propTypes = {
+  yourName: PropTypes.string,
+  yourAge: PropTypes.number.isRequired,
+  yourNumbers: PropTypes.array
+};
+```
+
+In this case, if you don´t have that property you console will show something like...
+
+```
+Warning: Failed prop type: The prop `yourAge` is marked as required in `Child`, but its value is `undefined`.
+    in Child (at App.js:17)
+    in App (at index.js:7)
+```
