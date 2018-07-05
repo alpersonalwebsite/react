@@ -131,3 +131,82 @@ Warning: Failed prop type: The prop `yourAge` is marked as required in `Child`, 
     in Child (at App.js:17)
     in App (at index.js:7)
 ```
+
+---
+
+### Escape RegExp
+
+Used to escape RegExp special characters.
+More info: https://www.npmjs.com/package/escape-string-regexp
+
+CMD or terminal:
+
+```
+npm install --save escape-string-regexp
+```
+
+Example use:
+
+```
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import escapeStringRegexp from 'escape-string-regexp';
+
+class App extends Component {
+  state = {
+    yourName: ''
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    this.setState(prevState => {
+      return {
+        yourName: escapeStringRegexp(prevState.yourName)
+      };
+    });
+
+    // Here the Logic or WHAT to do with the data
+  };
+
+  render() {
+    const { yourName } = this.state;
+
+    return (
+      <div className="App">
+        <form onSubmit={this.handleSubmit}>
+          <span>Your name: </span>
+          <input
+            type="text"
+            value={this.state.yourName}
+            onChange={event => this.setState({ yourName: event.target.value })}
+          />
+          <button>Submit</button>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+Type some symbols like: $!#%&/()=?¡'+
+Then, in the React tab of your Dev Tools check the State... You should see:
+
+```
+State
+  yourName: "$!#%&/()=?¡'+"
+```
+
+Now, hit Submit and check (again) the value of yourName property.
+You should see:
+
+```
+State
+ yourName: "\\$!#%&/\\(\\)=\\?¡'\\+"
+```
+
+Bravo...! You know how to escape characters.
+
+---
