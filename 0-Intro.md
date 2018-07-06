@@ -9,4 +9,7 @@
 
 .map(), .reduce() and .filter() examples
 
-### Why Single-Page Apps...?
+<!--
+  TODO: Single Page Apps
+  You download everything is needed once. Then, we request data through async JS requests.
+-->

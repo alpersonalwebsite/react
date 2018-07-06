@@ -1,4 +1,4 @@
-## Functional or stateless Component
+## Components or screens
 
 ### Class Component
 
@@ -18,7 +18,9 @@ class App extends Component {
 export default App;
 ```
 
-### Functional Component
+### Functional or stateless Component
+
+They are regular ES6 functions with implicit return.
 
 ```
 import React from 'react';
@@ -31,3 +33,5 @@ const App = () => (
 
 export default App;
 ```
+
+When to use functional components...? When our component only cares about rendering some "JSX".
