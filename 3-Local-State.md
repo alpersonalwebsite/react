@@ -63,3 +63,10 @@ componentDidMount() {
   }));
 }
 ```
+
+#### Basic difference between props and state
+
+* props: read-only data
+* state: mutable data
+
+Remember: in both cases, either when a Component receives props or the state is "updated", it will re-render.

@@ -8,3 +8,5 @@
 * JavaScript
 
 .map(), .reduce() and .filter() examples
+
+### Why Single-Page Apps...?

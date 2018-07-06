@@ -56,6 +56,8 @@ React.createElement(
 );
 ```
 
+Note about render() method: It should only be used to render or display data; never for async calls.
+
 Install some packages
 CMD: C:\practice\myapp
 
