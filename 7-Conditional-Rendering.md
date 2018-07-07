@@ -2,6 +2,11 @@
 
 Previously we saw some conditional renderings like the "ternary operator". We are going to take back from that point and see different ways to render one or other content in relation to x-criteria.
 
+#### State and Class
+
+First cases we are going to be using the state property conditionIs to show one message or other, consigning as well, just the changes.
+Note: since we are using local state, we are extending the Class instead of employing functional components.
+
 **if/else**
 
 ```
@@ -58,4 +63,29 @@ render() {
 
   return <div>{jSx}</div>;
 }
+```
+
+#### Props and Functional component
+
+**if>return**
+
+```
+import React from 'react';
+
+const Child = props => {
+  if (!props.conditionIs) {
+    return null;
+  }
+
+  return <div>I'm Child! {props.conditionIs}</div>;
+};
+
+const App = () => (
+  <div>
+    I'm App!
+    <Child conditionIs="" />
+  </div>
+);
+
+export default App;
 ```
