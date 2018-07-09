@@ -5,6 +5,7 @@ We need to have installed...
 * create-react-app
 
 Then we have to create our App.
+
 CMD: C:\practice
 
 ```

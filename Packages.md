@@ -260,8 +260,15 @@ ReactDOM.render(
 Why we use exact for "/"...?
 If we don´t add the exact attribute, both screens will render when we go to the main route "/".
 
-* **/**
-* **/** search
+An example to clarify.
+All these routes will match http://localhost:3000/animals/dogs
+
+```
+<Route path="/" component={Something} />
+<Route path="/animals" component={Something}>
+<Route exact path="/animals/dogs" component={Something}>
+<Route path="/animals/dogs" component={Something}>
+```
 
 Note: When we use ReactRouter we are rendering a Router component and passing to it a history prop.
 

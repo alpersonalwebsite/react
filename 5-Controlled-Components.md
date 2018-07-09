@@ -83,3 +83,137 @@ const { yourName, yourAge } = this.state;
 ```
 
 Then, use yourName or yourAge instead of this.props.yourName or this.props.yourAge
+
+##### One note about working with forms
+
+By default, when you submit a form, the fields (name and value) are serialized in the URL:
+
+Example:
+http://localhost:3000/?name=Peter&lastName=Pan&age=30
+
+```
+import React, { Component } from 'react';
+
+class App extends Component {
+  state = {
+    name: '',
+    lastName: '',
+    age: 0
+  };
+
+  updateStateProperty = (stateProperty, statePropertyValue) => {
+    this.setState({ [stateProperty]: statePropertyValue });
+  };
+
+  render() {
+    const { name, lastName, age } = this.state;
+
+    return (
+      <div>
+        <form>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={event =>
+              this.updateStateProperty(event.target.name, event.target.value)
+            }
+          />
+          <input
+            type="text"
+            name="lastName"
+            value={lastName}
+            onChange={event =>
+              this.updateStateProperty(event.target.name, event.target.value)
+            }
+          />
+          <input
+            type="text"
+            name="age"
+            value={age}
+            onChange={event =>
+              this.updateStateProperty(event.target.name, event.target.value)
+            }
+          />
+          <button>Submit!</button>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+Alternatively, we can use packages like form-serialize; this library, allows us to serialize the fields (names and values) into an object and, preventing the default behavior of form (submit), we can show that data without reloading the page.
+
+Example: (you need to have form-serialize installed through npm or yarn. For more information and HOW to use it, please visit: https://www.npmjs.com/package/form-serialize)
+
+Example:
+
+```
+import React, { Component } from 'react';
+import formSerialize from 'form-serialize';
+
+class App extends Component {
+  state = {
+    name: '',
+    lastName: '',
+    age: 0
+  };
+
+  updateStateProperty = (stateProperty, statePropertyValue) => {
+    this.setState({ [stateProperty]: statePropertyValue });
+  };
+
+  submitHandler = e => {
+    e.preventDefault();
+    const userObject = formSerialize(e.target, { hash: true });
+    console.log(userObject);
+  };
+
+  render() {
+    const { name, lastName, age } = this.state;
+
+    return (
+      <div>
+        <form onSubmit={this.submitHandler}>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={event =>
+              this.updateStateProperty(event.target.name, event.target.value)
+            }
+          />
+          <input
+            type="text"
+            name="lastName"
+            value={lastName}
+            onChange={event =>
+              this.updateStateProperty(event.target.name, event.target.value)
+            }
+          />
+          <input
+            type="text"
+            name="age"
+            value={age}
+            onChange={event =>
+              this.updateStateProperty(event.target.name, event.target.value)
+            }
+          />
+          <button>Submit!</button>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+Result: (check you Dev Tools Console)
+
+```
+Object { name: "Peter", lastName: "Pan", age: "30" }      App.js:18
+```
