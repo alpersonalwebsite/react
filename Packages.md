@@ -257,8 +257,41 @@ ReactDOM.render(
 );
 ```
 
+Why we use exact for "/"...?
+If we don´t add the exact attribute, both screens will render when we go to the main route "/".
+
+* **/**
+* **/**search
+
 Note: When we use ReactRouter we are rendering a Router component and passing to it a history prop.
 
 If you open the React DevTools you will see something like this...
 
 ![React DevTools: Router and Routes](/images/react-devTools-reactRouter.png)
+
+Route component takes a path and renders its proper UI.
+
+We don´t use <a> if not Link which keeps sync with BrowserRouter; Link renders an anchor tag.
+We can pass parameters to Link using an object instead of a string as value.
+
+```
+<BrowserRouter>
+  <div>
+    <Route
+      path="/home"
+      render={() => (
+        <div>
+          <Link
+            to={{
+              pathname: '/search',
+              search: '?sort=date',
+              hash: '#the-hash'
+            }}
+          >Advanced Search
+          </Link>
+        </div>
+      )}
+    />
+  </div>
+</BrowserRouter>,
+```
