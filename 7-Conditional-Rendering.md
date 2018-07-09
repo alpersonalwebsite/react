@@ -34,7 +34,7 @@ class App extends Component {
 export default App;
 ```
 
-**if/else** ():()
+**if/else** ? ():()
 
 ```
 render() {
@@ -65,9 +65,24 @@ render() {
 }
 ```
 
+**if &&**
+
+```
+render() {
+  const { conditionIs } = this.state;
+
+  return (
+    <div>
+      {conditionIs && `I've a cristal clear state... I'm ${conditionIs}`}
+    </div>
+  );
+}
+}
+```
+
 #### Props and Functional component
 
-**if>return**
+**if > return**
 
 ```
 import React from 'react';
