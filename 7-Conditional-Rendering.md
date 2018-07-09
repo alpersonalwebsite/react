@@ -65,7 +65,7 @@ render() {
 }
 ```
 
-**if &&**
+**if &&** (short-circuit evaluation)
 
 ```
 render() {

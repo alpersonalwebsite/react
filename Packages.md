@@ -256,3 +256,9 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
+
+Note: When we use ReactRouter we are rendering a Router component and passing to it a history prop.
+
+If you open the React DevTools you will see something like this...
+
+![React DevTools: Router and Routes](/images/react-devTools-reactRouter.png)
