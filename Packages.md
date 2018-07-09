@@ -261,7 +261,7 @@ Why we use exact for "/"...?
 If we don´t add the exact attribute, both screens will render when we go to the main route "/".
 
 * **/**
-* **/**search
+* **/** search
 
 Note: When we use ReactRouter we are rendering a Router component and passing to it a history prop.
 
