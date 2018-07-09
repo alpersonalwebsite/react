@@ -210,3 +210,49 @@ State
 Bravo...! You know how to escape characters.
 
 ---
+
+### React Router
+
+Declarative routing for React.
+More info: https://www.npmjs.com/package/react-router
+
+```
+npm install --save react-router
+```
+
+Note: This package provides the core routing functionality for React Router, but you might not want to install it directly. If you are writing an application that will run in the browser, you should instead install react-router-dom. Similarly, if you are writing a React Native application, you should instead install react-router-native. Both of those will install react-router as a dependency.
+
+Since we are just caring about a WebApp (an app that will run in a browser) we are going to use react-router-dom.
+
+CMD or terminal:
+
+```
+npm install --save react-router-dom
+```
+
+Example use:
+
+```
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+ReactDOM.render(
+  <BrowserRouter>
+    <div>
+      <Route
+        path="/search"
+        render={() => (
+          <div>
+            Searching...?
+            <Link to="/">Go home!</Link>
+          </div>
+        )}
+      />
+      <Route exact path="/" component={App} />
+    </div>
+  </BrowserRouter>,
+  document.getElementById('root')
+);
+```
