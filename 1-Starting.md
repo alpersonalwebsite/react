@@ -59,11 +59,37 @@ React.createElement(
 
 Note about render() method: It should only be used to render or display data; never for async calls.
 
-Install some packages
-CMD: C:\practice\myapp
+**createElement()**
+
+Returns a JavaScript object
+
+Example:
 
 ```
-npm install react-router-dom --save
+const element = React.createElement('div', null,
+  React.createElement('strong', null, 'Hello world!')
+);
+```
+
+**ReactDOM.render()**
+
+Example: src/index.js
+
+```
+ReactDOM.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById('root')
+);
+```
+
+Note: Remember React Apps usually have a single root element.
+
+public/index.html
+
+```
+<div id="root"></div>
 ```
 
 <!--

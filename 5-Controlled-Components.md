@@ -212,7 +212,7 @@ class App extends Component {
 export default App;
 ```
 
-Result: (check you Dev Tools Console)
+Result: (check your Dev Tools Console)
 
 ```
 Object { name: "Peter", lastName: "Pan", age: "30" }      App.js:18
