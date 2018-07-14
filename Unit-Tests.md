@@ -67,7 +67,14 @@ describe('<App />', () => {
 });
 ```
 
-And... Run your tests...
+---
+
+Notes:
+We use describe to group test. We can nest describe to tie (as well) sub-groups. We will see this in behavioral tests.
+
+---
+
+Run your tests...
 
 ```
 npm test
@@ -86,10 +93,114 @@ If you are going to be working with several people, exclude this folder from Git
 **/__snapshots__
 ```
 
-Feel free to check the strcuture of your Snapshot. Go to **src/\_\_snapshots/App.test.js.snap**
+Feel free to check the structure of your Snapshot. Go to **src/\_\_snapshots/App.test.js.snap**
 
 Now, make a small change in your App Component. Just add a comment inside your class.
+If you check your console you will see something like...
+
+![Unit Test: Snapshot not matching previous one](/images/unit-test-diff-snapshot.png)
+
+As it says, just hit u (update) and all your test will be green (status = passed) again.
 
 ### Coverage
+
+### Structural Testing
+
+### BDD: Behavior Driven Development
+
+We are going to make several changes in our App Component.
+
+src/App.js
+
+```
+import React, { Component } from 'react';
+
+class App extends Component {
+  state = {
+    friend: '',
+    friends: []
+  };
+
+  updateStateProperty = (stateProperty, statePropertyValue) => {
+    this.setState({ [stateProperty]: statePropertyValue });
+  };
+
+  submitHandler = e => {
+    e.preventDefault();
+
+    this.setState(previousState => {
+      return {
+        friends: [...previousState.friends, this.state.friend],
+        friend: ''
+      };
+    });
+  };
+
+  render() {
+    const { friend } = this.state;
+    return (
+      <div>
+        <h1 className="title">Add your friends!</h1>
+        <form onSubmit={this.submitHandler}>
+          <input
+            type="text"
+            name="friend"
+            value={friend}
+            onChange={event =>
+              this.updateStateProperty(event.target.name, event.target.value)
+            }
+          />
+          <button>Add friend!</button>
+        </form>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+This is a Controlled Component: local state property sets the value for the input. Then, when clicking, that value populates to the property friends (graving the previous state and appending the new one at the end of the array) "cleaning" (aka, setting to empty string) the value of the state property friend.
+
+Now, we have to add the proper UT.
+I will start testing that I should cover...
+
+* That I have a title which is an h1 with class title
+* That I have a form
+* That I have an input which type is text
+* That I have JUST ONE button
+
+**src/App.test.js**
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { mount } from 'enzyme';
+import App from './App';
+
+describe('<App />', () => {
+  const wrapper = mount(<App />);
+
+  it('matches the previous Snapshot', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('has a h1 as title with class title', () => {
+    expect(wrapper.find('h1.title').exists()).toBe(true);
+  });
+
+  describe('with a form that', () => {
+    it('has a input with type text', () => {
+      expect(wrapper.find('[type="text"]').exists()).toBe(true);
+    });
+    it('has JUST ONE button', () => {
+      expect(wrapper.find('button')).toHaveLength(1);
+    });
+  });
+});
+```
+
+And, the SC of our console...
+![Unit Test: Snapshot not matching previous one](/images/unit-test-structure.png)
 
 ### Mock
