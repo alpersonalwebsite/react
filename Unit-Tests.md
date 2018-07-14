@@ -48,7 +48,7 @@ configure({ adapter: new Adapter(), disableLifecycleMethods: true });
 
 ### Snapshots
 
-Snapshots are a recorded history of our code to verify that previous "captures" match current ones after changes (so, we prevent unwanted changes).
+Snapshots are a recorded history of our Component to verify that previous "captures" match current ones after changes (so, we prevent unwanted changes).
 
 Create the file src/App.test.js (if you have it, delete ALL its content)
 
@@ -61,7 +61,7 @@ import App from './App';
 describe('<App />', () => {
   const wrapper = mount(<App />);
 
-  it('renders without crashing', () => {
+  it('matches the previous Snapshot', () => {
     expect(wrapper).toMatchSnapshot();
   });
 });
@@ -77,6 +77,18 @@ You can also use yarn (yarn test)
 
 The result will be...
 ![Unit Test: Snapshot](/images/unit-test-snapshot.png)
+
+You will see in your root dir, in our case, src a new folder **\_\_snapshots\_\_**
+If you are going to be working with several people, exclude this folder from Git. In this case, add the following rule to your **.gitignore**
+
+```
+# testing
+**/__snapshots__
+```
+
+Feel free to check the strcuture of your Snapshot. Go to **src/\_\_snapshots/App.test.js.snap**
+
+Now, make a small change in your App Component. Just add a comment inside your class.
 
 ### Coverage
 
