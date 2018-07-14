@@ -13,7 +13,7 @@ First, install enzyme and the proper adapter
 CMD or terminal:
 
 ```
-npm install enzyme enzyme-adapter-react-16 jest-cli --save-dev  
+npm install enzyme enzyme-adapter-react-16 jest-cli@20.0.4 --save-dev  
 ```
 
 Yes... We are saving it as a dev dependency. So, if you go to your package.json you will see something like:
@@ -22,23 +22,13 @@ Yes... We are saving it as a dev dependency. So, if you go to your package.json 
 "devDependencies": {
   "enzyme": "^3.3.0",
   "enzyme-adapter-react-16": "^1.1.1",
-  "jest-cli": "^23.4.0"
+  "jest-cli": "^20.0.4"
 }
 ```
 
-In your package.json, change...
+Note: At the moment I´m writing this tuto the last Jest version is 23.4.1, however, react-scripts is locked at 20.0.4 so other will not work.
 
-```
-"test": "react-scripts test --env=jsdom",
-```
-
-with...
-
-```
-"test": "react-scripts test --env=jsdom --watchAll"
-```
-
-Then we are going to create **tempPolyfills.js**
+We are going to create **src/tempPolyfills.js**
 
 ```
 const requestAnimationFrame = global.requestAnimationFrame = callback => {
@@ -47,7 +37,7 @@ const requestAnimationFrame = global.requestAnimationFrame = callback => {
 export default requestAnimationFrame;
 ```
 
-And, **setupTests.js**
+And, **src/setupTests.js**
 
 ```
 import requestAnimationFrame from './tempPolyfills';
@@ -61,6 +51,27 @@ configure({ adapter: new Adapter(), disableLifecycleMethods: true });
 Snapshots are a recorded history of our code to verify that previous "captures" match current ones after changes (so, we prevent unwanted changes).
 
 Create the file src/App.test.js (if you have it, delete ALL its content)
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { mount } from 'enzyme';
+import App from './App';
+
+describe('<App />', () => {
+  it('renders without crashing', () => {
+    const wrapper = mount(<App />);
+  });
+});
+```
+
+And... Run your tests...
+
+```
+npm test
+```
+
+You can also use yarn (yarn test)
 
 ### Coverage
 
