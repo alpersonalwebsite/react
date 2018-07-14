@@ -59,8 +59,10 @@ import { mount } from 'enzyme';
 import App from './App';
 
 describe('<App />', () => {
+  const wrapper = mount(<App />);
+
   it('renders without crashing', () => {
-    const wrapper = mount(<App />);
+    expect(wrapper).toMatchSnapshot();
   });
 });
 ```
@@ -72,6 +74,9 @@ npm test
 ```
 
 You can also use yarn (yarn test)
+
+The result will be...
+![Unit Test: Snapshot](/images/unit-test-snapshot.png)
 
 ### Coverage
 
