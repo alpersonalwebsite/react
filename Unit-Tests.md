@@ -83,6 +83,7 @@ npm test
 You can also use yarn (yarn test)
 
 The result will be...
+
 ![Unit Test: Snapshot](/images/unit-test-snapshot.png)
 
 You will see in your root dir, in our case, src a new folder **\_\_snapshots\_\_**
@@ -163,12 +164,13 @@ export default App;
 This is a Controlled Component: local state property sets the value for the input. Then, when clicking, that value populates to the property friends (graving the previous state and appending the new one at the end of the array) "cleaning" (aka, setting to empty string) the value of the state property friend.
 
 Now, we have to add the proper UT.
-I will start testing that I should cover...
+I will start testing...
 
 * That I have a title which is an h1 with class title
-* That I have a form
 * That I have an input which type is text
 * That I have JUST ONE button
+
+You can also check the existence of the form tag. I´m letting this one as homework :)
 
 **src/App.test.js**
 
@@ -201,6 +203,59 @@ describe('<App />', () => {
 ```
 
 And, the SC of our console...
+
 ![Unit Test: Snapshot not matching previous one](/images/unit-test-structure.png)
+
+Great job!
+
+We have to test the behavior or functionality.
+
+<!-- TODO: pollution issues
+-->
+
+Let´s add this to our **src/App.test.js**
+
+```
+describe('when adding a friend', () => {
+  let theFriend = 'peter';
+
+  // Initial state
+  console.log(wrapper.state());
+
+  // We add to the peter to the `friend` state´s property
+  beforeEach(() => {
+    // I´m adding the name to keep the behavior of my method: updateStateProperty
+    wrapper.find('input').simulate('change', {
+      target: { name: 'friend', value: theFriend }
+    });
+  });
+  it('updates the value of `friend` state´s property', () => {
+    console.log(wrapper.state());
+    expect(wrapper.state().friend).toEqual(theFriend);
+  });
+
+  describe('and adding the new friend to the list', () => {
+    beforeEach(() => {
+      // Yes... We simulate the event from the button
+      // Our submit handler will clear as well `friend` state´s property
+      wrapper.find('button').simulate('submit');
+    });
+
+    it('adds the new friend to `friends` state´s property', () => {
+      console.log(wrapper.state());
+      expect(wrapper.state().friends[0]).toEqual(theFriend);
+    });
+    // Now we want to clear our `friends` state´s property or set it to the initial state
+    afterEach(() => {
+      wrapper.setState({ friends: [] });
+      console.log(wrapper.state());
+    });
+  }); // close describe: and adding the new friend to the list
+}); // close describe: when adding a friend
+```
+
+Now, if you run the tests your console will look like...
+
+![Unit Test: Behavior testing](/images/unit-test-behavior.png)
 
 ### Mock
