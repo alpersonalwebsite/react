@@ -105,6 +105,17 @@ As it says, just hit u (update) and all your test will be green (status = passed
 
 ### Coverage
 
+We can use Jest´s functionality to corroborate the coverage of our UT.
+
+CMD or terminal:
+
+```
+npm test -- --coverage
+```
+
+Result:
+![Unit Test: Snapshot not matching previous one](/images/jest-coverage.png)
+
 ### Structural Testing
 
 ### BDD: Behavior Driven Development
@@ -265,6 +276,15 @@ Now, if you run the tests your console will look like...
 
 ![Unit Test: Behavior testing](/images/unit-test-behavior.png)
 
-Note: We are printing our state several times with console.log(wrapper.state()) so you can see clearly the changes in each instance.
+Notes:
+We are printing our state several times with console.log(wrapper.state()) so you can see clearly the changes in each instance.
+Reserved words like const and object properties (in our example friend and friend) should be between backtick (\`\`).
+If we are targeting an element among several, for example, if we had 2 or more buttons, we could refer to the particular button (the one that we use to submit) through class, id... or, using .at(position)...
+
+Example: to find the first button
+
+```
+wrapper.find('button').at(0).simulate('submit');
+```
 
 ### Mock
