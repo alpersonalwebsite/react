@@ -210,8 +210,15 @@ Great job!
 
 We have to test the behavior or functionality.
 
+* That we have a Controlled Component: input data will update friend state property and be reflected as the value of the input element.
+* That submitting the form should update the friends state property with the value of friend and set -then- the value of friend to empty string.
+
 <!-- TODO: pollution issues
 -->
+
+Note: beforeEach(() => {} and afterEach(() => {} will execute functionality before/ater each IT on their scope.
+
+<!-- TODO: Maybe an example can clarify the scope -->
 
 Let´s add this to our **src/App.test.js**
 
@@ -257,5 +264,7 @@ describe('when adding a friend', () => {
 Now, if you run the tests your console will look like...
 
 ![Unit Test: Behavior testing](/images/unit-test-behavior.png)
+
+Note: We are printing our state several times with console.log(wrapper.state()) so you can see clearly the changes in each instance.
 
 ### Mock
