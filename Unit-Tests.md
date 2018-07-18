@@ -290,6 +290,22 @@ Example: to find the first button
 wrapper.find('button').at(0).simulate('submit');
 ```
 
+We can also nest element. Example:
+
+```
+<div>
+  <h1>Hello</h1>
+</div>
+```
+
+UT:
+
+```
+it('renders an h1 title', () => {
+    expect(wrapper.find('div h1').text()).toEqual('Hello');
+  });
+```
+
 #### Mount and Shallow
 
 Let´s add first a functional component to the previous **src/App.js** code
@@ -336,6 +352,8 @@ Result:
 </div>
 ```
 
+Note: Remember that console.log(wrapper.debug()); prints in the console (aka, your CMD or terminal) the component´s structure.
+
 **Mount**
 
 Just replace shallow with mount.
@@ -362,5 +380,9 @@ Result:
   </div>
 </App>
 ```
+
+<!-- TODO: Difference between Shallow and Mount -->
+
+<!-- TODO: Issue with <Link> and Mount-->
 
 ### Mock
