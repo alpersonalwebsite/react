@@ -185,3 +185,5 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 ```
+
+![Redux DevTools SC](/images/redux-devTools-state.png)

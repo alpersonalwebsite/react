@@ -385,4 +385,8 @@ Result:
 
 <!-- TODO: Issue with <Link> and Mount-->
 
+### Connected components
+
+<!-- TODO: Check final link to Reudx.md -->
+
 ### Mock
