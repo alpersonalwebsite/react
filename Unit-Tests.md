@@ -1,12 +1,14 @@
 ## Unit Tests
 
+<!-- TODO: What´s Unit Test -->
+
 I recommend you to follow the TDD (Test Driven Development)
 You start writing the boiler-plate of your Unit Test, then you run the test which will fail and it will determine the feature that you should add to your script/program... and so on.
 
-When you use create-react-app you are wiring up -as well- Jest (Facebook).
+When you use create-react-app you are wiring up -as well- Jest (Facebook's test runner).
 Your files should have the extension \*.test.js or be inside \_\_tests\_\_
 
-In our examples we will use -also- Enzyme (Airbnb).
+In our examples we will use -also- Enzyme (Airbnb's React testing library).
 
 First, install enzyme and the proper adapter
 
@@ -26,7 +28,7 @@ Yes... We are saving it as a dev dependency. So, if you go to your package.json 
 }
 ```
 
-Note: At the moment I´m writing this tuto the last Jest version is 23.4.1, however, react-scripts is locked at 20.0.4 so other will not work.
+Note: At the moment I´m writing this tutorial the last Jest version is 23.4.1, however, react-scripts is locked at 20.0.4 so other will not work.
 
 We are going to create **src/tempPolyfills.js**
 
@@ -70,7 +72,8 @@ describe('<App />', () => {
 ---
 
 Notes:
-We use describe to group test. We can nest describe to tie (as well) sub-groups. We will see this in behavioral tests.
+We use `describe` to group test. We can nest describes to tie (as well) sub-groups. We will see this in behavioral tests.
+We use `it` for each test.
 
 ---
 
@@ -105,7 +108,7 @@ As it says, just hit u (update) and all your test will be green (status = passed
 
 ### Coverage
 
-We can use Jest´s functionality to corroborate the coverage of our UT.
+We can use Jest´s functionality to corroborate the coverage (%) of our UT.
 
 CMD or terminal:
 
@@ -114,7 +117,7 @@ npm test -- --coverage
 ```
 
 Result:
-![Unit Test: Snapshot not matching previous one](/images/jest-coverage.png)
+![Unit Test: Jest Coverage](/images/jest-coverage.png)
 
 ### Structural Testing
 
@@ -122,7 +125,7 @@ Result:
 
 We are going to make several changes in our App Component.
 
-src/App.js
+**src/App.js**
 
 ```
 import React, { Component } from 'react';
@@ -285,6 +288,79 @@ Example: to find the first button
 
 ```
 wrapper.find('button').at(0).simulate('submit');
+```
+
+#### Mount and Shallow
+
+Let´s add first a functional component to the previous **src/App.js** code
+
+```
+const Child = () => {
+  return <div>I'm Child!</div>;
+};
+```
+
+Now, let´s console the structure of the Component using `shallow` and `mount`
+
+**Shallow**
+
+```
+import React from 'react';
+import { shallow } from 'enzyme';
+import App from './App';
+
+describe('<App />', () => {
+  const wrapper = shallow(<App />);
+
+  it('matches the previous Snapshot', () => {
+    expect(wrapper).toMatchSnapshot();
+    console.log(wrapper.debug());
+  });
+});
+```
+
+Result:
+
+```
+<div>
+  <h1 className="title">
+    Add your friends!
+  </h1>
+  <form onSubmit={[Function]}>
+    <input type="text" name="friend" value="" onChange={[Function: onChange]} />
+    <button>
+      Add friend!
+    </button>
+  </form>
+  <Child />
+</div>
+```
+
+**Mount**
+
+Just replace shallow with mount.
+
+Result:
+
+```
+<App>
+  <div>
+    <h1 className="title">
+      Add your friends!
+    </h1>
+    <form onSubmit={[Function]}>
+      <input type="text" name="friend" value="" onChange={[Function: onChange]} />
+      <button>
+        Add friend!
+      </button>
+    </form>
+    <Child>
+      <div>
+        I&#39;m Child!
+      </div>
+    </Child>
+  </div>
+</App>
 ```
 
 ### Mock
