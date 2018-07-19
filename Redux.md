@@ -6,7 +6,7 @@ Let´s install some libraries.
 npm install axios react-redux redux-promise redux --save
 ```
 
-<!-- TODO: Add tp packages
+<!-- TODO: Add to packages
 * axios
 * react-redux
 * redux-promise
@@ -185,5 +185,7 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 ```
+
+If we check our Redux DevTools console...
 
 ![Redux DevTools SC](/images/redux-devTools-state.png)

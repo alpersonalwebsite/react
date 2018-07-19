@@ -387,6 +387,51 @@ Result:
 
 ### Connected components
 
-<!-- TODO: Check final link to Reudx.md -->
+<!-- TODO: Check final link to Redux.md -->
+
+We are going to use the example that we have in our Redux chapter.
+We tested the structural and behavioral part earlier. However, try to run the test again.
+
+You will see...
+
+![Unit Test: Store issue](/images/unit-test-redux-app.png)
+
+So first, let´s delimit the context changing (in our test) mount with shallow.
+Now, we are going to export our class (or function) to test the component itself rather than the connected component.
+
+We will have 2 exports (one by default, the connected component)
+
+**src/components/App.js**
+
+```
+...
+export class App extends Component {}
+
+...
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+```
+
+In our UT we will destructure from our component the unconnected version.
+
+So we will replace...
+
+**src/components/App.test.js**
+
+```
+import App from './App';
+```
+
+with...
+
+```
+import { App } from './App';
+```
+
+Hit `u` to update your Snapshot.
+Your console will look like...
+
+![Unit Test: Store issue 1](/images/unit-test-redux-app1.png)
+
+As you can see, we are getting closer to the solution.
 
 ### Mock
