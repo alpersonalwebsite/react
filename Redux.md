@@ -189,3 +189,77 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
 If we check our Redux DevTools console...
 
 ![Redux DevTools SC](/images/redux-devTools-state.png)
+
+---
+
+Now, instead of dispatching in our Component we are going to resolve the promise and dispatch from our action creator using redux-thunk (we were using redux-promise to return an action with the payload property and a promise as value).
+
+<!-- TODO: Add redux-thunk to packages -->
+
+We have to add redux-thunk middleware to our src/index.js
+
+```
+const store = createStore(
+  rootReducer,
+  //composeEnhancers(applyMiddleware(ReduxPromise))
+  composeEnhancers(applyMiddleware(reduxThunk))
+);
+```
+
+Go to src/actions/index.js
+
+```
+import { FETCH_COMMENTS } from './types';
+
+import axios from 'axios';
+
+const api = 'https://jsonplaceholder.typicode.com/';
+
+const headers = {
+  Accept: 'application/json'
+};
+
+export const fetchComments = () => async dispatch => {
+  const query = 'comments';
+  const endPoint = `${api}${query}`;
+
+  const request = await axios.get(endPoint, { headers });
+  dispatch({ type: FETCH_COMMENTS, payload: request.data });
+};
+```
+
+Go to src/reducers/commentsReducer.js and replace return action.payload.data; with return action.payload
+
+Go to your component, example: src/App.js and...
+
+Replace...
+
+```
+import { fetchComments } from './actions';
+```
+
+with...
+
+```
+import * as actions from './actions';
+```
+
+Remove...
+
+```
+function mapDispatchToProps(dispatch) {
+return bindActionCreators({ fetchComments }, dispatch);
+}
+```
+
+Replace...
+
+```
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+```
+
+with...
+
+```
+export default connect(mapStateToProps, actions)(App);
+```

@@ -455,4 +455,8 @@ Your tests should be green again...
 
 ![Unit Test: Store issue - Fix](/images/unit-test-redux-app2.png)
 
+##### Testing Actions Creators
+
+Create a new file: **src/actions/index.test.js** ... ... ...
+
 ### Mock
