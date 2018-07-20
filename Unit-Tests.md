@@ -433,5 +433,26 @@ Your console will look like...
 ![Unit Test: Store issue 1](/images/unit-test-redux-app1.png)
 
 As you can see, we are getting closer to the solution.
+Now, replace the UT...
+
+```
+beforeEach(() => {
+  // Yes... We simulate the event from the button
+  // Our submit handler will clear as well `friend` state´s property
+  wrapper.find('button').simulate('submit');
+});
+```
+
+with...
+
+```
+beforeEach(() => {
+  wrapper.find('form').simulate('submit', { preventDefault() {} });
+});
+```
+
+Your tests should be green again...
+
+![Unit Test: Store issue - Fix](/images/unit-test-redux-app2.png)
 
 ### Mock
