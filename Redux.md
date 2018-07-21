@@ -192,11 +192,11 @@ If we check our Redux DevTools console...
 
 ---
 
-Now, instead of dispatching in our Component we are going to resolve the promise and dispatch from our action creator using redux-thunk (we were using redux-promise to return an action with the payload property and a promise as value).
+Now, instead of dispatching in our Component we are going to resolve the promise and dispatch from our action creator using `redux-thunk` (we were using `redux-promise` to return an action with the payload property and a promise as value).
 
 <!-- TODO: Add redux-thunk to packages -->
 
-We have to add redux-thunk middleware to our src/index.js
+We have to add redux-thunk middleware to our **src/index.js**
 
 ```
 const store = createStore(
@@ -206,7 +206,7 @@ const store = createStore(
 );
 ```
 
-Go to src/actions/index.js
+Go to **src/actions/index.js**
 
 ```
 import { FETCH_COMMENTS } from './types';
@@ -228,9 +228,9 @@ export const fetchComments = () => async dispatch => {
 };
 ```
 
-Go to src/reducers/commentsReducer.js and replace return action.payload.data; with return action.payload
+Go to **src/reducers/commentsReducer.js** and replace `return action.payload.data;` with `return action.payload;`
 
-Go to your component, example: src/App.js and...
+Go to your component, example: **src/App.js** and...
 
 Replace...
 
@@ -263,3 +263,5 @@ with...
 ```
 export default connect(mapStateToProps, actions)(App);
 ```
+
+Check your Redux DevTools. You should have the same results as previously.
