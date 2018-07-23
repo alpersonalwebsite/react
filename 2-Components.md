@@ -5,6 +5,7 @@
 Plus...
 They only required render() methods
 Through components we create React Elements
+Data flows down... For parent to child.
 -->
 
 ### Class Component

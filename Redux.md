@@ -1,5 +1,32 @@
 ## Redux
 
+<!-- What´s Redux
+It´s not only for React.
+It´s for handling state in a predictable way.
+-->
+
+In Redux there´s a single Source of Truth: the store. The state is read-only (immutable).
+Reducers create and return a new copy of the state.
+
+When to use Redux...
+
+1. Shared state through multiple Components. Let´s say that we have ComponentA with one child, ComponentB. We can easily pass data down with props. But, if we need to pass the data across several components (example: from A->B->-C->D) we should consider the global state or Redux store so we can instruct (without nesting) which components will have access to that data.
+2. Caching: when we want to cache API requests/responses.
+
+For other cases, we should opt for Local State.
+
+### Pure functions
+
+We make changes in the state through pure functions.
+
+What are Pure Functions...?
+
+1. They depend just in the arguments that we pass.
+2. Same arguments should return same results.
+3. They don´t produce side effects.
+
+<!-- TODO: Example of pure function and check definition and characteristics -->
+
 Let´s install some libraries.
 
 ```

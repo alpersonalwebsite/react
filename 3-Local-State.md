@@ -1,5 +1,7 @@
 ## Local State
 
+<!-- TODO: What´s Local State -->
+
 ### Set state
 
 We set the state through the state class property and access to it via: this.state.theProperty.
