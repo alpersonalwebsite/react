@@ -1,5 +1,12 @@
 ## Components or screens
 
+<!-- TODO: What are Components
+
+Plus...
+They only required render() methods
+Through components we create React Elements
+-->
+
 ### Class Component
 
 ```

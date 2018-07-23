@@ -455,8 +455,22 @@ Your tests should be green again...
 
 ![Unit Test: Store issue - Fix](/images/unit-test-redux-app2.png)
 
+---
+
+Note: for the following examples you need to make (previously) the changes consigned in Redux Part 2.
+
+---
+
+<!-- TODO: Add link to redux-thunk dispatching from action creators -->
+
 ##### Testing Actions Creators
 
-Create a new file: **src/actions/index.test.js** ... ... ...
+Create a new file: **src/actions/index.test.js**
+
+<!-- TODO: Add redux-mock-store and fetch-mock on packages. This are dev dependencies. -->
+
+...
+...
+...
 
 ### Mock

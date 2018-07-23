@@ -2,7 +2,7 @@ We need to have installed...
 
 * node
 * npm or yarn
-* create-react-app
+* create-react-app: npm install -g create-react-app
 
 Then we have to create our App.
 
