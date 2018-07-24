@@ -5,7 +5,8 @@ It´s not only for React.
 It´s for handling state in a predictable way.
 -->
 
-In Redux there´s a single Source of Truth: the store. The state is read-only (immutable).
+In Redux there´s a single Source of Truth: the store.
+The state is read-only (immutable); components cannot write directly into the state.
 Reducers create and return a new copy of the state.
 
 When to use Redux...
@@ -26,6 +27,30 @@ What are Pure Functions...?
 3. They don´t produce side effects.
 
 <!-- TODO: Example of pure function and check definition and characteristics -->
+
+One common example of pure and impure functions...
+
+**Pure function: slice()**
+
+```
+let numbers = [1,2,3,4,5,6];
+numbers.slice(3,5);
+// Array [ 4, 5 ]
+
+console.log(numbers);
+// Array [1,2,3,4,5,6];
+```
+
+**Impure function: splice()**
+
+```
+let numbers = [1,2,3,4,5,6];
+numbers.splice(3,5);
+// Array [ 4, 5, 6 ]
+
+console.log(numbers);
+// Array [ 1, 2, 3 ];
+```
 
 Let´s install some libraries.
 
