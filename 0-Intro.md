@@ -10,6 +10,31 @@
 
 .map(), .reduce() and .filter() examples
 
+.reduce(<callback-function>, <starting-value>)
+It takes a collection of data and reduce it to a single value.
+
+Example: reduce years collection into TOTAL years
+
+```
+const friends = [
+	{ name: 'Peter', age: 30 },
+  { name: 'Tinkerbell', age: 100 },
+  { name: 'Wendy', age: 31 }
+];
+
+friends.reduce((totalYear, eachAge) => {
+	return addFriendsAge = totalYear + eachAge.age;
+}, 0);
+
+console.log(addFriendsAge);
+// 161
+```
+
+HOF: Higher Order Function
+Example: reduce()
+
+<!-- TODO: What´s is a HOF -->
+
 ### What´s JSX...?
 
 <!-- TODO: What´s JSX... -->
