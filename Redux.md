@@ -80,6 +80,26 @@ const addToTotal = amount => ({
   });
 ```
 
+##### Reducers
+
+They are functions that receive 2 arguments: current state and the action that was dispatched. As we said before, they must be pure function.
+They set the original state and return THEN the previous state or a new one.
+
+Important: Please, read it carefully... Reducers must always return the state. We never modify the state directly. We create a new copy of the current state, modify the copy and return the copy (original state remains the same).
+
+Never mutate the state...
+Example: **AVOID doing this**
+
+```
+case ADD_TO_TOTAL:
+  state.amount = action.amount;
+  return state;
+```
+
+So... Our reducers will receive ALL actions. Inside the reducer (s) we switch the action by type and return the state for that match.
+
+<!-- TODO: Reducer example -->
+
 Now... Let´s install some libraries.
 
 ```
