@@ -16,15 +16,15 @@ When to use Redux...
 
 For other cases, we should opt for Local State.
 
-### Pure functions
+#### Pure functions
 
 We make changes in the state through pure functions.
 
 What are Pure Functions...?
 
 1. They depend just in the arguments that we pass.
-2. Same arguments should return same results.
-3. They don´t produce side effects.
+2. Same arguments should return same results (this makes pure functions easy to test).
+3. They don´t produce side effects (aka, NO interaction between the function and its outside scope. Example: HTTP calls)
 
 <!-- TODO: Example of pure function and check definition and characteristics -->
 
@@ -52,7 +52,35 @@ console.log(numbers);
 // Array [ 1, 2, 3 ];
 ```
 
-Let´s install some libraries.
+#### Actions, Reducers and the store
+
+To create the store we need at least one reducer which will receive all the actions (dispatched by the store) and return a new state of the application.
+
+##### Actions
+
+They are JS objects that describes an event that should update the application state. A Redux action must include the type property and, optionally, a payload (only send the necessary data).
+
+```
+{
+  type: 'ADD_TO_TOTAL',
+  amount: 10
+}
+```
+
+Actions can be created (and returned) through **Action Creators**; these functions make the **Actions** portable and easy to test.
+
+Also, for the value of the type property we should opt for CONSTANTS rather than strings (for practicality and to avoid errors related to typos).
+
+```
+const ADD_TO_TOTAL = 'ADD_TO_TOTAL';
+
+const addToTotal = amount => ({
+  type: ADD_TO_TOTAL,
+  amount: 10
+  });
+```
+
+Now... Let´s install some libraries.
 
 ```
 npm install axios react-redux redux-promise redux --save

@@ -10,7 +10,10 @@
 
 .map(), .reduce() and .filter() examples
 
-.reduce(<callback-function>, <starting-value>)
+**.reduce()**
+
+`.reduce(<callback-function>, <starting-value>)`
+
 It takes a collection of data and reduce it to a single value.
 It´s the base of one of the vital parts of Redux´s flow: reducers.
 
@@ -32,7 +35,9 @@ console.log(addFriendsAge);
 ```
 
 Short explanation...
-When we call reduce() we start from 0 (try changing 0 to 100). The first time our function is called, totalYear (or accumulator) will have the value of 0 and eachAge 30.
+When we call reduce() we start from 0 (try changing 0 to 100).
+The first time our function is called, totalYear (or accumulator) will have the value of 0 and eachAge 30.
+The return of our function is a new variable (addFriendsAge) with the sum of all ages.
 
 HOF: Higher Order Function
 Example: reduce()
