@@ -13,7 +13,7 @@ Reducers create and return a new copy of the state.
 
 When to use Redux...
 
-1. Shared state through multiple Components. Let´s say that we have ComponentA with one child, ComponentB. We can easily pass data down with props. But, if we need to pass the data across several components (example: from A->B->-C->D) we should consider the global state or Redux store so we can instruct (without nesting) which components will have access to that data.
+1. Shared state through multiple Components. Let´s say that we have ComponentA with one child, ComponentB. We can easily pass data down with props. But, if we need to pass the data across several components (example of "prop threading": from A->B->-C->D) we should consider the global state or Redux store so we can instruct (without nesting) which components will have access to that data.
 2. Caching: when we want to cache API requests/responses.
 
 For other cases, we should opt for Local State.
@@ -84,7 +84,7 @@ const addToTotal = amount => ({
 
 ##### Reducers
 
-They are functions that receive 2 arguments: current state and the action that was dispatched. As we said before, they must be pure function.
+They are functions that receive 2 arguments: current state and the action that was dispatched. As we said before, they must be pure functions.
 They set the original state and return THEN the previous state or a new one.
 
 Important: Please, read it carefully... Reducers must always return the state. We never modify the state directly. We create a new copy of the current state, modify the copy and return the copy (original state remains the same).
@@ -103,6 +103,51 @@ So... Our reducers will receive ALL actions. Inside the reducer (s) we switch th
 <!-- TODO: Reducer example -->
 
 ##### Store
+
+It holds the application state.
+It dispatches actions that will hit the reducers which will return the state.
+
+We create the store through the method `createStore(reducer)`
+
+```
+import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import rootReducer from './reducers';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import App from './App';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducer);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <div>
+        <Route exact path="/" component={App} />
+      </div>
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById('root')
+);
+```
+
+The `Store` has the following methods:
+
+<!-- TODO: Check if are more -->
+
+* `getState()` > returns current state
+* `dispatch(action)` > sends the action to all the reducers
+* `subscribe(callback)` > will execute the callback when the state changes
+
+---
+
+##### react-redux
+
+It allows us to dispatch actions and access to our Store from inside our components.
+For this, we use the Provider tag and the connect() method.
 
 Now... Let´s install some libraries.
 

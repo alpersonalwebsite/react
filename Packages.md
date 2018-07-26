@@ -134,6 +134,22 @@ Warning: Failed prop type: The prop `yourAge` is marked as required in `Child`, 
 
 ---
 
+I recommend you to install as well Redux DevTools.
+
+* Firefox: https://addons.mozilla.org/es/firefox/addon/remotedev/
+* Chrome: https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en
+
+Once you have this Add-on, you can wire it up to your store using it as second parameter of `createStore()`
+
+```
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+```
+
+---
+
 ### Escape RegExp
 
 Used to escape RegExp special characters.
