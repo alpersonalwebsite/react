@@ -149,6 +149,18 @@ The `Store` has the following methods:
 It allows us to dispatch actions and access to our Store from inside our components.
 For this, we use the Provider tag and the connect() method.
 
+* Provider wraps our application taking the store as prop, settings the store context and passing it down to child components.
+* Connect we can dispatch actions and access to specific parts of our state. It returns a `curried function`.
+
+```
+...
+connect(mapStateToProps, mapDispatchToProps)(App)
+```
+
+What is a `curried function`...?
+
+<!-- TODO: What and examples -->
+
 Now... Let´s install some libraries.
 
 ```
