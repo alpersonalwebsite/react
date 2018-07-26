@@ -5,6 +5,8 @@ It´s not only for React.
 It´s for handling state in a predictable way.
 -->
 
+<!-- TODO: First we should define the store. We have to think how the app will use that data -->
+
 In Redux there´s a single Source of Truth: the store.
 The state is read-only (immutable); components cannot write directly into the state.
 Reducers create and return a new copy of the state.
@@ -99,6 +101,8 @@ case ADD_TO_TOTAL:
 So... Our reducers will receive ALL actions. Inside the reducer (s) we switch the action by type and return the state for that match.
 
 <!-- TODO: Reducer example -->
+
+##### Store
 
 Now... Let´s install some libraries.
 
