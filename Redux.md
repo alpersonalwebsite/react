@@ -157,7 +157,30 @@ For this, we use the Provider tag and the connect() method.
 connect(mapStateToProps, mapDispatchToProps)(App)
 ```
 
-What is a `curried function`...?
+What is a `curried or partial app`...?
+It happens when we call a function without ALL its argument. The result will be a new function which will be waiting for the next argument.
+
+Example:
+
+```
+add = a => {
+  return (b) => {
+    return a + b;
+  }
+}
+
+console.log(add(1)(3));
+// 4
+```
+
+We can simplify it to
+
+```
+add = a => b => a + b;
+
+console.log(add(1)(3));
+// 4
+```
 
 <!-- TODO: What and examples -->
 
