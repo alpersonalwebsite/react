@@ -157,6 +157,16 @@ For this, we use the Provider tag and the connect() method.
 connect(mapStateToProps, mapDispatchToProps)(App)
 ```
 
+###### mapStateToProps(state, [ownProps])
+
+Define which data are we going to pass to the component. That data is going to be available through props.
+
+Example:
+
+```
+
+```
+
 What is a `curried or partial app`...?
 It happens when we call a function without ALL its argument. The result will be a new function which will be waiting for the next argument.
 
@@ -182,7 +192,26 @@ console.log(add(1)(3));
 // 4
 ```
 
-<!-- TODO: What and examples -->
+Example passing one value, storing and then passing the other
+
+```
+add = a => b => a + b;
+
+const addition = add(1);
+console.log(addition);
+/*
+ function (b) {
+    return a + b;
+  }
+*/
+
+console.log(addition(3));
+//4
+```
+
+Note: We have 3 functions and we are returning 2 (take this as a general rule)
+
+---
 
 Now... Let´s install some libraries.
 
