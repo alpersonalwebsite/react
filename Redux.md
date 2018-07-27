@@ -164,8 +164,51 @@ Define which data are we going to pass to the component. That data is going to b
 Example:
 
 ```
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from './actions';
+
+class App extends Component {
+  componentDidMount() {
+    this.props.fetchComments();
+  }
+  render() {
+    return (
+      <div>{`Comment with id 1: ${JSON.stringify(
+        this.props.comments[0]
+      )}`}</div>
+    );
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    comments: state.comments
+  };
+}
+
+export default connect(mapStateToProps, actions)(App);
+```
+
+Result:
 
 ```
+Comment with id 1: {"postId":1,"id":1,"name":"id labore ex et quam laborum","email":"Eliseo@gardner.biz","body":"laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"}
+```
+
+As you can see, we access through `this.props` (Class Component) or `props` (Functional Component).
+
+Remember that you can `destructure`
+
+Example for **Functional Component**
+
+```
+const App = ({ comments }) => {
+  <div>{`Comment with id 1: ${JSON.stringify(comments[0])}`}</div>
+};
+```
+
+---
 
 What is a `curried or partial app`...?
 It happens when we call a function without ALL its argument. The result will be a new function which will be waiting for the next argument.
