@@ -102,6 +102,22 @@ So... Our reducers will receive ALL actions. Inside the reducer (s) we switch th
 
 <!-- TODO: Reducer example -->
 
+###### Root reducer
+
+createStore() takes a single reducer, so... If we need to pass more than one, we should create a rootReducer, a reducer that utilize composition to call more than one reducer.
+
+Example:
+
+```
+import { combineReducers } from 'redux';
+import commentsReducer from './commentsReducer';
+const rootReducer = combineReducers({
+  comments: commentsReducer
+});
+
+export default rootReducer;
+```
+
 ##### Store
 
 It holds the application state.
@@ -211,6 +227,8 @@ const App = ({ comments }) => {
 <!-- TODO: Add `ownProps` fromn React Notes 7 -->
 
 ###### mapDispatchToProps()
+
+Allows us to bind dispatch() to our action creators before they hit the component.
 
 <!-- TODO: Add `mapDispatchToProps()` fromn React Notes 7 -->
 
