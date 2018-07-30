@@ -111,11 +111,24 @@ Example:
 ```
 import { combineReducers } from 'redux';
 import commentsReducer from './commentsReducer';
+import postsReducer from './postsReducer';
 const rootReducer = combineReducers({
-  comments: commentsReducer
+  comments: commentsReducer,
+  posts: postsReducer
 });
 
 export default rootReducer;
+```
+
+Note: combineReducers() will reduce the reducers to a single or main one, which will call every "child reducer" and set each property state.
+
+So for the previous reducers the shape of the store will be...
+
+```
+{
+  comments: [],
+  posts: []
+}
 ```
 
 ##### Store
