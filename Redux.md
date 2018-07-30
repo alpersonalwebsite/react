@@ -208,6 +208,12 @@ const App = ({ comments }) => {
 };
 ```
 
+<!-- TODO: Add `ownProps` fromn React Notes 7 -->
+
+###### mapDispatchToProps()
+
+<!-- TODO: Add `mapDispatchToProps()` fromn React Notes 7 -->
+
 ---
 
 What is a `curried or partial app`...?
