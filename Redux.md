@@ -104,7 +104,7 @@ So... Our reducers will receive ALL actions. Inside the reducer (s) we switch th
 
 ###### Root reducer
 
-`createStore()` takes a single reducer, so... If we need to pass more than one, we should create a `rootReducer`, a reducer that utilize composition ("combined reducers") to call more than one reducer.
+`createStore(reducer, [enhancer)` takes a single reducer, so... If we need to pass more than one, we should create a `rootReducer`, a reducer that utilize composition ("combined reducers") to call more than one reducer.
 
 Example:
 
@@ -131,6 +131,8 @@ So for the previous reducers the shape of the store will be...
   posts: []
 }
 ```
+
+`createStore()` recives as second argument an enhancer. We can provide our `middlewares` using `applyMiddleware()`; this method accept multiple arguments (aka, middlewares)
 
 ##### Store
 
@@ -565,6 +567,6 @@ Check your Redux DevTools. You should have the same results as previously.
 ---
 
 Several times we referred to Middlewares...
-What is a Middleware...? Is Logic that intercepts a process (or request) producing a side effect.
+**What is a Middleware...?** Is Logic that intercepts a process (or request) producing a side effect. Middlewares can be chained.
 In Redux we use Middlewares to intercept dispatched
-actions modifying them (if needed) before they hit the reducers.
+actions modifying them (or not) before they hit the reducers. We can also dispatch other actions or execute some logic at the dispatching time or layer.
