@@ -561,3 +561,10 @@ export default connect(mapStateToProps, actions)(App);
 ```
 
 Check your Redux DevTools. You should have the same results as previously.
+
+---
+
+Several times we referred to Middlewares...
+What is a Middleware...? Is Logic that intercepts a process (or request) producing a side effect.
+In Redux we use Middlewares to intercept dispatched
+actions modifying them (if needed) before they hit the reducers.
