@@ -318,3 +318,36 @@ We can pass parameters to Link using an object instead of a string as value.
   </div>
 </BrowserRouter>,
 ```
+
+---
+
+### Redux logger
+
+We use redux-logger to log the actions and the state (after and before that action)
+
+More info and "how to create your own logger": https://www.npmjs.com/package/redux-logger
+
+CMD or terminal:
+
+```
+npm install --save redux-logger
+```
+
+IMPORTANT: logger must be the last middleware in chain, otherwise it will log thunk and promise, not actual actions
+
+Example:
+
+```
+import logger from 'redux-logger';
+
+...
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(reduxThunk, logger))
+);
+...
+```
+
+If you check your console you will see...
+
+![Browser console: Logger logs](/images/logger-logs.png)
