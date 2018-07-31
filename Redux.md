@@ -104,7 +104,7 @@ So... Our reducers will receive ALL actions. Inside the reducer (s) we switch th
 
 ###### Root reducer
 
-createStore() takes a single reducer, so... If we need to pass more than one, we should create a rootReducer, a reducer that utilize composition to call more than one reducer.
+`createStore()` takes a single reducer, so... If we need to pass more than one, we should create a `rootReducer`, a reducer that utilize composition ("combined reducers") to call more than one reducer.
 
 Example:
 
@@ -112,6 +112,7 @@ Example:
 import { combineReducers } from 'redux';
 import commentsReducer from './commentsReducer';
 import postsReducer from './postsReducer';
+
 const rootReducer = combineReducers({
   comments: commentsReducer,
   posts: postsReducer
@@ -120,7 +121,7 @@ const rootReducer = combineReducers({
 export default rootReducer;
 ```
 
-Note: combineReducers() will reduce the reducers to a single or main one, which will call every "child reducer" and set each property state.
+Note: `combineReducers()` will reduce the reducers to a single or main one, which will call every "child reducer" and set/handle each property of our state.
 
 So for the previous reducers the shape of the store will be...
 
@@ -170,6 +171,8 @@ The `Store` has the following methods:
 * `getState()` > returns current state
 * `dispatch(action)` > sends the action to all the reducers
 * `subscribe(callback)` > will execute the callback when the state changes
+
+IMPORTANT: In Redux (as in React or programming in general) you don´t duplicate data. Remember that you have `once Source of Truth`: the Store. Also, put special attention to the shape of the Store... Try to keep it as simple and shallow as you can obviating complex nested structures.
 
 ---
 
