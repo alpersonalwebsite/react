@@ -492,8 +492,6 @@ If we check our Redux DevTools console...
 
 Now, instead of dispatching in our Component we are going to resolve the promise and dispatch from our action creator using `redux-thunk` (we were using `redux-promise` to return an action with the payload property and a promise as value).
 
-<!-- TODO: Add redux-thunk to packages -->
-
 We have to add redux-thunk middleware to our **src/index.js**
 
 ```
@@ -570,3 +568,7 @@ Several times we referred to Middlewares...
 **What is a Middleware...?** Is Logic that intercepts a process (or request) producing a side effect. Middlewares can be chained.
 In Redux we use Middlewares to intercept dispatched
 actions modifying them (or not) before they hit the reducers. We can also dispatch other actions or execute some logic at the dispatching time or layer.
+
+What is `redux-thunk`...? It´s a thunk middleware for Redux. We can use it for async HTTP requests (Redux only supports synchronous data flow).
+
+What is a `thunk middleware`...? A middleware that allows us to return from the action creator a function instead of an object. With thunks we can intercept those actions before dispatching.

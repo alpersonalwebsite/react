@@ -353,3 +353,13 @@ If you check your console you will see...
 ![Browser console: Logger logs](/images/logger-logs.png)
 
 ### Redux Thunk
+
+Thunk middleware for Redux.
+
+More info: https://www.npmjs.com/package/redux-thunk
+
+CMD or terminal:
+
+```
+npm install --save redux-thunk
+```
