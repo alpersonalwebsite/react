@@ -351,3 +351,5 @@ const store = createStore(
 If you check your console you will see...
 
 ![Browser console: Logger logs](/images/logger-logs.png)
+
+### Redux Thunk
