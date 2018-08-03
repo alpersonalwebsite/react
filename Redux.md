@@ -185,22 +185,41 @@ Usually, the most common ways to organize our code is through:
 * Types
 * Features
 
-I usually do the following... For general purposes...
+Personally, for "regular projects" I opt for the following structure...
 
 ```
 src
   actions
   components
+    Header
+    Footer
   css
   data
   hoc
   images
   pages
+    Homepage
+      index.js
+      HomeAdvice
   reducers
   store
 ```
 
+So, for example, inside `src/Homepage` (main route) I have my `index.js` where I import reusable components that I store inside `src/components`, but also, those which are particular tied to the `src/Homepage` one like `src/Homepage/HomeAdvice`.
+
+If you want to easily reuse your components in other projects, you should probably go with features. In this case, you will have everything that component needs inside it (aka, its folder).
+
+```
+src  
+  Menu
+    actions.js
+    index.js
+    reducers.js
+```
+
 ---
+
+<!-- TODO: Check React and LAYOUTS -->
 
 ##### react-redux
 
