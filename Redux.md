@@ -178,6 +178,30 @@ IMPORTANT: In Redux (as in React or programming in general) you don´t duplicate
 
 ---
 
+**App modularity or skeleton**
+
+Usually, the most common ways to organize our code is through:
+
+* Types
+* Features
+
+I usually do the following... For general purposes...
+
+```
+src
+  actions
+  components
+  css
+  data
+  hoc
+  images
+  pages
+  reducers
+  store
+```
+
+---
+
 ##### react-redux
 
 It allows us to dispatch actions and access to our Store from inside our components.
@@ -569,6 +593,6 @@ Several times we referred to Middlewares...
 In Redux we use Middlewares to intercept dispatched
 actions modifying them (or not) before they hit the reducers. We can also dispatch other actions or execute some logic at the dispatching time or layer.
 
-What is `redux-thunk`...? It´s a thunk middleware for Redux. We can use it for async HTTP requests (Redux only supports synchronous data flow).
+What is `redux-thunk`...? It´s a thunk middleware for Redux. We can use it for async HTTP requests (Redux only supports synchronous data flow) for example, when we are dealing/interacting with a server, delaying, dispatching, or dispatching if certain condition is met (like a response to our request).
 
-What is a `thunk middleware`...? A middleware that allows us to return from the action creator a function instead of an object. With thunks we can intercept those actions before dispatching.
+With thunks we can return from the action creator a function instead of an object and intercept these actions before dispatching.
