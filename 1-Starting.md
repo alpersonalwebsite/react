@@ -93,9 +93,5 @@ public/index.html
 ```
 
 <!--
-TODO: How to pass data or props...
--->
-
-<!--
 TODO: Compose components together
 -->
