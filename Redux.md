@@ -558,30 +558,18 @@ const headers = {
   Accept: 'application/json'
 };
 
-export const fetchComments = () => async dispatch => {
+export const fetchComments = () => dispatch => {
   const query = 'comments';
   const endPoint = `${api}${query}`;
-
-  const request = await axios.get(endPoint, { headers });
-  dispatch({ type: FETCH_COMMENTS, payload: request.data });
+  return axios.get(endPoint, { headers }).then(response => {
+    dispatch({ type: FETCH_COMMENTS, payload: response.data });
+  });
 };
 ```
 
 Go to **src/reducers/commentsReducer.js** and replace `return action.payload.data;` with `return action.payload;`
 
 Go to your component, example: **src/App.js** and...
-
-Replace...
-
-```
-import { fetchComments } from './actions';
-```
-
-with...
-
-```
-import * as actions from './actions';
-```
 
 Remove...
 
@@ -600,7 +588,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
 with...
 
 ```
-export default connect(mapStateToProps, actions)(App);
+export default connect(mapStateToProps, { fetchComments })(App);
 ```
 
 Check your Redux DevTools. You should have the same results as previously.

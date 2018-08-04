@@ -89,7 +89,7 @@ If you go to http://localhost:3000/ you will see: `I´m receiving... Hello`
 
 Let´s say that we want to pass down a state property of App.js to Child.js as props.
 
-src/App.js
+**src/App.js**
 
 ```
 import React, { Component } from 'react';
@@ -111,6 +111,7 @@ class App extends Component {
 export default App;
 ```
 
+**src/Child.js**
 If we are using a Functional Component we will access to props through `props`, for example, `props.onPassingMessage`
 
 If we are using a Class Component, thorugh `this.props.onPassingMessage`

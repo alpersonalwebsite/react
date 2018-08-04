@@ -94,3 +94,6 @@ const Child = props => (
 
 export default Child;
 ```
+
+Notes:
+In `App.js` we pass a reference to the function updateStateProperty `onUpdateStateProperty={this.updateStateProperty}` as props to `Child.js` where we are going to execute the function with the proper arguments `onClick={() => props.onUpdateStateProperty('yourName', 'Wendy')}`

@@ -52,3 +52,5 @@ Example: reduce()
   TODO: Single Page Apps
   You download everything is needed once. Then, we request data through async JS requests.
 -->
+
+<!-- TODO: Add somewhere that when we are rendering a list we should add a key with a unique id -->

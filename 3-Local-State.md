@@ -56,7 +56,7 @@ componentDidMount() {
 }
 ```
 
-If we care...
+If we care or the "new state" depends in the previous one...
 
 ```
 componentDidMount() {
