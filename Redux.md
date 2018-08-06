@@ -375,16 +375,15 @@ Now, we are going to write our first reducer.
 ```
 import { FETCH_COMMENTS } from '../actions/types';
 
-export default function(state = [], action) {
-
+export default (state = [], action) => {
   switch (action.type) {
     case FETCH_COMMENTS:
-      return action.payload.data;
+      return action.payload;
 
     default:
       return state;
   }
-}
+};
 ```
 
 Create the folder **src/actions** and inside it the following files...
@@ -561,6 +560,7 @@ const headers = {
 export const fetchComments = () => dispatch => {
   const query = 'comments';
   const endPoint = `${api}${query}`;
+
   return axios.get(endPoint, { headers }).then(response => {
     dispatch({ type: FETCH_COMMENTS, payload: response.data });
   });
