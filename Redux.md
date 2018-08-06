@@ -100,7 +100,21 @@ case ADD_TO_TOTAL:
 
 So... Our reducers will receive ALL actions. Inside the reducer (s) we switch the action by type and return the state for that match.
 
-<!-- TODO: Reducer example -->
+**src/reducers/sumReducer.js**
+
+```
+import { ADD_TO_TOTAL } from '../actions/types';
+
+export default (state = 0, action) => {
+  switch (action.type) {
+    case ADD_TO_TOTAL:
+      return state + action.amount;
+
+    default:
+      return state;
+  }
+};
+```
 
 ###### Root reducer
 

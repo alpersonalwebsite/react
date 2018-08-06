@@ -72,3 +72,46 @@ componentDidMount() {
 * state: mutable data
 
 Remember: in both cases, either when a Component receives props or the state is "updated", it will re-render.
+
+Now, an example with several of the topics we covered.
+We have a local (or component) state property: `friends`
+Also, a method to delete a particular friend which is taken as argument. What we pass to this function is going to be "filtered out", setting the new state without the given friend.
+In our JSX we map our friends array.
+When you click in the button, we call the function `deleteFriend()` (in its proper context) passing a hard-coded value (`Wendy`) which is the one that we are going to pull out.
+
+```
+import React, { Component } from 'react';
+
+class App extends Component {
+  state = {
+    friends: [
+      { id: 0, name: 'Wendy' },
+      { id: 1, name: 'Tinkerbell' },
+      { id: 2, name: 'Cap. Hook' }
+    ]
+  };
+
+  deleteFriend = friend => {
+    this.setState(state => ({
+      friends: state.friends.filter(eachFriend => eachFriend.name !== friend)
+    }));
+  };
+
+  render() {
+    return (
+      <div>
+        <div>
+          {`Friends in local state: ${this.state.friends.map(
+            eachFriend => eachFriend.name
+          )}`}
+        </div>
+        <button onClick={() => this.deleteFriend('Wendy')}>
+          Delete friend!
+        </button>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
