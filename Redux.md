@@ -28,8 +28,6 @@ What are Pure Functions...?
 2. Same arguments should return same results (this makes pure functions easy to test).
 3. They don´t produce side effects (aka, NO interaction between the function and its outside scope. Example: HTTP calls)
 
-<!-- TODO: Example of pure function and check definition and characteristics -->
-
 One common example of pure and impure functions...
 
 **Pure function: slice()**
@@ -184,7 +182,7 @@ The `Store` has the following methods:
 
 <!-- TODO: Check if are more -->
 
-* `getState()` > returns current state
+* `getState()` > returns current state of the store
 * `dispatch(action)` > sends the action to all the reducers
 * `subscribe(callback)` > will execute the callback when the state changes
 

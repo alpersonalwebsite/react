@@ -6,6 +6,7 @@ Examples:
 
 * Before the Component is inserted into the DOM > **componentWillMount()**
 * After the Component is inserted into the DOM > **componentDidMount()**
+  Probably the most used one. Example: AJAX requests.
 
 * Whenever the component is going to receive NEW props > **componentWillReceiveProps()**
 
