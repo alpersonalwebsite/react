@@ -87,6 +87,8 @@ They set the original state and return THEN the previous state or a new one.
 
 Important: Please, read it carefully... Reducers must always return the state. We never modify the state directly. We create a new copy of the current state, modify the copy and return the copy (original state remains the same).
 
+Every time that we talk about **state** in a Reducer, we are referring to the particular piece of state that the "concerned reducer" is responsible for.
+
 Never mutate the state...
 Example: **AVOID doing this**
 
@@ -245,6 +247,11 @@ For this, we use the Provider tag and the connect() method.
 ...
 connect(mapStateToProps, mapDispatchToProps)(App)
 ```
+
+Note: **Connected components** (aka, Components using the connect() method) are also called `Smart Components` or `Containers`. Some people place them inside `src/containers/`.
+
+Usually you connect the most parent Component that cares about a particular piece of state.
+For example... If you have a **"list of notes"**, you will connect `ListofNotes.js` which is going to pass down as props the particular note to `Note.js`
 
 ###### mapStateToProps(state, [ownProps])
 

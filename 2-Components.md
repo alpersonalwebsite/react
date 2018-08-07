@@ -115,3 +115,35 @@ export default App;
 If we are using a Functional Component we will access to props through `props`, for example, `props.onPassingMessage`
 
 If we are using a Class Component, thorugh `this.props.onPassingMessage`
+
+##### Dynamic values passed as props and rendering
+
+In the previous examples we were hard-coding the value of message...
+
+```
+state = {
+  message: 'Hello'
+};
+```
+
+However, in practice, usually our data is going to be dynamic. Think in an input where the user introduce some value (for example message) which is going to be passed down as prop. We would start with an empty string (`message: ''`), then a Controlled Form would update the value of the state property (`message: 'Hola'`) what would result in... `I´m receiving... Hola`
+But, until your parent Component pass "something" down, different than the default empty string, the Child one will render: `I´m receiving...`
+Not a great user experience... I´m rendering... Nothing...?
+
+We can fix this replacing...
+
+```
+...
+<div>I´m receiving... {props.onShowingHello}</div>
+...
+```
+
+With this...
+
+```
+...
+{onShowingHello !== '' ? `I´m receiving... ${onShowingHello}` : null}
+...
+```
+
+Now, we are only going to display our message if it´s different than the default one (empty string).
