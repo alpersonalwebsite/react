@@ -367,3 +367,5 @@ npm install --save redux-thunk
 Example:
 
 <!-- TODO: redux-thunk example + check Notes 7 -->
+
+<!-- TODO: Check for reselect -->
