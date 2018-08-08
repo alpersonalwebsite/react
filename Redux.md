@@ -316,7 +316,7 @@ Example:
   : `Comment with id 1: ${JSON.stringify(this.props.comments[0])}`}
 ```
 
-Until `this.props.comments[0]` is something, we show the `'I am loading...'` message. It is not a must, but, it offers a better "contextual" interaction.
+Until `this.props.comments[0]` is something (or, is different than `undefined`), we show the `'I am loading...'` message. It is not a must, but, it offers a better "contextual" interaction.
 
 <!-- TODO: Add `ownProps` fromn React Notes 7 -->
 

@@ -39,6 +39,37 @@ When we call reduce() we start from 0 (try changing 0 to 100).
 The first time our function is called, totalYear (or accumulator) will have the value of 0 and eachAge 30.
 The return of our function is a new variable (addFriendsAge) with the sum of all ages.
 
+One comment about `return`.
+If we are returning in one line we can do...
+
+`renderMessage = message => message;`
+
+```
+renderMessage = message => message;
+
+...
+
+render() {
+	return (
+		<div>{this.renderMessage('Hi')}</div>
+	);
+}
+```
+
+... or ... `renderMessage = message => { return message; };` or the same, `renderMessage = message => { return <div>{message}</div>; };`
+
+For multilines use `()`
+
+```
+renderMessage = message => {
+	return (
+		<div>
+			My message: <div>{message}</div>
+		</div>
+	);
+};
+```
+
 HOF: Higher Order Function
 Example: reduce()
 
