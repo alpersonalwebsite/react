@@ -304,6 +304,20 @@ const App = ({ comments }) => {
 };
 ```
 
+Note: Once you load the page, for a fraction of seconds you will see
+`Comment with id 1: undefined`; this is because we are dealing with an async operation (an operation that takes some time to resolve).
+
+We can provide a better user experience showing a `loading` message.
+Example:
+
+```
+{!this.props.comments[0]
+  ? 'I am loading...'
+  : `Comment with id 1: ${JSON.stringify(this.props.comments[0])}`}
+```
+
+Until `this.props.comments[0]` is something, we show the `'I am loading...'` message. It is not a must, but, it offers a better "contextual" interaction.
+
 <!-- TODO: Add `ownProps` fromn React Notes 7 -->
 
 ###### mapDispatchToProps()
