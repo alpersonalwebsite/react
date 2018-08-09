@@ -563,6 +563,23 @@ If we check our Redux DevTools console...
 
 ![Redux DevTools SC](/images/redux-devTools-state.png)
 
+Note: remember that we can destructure or pull properties from objects.
+So...
+
+```
+function mapStateToProps(state) {
+  return {
+    comments: state.comments
+  };
+}
+```
+
+Can be replaced with...
+
+```
+
+```
+
 ---
 
 Now, instead of dispatching in our Component we are going to resolve the promise and dispatch from our action creator using `redux-thunk` (we were using `redux-promise` to return an action with the payload property and a promise as value).
