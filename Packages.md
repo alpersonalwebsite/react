@@ -352,6 +352,8 @@ If you check your console you will see...
 
 ![Browser console: Logger logs](/images/logger-logs.png)
 
+---
+
 ### Redux Thunk
 
 Thunk middleware for Redux.
@@ -369,3 +371,55 @@ Example:
 <!-- TODO: redux-thunk example + check Notes 7 -->
 
 <!-- TODO: Check for reselect -->
+
+---
+
+### Axios
+
+Promise based HTTP client for the browser and node.js
+
+More info: https://www.npmjs.com/package/axios
+
+CMD or terminal:
+
+```
+npm install --save axios
+```
+
+Example:
+
+**Action creator**
+
+```
+export const FETCH_COMMENTS = 'FETCH_COMMENTS';
+
+export const fetchComments = () => {
+  const api ='https://jsonplaceholder.typicode.com/comments';
+  const request = axios.get(api);
+
+  return {
+    type: FETCH_WEATHER,
+    payload: request
+  }
+}
+```
+
+**Reducer**
+
+```
+import { FETCH_COMMENTS } from '../actions/types';
+
+export default (state = [], action) => {
+  switch (action.type) {
+    case FETCH_COMMENTS:
+      return action.payload.data;
+
+    default:
+      return state;
+  }
+};
+```
+
+Remember that `axios` returns a `promise` (in our example passed it as the value of payload property) that we have to resolve.
+
+Note: In some of our examples we use `redux-promise` which, with `axios`, it "checks" the `payload` property of the `actions`, and if this payload is a `promise`, redux-promise (middleware) stops the action, wait until the request finishes and **then** dispatches a **NEW action** but with the **same type** property and for payload, the request properly resolved. This new action will follow its logic course and hit the reducers.
