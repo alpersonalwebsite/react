@@ -84,4 +84,8 @@ Example: reduce()
   You download everything is needed once. Then, we request data through async JS requests.
 -->
 
+### SPA: Single Page Applications
+
+The idea under SPA is having a single HTML document using JS to change what the user sees in the screen.
+
 <!-- TODO: Add somewhere that when we are rendering a list we should add a key with a unique id -->
