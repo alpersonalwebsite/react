@@ -133,3 +133,47 @@ We saw option 1, let´s check option 2.
 
 With this we are saying... Hey, our Component has an instance
 -->
+
+---
+
+You can see that we are **NOT initializing our state in the constructor** (as you will notice in several React tutorials).
+
+```
+import React, { Component } from 'react';
+
+class App extends Component {
+
+constructor(props) {
+  super(props);
+  this.state = {
+    name: 'Peter'
+  };
+}
+
+...
+}
+```
+
+First... Some contextual observations...
+
+* `Constructor` is a method for creating and initializing an object created with a class.
+* A constructor can use the super keyword to call the constructor of the `super` class.
+
+Among other upcoming changes in ES, we have the [Class field declarations for JavaScript](https://github.com/tc39/proposal-class-fields) which will allow us to define class properties.
+
+Until it becomes part of the standard, we can use Babel to transpile code (which will add the constructor for us).
+
+So, the previous example would be...
+
+```
+import React, { Component } from 'react';
+
+class App extends Component {
+  state = {
+    name: 'Peter'
+  };
+...
+}
+```
+
+... and, since in this tutorial we are using `create-react-app` you don´t have to worry about wiring up Babel. It´s part of the package!
