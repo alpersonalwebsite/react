@@ -85,7 +85,7 @@ const addToTotal = amount => ({
 They are functions that receive 2 arguments: current state and the action that was dispatched. As we said before, they must be pure functions.
 They set the original state and return THEN the previous state or a new one.
 
-Important: Please, read it carefully... Reducers must always return the state. We never modify the state directly. We create a new copy of the current state, modify the copy and return the copy (original state remains the same).
+Important: Please, read it carefully... Reducers must always return the state. We never modify (aka, mutate) the state directly. We create a new copy of the current state, modify the copy and return the copy (original state remains the same).
 
 Every time that we talk about **state** in a Reducer, we are referring to the particular piece of state that the "concerned reducer" is responsible for.
 
@@ -577,7 +577,23 @@ function mapStateToProps(state) {
 Can be replaced with...
 
 ```
+function mapStateToProps({ comments }) {
+  return {
+    comments
+  };
+}
+```
 
+Since key and value are the same (comments) we can simplify it just to `comments`
+
+... and, since we love ES6, we can use `fat arrow function` and return our `object`
+
+```
+const mapStateToProps = ({ comments }) => {
+  return {
+    comments
+  };
+};
 ```
 
 ---

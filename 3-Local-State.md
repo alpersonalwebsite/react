@@ -115,3 +115,21 @@ class App extends Component {
 
 export default App;
 ```
+
+Maybe you are thinking... Why do we use `() => this.deleteFriend('Wendy')`...? Simple answer: Just to avoid context issues. We want to be sure that we are referring to the Component´s context. For this, we have 2 options...
+
+1. Wrap our event handler inside a fat arrow function.
+2. Binding the context of `deleteFriend()`
+   ... there´re others but these two are the most used ones.
+
+<!-- TODO:
+We saw option 1, let´s check option 2.
+
+```
+<button onClick={this.deleteFriend.bind(this, 'Wendy')}>
+  Delete friend!
+</button>
+```
+
+With this we are saying... Hey, our Component has an instance
+-->
