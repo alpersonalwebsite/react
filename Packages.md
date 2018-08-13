@@ -324,7 +324,9 @@ Now...
 * http://localhost:3000/animals/dogs will render App1
 
 What happens if we try: http://localhost:3000/animals/cat...?
-It will render App0.
+It will render **App0**.
+
+Add `<Route path="/animals/:animal" component={App1} />` at the top. Now, everything that matches the patten `/animals/:animal` (including `/animals/dogs`) will render **App1**.
 
 Note: When we use ReactRouter we are rendering a Router component and passing to it a history prop.
 
@@ -333,6 +335,42 @@ If you open the React DevTools you will see something like this...
 ![React DevTools: Router and Routes](/images/react-devTools-reactRouter.png)
 
 Route component takes a path and renders its proper UI.
+
+Let´s go back to our `<Switch>` example for a moment. Through the URI we can get the `animal` that the user is passing (`/animals/:animal`) and execute some operation. For example, make a request to x-API to retrieve all the information related to that animal. To ilustrate the point, in **App1** I´, adding...
+
+```
+class App1 extends Component {
+  componentDidMount() {
+    const { animal } = this.props.match.params;
+    this.props.fetchPost(animal);
+  }
+
+  render() {
+    return (
+      <div>
+        <div>{JSON.stringify(this.props.match)}</div>
+      </div>
+    );
+  }
+}
+```
+
+In the Lifecycle `componentDidMount()` we are making the request via `this.props.fetchPost(animal);`
+
+In the JSX, I´m printing as well the `match` property which its result would be:
+
+```
+{
+   "path":"/animals/:animal",
+   "url":"/animals/cat",
+   "isExact":true,
+   "params":{
+      "animal":"cat"
+   }
+}
+```
+
+---
 
 We don´t use <a> if not Link which keeps sync with BrowserRouter; Link renders an anchor tag.
 We can pass parameters to Link using an object instead of a string as value.
