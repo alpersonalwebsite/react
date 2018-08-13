@@ -336,7 +336,7 @@ If you open the React DevTools you will see something like this...
 
 Route component takes a path and renders its proper UI.
 
-Let´s go back to our `<Switch>` example for a moment. Through the URI we can get the `animal` that the user is passing (`/animals/:animal`) and execute some operation. For example, make a request to x-API to retrieve all the information related to that animal. To ilustrate the point, in **App1** I´, adding...
+Let´s go back to our `<Switch>` example for a moment. Through the URI we can get the `animal` that the user is passing (`/animals/:animal`) and execute some operation. For example, make a request to x-API to retrieve all the information related to that animal. To ilustrate the point, in **App1** I´m, adding...
 
 ```
 class App1 extends Component {
@@ -355,9 +355,9 @@ class App1 extends Component {
 }
 ```
 
-In the Lifecycle `componentDidMount()` we are making the request via `this.props.fetchPost(animal);`
+In the Lifecycle `componentDidMount()` we are making the request via `this.props.fetchPost(animal);`.
 
-In the JSX, I´m printing as well the `match` property which its result would be:
+In the JSX, I´m printing as well the `match` property which its parsed-value would be:
 
 ```
 {
