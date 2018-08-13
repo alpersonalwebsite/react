@@ -598,6 +598,107 @@ const mapStateToProps = ({ comments }) => {
 
 ---
 
+#### Architectural advice...
+
+Currently, our `comments` piece of state is an array of objects. This is "good enough" for this App, however, it doesn´t scale neither perform properly for big projects. You should always opt for objects with IDs as keys (aka, normalized state) instead of array.
+
+Using `lodash`, we can take advantage of `_.mapKeys(object, key)`. So, in our reducer first we will import `import _ from "lodash";` and then, we will change...
+
+Old:
+
+```
+case FETCH_COMMENTS:
+  return action.payload;
+```
+
+New:
+
+```
+case FETCH_COMMENTS:
+  return _.mapKeys(action.payload, 'id');
+```
+
+So... We will pass from this...
+
+```
+[{
+        "postId": 1,
+        "id": 1,
+        "name": "id labore ex et quam laborum",
+        "email": "Eliseo@gardner.biz",
+        "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+    }, {
+        "postId": 1,
+        "id": 2,
+        "name": "quo vero reiciendis velit similique earum",
+        "email": "Jayne_Kuhic@sydney.com",
+        "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et"
+    }
+ ]
+```
+
+To this...
+
+```
+{
+    "1": {
+        "postId": 1,
+        "id": 1,
+        "name": "id labore ex et quam laborum",
+        "email": "Eliseo@gardner.biz",
+        "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+    },
+    "2": {
+        "postId": 1,
+        "id": 2,
+        "name": "quo vero reiciendis velit similique earum",
+        "email": "Jayne_Kuhic@sydney.com",
+        "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et"
+    }
+}
+```
+
+Note: `key` is the property of the object that we want for our new object property. We could use name, email, etc... But, we opted for `id` since we need something unique.
+
+At this point -probably- you are thinking... How will I map that object state...?
+
+And here´s where we use `lodash` (or `_`) again.
+Having the piece of state with a new shape we can use `_.map(object)`
+So, for example, in our `App.js` we are going to include as first step. Next, we will create a method for render our comments and we will call that function from our JSX.
+
+```
+renderComments() {
+  return _.map(this.props.comments, comment => {
+    return <li key={comment.id}>{`Title: ${comment.name}`}</li>;
+  });
+}
+```
+
+And, as we said, inside our returned JSX...
+
+```
+{this.renderComments()}
+```
+
+Example result:
+
+```
+Title: id labore ex et quam laborum
+Title: quo vero reiciendis velit similique earum
+Title: odio adipisci rerum aut animi
+Title: alias odio sit
+Title: vero eaque aliquid doloribus et culpa
+Title: et fugit eligendi deleniti quidem qui sint nihil autem
+Title: repellat consequatur praesentium vel minus molestias voluptatum
+Title: et omnis dolorem
+Title: provident id voluptas
+...
+...
+...
+```
+
+---
+
 Now, instead of dispatching in our Component we are going to resolve the promise and dispatch from our action creator using `redux-thunk` (we were using `redux-promise` to return an action with the payload property and a promise as value).
 
 We have to add redux-thunk middleware to our **src/index.js**
