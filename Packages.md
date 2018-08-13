@@ -281,10 +281,50 @@ All these routes will match http://localhost:3000/animals/dogs
 
 ```
 <Route path="/" component={Something} />
-<Route path="/animals" component={Something}>
-<Route exact path="/animals/dogs" component={Something}>
-<Route path="/animals/dogs" component={Something}>
+<Route path="/animals" component={Something} />
+<Route exact path="/animals/dogs" component={Something} />
+<Route path="/animals/dogs" component={Something} />
 ```
+
+Alternatively, we can use Switch which takes a collection of different routes and it just renders the first route that matches the URI.
+Example:
+
+```
+<BrowserRouter>
+  <Switch>
+    <Route path="/animals" component={App0} />
+    <Route path="/animals/dogs" component={App1} />
+    <Route path="/" component={App} />
+  </Switch>
+</BrowserRouter>
+```
+
+In the previous example...
+
+* http://localhost:3000/ will render App
+* http://localhost:3000/animals will render App0
+* http://localhost:3000/animals/dogs will render App0
+
+... and YES, **you do also need to set the routes by granularity** (or specification) to have the expected results...
+
+Example with routes in "proper order":
+
+```
+<Switch>
+  <Route path="/animals/dogs" component={App1} />
+  <Route path="/animals" component={App0} />
+  <Route path="/" component={App} />
+</Switch>
+```
+
+Now...
+
+* http://localhost:3000/ will render App
+* http://localhost:3000/animals will render App0
+* http://localhost:3000/animals/dogs will render App1
+
+What happens if we try: http://localhost:3000/animals/cat...?
+It will render App0.
 
 Note: When we use ReactRouter we are rendering a Router component and passing to it a history prop.
 
