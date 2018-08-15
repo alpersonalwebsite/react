@@ -48,6 +48,27 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter(), disableLifecycleMethods: true });
 ```
 
+---
+
+Note: When you create your app using `create-react-app` your `App.test.js` will look like...
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App />, div);
+  ReactDOM.unmountComponentAtNode(div);
+});
+```
+
+Once you run this test, a fake div will be created (in the memory of our terminal) and our component will be rendered inside this container (or node).
+Then, the mounted Component will be removed.
+
+---
+
 ### Snapshots
 
 Snapshots are a recorded history of our Component to verify that previous "captures" match current ones after changes (so, we prevent unwanted changes).
