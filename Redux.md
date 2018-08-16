@@ -253,7 +253,7 @@ Note: Check in your .gitignore that you are not excluding this file from version
 
 Now, rather than using `../../components/Footer/index.js` we will use `./components/Footer/index.js` starting always from our `src/`
 
-If we place our Components in different folders (let´s say that we move Homepage to `/home/yourUser/yourProject/src/pages/main/Homepage/index.js`) are import statements will not be affected.
+If we place our Components in different folders (let´s say that we move Homepage to `/home/yourUser/yourProject/src/pages/main/Homepage/index.js`) our import statements will not be affected.
 
 <!-- TODO: A little more about .env file -->
 
