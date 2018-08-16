@@ -8,7 +8,7 @@ You start writing the boiler-plate of your Unit Test, then you run the test whic
 When you use create-react-app you are wiring up -as well- Jest (Facebook's test runner).
 Your files should have the extension \*.test.js or be inside \_\_tests\_\_
 
-In our examples we will use -also- Enzyme (Airbnb's React testing library).
+In our examples we will use -also- [Enzyme](http://airbnb.io/enzyme/docs/api/) (Airbnb's React testing library).
 
 First, install enzyme and the proper adapter (we are using React 16).
 
@@ -43,7 +43,15 @@ And, **src/setupTests.js**
 
 ```
 import requestAnimationFrame from './tempPolyfills';
+
+/* Some people avoid destructuring this:
+import Enzyme from 'enzyme';
+And then...
+Enzyme.configure({ adapter: new Adapter(), disableLifecycleMethods: true  });
+*/
 import { configure } from 'enzyme';
+
+
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter(), disableLifecycleMethods: true });
 ```
@@ -329,8 +337,6 @@ it('renders an h1 title', () => {
 
 #### Shallow Rendering (Shallow), Full Rendering (Mount) and Static Rendering (Render)
 
-Mount and Shallow
-
 Let´s add first a functional component to the previous **src/App.js** code
 
 ```
@@ -339,7 +345,13 @@ const Child = () => {
 };
 ```
 
-Now, let´s console the structure of the Component using `shallow`, `render` and `mount`
+**Render**
+It renders the provided Component returning HTML.
+It uses a third party HTML parsing and traversal library [cheerio](https://cheerio.js.org/)
+
+<!-- TODO: When to use each one, particularly Render -->
+
+Now, let´s console the structure of the Component using `shallow` and `mount`
 
 **Shallow**
 It renders the provided Component but NOT its children.
