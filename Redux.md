@@ -231,6 +231,32 @@ src
     reducers.js
 ```
 
+Sometimes (aka, generally) you are going to have deeply nested paths.
+Let´s think in the following case.
+We are working in our `Homepage`: `/home/yourUser/yourProject/src/pages/Homepage/index.js` and we want to include our `Footer`: `/home/yourUser/yourProject/src/components/Footer/index.js`
+
+We would do something like...
+
+```
+import Footer from '../../components/Footer/index.js';
+```
+
+In big projects this can generate confusion. But, you have other option: use `'absolute paths'` instead of `'relative'`.
+
+For this, we are going to create an environment file:`src/.env`
+
+```
+NODE_PATH=src/
+```
+
+Note: Check in your .gitignore that you are not excluding this file from versioning.
+
+Now, rather than using `../../components/Footer/index.js` we will use `./components/Footer/index.js` starting always from our `src/`
+
+If we place our Components in different folders (let´s say that we move Homepage to `/home/yourUser/yourProject/src/pages/main/Homepage/index.js`) are import statements will not be affected.
+
+<!-- TODO: A little more about .env file -->
+
 ---
 
 <!-- TODO: Check React and LAYOUTS -->
