@@ -10,7 +10,7 @@ Your files should have the extension \*.test.js or be inside \_\_tests\_\_
 
 In our examples we will use -also- Enzyme (Airbnb's React testing library).
 
-First, install enzyme and the proper adapter
+First, install enzyme and the proper adapter (we are using React 16).
 
 CMD or terminal:
 
@@ -327,7 +327,9 @@ it('renders an h1 title', () => {
   });
 ```
 
-#### Mount and Shallow
+#### Shallow Rendering (Shallow), Full Rendering (Mount) and Static Rendering (Render)
+
+Mount and Shallow
 
 Let´s add first a functional component to the previous **src/App.js** code
 
@@ -337,9 +339,10 @@ const Child = () => {
 };
 ```
 
-Now, let´s console the structure of the Component using `shallow` and `mount`
+Now, let´s console the structure of the Component using `shallow`, `render` and `mount`
 
 **Shallow**
+It renders the provided Component but NOT its children.
 
 ```
 import React from 'react';
@@ -375,7 +378,18 @@ Result:
 
 Note: Remember that console.log(wrapper.debug()); prints in the console (aka, your CMD or terminal) the component´s structure.
 
+**Render**
+
+```
+
+```
+
+<!-- TODO: Add render -->
+
 **Mount**
+It renders the provided Component and its children.
+
+<!-- TODO: Something else to add...? -->
 
 Just replace shallow with mount.
 
