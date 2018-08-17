@@ -346,6 +346,9 @@ Until `this.props.comments[0]` is something (or, is different than `undefined`),
 
 <!-- TODO: Add `ownProps` fromn React Notes 7 -->
 
+Whether we use `export default connect(mapStateToProps, actions)(App);` (actions object) or `export default connect(mapStateToProps, mapDispatchToProps)(App);` (mapDispatchToProps method), `mapStateToProps` must be something. If we don´t need access to the store, just to `dispatch` we should set it as `null`
+Example: `export default connect(null, actions)(App);`
+
 ###### mapDispatchToProps()
 
 Allows us to bind dispatch() to our action creators before they hit the component.
