@@ -263,52 +263,99 @@ Note: beforeEach(() => {} and afterEach(() => {} will execute functionality befo
 
 <!-- TODO: Maybe an example can clarify the scope -->
 
-Let´s add this to our **src/App.test.js**
+Let´s include the new tests to **src/App.test.js**
 
 ```
-describe('when adding a friend', () => {
-  let theFriend = 'peter';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { mount } from 'enzyme';
+import App from './App';
 
-  // Initial state
-  console.log(wrapper.state());
+describe('<App />', () => {
+  const wrapper = mount(<App />);
 
-  // We add to the peter to the `friend` state´s property
-  beforeEach(() => {
-    // I´m adding the name to keep the behavior of my method: updateStateProperty
-    wrapper.find('input').simulate('change', {
-      target: { name: 'friend', value: theFriend }
+  it('matches the previous Snapshot', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('has a h1 as title with class title', () => {
+    expect(wrapper.find('h1.title').exists()).toBe(true);
+  });
+
+  describe('with a form that', () => {
+    it('has a input with type text', () => {
+      expect(wrapper.find('[type="text"]').exists()).toBe(true);
+    });
+    it('has JUST ONE button', () => {
+      expect(wrapper.find('button')).toHaveLength(1);
     });
   });
-  it('updates the value of `friend` state´s property', () => {
+
+  describe('when adding a friend', () => {
+    let theFriend = 'peter';
+
+    // Initial state
     console.log(wrapper.state());
-    expect(wrapper.state().friend).toEqual(theFriend);
-  });
 
-  describe('and adding the new friend to the list', () => {
+    // We add to the peter to the `friend` state´s property
     beforeEach(() => {
-      // Yes... We simulate the event from the button
-      // Our submit handler will clear as well `friend` state´s property
-      wrapper.find('button').simulate('submit');
+      // I´m adding the name to keep the behavior of my method: updateStateProperty
+      wrapper.find('input').simulate('change', {
+        target: { name: 'friend', value: theFriend }
+      });
+
+      wrapper.update();
     });
 
-    it('adds the new friend to `friends` state´s property', () => {
+    it('updates the value of `friend` state´s property', () => {
       console.log(wrapper.state());
-      expect(wrapper.state().friends[0]).toEqual(theFriend);
+      expect(wrapper.state().friend).toEqual(theFriend);
     });
-    // Now we want to clear our `friends` state´s property or set it to the initial state
-    afterEach(() => {
-      wrapper.setState({ friends: [] });
-      console.log(wrapper.state());
+
+    it('reflects the proper value on the input', () => {
+      expect(wrapper.find('[type="text"]').prop('value')).toEqual(theFriend);
     });
-  }); // close describe: and adding the new friend to the list
-}); // close describe: when adding a friend
+
+    describe('and adding the new friend to the list', () => {
+      beforeEach(() => {
+        // Yes... We simulate the event from the button
+        // Our submit handler will clear as well `friend` state´s property
+        wrapper.find('button').simulate('submit');
+      });
+
+      it('adds the new friend to `friends` state´s property', () => {
+        console.log(wrapper.state());
+        expect(wrapper.state().friends[0]).toEqual(theFriend);
+      });
+      // Now we want to clear our `friends` state´s property or set it to the initial state
+      afterEach(() => {
+        wrapper.setState({ friends: [] });
+        console.log(wrapper.state());
+      });
+    }); // close describe: and adding the new friend to the list
+  }); // close describe: when adding a friend
+});
 ```
 
 Now, if you run the tests your console will look like...
 
-![Unit Test: Behavior testing](/images/unit-test-behavior.png)
+![Unit Test: Behavior testing](/images/unit-test-behavior-1.png)
 
 Notes:
+
+```
+beforeEach(() => {
+  // I´m adding the name to keep the behavior of my method: updateStateProperty
+  wrapper.find('input').simulate('change', {
+    target: { name: 'friend', value: theFriend }
+  });
+
+  wrapper.update();
+});
+```
+
+We are using `wrapper.update();` to force our Component to update or re-render so we can be sure that the state was updated (or set with `setState()`, which is an async operation) and our input value reflects what the state property holds (remember controlled forms logic).
+
 We are printing our state several times with console.log(wrapper.state()) so you can see clearly the changes in each instance.
 Reserved words like const and object properties (in our example friend and friend) should be between backtick (\`\`).
 If we are targeting an element among several, for example, if we had 2 or more buttons, we could refer to the particular button (the one that we use to submit) through class, id... or, using .at(position)...
