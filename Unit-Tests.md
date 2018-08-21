@@ -579,9 +579,48 @@ export default ({ children, initialState = {} }) => {
 
 Now, we are going to import `Provider_Enhancement.js` in our `src/index.js` and wrap our JSX replacing `Provider` with the given namespace.
 
-And remove the the following calls...
+And remove the following...
 
-**src/index.js**
+```
+import rootReducer from './reducers';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+//import ReduxPromise from 'redux-promise';
+import reduxThunk from 'redux-thunk';
+import logger from 'redux-logger';
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+```
+
+Plus...
+
+```
+const store = createStore(
+  rootReducer,
+  //composeEnhancers(applyMiddleware(ReduxPromise))
+  composeEnhancers(applyMiddleware(reduxThunk, logger))
+);
+```
+
+Your **src/index.js** should look like...
+
+```
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+
+import Provider_Enhancement from './ProviderEnhancement';
+
+ReactDOM.render(
+  <ProviderEnhancement>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" component={App} />
+      </Switch>
+    </BrowserRouter>
+  </ProviderEnhancement>,
+  document.getElementById('root')
+);
+```
 
 ---
 
