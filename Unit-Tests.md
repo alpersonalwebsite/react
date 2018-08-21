@@ -559,19 +559,24 @@ In this case (aka, how to fix the issue with the store´s context option b) we c
 
 <!-- TODO: HOC of a HOC -->
 
-**src/Provider_Enhancement.js**
+**src/ProviderEnhancement.js**
 
 ```
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import reduxPromise from 'redux-promise';
-import reducers from 'reducers';
+import { createStore, applyMiddleware, compose } from 'redux';
+//import reduxPromise from 'redux-promise';
+import logger from 'redux-logger';
+import reduxThunk from 'redux-thunk';
+import reducers from './reducers';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 export default ({ children, initialState = {} }) => {
   const store = createStore(
     reducers,
     initialState,
-    applyMiddleware(reduxPromise)
+    composeEnhancers(applyMiddleware(reduxThunk, logger))
   );
   return <Provider store={store}>{children}</Provider>;
 };
@@ -607,8 +612,9 @@ Your **src/index.js** should look like...
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ReactDOM from 'react-dom';
+import ProviderEnhancement from './ProviderEnhancement';
 
-import Provider_Enhancement from './ProviderEnhancement';
+import App from './App';
 
 ReactDOM.render(
   <ProviderEnhancement>
@@ -619,6 +625,30 @@ ReactDOM.render(
     </BrowserRouter>
   </ProviderEnhancement>,
   document.getElementById('root')
+);
+```
+
+Once you do this, you can avoid exporting the class (just export the connected Component) in you `App.js`
+
+Replace...
+
+```
+export class App extends Component {
+```
+
+With...
+
+```
+class App extends Component {
+```
+
+In our test file, `App.test.js` import `ProviderEnhancement`, use `mount` and replace our current `wrapper` with...
+
+```
+const wrapper = mount(
+  <ProviderEnhancement>
+    <App />
+  </ProviderEnhancement>
 );
 ```
 
