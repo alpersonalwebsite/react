@@ -534,6 +534,7 @@ beforeEach(() => {
   // Yes... We simulate the event from the button
   // Our submit handler will clear as well `friend` state´s property
   wrapper.find('button').simulate('submit');
+  wrapper.update();
 });
 ```
 
@@ -542,12 +543,45 @@ with...
 ```
 beforeEach(() => {
   wrapper.find('form').simulate('submit', { preventDefault() {} });
+  wrapper.update();
 });
 ```
 
 Your tests should be green again...
 
-![Unit Test: Store issue - Fix](/images/unit-test-redux-app2.png)
+![Unit Test: Store issue - Fix](/images/unit-test-redux-app3.png)
+
+Remember that we exported the class to fix the issue related with the context of our store.
+
+We can also create a separated component for our store (initializing it with the `Provider` tag or Component) and including it in both, our main file, example `src/index.js` and the "connected component tests".
+
+In this case (aka, how to fix the issue with the store´s context option b) we can enhance `Provider`.
+
+<!-- TODO: HOC of a HOC -->
+
+**src/Provider_Enhancement.js**
+
+```
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reduxPromise from 'redux-promise';
+import reducers from 'reducers';
+export default ({ children, initialState = {} }) => {
+  const store = createStore(
+    reducers,
+    initialState,
+    applyMiddleware(reduxPromise)
+  );
+  return <Provider store={store}>{children}</Provider>;
+};
+```
+
+Now, we are going to import `Provider_Enhancement.js` in our `src/index.js` and wrap our JSX replacing `Provider` with the given namespace.
+
+And remove the the following calls...
+
+**src/index.js**
 
 ---
 
