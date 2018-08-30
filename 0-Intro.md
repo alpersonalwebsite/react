@@ -14,9 +14,30 @@ A JavaScript library for building user interfaces
 
 .map(), .reduce() and .filter() examples
 
+**.map()**
+
+`const myArrayElements = myArray.map(function callback(currentValue[, index[, array]]) { // element to return }[, thisArg])`
+
+Given an array, it generates a new array as the result of executing the callback function on each element of the array,
+
+Example: map an array and retrieve a new array with the results assigned to a variable
+
+```
+const friends = [
+  { name: 'Peter', age: 30 },
+  { name: 'Tinkerbell', age: 100 },
+  { name: 'Wendy', age: 31 }
+];
+
+const friendsNames = friends.map(eachFriend => eachFriend.name);
+
+console.log(friendsNames);
+// Array(3) [ "Peter", "Tinkerbell", "Wendy" ]
+```
+
 **.reduce()**
 
-`.reduce(<callback-function>, <starting-value>)`
+`myArray.reduce(callback[, initialValue])`
 
 It takes a collection of data and reduce it to a single value.
 It´s the base of one of the vital parts of Redux´s flow: reducers.
