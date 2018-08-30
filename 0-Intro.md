@@ -18,7 +18,7 @@ A JavaScript library for building user interfaces
 
 `const myArrayElements = myArray.map(function callback(currentValue[, index[, array]]) { // element to return }[, thisArg])`
 
-Given an array, it generates a new array as the result of executing the callback function on each element of the array,
+Given an array, it generates a new one (just for clarity allow me to repeat, new array) as the result of executing the callback function on each element of the array,
 
 Example: map an array and retrieve a new array with the results assigned to a variable
 
