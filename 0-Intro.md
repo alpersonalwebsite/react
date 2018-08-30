@@ -1,12 +1,16 @@
 # React
 
+A JavaScript library for building user interfaces
+
 ## Why React...?
 
-* Composition
+* Composition: small integrated pieces of code (components) that allow us to build complex UI.
 * Use of objects to build the UI.
-* Declarative
-* Unidirectional data flow
-* JavaScript: we use just JS (not a particular templating library)
+* Declarative approach
+* Unidirectional data flow (from parent to child component)
+* JavaScript logic: we use just JS (not a particular templating library)
+* Server Side Integration (SSR as first render)
+* Mobile Apps Development with React Native
 
 .map(), .reduce() and .filter() examples
 
