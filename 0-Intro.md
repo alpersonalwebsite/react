@@ -14,27 +14,6 @@ A JavaScript library for building user interfaces
 
 .map(), .reduce() and .filter() examples
 
-**.map()**
-
-`const myArrayElements = myArray.map(function callback(currentValue[, index[, array]]) { // element to return }[, thisArg])`
-
-Given an array, it generates a new one (just for clarity allow me to repeat, new array) as the result of executing the callback function on each element of the array,
-
-Example: map an array and retrieve a new array with the results assigned to a variable
-
-```
-const friends = [
-  { name: 'Peter', age: 30 },
-  { name: 'Tinkerbell', age: 100 },
-  { name: 'Wendy', age: 31 }
-];
-
-const friendsNames = friends.map(eachFriend => eachFriend.name);
-
-console.log(friendsNames);
-// Array(3) [ "Peter", "Tinkerbell", "Wendy" ]
-```
-
 **.reduce()**
 
 `myArray.reduce(callback[, initialValue])`
@@ -93,6 +72,52 @@ renderMessage = message => {
 		</div>
 	);
 };
+```
+
+**.map()**
+
+`const myArrayElements = myArray.map(function callback(currentValue[, index[, array]]) { // element to return }[, thisArg])`
+
+Given an array, it generates a new one (just for clarity allow me to repeat, new array) as the result of executing the callback function on each element of the array.
+
+Example: map an array and retrieve a new array with the results assigned to a variable
+
+```
+const friends = [
+  { name: 'Peter', age: 30 },
+  { name: 'Tinkerbell', age: 100 },
+  { name: 'Wendy', age: 31 }
+];
+
+const friendsNames = friends.map(eachFriend => eachFriend.name);
+
+console.log(friendsNames);
+// Array(3) [ "Peter", "Tinkerbell", "Wendy" ]
+```
+
+**.filter()**
+
+`var myArrayElements = myArray.filter(callback(element[, index[, array]])[, thisArg])`
+
+Given an array, it generates a new one with the elements that meet the criteria of the function logic.
+
+Example: filter and retrieve all the elements which property name is NOT Wendy
+
+```
+const friends = [
+  { name: 'Peter', age: 30 },
+  { name: 'Tinkerbell', age: 100 },
+  { name: 'Wendy', age: 31 }
+];
+
+const friendsFiltered = friends.filter(friend => friend.name != 'Wendy');
+
+console.log(friendsFiltered);
+/*
+(2) […]
+0: Object { name: "Peter", age: 30 }
+1: Object { name: "Tinkerbell", age: 100 }
+*/
 ```
 
 HOF: Higher Order Function
