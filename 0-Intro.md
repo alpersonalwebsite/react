@@ -2,7 +2,7 @@
 
 A JavaScript library for building user interfaces.
 
-More than 5 years have passed since the official React´s release (March 2013) nevertheless the community interest and adoption are –still- in constant growth.
+More than 5 years have passed since the official React´s release (Facebook - March 2013) nevertheless the community interest and adoption are –still- in constant growth.
 Everytime I talked with young DEVs, the React´s stamp widely extends its real existence… For the new rows of builders, handling UIs without a solid framework (we can also modestly include Angular, Vue.js…) is something unthinkable and, perhaps, fumes of an old-past ready to be forgotten.
 No matter the tool that you pick to support your work (here´s an elder Angular´s patron) we all want the same:
 
@@ -134,6 +134,40 @@ Example: reduce()
 <!-- TODO: What´s is a HOF -->
 
 ### What´s JSX...?
+
+It´s an extension to JS syntax recommended by React to describe how our UI. It´s not mandatory; just a really convenient and standardized way of structure our component´s rendering.
+
+Here´s and example using JSX
+
+```
+class SayHi extends React.Component {
+  render() {
+    return <div>Hi {this.props.name}</div>;
+  }
+}
+
+ReactDOM.render(
+  <SayHi hisName="Peter" />,
+  document.getElementById('root')
+);
+```
+
+And the same example (compiled with Babel) with plain or vanilla JavaScript
+
+```
+class SayHi extends React.Component {
+  render() {
+    return React.createElement(
+      "div",
+      null,
+      "Hi ",
+      this.props.name
+    );
+  }
+}
+
+ReactDOM.render(React.createElement(SayHi, { hisName: "Peter" }), document.getElementById('root'));
+```
 
 <!-- TODO: What´s JSX... -->
 
