@@ -1,6 +1,14 @@
 # React
 
-A JavaScript library for building user interfaces
+A JavaScript library for building user interfaces.
+
+More than 5 years have passed since the official React´s release (March 2013) nevertheless the community interest and adoption are –still- in constant growth.
+Everytime I talked with young DEVs, the React´s stamp widely extends its real existence… For the new rows of builders, handling UIs without a solid framework (we can also modestly include Angular, Vue.js…) is something unthinkable and, perhaps, fumes of an old-past ready to be forgotten.
+No matter the tool that you pick to support your work (here´s an elder Angular´s patron) we all want the same:
+
+* Simplicity
+* Scalability
+* Security
 
 ## Why React...?
 
