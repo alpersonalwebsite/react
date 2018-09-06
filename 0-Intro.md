@@ -20,7 +20,9 @@ No matter the tool that you pick to support your work (here´s an elder Angular�
 * Server Side Integration (SSR as first render)
 * Mobile Apps Development with React Native
 
-.map(), .reduce() and .filter() examples
+**HOF: Higher Order Function**
+Is a function that takes a function as an argument or returns a function.
+Examples: .map(), .reduce() and .filter()
 
 **.reduce()**
 
@@ -127,11 +129,6 @@ console.log(friendsFiltered);
 1: Object { name: "Tinkerbell", age: 100 }
 */
 ```
-
-HOF: Higher Order Function
-Example: reduce()
-
-<!-- TODO: What´s is a HOF -->
 
 ### What´s JSX...?
 
