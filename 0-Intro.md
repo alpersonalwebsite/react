@@ -156,6 +156,8 @@ console.log(friendsFiltered);
 
 It´s an extension to JS syntax recommended by React to describe how our UI. It´s not mandatory; just a really convenient and standardized way of structure our component´s rendering.
 
+Note: It´s important to remember React´s motto: `A JavaScript library for building user interfaces.` Following this notion, you will find coherent to have a strict relation between `logic` and `markup` in the same small unit or component.
+
 Here´s and example using JSX
 
 ```
@@ -187,8 +189,6 @@ class SayHi extends React.Component {
 
 ReactDOM.render(React.createElement(SayHi, { hisName: "Peter" }), document.getElementById('root'));
 ```
-
-<!-- TODO: What´s JSX... -->
 
 <!--
   TODO: Single Page Apps
