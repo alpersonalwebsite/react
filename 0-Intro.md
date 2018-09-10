@@ -190,13 +190,7 @@ class SayHi extends React.Component {
 ReactDOM.render(React.createElement(SayHi, { hisName: "Peter" }), document.getElementById('root'));
 ```
 
-<!--
-  TODO: Single Page Apps
-  You download everything is needed once. Then, we request data through async JS requests.
--->
-
 ### SPA: Single Page Applications
 
-The idea under SPA is having a single HTML document using JS to change what the user sees in the screen.
-
-<!-- TODO: Add somewhere that when we are rendering a list we should add a key with a unique id -->
+The idea under SPA is having a single HTML document using JS to change what the user sees on the screen.
+So, if the user clicks on x-link, x-data (remember that we have HTML/CSS/JS, all downloaded on the first request) is going to be requested asynchronously showing the proper view for that particular set of data.
