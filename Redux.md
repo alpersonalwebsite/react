@@ -1,8 +1,7 @@
 ## Redux
 
 <!-- What´s Redux
-It´s not only for React.
-It´s for handling state in a predictable way.
+State in a predictable way.
 -->
 
 <!-- TODO: First we should define the store. We have to think how the app will use that data -->

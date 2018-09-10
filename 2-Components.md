@@ -85,7 +85,7 @@ export default Child;
 
 If you go to http://localhost:3000/ you will see: `I´m receiving... Hello`
 
-<!-- TODO: Is there a proper way to pass down. I like to use on... Check -->
+<!-- TODO: standardized pass-down properties -->
 
 Let´s say that we want to pass down a state property of App.js to Child.js as props.
 
