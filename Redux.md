@@ -181,11 +181,12 @@ ReactDOM.render(
 
 The `Store` has the following methods:
 
-<!-- TODO: Check if are more -->
+* `store.getState()` > returns current state of the store
+* `store.dispatch(action)` > sends/dispatches the action to all the reducers to return a new property state
+* `store.subscribe(callback)` > will execute the callback when the state changes
+* `store.replaceReducer(reducer)` > will replace current reducer with the provided one
 
-* `getState()` > returns current state of the store
-* `dispatch(action)` > sends the action to all the reducers
-* `subscribe(callback)` > will execute the callback when the state changes
+<!-- TODO: add example for store.replaceReducer(reducer) --->
 
 IMPORTANT: In Redux (as in React or programming in general) you don´t duplicate data. Remember that you have `once Source of Truth`: the Store. Also, put special attention to the shape of the Store... Try to keep it as simple and shallow as you can obviating complex nested structures.
 
