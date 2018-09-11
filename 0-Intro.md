@@ -198,4 +198,6 @@ So, if the user clicks on x-link, x-data (remember that we have everything downl
 At future we are going to see...
 
 1. Routing
-2. Keep UI and URL in sync: particular content for each route (allowing to copy and paste a URL or interact with browser functionality like Go back arrow)
+2. Keep UI and URL in sync: particular content for each route (allowing you to copy and paste a URL on the browser´s address bar, or, interact with other of its control elements like the "Go back" arrow).
+
+For this, we are going to use `react-router-dom` package. I strongly encourage you to take a look to **React Router** [documentation](https://github.com/ReactTraining/react-router).
