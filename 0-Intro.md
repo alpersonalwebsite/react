@@ -194,3 +194,8 @@ ReactDOM.render(React.createElement(SayHi, { hisName: "Peter" }), document.getEl
 
 The idea under SPA is having a single HTML document using JS to change what the user sees on the screen.
 So, if the user clicks on x-link, x-data (remember that we have everything downloaded on the "first load": HTML/CSS/JS) is going to be requested asynchronously showing the proper view for that particular set of data.
+
+At future we are going to see...
+
+1. Routing
+2. Keep UI and URL in sync: particular content for each route (allowing to copy and paste a URL or interact with browser functionality like Go back arrow)
