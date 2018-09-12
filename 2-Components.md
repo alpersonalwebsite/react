@@ -10,7 +10,7 @@ Data flows down... For parent to child.
 
 ### Class Component
 
-```
+```javascript
 import React, { Component } from 'react';
 
 class App extends Component {
@@ -30,7 +30,7 @@ export default App;
 
 They are regular ES6 functions with implicit return.
 
-```
+```javascript
 import React from 'react';
 
 const App = () => (
@@ -52,7 +52,7 @@ TODO: How to pass data or props...
 
 **src/App.js** - Class Component
 
-```
+```javascript
 import React, { Component } from 'react';
 import Child from './Child';
 
@@ -71,7 +71,7 @@ export default App;
 
 **src/Child.js** - Functional Component
 
-```
+```javascript
 import React from 'react';
 
 const Child = props => (
@@ -91,7 +91,7 @@ Let´s say that we want to pass down a state property of App.js to Child.js as p
 
 **src/App.js**
 
-```
+```javascript
 import React, { Component } from 'react';
 import Child from './Child';
 
@@ -120,7 +120,7 @@ If we are using a Class Component, thorugh `this.props.onPassingMessage`
 
 In the previous examples we were hard-coding the value of message...
 
-```
+```javascript
 state = {
   message: 'Hello'
 };
@@ -132,7 +132,7 @@ Not a great user experience... I´m rendering... Nothing...?
 
 We can fix this replacing...
 
-```
+```html
 ...
 <div>I´m receiving... {props.onShowingHello}</div>
 ...
@@ -140,7 +140,7 @@ We can fix this replacing...
 
 With this...
 
-```
+```javascript
 ...
 {onShowingHello !== '' ? `I´m receiving... ${onShowingHello}` : null}
 ...

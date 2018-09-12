@@ -25,7 +25,7 @@ TODO: How we create components
 
 Replace the content of src/App.js with...
 
-```
+```javascript
 import React, { Component } from 'react';
 
 class App extends Component {
@@ -43,17 +43,13 @@ export default App;
 
 If we grab the JSX and transpile it with [Babel](http://babeljs.io/repl/) (be sure that you are selecting the following presets: es2015, es2016, es2017, stage-2 and react) you will see:
 
-```
-"use strict";
+```javascript
+'use strict';
 
 React.createElement(
-  "div",
-  { className: "App" },
-  React.createElement(
-    "h1",
-    null,
-    "Hello World!"
-  )
+  'div',
+  { className: 'App' },
+  React.createElement('h1', null, 'Hello World!')
 );
 ```
 
@@ -65,8 +61,10 @@ Returns a JavaScript object
 
 Example:
 
-```
-const element = React.createElement('div', null,
+```javascript
+const element = React.createElement(
+  'div',
+  null,
   React.createElement('strong', null, 'Hello world!')
 );
 ```
@@ -75,7 +73,7 @@ const element = React.createElement('div', null,
 
 Example: src/index.js
 
-```
+```javascript
 ReactDOM.render(
   <BrowserRouter>
     <App />
@@ -88,7 +86,7 @@ Note: Remember React Apps usually have a single root element.
 
 public/index.html
 
-```
+```html
 <div id="root"></div>
 ```
 

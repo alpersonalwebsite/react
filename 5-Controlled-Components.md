@@ -2,7 +2,7 @@
 
 These are components that render a form (or form element) and where the "source of Truth" (aka, data) lives inside the component state rather than in the DOM.
 
-```
+```javascript
 class App extends Component {
   state = {
     yourName: ''
@@ -38,17 +38,15 @@ Also, you can use conditional rendering for instant validation.
 
 Example:
 
-```
+```javascript
 <div>
-  {yourName.length < 3 && (
-    <span>Name should be at least 3 chars...!</span>
-  )}
+  {yourName.length < 3 && <span>Name should be at least 3 chars...!</span>}
 </div>
 ```
 
 Same example but using the ternary operator:
 
-```
+```javascript
 <div>
   <span>
     {yourName.length < 3 ? 'Name should be at least 3 chars...!' : ''}
@@ -71,7 +69,7 @@ Examples:
 
 * When you are dealing with props or state, you can do:
 
-```
+```javascript
 const { yourName, yourAge } = this.props;
 /*
   This is like...
@@ -91,7 +89,7 @@ By default, when you submit a form, the fields (name and value) are serialized i
 Example:
 http://localhost:3000/?name=Peter&lastName=Pan&age=30
 
-```
+```javascript
 import React, { Component } from 'react';
 
 class App extends Component {
@@ -151,7 +149,7 @@ Example: (you need to have form-serialize installed through npm or yarn. For mor
 
 Example:
 
-```
+```javascript
 import React, { Component } from 'react';
 import formSerialize from 'form-serialize';
 
@@ -214,6 +212,6 @@ export default App;
 
 Result: (check your Dev Tools Console)
 
-```
+```javascript
 Object { name: "Peter", lastName: "Pan", age: "30" }      App.js:18
 ```

@@ -20,7 +20,7 @@ npm install enzyme enzyme-adapter-react-16 jest-cli@20.0.4 --save-dev
 
 Yes... We are saving it as a dev dependency. So, if you go to your package.json you will see something like:
 
-```
+```json
 "devDependencies": {
   "enzyme": "^3.3.0",
   "enzyme-adapter-react-16": "^1.1.1",
@@ -32,16 +32,16 @@ Note: At the moment I´m writing this tutorial the last Jest version is 23.4.1, 
 
 We are going to create **src/tempPolyfills.js**
 
-```
-const requestAnimationFrame = global.requestAnimationFrame = callback => {
+```javascript
+const requestAnimationFrame = (global.requestAnimationFrame = callback => {
   setTimeout(callback, 0);
-}
+});
 export default requestAnimationFrame;
 ```
 
 And, **src/setupTests.js**
 
-```
+```javascript
 import requestAnimationFrame from './tempPolyfills';
 
 /* Some people avoid destructuring this:
@@ -51,7 +51,6 @@ Enzyme.configure({ adapter: new Adapter(), disableLifecycleMethods: true  });
 */
 import { configure } from 'enzyme';
 
-
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter(), disableLifecycleMethods: true });
 ```
@@ -60,7 +59,7 @@ configure({ adapter: new Adapter(), disableLifecycleMethods: true });
 
 Note: When you create your app using `create-react-app` your `App.test.js` will look like...
 
-```
+```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -83,7 +82,7 @@ Snapshots are a recorded history of our Component to verify that previous "captu
 
 Create the file src/App.test.js (if you have it, delete ALL its content)
 
-```
+```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
@@ -156,7 +155,7 @@ We are going to make several changes in our App Component.
 
 **src/App.js**
 
-```
+```javascript
 import React, { Component } from 'react';
 
 class App extends Component {
@@ -217,7 +216,7 @@ You can also check the existence of the form tag. I´m letting this one as homew
 
 **src/App.test.js**
 
-```
+```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
@@ -265,7 +264,7 @@ Note: beforeEach(() => {} and afterEach(() => {} will execute functionality befo
 
 Let´s include the new tests to **src/App.test.js**
 
-```
+```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
@@ -343,7 +342,7 @@ Now, if you run the tests your console will look like...
 
 Notes:
 
-```
+```javascript
 beforeEach(() => {
   // I´m adding the name to keep the behavior of my method: updateStateProperty
   wrapper.find('input').simulate('change', {
@@ -362,13 +361,16 @@ If we are targeting an element among several, for example, if we had 2 or more b
 
 Example: to find the first button
 
-```
-wrapper.find('button').at(0).simulate('submit');
+```javascript
+wrapper
+  .find('button')
+  .at(0)
+  .simulate('submit');
 ```
 
 We can also nest element. Example:
 
-```
+```html
 <div>
   <h1>Hello</h1>
 </div>
@@ -376,19 +378,19 @@ We can also nest element. Example:
 
 UT:
 
-```
+```javascript
 it('renders an h1 title', () => {
-    expect(wrapper.find('div h1').text()).toEqual('Hello');
-  });
+  expect(wrapper.find('div h1').text()).toEqual('Hello');
+});
 ```
 
 #### Shallow Rendering (Shallow), Full Rendering (Mount) and Static Rendering (Render)
 
 Let´s add first a functional component to the previous **src/App.js** code
 
-```
+```javascript
 const Child = () => {
-  return <div>I'm Child!</div>;
+  return <div>Im Child!</div>;
 };
 ```
 
@@ -403,7 +405,7 @@ Now, let´s console the structure of the Component using `shallow` and `mount`
 **Shallow**
 It renders the provided Component but NOT its children.
 
-```
+```javascript
 import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
@@ -420,16 +422,17 @@ describe('<App />', () => {
 
 Result:
 
-```
+```javascript
 <div>
-  <h1 className="title">
-    Add your friends!
-  </h1>
+  <h1 className="title">Add your friends!</h1>
   <form onSubmit={[Function]}>
-    <input type="text" name="friend" value="" onChange={[Function: onChange]} />
-    <button>
-      Add friend!
-    </button>
+    <input
+      type="text"
+      name="friend"
+      value=""
+      onChange={[(Function: onChange)]}
+    />
+    <button>Add friend!</button>
   </form>
   <Child />
 </div>
@@ -454,22 +457,21 @@ Just replace shallow with mount.
 
 Result:
 
-```
+```javascript
 <App>
   <div>
-    <h1 className="title">
-      Add your friends!
-    </h1>
+    <h1 className="title">Add your friends!</h1>
     <form onSubmit={[Function]}>
-      <input type="text" name="friend" value="" onChange={[Function: onChange]} />
-      <button>
-        Add friend!
-      </button>
+      <input
+        type="text"
+        name="friend"
+        value=""
+        onChange={[(Function: onChange)]}
+      />
+      <button>Add friend!</button>
     </form>
     <Child>
-      <div>
-        I&#39;m Child!
-      </div>
+      <div>I&#39;m Child!</div>
     </Child>
   </div>
 </App>
@@ -497,7 +499,7 @@ We will have 2 exports (one by default, the connected component)
 
 **src/components/App.js**
 
-```
+```javascript
 ...
 export class App extends Component {}
 
@@ -511,13 +513,13 @@ So we will replace...
 
 **src/components/App.test.js**
 
-```
+```javascript
 import App from './App';
 ```
 
 with...
 
-```
+```javascript
 import { App } from './App';
 ```
 
@@ -529,7 +531,7 @@ Your console will look like...
 As you can see, we are getting closer to the solution.
 Now, replace the UT...
 
-```
+```javascript
 beforeEach(() => {
   // Yes... We simulate the event from the button
   // Our submit handler will clear as well `friend` state´s property
@@ -540,7 +542,7 @@ beforeEach(() => {
 
 with...
 
-```
+```javascript
 beforeEach(() => {
   wrapper.find('form').simulate('submit', { preventDefault() {} });
   wrapper.update();
@@ -561,7 +563,7 @@ In this case (aka, how to fix the issue with the store´s context option b) we c
 
 **src/ProviderEnhancement.js**
 
-```
+```javascript
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -586,7 +588,7 @@ Now, we are going to import `Provider_Enhancement.js` in our `src/index.js` and 
 
 And remove the following...
 
-```
+```javascript
 import rootReducer from './reducers';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -598,7 +600,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 Plus...
 
-```
+```javascript
 const store = createStore(
   rootReducer,
   //composeEnhancers(applyMiddleware(ReduxPromise))
@@ -608,7 +610,7 @@ const store = createStore(
 
 Your **src/index.js** should look like...
 
-```
+```javascript
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ReactDOM from 'react-dom';
@@ -632,19 +634,19 @@ Once you do this, you can avoid exporting the class (just export the connected C
 
 Replace...
 
-```
-export class App extends Component {
+```javascript
+export class App extends Component {}
 ```
 
 With...
 
-```
-class App extends Component {
+```javascript
+class App extends Component {}
 ```
 
 In our test file, `App.test.js` import `ProviderEnhancement`, use `mount` and replace our current `wrapper` with...
 
-```
+```javascript
 const wrapper = mount(
   <ProviderEnhancement>
     <App />

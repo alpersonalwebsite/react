@@ -33,10 +33,10 @@ TODO: Explain template literals
 We should avoid initializing the state with props.
 For example:
 
-```
+```javascript
 state = {
   yourName: this.props.userName
-}
+};
 ```
 
 Why...?
@@ -48,7 +48,7 @@ Why...?
 
 If we don´t care about the previous state, we can do the following...
 
-```
+```javascript
 componentDidMount() {
   this.setState({
     yourName: 'Wendy'
@@ -58,7 +58,7 @@ componentDidMount() {
 
 If we care or the "new state" depends in the previous one...
 
-```
+```javascript
 componentDidMount() {
   this.setState(prevState => ({
     yourName: `Wendy, ex ${prevState.yourName}!`
@@ -79,7 +79,7 @@ Also, a method to delete a particular friend which is taken as argument. What we
 In our JSX we map our friends array.
 When you click in the button, we call the function `deleteFriend()` (in its proper context) passing a hard-coded value (`Wendy`) which is the one that we are going to pull out.
 
-```
+```javascript
 import React, { Component } from 'react';
 
 class App extends Component {
@@ -125,18 +125,14 @@ Example \#2 with `bind()`
 
 Change...
 
-```
-<button onClick={() => this.deleteFriend('Wendy')}>
-  Delete friend!
-</button>
+```javascript
+<button onClick={() => this.deleteFriend('Wendy')}>Delete friend!</button>
 ```
 
 With...
 
-```
-<button onClick={this.deleteFriend.bind(null, 'Wendy')}>
-  Delete friend!
-</button>
+```javascript
+<button onClick={this.deleteFriend.bind(null, 'Wendy')}>Delete friend!</button>
 ```
 
 In this example, the `new function` that `.bind()` returns will have access to the `global context` (since we are using `null`) and will receive `'Wendy'` as parameter or argument.
@@ -147,7 +143,7 @@ In this example, the `new function` that `.bind()` returns will have access to t
 
 You can see that we are **NOT initializing our state in the constructor** (as you will notice in several React tutorials).
 
-```
+```javascript
 import React, { Component } from 'react';
 
 class App extends Component {
@@ -174,7 +170,7 @@ Until it becomes part of the standard, we can use Babel to transpile code (which
 
 So, the previous example would be...
 
-```
+```javascript
 import React, { Component } from 'react';
 
 class App extends Component {

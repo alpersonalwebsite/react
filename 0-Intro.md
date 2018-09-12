@@ -25,13 +25,12 @@ Is a function that takes a function as an argument or returns a function.
 
 Basic example: function that returns (or creates) a new function.
 
-```
+```javascript
 multiplyNumbers = theFirstNumber => {
- return theSecondNumber => theSecondNumber * theFirstNumber;
-}
+  return theSecondNumber => theSecondNumber * theFirstNumber;
+};
 
 let multiplyNumbers30 = multiplyNumbers(30);
-
 
 //console.log(multiplyNumbers30);
 console.log(typeof multiplyNumbers30);
@@ -55,15 +54,15 @@ It´s the base of one of the vital parts of Redux´s flow: reducers.
 
 Example: reduce years collection into TOTAL years
 
-```
+```javascript
 const friends = [
-	{ name: 'Peter', age: 30 },
+  { name: 'Peter', age: 30 },
   { name: 'Tinkerbell', age: 100 },
   { name: 'Wendy', age: 31 }
 ];
 
 friends.reduce((totalYear, eachAge) => {
-	return addFriendsAge = totalYear + eachAge.age;
+  return (addFriendsAge = totalYear + eachAge.age);
 }, 0);
 
 console.log(addFriendsAge);
@@ -80,7 +79,7 @@ If we are returning in one line we can do...
 
 `renderMessage = message => message;`
 
-```
+```javascript
 renderMessage = message => message;
 
 ...
@@ -96,13 +95,13 @@ render() {
 
 For multilines use `()`
 
-```
+```javascript
 renderMessage = message => {
-	return (
-		<div>
-			My message: <div>{message}</div>
-		</div>
-	);
+  return (
+    <div>
+      My message: <div>{message}</div>
+    </div>
+  );
 };
 ```
 
@@ -114,7 +113,7 @@ Given an array, it generates a new one (just for clarity allow me to repeat, new
 
 Example: map an array and retrieve a new array with the results assigned to a variable
 
-```
+```javascript
 const friends = [
   { name: 'Peter', age: 30 },
   { name: 'Tinkerbell', age: 100 },
@@ -135,7 +134,7 @@ Given an array, it generates a new one with the elements that meet the criteria 
 
 Example: filter and retrieve all the elements which property name is NOT Wendy
 
-```
+```javascript
 const friends = [
   { name: 'Peter', age: 30 },
   { name: 'Tinkerbell', age: 100 },
@@ -160,34 +159,29 @@ Note: It´s important to remember React´s motto: `A JavaScript library for buil
 
 Here´s and example using JSX
 
-```
+```javascript
 class SayHi extends React.Component {
   render() {
     return <div>Hi {this.props.name}</div>;
   }
 }
 
-ReactDOM.render(
-  <SayHi hisName="Peter" />,
-  document.getElementById('root')
-);
+ReactDOM.render(<SayHi hisName="Peter" />, document.getElementById('root'));
 ```
 
 And the same example (compiled with Babel) with plain or vanilla JavaScript
 
-```
+```javascript
 class SayHi extends React.Component {
   render() {
-    return React.createElement(
-      "div",
-      null,
-      "Hi ",
-      this.props.name
-    );
+    return React.createElement('div', null, 'Hi ', this.props.name);
   }
 }
 
-ReactDOM.render(React.createElement(SayHi, { hisName: "Peter" }), document.getElementById('root'));
+ReactDOM.render(
+  React.createElement(SayHi, { hisName: 'Peter' }),
+  document.getElementById('root')
+);
 ```
 
 ### SPA: Single Page Applications

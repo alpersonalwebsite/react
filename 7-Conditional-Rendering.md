@@ -9,7 +9,7 @@ Note: since we are using local state, we are extending the Class instead of empl
 
 **if/else**
 
-```
+```javascript
 import React, { Component } from 'react';
 
 class App extends Component {
@@ -36,7 +36,7 @@ export default App;
 
 **if/else** ? ():()
 
-```
+```javascript
 render() {
   const { conditionIs } = this.state;
 
@@ -53,7 +53,7 @@ render() {
 
 **Ternary operator**
 
-```
+```javascript
 render() {
   const { conditionIs } = this.state;
 
@@ -67,7 +67,7 @@ render() {
 
 **if &&** (short-circuit evaluation)
 
-```
+```javascript
 render() {
   const { conditionIs } = this.state;
 
@@ -84,7 +84,7 @@ render() {
 
 **if > return**
 
-```
+```javascript
 import React from 'react';
 
 const Child = props => {
@@ -92,12 +92,12 @@ const Child = props => {
     return null;
   }
 
-  return <div>I'm Child! {props.conditionIs}</div>;
+  return <div>Im Child! {props.conditionIs}</div>;
 };
 
 const App = () => (
   <div>
-    I'm App!
+    Im App!
     <Child conditionIs="" />
   </div>
 );

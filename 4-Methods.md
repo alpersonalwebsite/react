@@ -24,7 +24,7 @@ class App extends Component {
 
 ### Setting state with custom method
 
-```
+```javascript
 class App extends Component {
   state = {
     yourName: 'Peter Pan'
@@ -51,7 +51,7 @@ class App extends Component {
 
 App.js
 
-```
+```javascript
 import React, { Component } from 'react';
 import Child from './Child';
 
@@ -81,7 +81,7 @@ export default App;
 
 Child.js
 
-```
+```javascript
 import React from 'react';
 
 const Child = props => (

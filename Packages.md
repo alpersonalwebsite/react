@@ -13,11 +13,11 @@ npm install --save prop-types
 
 Example use:
 
-```
+```javascript
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const Child = props => <div>I'm Child...</div>;
+const Child = props => <div>Im Child...</div>;
 
 class App extends Component {
   state = {
@@ -29,7 +29,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        I'm App
+        Im App
         <Child {...this.state} />
       </div>
     );
@@ -57,7 +57,7 @@ Click in the React tab and expand your App view.
 
 You can see that the App component has the following properties in its State:
 
-```
+```javascript
 State
     yourAge: 30
     yourName:"Peter Pan"
@@ -70,7 +70,7 @@ State
 
 And, if you click in Child, you will see the following properties...
 
-```
+```javascript
 Props read-only
     yourAge: 30
     yourName: "Peter Pan"
@@ -84,7 +84,7 @@ Refresh the page. You should not see any error.
 
 Now, change the expected type of yourAge property to string
 
-```
+```javascript
 Child.propTypes = {
   yourName: PropTypes.string,
   yourAge: PropTypes.string,
@@ -94,7 +94,7 @@ Child.propTypes = {
 
 In the Console you will see...
 
-```
+```javascript
 Warning: Failed prop type: Invalid prop `yourAge` of type `number` supplied to `Child`, expected `string`.
     in Child (at App.js:17)
     in App (at index.js:7)
@@ -104,7 +104,7 @@ Excellent! Everything is working as expected (aka, every time you use a type dif
 
 ##### Most used types...
 
-```
+```javascript
 optionalArray: PropTypes.array,
 optionalBool: PropTypes.bool,
 optionalFunc: PropTypes.func,
@@ -116,7 +116,7 @@ optionalSymbol: PropTypes.symbol
 
 You can define IF a property is required with .isRequired
 
-```
+```javascript
 Child.propTypes = {
   yourName: PropTypes.string,
   yourAge: PropTypes.number.isRequired,
@@ -126,7 +126,7 @@ Child.propTypes = {
 
 In this case, if you don´t have that property you console will show something like...
 
-```
+```javascript
 Warning: Failed prop type: The prop `yourAge` is marked as required in `Child`, but its value is `undefined`.
     in Child (at App.js:17)
     in App (at index.js:7)
@@ -141,11 +141,11 @@ I recommend you to install as well Redux DevTools.
 
 Once you have this Add-on, you can wire it up to your store using it as second parameter of `createStore()`
 
-```
+```javascript
 const store = createStore(
   reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+);
 ```
 
 ---
@@ -163,7 +163,7 @@ npm install --save escape-string-regexp
 
 Example use:
 
-```
+```javascript
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import escapeStringRegexp from 'escape-string-regexp';
@@ -210,17 +210,17 @@ export default App;
 Type some symbols like: $!#%&/()=?¡'+
 Then, in the React tab of your Dev Tools check the State... You should see:
 
-```
-State
-  yourName: "$!#%&/()=?¡'+"
+```javascript
+State;
+yourName: "$!#%&/()=?¡'+";
 ```
 
 Now, hit Submit and check (again) the value of yourName property.
 You should see:
 
-```
-State
- yourName: "\\$!#%&/\\(\\)=\\?¡'\\+"
+```javascript
+State;
+yourName: "\\$!#%&/\\(\\)=\\?¡'\\+";
 ```
 
 Bravo...! You know how to escape characters.
@@ -279,7 +279,7 @@ If we don´t add the exact attribute, both screens will render when we go to the
 An example to clarify.
 All these routes will match http://localhost:3000/animals/dogs
 
-```
+```javascript
 <Route path="/" component={Something} />
 <Route path="/animals" component={Something} />
 <Route exact path="/animals/dogs" component={Something} />
@@ -289,7 +289,7 @@ All these routes will match http://localhost:3000/animals/dogs
 Alternatively, we can use Switch which takes a collection of different routes and it just renders the first route that matches the URI.
 Example:
 
-```
+```javascript
 <BrowserRouter>
   <Switch>
     <Route path="/animals" component={App0} />
@@ -309,7 +309,7 @@ In the previous example...
 
 Example with routes in "proper order":
 
-```
+```javascript
 <Switch>
   <Route path="/animals/dogs" component={App1} />
   <Route path="/animals" component={App0} />
@@ -338,7 +338,7 @@ Route component takes a path and renders its proper UI.
 
 Let´s go back to our `<Switch>` example for a moment. Through the URI we can get the `animal` that the user is passing (`/animals/:animal`) and execute some operation. For example, make a request to x-API to retrieve all the information related to that animal. To ilustrate the point, in **App1** I´m, adding...
 
-```
+```javascript
 class App1 extends Component {
   componentDidMount() {
     const { animal } = this.props.match.params;
@@ -359,7 +359,7 @@ In the Lifecycle `componentDidMount()` we are making the request via `this.props
 
 In the JSX, I´m printing as well the `match` property which its parsed-value would be:
 
-```
+```javascript
 {
    "path":"/animals/:animal",
    "url":"/animals/cat",
@@ -375,7 +375,7 @@ In the JSX, I´m printing as well the `match` property which its parsed-value wo
 We don´t use <a> if not Link which keeps sync with BrowserRouter; Link renders an anchor tag.
 We can pass parameters to Link using an object instead of a string as value.
 
-```
+```javascript
 <BrowserRouter>
   <div>
     <Route
@@ -415,7 +415,7 @@ IMPORTANT: logger must be the last middleware in chain, otherwise it will log th
 
 Example:
 
-```
+```javascript
 import logger from 'redux-logger';
 
 ...
@@ -468,23 +468,23 @@ Example:
 
 **Action creator**
 
-```
+```javascript
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 
 export const fetchComments = () => {
-  const api ='https://jsonplaceholder.typicode.com/comments';
+  const api = 'https://jsonplaceholder.typicode.com/comments';
   const request = axios.get(api);
 
   return {
     type: FETCH_WEATHER,
     payload: request
-  }
-}
+  };
+};
 ```
 
 **Reducer**
 
-```
+```javascript
 import { FETCH_COMMENTS } from '../actions/types';
 
 export default (state = [], action) => {
