@@ -19,10 +19,6 @@ Delete...
 1. src/App.css
 2. src/Logo.svg
 
-<!--
-TODO: How we create components
--->
-
 Replace the content of src/App.js with...
 
 ```javascript
@@ -129,6 +125,16 @@ Well, it is (in fact) an object representation of a DOM node.
 const element = <div>Im an element!</div>;
 ```
 
-<!--
-TODO: Compose components together
--->
+Through components (we will cover this on the next chapter) we return the created elements. Let´s go back to our `Hello world!` example...
+
+```javascript
+const element = React.createElement(
+  'div',
+  null,
+  React.createElement('strong', null, 'Hello world!')
+);
+
+HelloWorld = () => element;
+
+ReactDOM.render(<HelloWorld />, document.getElementById('root'));
+```
