@@ -58,6 +58,11 @@ Note about render() method: It should only be used to render or display data; ne
 **createElement()**
 
 Returns a JavaScript object
+It takes 3 arguments:
+
+1. tag
+2. attributes
+3. content or element´s children
 
 Example:
 
@@ -88,6 +93,16 @@ public/index.html
 
 ```html
 <div id="root"></div>
+```
+
+### Elements
+
+As we saw previously, we create elements through `React.createElement()`.
+An element is an object that describes what we want to show in the screen.
+Well, it is (in fact) an object representation of a DOM node.
+
+```javascript
+const element = <div>Im an element!</div>;
 ```
 
 <!--
