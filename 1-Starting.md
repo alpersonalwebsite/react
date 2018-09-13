@@ -76,6 +76,30 @@ const element = React.createElement(
 
 **ReactDOM.render()**
 
+Let´s first `render` our previous element.
+
+```javascript
+const element = React.createElement(
+  'div',
+  null,
+  React.createElement('strong', null, 'Hello world!')
+);
+
+ReactDOM.render(element, document.getElementById('root'));
+```
+
+If we inspect our `html` we will see our DOM node...
+
+```html
+<body>
+  <div id="root">
+  <div><strong>Hello world!</strong></div>
+  </div>
+</body>
+```
+
+Another example (with components not elements)
+
 Example: src/index.js
 
 ```javascript
