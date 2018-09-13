@@ -8,7 +8,7 @@ No matter the tool that you pick to support your work (hereÂ´s an elder AngularÂ
 
 * Simplicity
 * Scalability
-* Security
+* Security (everything is converted into a string before render). This prevents XSS.
 
 ## Why React...?
 
