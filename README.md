@@ -15,6 +15,21 @@ This is a pure practical guide; I don´t have the intention of challenging the g
 You DO need to have an intermediate knowledge in `JavaScript` and, preferably, some exposure to [ES6](http://es6-features.org)
 Even when complex topics are addressed as needed part of the "session" (for example leaks, currying) not having a JS base at all will generate more doubts than contribution. If you don´t have experience with JavaScript, familiarity with `OOP`... Please, resolve `this` and `then` come back.
 
+Before proceeding with the tutorial, please, install...
+
+**Required**
+
+* Node.js: https://nodejs.org/en/download/
+* Package manager (npm or yarn)
+
+**Recommended**
+
+* npm (bundled with Node)
+
+**Alternatives**
+
+* yarn (alternative to npm): https://yarnpkg.com/lang/en/docs/install/
+
 ### Installing
 
 ## Tests
