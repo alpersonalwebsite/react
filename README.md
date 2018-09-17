@@ -25,6 +25,9 @@ Before proceeding with the tutorial, please, install...
 **Recommended**
 
 * npm (bundled with Node)
+  More info: https://github.com/npm/npm
+
+* For Windows users: Git bash https://git-scm.com/downloads as a CMD replace.
 
 **Alternatives**
 
