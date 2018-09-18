@@ -35,6 +35,9 @@ Before proceeding with the tutorial, please, install...
 
 ### Installing
 
+Clone the project
+git clone https://github.com/alpersonalwebsite/react.git
+
 ## Tests
 
 ## License
