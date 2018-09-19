@@ -26,6 +26,8 @@ Before proceeding with the tutorial, please, be sure that you have installed or,
 * Node.js: https://nodejs.org/en/download/
 * Package manager (npm or yarn)
 
+Note: packages, dependencies, libraries are going to be referenced on-demand. Those whose scope is bigger (or represent some kind of particular difficulty) will be addressed in [Packages.md](Packages.md)
+
 **Recommended**
 
 * npm (bundled with Node)
