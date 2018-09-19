@@ -1,12 +1,15 @@
 # React and Redux
 
-An easy way to learn through examples
+An easy way to learn through examples.
 
 ## Before starting
 
-After several years of contributing, mentoring and working with React and Redux, I decided to “put together” some notes related to recurrent doubts and contrarieties that friends and co-workers have faced.
+After several years of contributing, mentoring and working with React and Redux (among other related technologies of `JAMStack`), I decided to “put together” some notes linked to recurrent doubts and contrarieties that friends and co-workers have faced.
 
-This is a pure practical guide; I don´t have the intention of challenging the great tutorials and books that you can find in the market (like the own Facebook´s proprietary documentation). My aim as I stated before is –clearly- pragmatic. You will see some concepts and technicalities (as general context) but you should complement this joint exercise with other materials (I try to avoid quoting since discovering good sources is also part of the training, however, taking a look the the mother source will not hurt you: [react](https://github.com/facebook/react)).
+This is a pure practical guide: please, keep the `practical intention` present during the course of these "shared topics"; I don´t have the purpose of challenging the great and innumerous coaching classes, neither the books/"white papers" that you can find in the market (starting with the own Facebook´s proprietary documentation).
+
+My aim as I stated before is –clearly- pragmatic. You will see some concepts and technicalities (as general and fair context) but you should (perhaps must) complement this joint exercise with other materials (I try to avoid quoting or referencing since, an important part of your training is discovering good sources and picking those that satisfy your own and extremely personal needs.
+However, taking a look the the mother source will not hurt you: [react](https://github.com/facebook/react)).
 
 ## Getting Started
 
