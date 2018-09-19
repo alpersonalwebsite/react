@@ -16,9 +16,10 @@ However, taking a look the the mother source will not hurt you: [react](https://
 ### Pre-requisites
 
 You DO need to have an intermediate knowledge in `JavaScript` and, preferably, some exposure to [ES6](http://es6-features.org)
-Even when complex topics are addressed as needed part of the "session" (for example leaks, currying) not having a JS base at all will generate more doubts than contribution. If you don´t have experience with JavaScript, familiarity with `OOP`... Please, resolve `this` and `then` come back.
+Even when complex topics are addressed as needed part of the "session" (for example leaks, currying) not having a JS base at all will generate more doubts and it could guide you to a premature failure.
+If you don´t have experience with JavaScript, familiarity with `OOP`... Please, resolve `this` and `then` come back (btw, if this phrase is catchy or understandable, you should be alright).
 
-Before proceeding with the tutorial, please, install...
+Before proceeding with the tutorial, please, be sure that you have installed or, install...
 
 **Required**
 
