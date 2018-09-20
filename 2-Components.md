@@ -1,5 +1,12 @@
 ## Components or screens
 
+We use components to split our UI into reusable "blocks" that receive `props` (aka, data) and return, as we saw earlier, React elements.
+
+In react there´re 2 types of Components:
+
+1. Class components
+2. Functional or Stateless components
+
 <!-- TODO: What are Components
 
 Plus...
@@ -29,6 +36,7 @@ export default App;
 ### Functional or stateless Component
 
 They are regular ES6 functions with implicit return.
+We use functional components when we just care about `rendering`. If we want to handle `local state` or work with custom methods we should opt for `Class Components`.
 
 ```javascript
 import React from 'react';
