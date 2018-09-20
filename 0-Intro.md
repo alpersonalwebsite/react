@@ -14,7 +14,7 @@ No matter the tool that you pick to support your work (hereÂ´s an elder AngularÂ
 
 * Composition: small integrated pieces of code (components) that allow us to build complex UI.
 * Use of objects to build the UI.
-* Declarative approach
+* Declarative approach: we "tell" what we want not "how/steps to" obtain what we want (imperative)
 * Unidirectional data flow (from parent to child component)
 * JavaScript logic: we use just JS (not a particular templating library)
 * Server Side Integration (SSR as first render)
