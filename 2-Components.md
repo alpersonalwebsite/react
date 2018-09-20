@@ -2,18 +2,12 @@
 
 We use components to split our UI into reusable "blocks" that receive `props` (aka, data) and return, as we saw earlier, React elements.
 
+You should name your component following the CamelCase (also called UpperCamelCase) convention. Example: `<ListOfRecords />`; use Lower Camel Case for DOM tags and HOC.
+
 In react there´re 2 types of Components:
 
 1. Class components
 2. Functional or Stateless components
-
-<!-- TODO: What are Components
-
-Plus...
-They only required render() methods
-Through components we create React Elements
-Data flows down... For parent to child.
--->
 
 ### Class Component
 
@@ -35,8 +29,22 @@ export default App;
 
 ### Functional or stateless Component
 
-They are regular ES6 functions with implicit return.
-We use functional components when we just care about `rendering`. If we want to handle `local state` or work with custom methods we should opt for `Class Components`.
+They are regular JS functions that returns a React element.
+
+Example: pre ES6
+
+```javascript
+function App() {
+  return (
+    <div className="App">
+      <h1>Hello World!</h1>
+    </div>
+  );
+}
+```
+
+Example: ES6
+(...with implicit return)
 
 ```javascript
 import React from 'react';
@@ -50,7 +58,35 @@ const App = () => (
 export default App;
 ```
 
-When to use functional components...? When our component only cares about rendering some "JSX".
+We use functional components when we just care about `rendering JSX`. If we want to handle `local state` or work with custom methods we should opt for `Class Components`.
+
+---
+
+### Composition
+
+One of the key aspects of React is `Composition`. Following this logic, we can have -multiple- **small components** as part of the `JSX` (or output).
+
+Example:
+
+```javascript
+const App = () => (
+  <div className="App">
+    <h1>Hello World!</h1>
+    <IntroComponent />
+    <LanguageComponent default="en">
+    <ContactComponent>
+  </div>
+);
+```
+
+Remember that **small components** contribute to the re-usable nature of React and its compositional view. However, try to avoid being extremely granular and always preserve the logic´s context.
+Example:
+
+* A Car could be the main (or App) component
+* Door can be a reusable component. We can call it as many times as doors our main component has.
+* The Door component contains children, like handle (which include door-lock as prop)
+
+Nevertheless, we are not going to dissect the door-lock until we have screws, metal, plastic and paint... Even when, for example, screws are going to be used in several elements.
 
 <!--
 TODO: How to pass data or props...
