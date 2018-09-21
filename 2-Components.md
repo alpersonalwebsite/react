@@ -79,18 +79,16 @@ const App = () => (
 );
 ```
 
-Remember that **small components** contribute to the re-usable nature of React and its compositional view. However, try to avoid being extremely granular and always preserve the logic´s context.
+Remember that **small components** contribute to the re-usable nature of React and its compositional view. However, try to avoid being extremely granular and always preserve the logic´s context and usage.
 Example:
 
 * A Car could be the main (or App) component
-* Door can be a reusable component. We can call it as many times as doors our main component has.
+* Door could be a reusable component. We can call it as many times as doors our main component has.
 * The Door component contains children, like handle (which include door-lock as prop)
 
-Nevertheless, we are not going to dissect the door-lock until we have screws, metal, plastic and paint... Even when, for example, screws are going to be used in several elements.
+Nevertheless, we are not going to dissect the door-lock until we have screws, metal, plastic and paint... Even when (for example) screws are going to be used in several elements.
 
-<!--
-TODO: How to pass data or props...
--->
+Think in elements as words and components as phrases.
 
 #### Passing props
 
@@ -128,8 +126,6 @@ export default Child;
 ```
 
 If you go to http://localhost:3000/ you will see: `I´m receiving... Hello`
-
-<!-- TODO: standardized pass-down properties -->
 
 Let´s say that we want to pass down a state property of App.js to Child.js as props.
 
