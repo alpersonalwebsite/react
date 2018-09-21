@@ -1,7 +1,9 @@
 ## Local State
 
-Previously, we saw `props` as read-only or immutable data. Now, we are going to review data that can mutate inside the component: `state`.
-Let´s think for a moment in a TODO list. We have several items and boxes to check as "done". The original state of each item would be `false` and, when the user or "some logic" click on a particular "checkbox" the property state associated to it would change its value to `true` (the process could be reversed un-checking the box what would set the state to its original value: `false`).
+Previously, we saw `props` as read-only or immutable data that we pass from a parent to a child component. Now, we are going to review data that can mutate inside the component: `state`.
+Let´s imagine for a moment a TODO list.
+We have several items and boxes to check as "done".
+The original state of each item would be `false` and, when the user or "some logic" clicks (aka, checks) on a particular "check-box" the property state associated to it would change its value to `true` (the process could be reversed un-checking the box what would set the state to its original value: `false`).
 
 ### Set state
 
