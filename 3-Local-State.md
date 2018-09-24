@@ -28,11 +28,33 @@ class App extends Component {
 ```
 
 **What are Template literals...?**
+(Also called Template Strings)
 
 Example: `` `Hello ${this.state.yourName}` ``
-Basically, the "ES6 way" to concatenate "strings" and embedded expressions.
-We enclose the entire content between back-ticks (\`\`). Expressions are defined with ${yourExpression}.
+Basically, the "ES6 way" to concatenate "strings" and embedded expressions, improving readability and "code formatting".
+We enclose the entire content between back-ticks (\`\`).
+Expressions are defined with ${yourExpression}.
 They can be single or multi-line. Spaces, tabs and break-lines are preserved.
+
+Pre-ES6: string and variable concatenation
+
+```
+var name = 'Peter';
+
+// Here we have to use double quotes ("") or escape single quotes ('')
+console.log('His name is "', name, '"');
+console.log('His name is \'' + name + '\'');
+```
+
+ES6: string and variable concatenation
+
+```
+const name = 'Peter';
+
+// Here we don´t care about single or double quotes
+console.log(`His 'name' is "${name}"`);
+```
+
 Example:
 
 ```
