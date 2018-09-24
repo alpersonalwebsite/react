@@ -27,9 +27,21 @@ class App extends Component {
   }
 ```
 
-<!--
-TODO: Explain template literals
--->
+**What are Template literals...?**
+
+Example: `` `Hello ${this.state.yourName}` ``
+Basically, the "ES6 way" to concatenate "strings" and embedded expressions.
+We enclose the entire content between back-ticks (\`\`). Expressions are defined with ${yourExpression}.
+They can be single or multi-line. Spaces, tabs and break-lines are preserved.
+Example:
+
+```
+console.log(`
+Hello
+  My
+    name is   Peter
+`);
+```
 
 **Every time the state changes the component will re-render**.
 
