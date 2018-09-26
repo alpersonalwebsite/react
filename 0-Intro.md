@@ -184,10 +184,14 @@ ReactDOM.render(
 );
 ```
 
+Note: Babel is used to compile or transpile ES6 code into syntax that old browsers can interpret.
+
 ### SPA: Single Page Applications
 
-The idea under SPA is having a single HTML document using JS to change what the user sees on the screen.
+The idea under SPA is having a single HTML document using JS to change what the user sees on the screen, avoiding, in consequence, having to refresh the page.
 So, if the user clicks on x-link, x-data (remember that we have everything downloaded on the "first load": HTML/CSS/JS) is going to be requested asynchronously showing the proper view for that particular set of data.
+
+React does not require a SPA implementation or approach. You can mix React with other JS libraries, use it partially (for certain features) and combine it with `Server Side Logic`.
 
 At future we are going to see...
 
