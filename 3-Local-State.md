@@ -5,6 +5,8 @@ Let´s imagine for a moment a TODO list.
 We have several items and boxes to check as "done".
 The original state of each item would be `false` and, when the user or "some logic" clicks (aka, checks) on a particular "check-box" the property state associated to it would change its value to `true` (the process could be reversed un-checking the box what would set the state to its original value: `false`).
 
+Remember: our `state` defines the UI of our App. Any "change" on the update will impact the UI.
+
 ### Set state
 
 We set the state through the state class property and access to it via: this.state.theProperty.
