@@ -40,17 +40,17 @@ They can be single or multi-line. Spaces, tabs and break-lines are preserved.
 
 Pre-ES6: string and variable concatenation
 
-```
+```javascript
 var name = 'Peter';
 
 // Here we have to use double quotes ("") or escape single quotes ('')
 console.log('His name is "', name, '"');
-console.log('His name is \'' + name + '\'');
+console.log("His name is '" + name + "'");
 ```
 
 ES6: string and variable concatenation
 
-```
+```javascript
 const name = 'Peter';
 
 // Here we don´t care about single or double quotes
@@ -59,7 +59,7 @@ console.log(`His 'name' is "${name}"`);
 
 Example:
 
-```
+```javascript
 console.log(`
 Hello
   My
