@@ -1,12 +1,12 @@
 ## Lifecycle events
 
-These are methods that allow us to execute certain functionality during the Component´s life.
+These are methods (also known as "hooks") that allow us to execute certain functionality during the Component´s life.
 
 Examples:
 
 * Before the Component is inserted into the DOM > **componentWillMount()**
 * After the Component is inserted into the DOM > **componentDidMount()**
-  Probably the most used one. Example: AJAX requests.
+  This is the most used one. Example: AJAX requests.
 
 * Whenever the component is going to receive NEW props > **componentWillReceiveProps()**
 
