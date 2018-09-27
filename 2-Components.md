@@ -31,6 +31,8 @@ class App extends Component {
 export default App;
 ```
 
+Note: Class components require `render()` method.
+
 ### Functional or stateless Component
 
 They are regular JS functions that returns a React element.
