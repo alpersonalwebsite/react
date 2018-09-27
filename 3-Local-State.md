@@ -9,8 +9,23 @@ Remember: our `state` defines the UI of our App. Any "change" on the update will
 
 ### Set state
 
-We set the state through the state class property and access to it via: this.state.theProperty.
-We use the state to determine changes in our UI.
+We set the state through the state class property and access to it via: this.state.theSelectedProperty.
+
+We **NEVER** modify the state directly, if not, with `setState()`
+
+Wrong
+
+```javascript
+this.state.name = 'Peter';
+```
+
+Right:
+
+```javascript
+this.setState({ name: 'Peter' });
+```
+
+If you modify the property of the state directly **your component WILL not re-render**.
 
 What´s the difference between props and state...?
 Props is read-only data.
