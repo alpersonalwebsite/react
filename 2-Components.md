@@ -9,6 +9,8 @@ In react there´re 2 types of Components:
 1. Class components
 2. Functional or Stateless components
 
+If it´s possible (aka, no local state, no custom or life-cycle methods), use `functional components`
+
 Note: Remember that `props` are inputs to the Components. We pass this data from parent to child.
 
 ### Class Component

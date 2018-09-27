@@ -1,6 +1,6 @@
 ## Methods
 
-Let´s grab the previous example and use a Global Event Handler (for this case, onClick) and a custom method.
+Let´s grab the previous example and use a `Global Event Handler` (for this case, onClick) with setState() and a custom method.
 
 ### Setting state with onClick
 
