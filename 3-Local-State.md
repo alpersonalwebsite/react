@@ -13,7 +13,7 @@ We set the state through the state class property and access to it via: this.sta
 
 We **NEVER** modify the state directly, if not, with `setState()`
 
-Wrong
+Wrong:
 
 ```javascript
 this.state.name = 'Peter';
@@ -119,6 +119,8 @@ componentDidMount() {
   }));
 }
 ```
+
+Note: `setState()` will merge the object that we pass in into the current state.
 
 #### Basic difference between props and state
 
