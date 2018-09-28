@@ -2,6 +2,8 @@
 
 Let´s grab the previous example and use a `Global Event Handler` (for this case, onClick) with setState() and a custom method.
 
+Note: In React events (like onClick), methods and component´s attributes (aka, props) are named using `lower camelCase`.
+
 ### Setting state with onClick
 
 ```
