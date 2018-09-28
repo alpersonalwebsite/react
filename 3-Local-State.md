@@ -5,7 +5,7 @@ Let´s imagine for a moment a TODO list.
 We have several items and boxes to check as "done".
 The original state of each item would be `false` and, when the user or "some logic" clicks (aka, checks) on a particular "check-box" the property state associated to it would change its value to `true` (the process could be reversed un-checking the box what would set the state to its original value: `false`).
 
-Remember: our `state` defines the UI of our App. Any "change" on the update will impact the UI.
+Remember: our `state` defines the UI of our App. Any "change" on the update will impact the UI. Also, that `state` is something related to the component which has and sets it, that´s why we talk about `local state`.
 
 ### Set state
 
@@ -97,6 +97,8 @@ Why...?
 
 1. If the props change (aka, are updated) the state will not reflect them.
 2. To avoid data duplication.
+
+We can freely pass down `state` as `props`.
 
 ### How to "update" or set new state Value
 
