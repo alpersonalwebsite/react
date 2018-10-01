@@ -1,11 +1,10 @@
 ## Conditional Rendering
 
-Previously we saw some conditional renderings like the "ternary operator". We are going to take back from that point and see different ways to render one or other content in relation to x-criteria.
+Previously, we saw some "conditional logic" like the "ternary operator". Now, we are going to resume this subject seeing different ways to render content in relation to x-criteria.
 
 #### State and Class
 
-First cases we are going to be using the state property conditionIs to show one message or other, consigning as well, just the changes.
-Note: since we are using local state, we are extending the Class instead of employing functional components.
+In the first cases, we are going to be using our state property `conditionIs` to show one message or other.
 
 **if/else**
 
