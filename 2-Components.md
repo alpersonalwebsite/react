@@ -133,6 +133,42 @@ export default Child;
 
 If you go to http://localhost:3000/ you will see: `I´m receiving... Hello`
 
+Passing an array and `Each child in an array or iterator should have a unique "key" prop.` warning.
+Imagine that rather than passing a `string` we pass an `array` and we loop it with `.map()` on our `child component`
+Probably, you would do something like...
+**src/Child.js**
+
+```javascript
+const Child = props => (
+  <div>
+    <div>
+      I´m receiving...{' '}
+      {props.onShowingHello.map(eachPerson => <li>{eachPerson}</li>)}
+    </div>
+  </div>
+);
+```
+
+... and it works, however, if you check your `dev console` you will see the following warning...
+
+![React DevTools: Checking props](/images/map-array-warning.png)
+
+What´s going on...?
+When we are looping an array, each child (no matter the element) must have a **UNIQUE key** property which will allow React to preserve the Component>DOM relation used in the reconciliation process.
+
+We can "fix" this adding a key to the element. For our example, we are going to use each element of the array as key and data to render, however, you should use a uniqueID to avoid warning related to children sharing a same key (for example, if someone repeat one of the elements in our array).
+
+```javascript
+<div>
+  I´m receiving...{' '}
+  {props.onShowingHello.map(eachPerson => (
+    <li key={eachPerson}>{eachPerson}</li>
+  ))}
+</div>
+```
+
+Remember: each key should be `unique` and `static`.
+
 Let´s say that we want to pass down a state property of App.js to Child.js as props.
 
 **src/App.js**
