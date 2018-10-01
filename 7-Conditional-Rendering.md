@@ -6,7 +6,7 @@ Previously, we saw some "conditional logic" like the "ternary operator". Now, we
 
 In the first cases, we are going to be using our state property `conditionIs` to show one message or other.
 
-**if/else**
+**if/else** - regular if/else inside render() or custom method
 
 ```javascript
 import React, { Component } from 'react';
@@ -33,7 +33,7 @@ class App extends Component {
 export default App;
 ```
 
-**if/else** ? ():()
+**if/else** - condition ? () : ()
 
 ```javascript
 render() {
@@ -81,7 +81,7 @@ render() {
 
 #### Props and Functional component
 
-**if > return**
+**if > return** - if x, return z
 
 ```javascript
 import React from 'react';
@@ -103,3 +103,5 @@ const App = () => (
 
 export default App;
 ```
+
+Note: You will see that some people return empty elements like `<span>` or `<div>`. This is totally valid, however, in most cases you don´t want to "return something" (aka, add some element to the DOM) so, start always returning `null`, and switch to elements in case you want to render and show a particular message to the user.
