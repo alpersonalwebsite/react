@@ -145,7 +145,7 @@ const Child = props => (
   <div>
     <div>
       I´m receiving...{' '}
-      {props.onShowingHello.map(eachPerson => <li>{eachPerson}</li>)}
+      {props.onShowingHello.map(eachGreeting => <li>{eachGreeting}</li>)}
     </div>
   </div>
 );
@@ -170,10 +170,138 @@ export default App;
 What´s going on...?
 When we are looping an array, each child (no matter the element) must have a **UNIQUE key** property which will allow React to preserve the Component>DOM relation used in the reconciliation process.
 
-We can "fix" this adding a key to the element. For our example, we are going to use the `item index` since we don´t have other "stable value". If we try to use the own element/item, like "Hi", and, if our array has the element twice: `['Hi', 'Hello', 'Hola', 'Hi']` we will end with a similar warning but now referring to "key duplication".
+**We can "fix" this adding a key to the element**. For our example, we are going to use the `item index` since we don´t have other "stable value" (I don´t recommend using it in a real project. Check below.)
 
-Example: error for duplicated keys
+If we try to use the own element/item, like "Hi", and, if our array has the element twice: `['Hi', 'Hello', 'Hola', 'Hi']` we will end with a similar warning but now referring to "key duplication".
 
+![React DevTools: Checking props](/images/map-array-duplicated-key.png)
+
+However, you should remember that index is -still- potentially dangerous and it can produce "unexpected side effects".
+
+Note: We use `htmlFor` instead of `for`.
+
+<!-- TODO: Extend this... -->
+
+```javascript
+import React, { Component } from 'react';
+
+const Child = props => (
+  <div>
+    <div>
+      I´m receiving...{' '}
+      {props.onShowingHello.map((eachGreeting, index) => (
+        <li key={index}>
+          <input
+            type="checkbox"
+            id={eachGreeting}
+            name={eachGreeting}
+            value={eachGreeting}
+          />
+          <label htmlFor={eachGreeting}>{eachGreeting}</label>
+        </li>
+      ))}
+    </div>
+  </div>
+);
+
+class App extends Component {
+  state = {
+    ourSalutation: ['Hi', 'Hello', 'Hola']
+  };
+  render() {
+    return (
+      <div className="App">
+        <Child onShowingHello={this.state.ourSalutation} />
+        <button
+          onClick={() =>
+            this.setState({
+              ourSalutation: ['be', ...this.state.ourSalutation]
+            })
+          }
+        >
+          Add
+        </button>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+If we run our App we will see a plain (extremely flat) list of checkboxes with no errors or warnings in our `dev console`. Next to each checkbox, the proper element with its index.
+
+Do the following...
+
+1. Check "Hola" (the last element) **which has index 2**
+2. Click on Add
+3. Revise the list
+   Yes... Now "Hello" is checked. It changed its index from 1 to 2 and "Hola" is on index 3.
+
+Does it make sense now...?
+React still thinks that the key attribute with value 2 is "tied" to "Hola".
+
+How should we fix the issue in a PROD env...?
+
+First, in our case, change the hard-coded value of the local state property `ourSalutation`
+
+Before:
+
+```javascript
+state = {
+  ourSalutation: ['Hi', 'Hello', 'Hola']
+};
+```
+
+After:
+
+```javascript
+state = {
+  ourSalutation: [
+    { salutation: 'Hi', timestamp: '29519bf2-c68e-11e8-8f1c-f3e5f253a17f' },
+    {
+      salutation: 'Hello',
+      timestamp: '3c72eae1-c68e-11e8-a508-89da3bf216bc'
+    },
+    { salutation: 'Hola', timestamp: '46af7641-c68e-11e8-9146-8343393a23eb' }
+  ]
+};
+```
+
+Second, install the package `uuid` and use the `version 1` (aka, timestamp). Then, change you `onClick handler`
+
+Before:
+
+```javascript
+<button
+onClick={() =>
+  this.setState({
+    ourSalutation: ['be', ...this.state.ourSalutation]
+  })
+}>
+```
+
+After:
+
+```javascript
+<button
+  onClick={() =>
+    this.setState({
+      ourSalutation: [
+        { salutation: 'be', timestamp: uuid.v1() },
+        ...this.state.ourSalutation
+      ]
+    })
+  }
+>
+```
+
+Third, in your `Child component` destructure the object and use `timestamp` as value for the `key`.
+Now, try again checking x-checkbox and clicking on Add.
+
+I´m attaching the entire example: HERE THE PATH
+
+<!--
 Example: key with unique value
 
 ```javascript
@@ -184,8 +312,9 @@ Example: key with unique value
   ))}
 </div>
 ```
+-->
 
-Remember: each key should be `unique` and `static`.
+_Remember_: each key should be `unique` and `static`.
 
 Let´s say that we want to pass down a state property of App.js to Child.js as props.
 
