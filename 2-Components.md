@@ -170,8 +170,11 @@ export default App;
 What´s going on...?
 When we are looping an array, each child (no matter the element) must have a **UNIQUE key** property which will allow React to preserve the Component>DOM relation used in the reconciliation process.
 
-We can "fix" this adding a key to the element. For our example, we are going to use the `item index` since we don´t have other "stable value". If we try to use the own element/item, for example
-element of the array as key and data to render, however, you should use a uniqueID to avoid warning related to children sharing a same key (for example, if someone repeat one of the elements in our array).
+We can "fix" this adding a key to the element. For our example, we are going to use the `item index` since we don´t have other "stable value". If we try to use the own element/item, like "Hi", and, if our array has the element twice: `['Hi', 'Hello', 'Hola', 'Hi']` we will end with a similar warning but now referring to "key duplication".
+
+Example: error for duplicated keys
+
+Example: key with unique value
 
 ```javascript
 <div>
