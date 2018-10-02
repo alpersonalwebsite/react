@@ -136,9 +136,11 @@ If you go to http://localhost:3000/ you will see: `I´m receiving... Hello`
 Passing an array and `Each child in an array or iterator should have a unique "key" prop.` warning.
 Imagine that rather than passing a `string` we pass an `array` and we loop it with `.map()` on our `child component`
 Probably, you would do something like...
-**src/Child.js**
+**src/App.js**
 
 ```javascript
+import React, { Component } from 'react';
+
 const Child = props => (
   <div>
     <div>
@@ -147,6 +149,18 @@ const Child = props => (
     </div>
   </div>
 );
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Child onShowingHello={['Hi', 'Hello', 'Hola', 'Hi']} />
+      </div>
+    );
+  }
+}
+
+export default App;
 ```
 
 ... and it works, however, if you check your `dev console` you will see the following warning...
@@ -156,13 +170,14 @@ const Child = props => (
 What´s going on...?
 When we are looping an array, each child (no matter the element) must have a **UNIQUE key** property which will allow React to preserve the Component>DOM relation used in the reconciliation process.
 
-We can "fix" this adding a key to the element. For our example, we are going to use each element of the array as key and data to render, however, you should use a uniqueID to avoid warning related to children sharing a same key (for example, if someone repeat one of the elements in our array).
+We can "fix" this adding a key to the element. For our example, we are going to use the `item index` since we don´t have other "stable value". If we try to use the own element/item, for example
+element of the array as key and data to render, however, you should use a uniqueID to avoid warning related to children sharing a same key (for example, if someone repeat one of the elements in our array).
 
 ```javascript
 <div>
   I´m receiving...{' '}
-  {props.onShowingHello.map(eachPerson => (
-    <li key={eachPerson}>{eachPerson}</li>
+  {props.onShowingHello.map((eachPerson, index) => (
+    <li key={index}>{eachPerson}</li>
   ))}
 </div>
 ```
