@@ -168,7 +168,7 @@ export default App;
 ![React DevTools: Checking props](/images/map-array-warning.png)
 
 What´s going on...?
-When we are looping an array, each child (no matter the element) must have a **UNIQUE key** property which will allow React to preserve the Component>DOM relation used in the reconciliation process.
+When we are looping an array, each child (no matter the element) must have a **UNIQUE key** property which will allow React to preserve the Component>DOM relation used in the reconciliation process, letting React know which element changed.
 
 **We can "fix" this adding a key to the element**. For our example, we are going to use the `item index` since we don´t have other "stable value" (I don´t recommend using it in a real project. Check below.)
 
@@ -217,8 +217,7 @@ class App extends Component {
             this.setState({
               ourSalutation: ['be', ...this.state.ourSalutation]
             })
-          }
-        >
+          }>
           Add
         </button>
       </div>
@@ -299,20 +298,7 @@ After:
 Third, in your `Child component` destructure the object and use `timestamp` as value for the `key`.
 Now, try again checking x-checkbox and clicking on Add.
 
-I´m attaching the entire example: HERE THE PATH
-
-<!--
-Example: key with unique value
-
-```javascript
-<div>
-  I´m receiving...{' '}
-  {props.onShowingHello.map((eachPerson, index) => (
-    <li key={index}>{eachPerson}</li>
-  ))}
-</div>
-```
--->
+I´m attaching the entire example with all the needed code in the folder: `/basic-react-example[map-with-key]`
 
 _Remember_: each key should be `unique` and `static`.
 
