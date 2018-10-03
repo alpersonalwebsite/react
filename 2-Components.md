@@ -168,9 +168,9 @@ export default App;
 ![React DevTools: Checking props](/images/map-array-warning.png)
 
 What´s going on...?
-When we are looping an array, each child (no matter the element) must have a **UNIQUE key** property which will allow React to preserve the Component>DOM relation used in the reconciliation process, letting React know which element changed.
+When we are looping an array, each child (no matter the element) must have a **UNIQUE key** property which will allow React to preserve the Component>DOM relation used in the reconciliation process, letting React know which element changed. Having a key is a stable way of referring to x-element (see it ad your Passport ID).
 
-**We can "fix" this adding a key to the element**. For our example, we are going to use the `item index` since we don´t have other "stable value" (I don´t recommend using it in a real project. Check below.)
+**We can "fix" this adding a key to the element**. For our example, we are going to use the `item index` since we don´t have other "stable value" (I don´t recommend using it in a real project).
 
 If we try to use the own element/item, like "Hi", and, if our array has the element twice: `['Hi', 'Hello', 'Hola', 'Hi']` we will end with a similar warning but now referring to "key duplication".
 
@@ -300,7 +300,7 @@ Now, try again checking x-checkbox and clicking on Add.
 
 I´m attaching the entire example with all the needed code in the folder: `/basic-react-example[map-with-key]`
 
-_Remember_: each key should be `unique` and `static`.
+_Remember_: each key should be `unique` and `static` in the `context` of x-array. This means that if we have 2 different arrays that we are mapping, we can have same key values since these "IDs" are referring to elements of different array (just a shared addresses but on different States).
 
 Let´s say that we want to pass down a state property of App.js to Child.js as props.
 
