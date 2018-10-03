@@ -1,3 +1,5 @@
+# React and forms
+
 ## Controlled components
 
 These are components that render a form (or form element) and where the "source of Truth" (aka, data) lives inside the component state rather than in the DOM.
@@ -54,9 +56,50 @@ Same example but using the ternary operator:
 </div>
 ```
 
-At future we will see more Conditional Renderings.
+At future we will other ways of `conditional rendering`.
 
 Note: The same criteria can be used to enable/disable "elements".
+
+Before jumping to other topic, let´s address one possible issue in our code setting a context.
+Daily, we interact with lists that filters (aka, update) its composition or results. Example: Amazon searcher and suggested keys/terms/products. However, as you probably noticed, there´s "some kind of delay" that allows you to receive suggestions per words or terms and not per letters.
+
+Let´s modify our previous example.
+Before closing the div, add...
+
+```javascript
+{
+  this.state.yourName ? `Hello ${this.state.yourName}` : null;
+}
+```
+
+Run your application.
+Type your name, for example, Tinkerbell.
+Every time you hit a letter the state is updated, the input shows the updated value of the state property and we also retrieve its value below.
+
+However, we can agree in two things.
+
+1. The UX of letter-by-letter is not great.
+2. If we were attaching a method to the handler (like calling an API) before requesting for `Tinkerbell` we will be requesting for T... Ti... Tin... Yes! We would be making several unnecessary calls/requests that would affect performance.
+
+**One solution** for this is `Debounce` which ensures that a `handler` is not fire or called so often.
+For more information (also Throttling): https://www.npmjs.com/package/react-throttle
+
+1. Install `react-throttle` package
+2. Destructure and import Debounce
+3. Add the Debounce component with the proper configuration wrapping the input
+   (... and remover `value={yourName}` from your input, if not, it will not work. Don´t worry, Debounce will take care of showing the proper data/value)
+
+```javascript
+<Debounce time="400" handler="onChange">
+  <input
+    type="text"
+    style={{ display: 'block' }}
+    onChange={event => this.setState({ yourName: event.target.value })}
+  />
+</Debounce>
+```
+
+Try now to type your name... A lot better, no...?
 
 #### Destructuring
 
