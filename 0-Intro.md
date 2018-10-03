@@ -20,6 +20,8 @@ No matter the tool that you pick to support your work (hereÂ´s an elder AngularÂ
 * Server Side Integration (SSR as first render)
 * Mobile Apps Development with React Native
 
+We are going to follow [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
+
 **HOF: Higher Order Function**
 Is a function that takes a function as an argument or returns a function.
 
