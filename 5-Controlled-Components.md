@@ -1,4 +1,4 @@
-# React and forms
+# React and forms elements
 
 ## Controlled components
 
@@ -59,6 +59,8 @@ Same example but using the ternary operator:
 At future we will other ways of `conditional rendering`.
 
 Note: The same criteria can be used to enable/disable "elements".
+
+#### .map() and key attribute
 
 Before jumping to other topic, let´s address one possible issue in our code setting a context.
 Daily, we interact with lists that filters (aka, update) its composition or results. Example: Amazon searcher and suggested keys/terms/products. However, as you probably noticed, there´s "some kind of delay" that allows you to receive suggestions per words or terms and not per letters.
