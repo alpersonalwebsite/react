@@ -69,6 +69,40 @@ Before proceeding, you should know that `Controlled Components` refer to:
 
 Selects: To avoid the warning, `` Warning: Use the`defaultValue`or`value`props on <select> instead of setting `selected`on <option>. ``, we use the attribute value on select instead of the selected one on the particular option. Remember that there´s a strict relation between state and element, so if you want to start showing (aka, selecting) a particular option, you should initialize your state with it.
 
+For easy handling of "radio" and "check-boxes" you can use `react-radio-group` and `react-checkbox-group`.
+
+Quick radio example:
+
+```javascript
+import React, { Component } from 'react';
+import { RadioGroup, Radio } from 'react-radio-group';
+
+class App extends Component {
+  state = {
+    selectedName: 'TinkerBell'
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <RadioGroup
+          name="names"
+          selectedValue={this.state.selectedName}
+          onChange={value => this.setState({ selectedName: value })}>
+          <Radio value="Peter" />Peter
+          <Radio value="Wendy" />Wendy
+          <Radio value="TinkerBell" />TinkerBell
+        </RadioGroup>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+TinkerBell will be selected by default. Then, every-time you click on one of the inputs>radio, the property of the state will be updated, so the selection (value). Inspect the changes on the state with React DevTools addon.
+
 #### .map() and key attribute
 
 Before jumping to other topic, let´s address one possible issue in our code setting a context.
