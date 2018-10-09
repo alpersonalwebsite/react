@@ -67,7 +67,7 @@ Before proceeding, you should know that `Controlled Components` refer to:
 * textareas
   ... all of them, have their own state which is based on the user´s action (the information he provides, the option that he selects, the checkbox that he checks, et).
 
-Selects: To avoid the warning, `` Warning: Use the`defaultValue`or`value`props on <select> instead of setting`selected`on <option>. ``, we use the attribute value on <select> instead of the selected one on the particular option. Remember that there´s a strict relation between state and element, so if you want to start showing (aka, selecting) a particular option, you should initialize your state with it.
+Selects: To avoid the warning, `` Warning: Use the`defaultValue`or`value`props on <select> instead of setting `selected`on <option>. ``, we use the attribute value on select instead of the selected one on the particular option. Remember that there´s a strict relation between state and element, so if you want to start showing (aka, selecting) a particular option, you should initialize your state with it.
 
 #### .map() and key attribute
 
