@@ -71,7 +71,8 @@ Selects: To avoid the warning, `` Warning: Use the`defaultValue`or`value`props o
 
 For easy handling of "radio" and "check-boxes" you can use `react-radio-group` and `react-checkbox-group`.
 
-Quick radio example:
+Quick radio example: `react-radio-group`
+With this dependency you will avoid: code duplication, repetitive in-line conditional to determine if input should be checked, complex logic to update state in relation to user´s selection.
 
 ```javascript
 import React, { Component } from 'react';
@@ -101,7 +102,7 @@ class App extends Component {
 export default App;
 ```
 
-TinkerBell will be selected by default. Then, every-time you click on one of the inputs>radio, the property of the state will be updated, so the selection (value). Inspect the changes on the state with React DevTools addon.
+TinkerBell will be selected by default. Then, every-time you click on one of the inputs>radio, the property of the state object will be updated, so the selection (value). Inspect the changes on the state with React DevTools add-on.
 
 #### .map() and key attribute
 
