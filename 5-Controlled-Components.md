@@ -104,6 +104,49 @@ export default App;
 
 TinkerBell will be selected by default. Then, every-time you click on one of the inputs>radio, the property of the state object will be updated, so the selection (value). Inspect the changes on the state with React DevTools add-on.
 
+Quick radio example: `react-checkbox-group`
+
+```javascript
+import React, { Component } from 'react';
+import { Checkbox, CheckboxGroup } from 'react-checkbox-group';
+
+class App extends Component {
+  state = {
+    selectedNames: ['TinkerBell', 'Peter']
+  };
+
+  handleChange = userSelectionNames => {
+    this.setState({
+      selectedNames: userSelectionNames
+    });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <CheckboxGroup
+          checkboxDepth={2}
+          name="fruits"
+          value={this.state.selectedNames}
+          onChange={this.handleChange}>
+          <label>
+            <Checkbox value="Peter" /> Peter
+          </label>
+          <label>
+            <Checkbox value="Wendy" /> Wendy
+          </label>
+          <label>
+            <Checkbox value="TinkerBell" /> Tinkerbell
+          </label>
+        </CheckboxGroup>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
 #### .map() and key attribute
 
 Before jumping to other topic, let´s address one possible issue in our code setting a context.
