@@ -378,3 +378,8 @@ Result: (check your Dev Tools Console)
 ```javascript
 Object { name: "Peter", lastName: "Pan", age: "30" }      App.js:18
 ```
+
+## Uncontrolled components
+
+We talked about inputs (text, radio, checkbox), selects, textareas... But what about `input type="file"`...?
+Well, since there is not another way than the own user selecting the file and interacting with the File API, the value that this element holds is "read-only" (as props) and the component uncontrolled.
