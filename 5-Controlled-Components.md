@@ -275,6 +275,37 @@ class App extends Component {
 export default App;
 ```
 
+Quick Note: We are re-using the method `updateStateProperty()`. Previously, we were utilizing it inside a `div` so we did not have other "clean way" of passing extra data (data outside the `scope of the own event`) when we click on that element (div). We were doing something like...
+
+```javascript
+<div onClick={() => props.onUpdateStateProperty('yourName', 'Wendy')}>
+  Change state...
+</div>
+```
+
+Here, we can pass the event (all the info will be inside the `event object`) and access to the properties inside it from the own handler:
+
+```javascript
+updateStateProperty = event => {
+  const stateProperty = event.target.name;
+  const statePropertyValue = event.target.value;
+  this.setState({ [stateProperty]: statePropertyValue });
+};
+```
+
+And then, we bind and attach the handler in this way:
+
+```javascript
+<input
+  type="text"
+  name="name"
+  value={this.state.name}
+  onChange={event => this.updateStateProperty(event)}
+/>
+```
+
+If you want to keep you return as clean as you can... This will be a good solution... (even when functionality remains the same).
+
 Alternatively, we can use packages like form-serialize; this library, allows us to serialize the fields (names and values) into an object and, preventing the default behavior of form (submit), we can show that data without reloading the page.
 
 Example: (you need to have form-serialize installed through npm or yarn. For more information and HOW to use it, please visit: https://www.npmjs.com/package/form-serialize)
