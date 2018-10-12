@@ -2,7 +2,7 @@
 
 ## Controlled components
 
-These are components that render a form (or form element) and where the "source of Truth" (aka, data) lives inside the component state rather than in the DOM.
+These are components that render a form (or form element) and where the "source of Truth" (aka, data) lives inside the component state rather than in the DOM; we start with an `initial value` and set the new value of the state property through a callback.
 
 ```javascript
 class App extends Component {
@@ -383,3 +383,5 @@ Object { name: "Peter", lastName: "Pan", age: "30" }      App.js:18
 
 We talked about inputs (text, radio, checkbox), selects, textareas... But what about `input type="file"`...?
 Well, since there is not another way than the own user selecting the file and interacting with the File API, the value that this element holds is "read-only" (as props) and the component uncontrolled.
+
+You will find some tutorials explaining the agnostic benefits (cases like when you are using multiple frameworks and libraries) of turning all elements into uncontrolled components. However, remember that this goes against React nature: taking as "Source of Truth" the DOM node instead of a particular state tied to the element.
