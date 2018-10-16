@@ -386,4 +386,34 @@ Well, since there is not another way than the own user selecting the file and in
 
 You will find some tutorials explaining the agnostic benefits (cases like when you are using multiple frameworks and libraries) of turning all elements into uncontrolled components. However, remember that this goes against React nature: taking as "Source of Truth" the DOM node instead of a particular state tied to the element.
 
-Try to avoid as much as you can the use of "uncontrolled components"... However, if you are thinking what would be an "uncontrolled component" with an "input of type text element"... Here´s your answer:
+Try to avoid as much as you can the use of "uncontrolled components"... However, if you are thinking what would be an "uncontrolled component" with an "input of type text element"... Here´s your answer...
+
+Example: using a ref
+
+```javascript
+import React, { Component } from 'react';
+
+class App extends Component {
+  handleSubmit = () => {
+    const name = this._name.value;
+    const lastName = this._lastName.value;
+    alert(`Hello ${name} ${lastName}`);
+  };
+
+  render() {
+    return (
+      <div>
+        Name: <input ref={input => (this._name = input)} type="text" />
+        Lastname: <input ref={input => (this._lastName = input)} type="text" />
+        <button onClick={this.handleSubmit}>Send data!</button>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+Probably, uncontrolled forms elements will remember you the `old vanilla JavaScript or jQuery way` of grabbing and interacting with data: someone provides information and through a particular `event` we collect and process that data.
+
+So, if you are just planning to pull data from "elements" and submit it... Well, you could use "uncontrolled components". Remember that you can also use "controlled" ones and take advantage of real-time elements validation, UI or screen for particular states, among others.
