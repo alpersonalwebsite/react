@@ -381,7 +381,9 @@ Object { name: "Peter", lastName: "Pan", age: "30" }      App.js:18
 
 ## Uncontrolled components
 
-We talked about inputs (text, radio, checkbox), selects, textareas... But what about `input type="file"`...?
+We talked about inputs (text, radio, check-box), selects, textareas... But what about `input type="file"`...?
 Well, since there is not another way than the own user selecting the file and interacting with the File API, the value that this element holds is "read-only" (as props) and the component uncontrolled.
 
 You will find some tutorials explaining the agnostic benefits (cases like when you are using multiple frameworks and libraries) of turning all elements into uncontrolled components. However, remember that this goes against React nature: taking as "Source of Truth" the DOM node instead of a particular state tied to the element.
+
+Try to avoid as much as you can the use of "uncontrolled components"... However, if you are thinking what would be an "uncontrolled component" with an "input of type text element"... Here´s your answer:
