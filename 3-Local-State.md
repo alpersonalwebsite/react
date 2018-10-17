@@ -247,3 +247,56 @@ Sometimes, you will have more than one component trying to access to the same "p
 If you know `redux` or `react context API` (among others) forget them for a moment. Think about hard-coded data (as initial properties state) or an user supplying info through a form. Yo don´t need to make a long persistence... Just share that data between components.
 
 If there´s no deeply nested need (ComponentA -> ComponentB -> ComponentC -> CompnentD) a good approach would be "host" that state on the nearest parent.
+Example:
+
+```javascript
+import React, { Component } from 'react';
+
+const ListOfBook = props => {
+  return (
+    <div>
+      <h2>List of books</h2>
+      <div>
+        {props &&
+          props.books.map(book => {
+            return book.title;
+          })}
+      </div>
+    </div>
+  );
+};
+
+const RandomBook = props => {
+  return (
+    <div>
+      <h2>Random book (strig object)</h2>
+      <div>
+        {props &&
+          JSON.stringify(props.books[Math.floor(Math.random() * 3 + 0)])}
+      </div>
+    </div>
+  );
+};
+
+class App extends Component {
+  state = {
+    books: [
+      { title: 'Title_1...', description: 'Description_1', author: 'Author_1' },
+      { title: 'Title_2...', description: 'Description_2', author: 'Author_2' },
+      { title: 'Title_3...', description: 'Description_3', author: 'Author_3' },
+      { title: 'Title_4...', description: 'Description_4', author: 'Author_4' }
+    ]
+  };
+  render() {
+    return (
+      <div>
+        <h1>My App</h1>
+        <ListOfBook books={this.state.books} />
+        <RandomBook books={this.state.books} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
