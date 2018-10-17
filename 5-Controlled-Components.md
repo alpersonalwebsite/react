@@ -388,7 +388,7 @@ You will find some tutorials explaining the agnostic benefits (cases like when y
 
 Try to avoid as much as you can the use of "uncontrolled components"... However, if you are thinking what would be an "uncontrolled component" with an "input of type text element"... Here´s your answer...
 
-Example: using a ref
+Example:
 
 ```javascript
 import React, { Component } from 'react';
@@ -416,4 +416,4 @@ export default App;
 
 Probably, uncontrolled forms elements will remember you the `old vanilla JavaScript or jQuery way` of grabbing and interacting with data: someone provides information and through a particular `event` we collect and process that data.
 
-So, if you are just planning to pull data from "elements" and submit it... Well, you could use "uncontrolled components". Remember that you can also use "controlled" ones and take advantage of real-time elements validation, UI or screen for particular states, among others.
+So, if you are just planning to pull data from "elements" and submit it... Well, you could technically use "uncontrolled components" without major damage. Remind that you can also utilize "controlled" ones and take advantage of real-time elements validation, UI or screen for particular states, among others features.
