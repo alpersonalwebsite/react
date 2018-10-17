@@ -240,3 +240,10 @@ class App extends Component {
 ```
 
 ... and, since in this tutorial we are using `create-react-app` you don´t have to worry about wiring up Babel. It´s part of the package!
+
+### Lifting state
+
+Sometimes, you will have more than one component trying to access to the same "piece of data".
+If you know `redux` or `react context API` (among others) forget them for a moment. Think about hard-coded data (as initial properties state) or an user supplying info through a form. Yo don´t need to make a long persistence... Just share that data between components.
+
+If there´s no deeply nested need (ComponentA -> ComponentB -> ComponentC -> CompnentD) a good approach would be "host" that state on the nearest parent.
