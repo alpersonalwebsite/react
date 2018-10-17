@@ -34,7 +34,7 @@ multiplyNumbers = theFirstNumber => {
 
 let multiplyNumbers30 = multiplyNumbers(30);
 
-//console.log(multiplyNumbers30);
+// console.log(multiplyNumbers30);
 console.log(typeof multiplyNumbers30);
 // function
 
