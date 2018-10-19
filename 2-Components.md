@@ -362,3 +362,15 @@ With this...
 ```
 
 Now, we are only going to display our message if it´s different than the default one (empty string).
+
+## Going from the data to the UI
+
+One of the most common cases is...
+
+1. You have a RESTful API retrieving JSON. Example: https://jsonplaceholder.typicode.com/posts/1/comments
+2. You defined (or at least know) the data set. Example: An array of objects (https://jsonplaceholder.typicode.com/posts/1/comments)
+3. You know where are you going to hold the data. Example: `local state`.
+4. You know how are you going to display or show the data (and local state related views if they are needed). Example: We are going to show all the comments for that particular post:id including just email and body.
+5. You know related functionality. Example: We are going to sort by id DESC (you also know if youare going to use third-party functionality; in this case, `sort-by` package)
+
+Note: In future lessons
