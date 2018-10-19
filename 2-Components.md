@@ -367,10 +367,48 @@ Now, we are only going to display our message if it´s different than the defaul
 
 One of the most common cases is...
 
-1. You have a RESTful API retrieving JSON. Example: https://jsonplaceholder.typicode.com/posts/1/comments
-2. You defined (or at least know) the data set. Example: An array of objects (https://jsonplaceholder.typicode.com/posts/1/comments)
+1. You have a RESTful API retrieving JSON. Example: https://jsonplaceholder.typicode.com/users You can check APIs documentation: https://github.com/typicode/jsonplaceholder#how-to
+2. You defined (or at least know) the data set. Example: An array of objects (https://jsonplaceholder.typicode.com/users)
 3. You know where are you going to hold the data. Example: `local state`.
-4. You know how are you going to display or show the data (and local state related views if they are needed). Example: We are going to show all the comments for that particular post:id including just email and body.
-5. You know related functionality. Example: We are going to sort by id DESC (you also know if youare going to use third-party functionality; in this case, `sort-by` package)
+4. You know how are you going to display or show the data (and local state related views if they are needed). Example: We are going to show all the users including (in our render) just `user-name` and `email`.
+5. You know related functionality. Example: We are going to sort by id DESC (you also know if you are going to use third-party functionality; in this case, `sort-by` package)
 
-Note: In future lessons
+Example:
+
+First, remember to install `sort-by` - `npm i sort-by`
+
+```javascript
+import React, { Component } from 'react';
+
+const api = 'https://jsonplaceholder.typicode.com';
+
+class App extends Component {
+  state = {
+    users: []
+  };
+
+  componentDidMount() {
+    fetch(`${api}/users`)
+      .then(res => res.json())
+      .then(users => {
+        this.setState({ users });
+      });
+  }
+
+  renderUsers = () => {
+    console.log(this.state.users);
+    return this.state.users.map(user => {
+      return (
+        <li key={user.id}>{`Username: ${user.username}
+        Email: ${user.email}`}</li>
+      );
+    });
+  };
+
+  render() {
+    return <ul>{this.renderUsers()}</ul>;
+  }
+}
+
+export default App;
+```
