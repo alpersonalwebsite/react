@@ -425,7 +425,7 @@ We could decompose our previous example in something like (avoid being extremely
 * UserList
   * User
 
-```
+```javascript
 import React, { Component } from 'react';
 import sortBy from 'sort-by';
 

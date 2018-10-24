@@ -6,7 +6,7 @@ Note: In React events (like onClick), methods and component´s attributes (aka, 
 
 ### Setting state with onClick
 
-```
+```javascript
 class App extends Component {
   state = {
     yourName: 'Peter Pan'
@@ -22,6 +22,7 @@ class App extends Component {
       </div>
     );
   }
+}
 ```
 
 ### Setting state with custom method
