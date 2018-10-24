@@ -416,3 +416,64 @@ class App extends Component {
 
 export default App;
 ```
+
+At the moment, we have just one big and tied Component. However, we could split this Component into Sub-Component where each one cares just about one thing.
+We could decompose our previous example in something like (avoid being extremely granular)
+
+1. App: the whole - Function: render our main component (UserList)
+
+* UserList
+  * User
+
+```
+import React, { Component } from 'react';
+import sortBy from 'sort-by';
+
+const api = 'https://jsonplaceholder.typicode.com';
+
+let User = ({ id, email }) => {
+  return <div>{email}</div>;
+};
+
+class UserList extends Component {
+  state = {
+    users: []
+  };
+
+  componentDidMount() {
+    fetch(`${api}/users`)
+      .then(res => res.json())
+      .then(users => {
+        this.setState({ users });
+      });
+  }
+
+  renderUsers = () => {
+    return this.state.users.map(user => {
+      return <User email={user.email} key={user.id} />;
+    });
+  };
+  render() {
+    return <div>{this.renderUsers()}</div>;
+  }
+}
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <UserList />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+#### Props and document.title
+
+<!-- TODO:
+Add more about this... Composition... PureComponent...
+Im using local state before explaining it... Check if I should move to other page
+->
