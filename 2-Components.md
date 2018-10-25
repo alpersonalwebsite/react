@@ -417,13 +417,13 @@ class App extends Component {
 export default App;
 ```
 
-At the moment, we have just one big and tied Component. However, we could split this Component into Sub-Component where each one cares just about one thing.
+At the moment, we have just one big and tied Component. However, we could split this Component into Sub-Components where each one cares just about one thing.
 We could decompose our previous example in something like (avoid being extremely granular)
 
-1. App: the whole - Function: render our main component (UserList)
+1. `App`: the whole - Purpose: renders our main component (UserList).
 
-* UserList
-  * User
+* `UserList` - Purpose: implements the logic to request and handle the API response (which includes rendering our User Component).
+  * `User` - Purpose: JSX to show on screen.
 
 ```javascript
 import React, { Component } from 'react';
