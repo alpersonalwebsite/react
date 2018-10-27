@@ -478,7 +478,25 @@ Of course, you can move each component to a new file and make the proper `import
 If you go to your public (or dist) folder, the one where you have the boilerplate `index.html`, you will see that CRA set a "static title" for your App: `<title>React App</title>`. With one screen (in this case the root one) you could replace and set the title there without bigger issues; however, as you application starts to scale (or grow) a pre-harcoded title will not always satisfy your needs.
 Later, we will try a more complex way of dealing with `HTML header´s tags`, but for the moment, we can add some code to our `componentDidMount()` lifecycle method utilizing as well, the `componentDidUpdate()`.
 
+We have a list of users where we are rendering just emails; so, we can set a title like: `E-mail list: x results` where x is a dynamic number.
+
+One more thing... Even when we did not see (yet) the Local State lesson, we are going to double the bet and not only use the setState() async method if not, also, take advantage of its second parameter or argument: a `callback` or a function to execute once the state property is updated.
+
+```javascript
+componentDidMount() {
+  fetch(`${api}/users`)
+    .then(res => res.json())
+    .then(users => {
+      this.setState({ users });
+    });
+}
+```
+
 <!-- TODO:
 Add more about this... Composition... PureComponent...
 Im using local state before explaining it... Check if I should move to other page
 ->
+
+<!-- TODO:
+Talk about callbacks
+-->
