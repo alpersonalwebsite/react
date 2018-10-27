@@ -471,7 +471,12 @@ class App extends Component {
 export default App;
 ```
 
+Of course, you can move each component to a new file and make the proper `imports` to allow re-usability.
+
 #### Props and document.title
+
+If you go to your public (or dist) folder, the one where you have the boilerplate `index.html`, you will see that CRA set a "static title" for your App: `<title>React App</title>`. With one screen (in this case the root one) you could replace and set the title there without bigger issues; however, as you application starts to scale (or grow) a pre-harcoded title will not always satisfy your needs.
+Later, we will try a more complex way of dealing with `HTML header´s tags`, but for the moment, we can add some code to our `componentDidMount()` lifecycle method utilizing as well, the `componentDidUpdate()`.
 
 <!-- TODO:
 Add more about this... Composition... PureComponent...
