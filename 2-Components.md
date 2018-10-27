@@ -487,10 +487,32 @@ componentDidMount() {
   fetch(`${api}/users`)
     .then(res => res.json())
     .then(users => {
-      this.setState({ users });
+      this.setState({ users }, () => {
+        document.title = `E-mail list: ${this.state.users.length} results`;
+      });
     });
 }
 ```
+
+Open you Web Developer Console, inspect the DOM and... Yes... You will see the proper title.
+
+```html
+<title>E-mail list: 10 results</title>
+```
+
+Now, imagine that we have the ability to remove some of the emails of our list or, a programmatic function calling our API which could retrieve less | more objects (aka, emails).
+That´s why we will also use `componentDidUpdate()` which will not render the first time or first render (where we are using `componentDidMount()`) but, every other time our component re-renders.
+
+```javascript
+componentDidUpdate(prevProps, prevState, snapshot) {
+  if (prevState.users !== this.state.users) {
+    console.log(1111111111);
+    document.title = `E-mail list: ${this.state.users.length} results`;
+  }
+}
+```
+
+We use a conditional to be sure that, if other state property is updated or props are received, we will not change the title of our document, or what´s worse when we are working with sync/async methods and timers... End in a loop-hole. Our code will only be executed if a change on a particular property state, `users`, happens.
 
 <!-- TODO:
 Add more about this... Composition... PureComponent...
