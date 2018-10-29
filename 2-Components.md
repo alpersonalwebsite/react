@@ -417,7 +417,7 @@ class App extends Component {
 export default App;
 ```
 
-At the moment, we have just one big and tied Component. However, we could split this Component into Sub-Components where each one cares just about one thing.
+At the moment, we have just one big and tied Component. However, we could split this Component into Sub-Components **where each one cares just about one thing**.
 We could decompose our previous example in something like (avoid being extremely granular)
 
 1. `App`: the whole - Purpose: renders our main component (UserList).
@@ -506,7 +506,6 @@ That´s why we will also use `componentDidUpdate()` which will not render the fi
 ```javascript
 componentDidUpdate(prevProps, prevState, snapshot) {
   if (prevState.users !== this.state.users) {
-    console.log(1111111111);
     document.title = `E-mail list: ${this.state.users.length} results`;
   }
 }
