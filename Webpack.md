@@ -18,7 +18,7 @@ At this point, you should be familiar with `static imports` like `import { myFun
 
 Currently, we import all the required modules (at the top of our file), compile them and generate a bundle, without the possibility of loading a module on-demand (or dynamically), for example, when a user clicks on a button, when certain condition is met (like a change on a state property), etc.
 
-Linked to "Code Splitting", imagine if you were able to freely load modules at the runtime.
+Imagine if you were able to freely load modules at the runtime.
 
 Example:
 
@@ -34,3 +34,5 @@ button.addEventListener('click', event => {
     })
 });
 ```
+
+What happens behind the scenes is easy: we return a Promise that will be resolved on a certain time point, retrieving the module with its entire functionality.
