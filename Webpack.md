@@ -6,14 +6,111 @@ It takes all the files (let´s just care, at least for the moment, only about `\
 As always, let´s use an example to illustrate the statement.
 
 Create a new folder
+
+```
 mkdir webpack
 cd webpack
+```
 
 Initiate our project (default flag)
+
+```
 npm init -y
+```
 
 Install webpack and webpack-cli
-$ npm install --save-dev webpack webpack-cli
+
+```
+npm install --save-dev webpack webpack-cli
+```
+
+Edit your package.json and add the following script:
+
+```
+  "build": "webpack --config=webpack.config.js"
+```
+
+Create the file webpack.config.js
+
+```
+touch webpack.config.js
+```
+
+webpack.config.js
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  entry: {
+    main: './src/index.js'
+  },
+  mode: 'development',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
+};
+```
+
+Create the folder dist
+
+```
+mkdir dist
+```
+
+Inside dist create the file index.html
+
+```
+touch index.html
+```
+
+index.html
+
+```html
+<body>
+    <h1>Testing Webpack...!</h1>
+    <script src="bundle.js"></script>
+</body>
+```
+
+Create the folder src
+
+```
+mkdir src
+```
+
+Inside src create the files app.js, index.js and other.js
+
+```
+touch app.js index.js other.js
+```
+
+index.js
+
+```javaScript
+import App, { someFunction } from './app';
+
+console.log('index.js');
+
+someFunction();
+```
+
+app.js
+
+```javaScript
+console.log('app.js');
+
+module.exports.someFunction = function() {
+  console.log('app.js > someFunction');
+};
+```
+
+other.js
+
+```javaScript
+console.log('other.js');
+```
 
 <!--TODO:
 What is
