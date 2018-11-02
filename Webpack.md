@@ -1,5 +1,8 @@
 ## Webpack
 
+Quoting Webpack documentation, "webpack is a static module bundler for modern JavaScript applications".
+It takes all the files (let´s just care, at least for the moment, about `\*.js` and `\*.css`) that are wired up in our project and generates a bundle.
+
 <!--TODO:
 What is
 What´s a bundle.
