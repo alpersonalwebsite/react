@@ -112,6 +112,41 @@ other.js
 console.log('other.js');
 ```
 
+Inside your root directory, **webpack**, run
+
+```
+npm run build
+```
+
+You will see something like...
+
+```
+> wp@1.0.0 build C:\practice\wp
+> webpack --config=webpack.config.js
+
+Hash: 78cc493c0b28897f196a
+Version: webpack 4.23.1
+Time: 96ms
+Built at: 2018-11-01 18:14:50
+    Asset      Size  Chunks             Chunk Names
+bundle.js  4.55 KiB    main  [emitted]  main
+Entrypoint main = bundle.js
+[./src/app.js] 115 bytes {main} [built]
+[./src/index.js] 91 bytes {main} [built]
+```
+
+Open your **index.html** and if you check the console you should see...
+
+```
+app.js app.js:1:1
+index.js index.js:6:1
+app.js > someFunction app.js:4:3
+```
+
+Also, a new static file will be hosted on your dist/, the file bundle.js
+
+What´s going on...? Explanation!
+
 <!--TODO:
 What is
 What´s a bundle.
