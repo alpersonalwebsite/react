@@ -170,7 +170,23 @@ Built at: 2018-11-02 18:30:48
 other.js   3.8 KiB   other  [emitted]  other
 ```
 
-What´s going on...? Explanation!
+If you do this, remember to update your `\*.html` file
+
+```html
+<body>
+    <h1>Testing Webpack...!</h1>
+    <script src="main.js"></script>
+    <script src="other.js"></script>
+</body>
+```
+
+Open the `other.js` file.
+Remember that in our webpack configuration file we set the flag development...? Well, change it to production: `mode: 'production',`.
+
+Build the project again.
+
+Go to `other.js`.
+Yes... Webpack is concatenating, minifying and just bundling the code needed for production.
 
 <!--TODO:
 What is
