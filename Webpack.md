@@ -188,6 +188,25 @@ Build the project again.
 Go to `other.js`.
 Yes... Webpack is concatenating, minifying and just bundling the code needed for production.
 
+We can compare both builds...
+
+On DEV mode
+
+```
+main.js  4.58 KiB    main  [emitted]  main
+other.js   3.8 KiB   other  [emitted]  other
+```
+
+On PROD mode
+
+```
+main.js   1.09 KiB       0  [emitted]  main
+other.js  962 bytes       1  [emitted]  other
+```
+
+All this, just adding the webpack dependency to our project and setting a few options.
+Even when this configuration is probably the most basic one, you can start seeing the power and flexibility of webpack. Also, its discretion... Everything outside the entry points that´s not indexed as part of the project, will not be part of the output.
+
 <!--TODO:
 What is
 What´s a bundle.
