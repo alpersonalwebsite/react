@@ -101,7 +101,7 @@ app.js
 ```javaScript
 console.log('app.js');
 
-module.exports.someFunction = function() {
+module.exports.someFunction = () => {
   console.log('app.js > someFunction');
 };
 ```
@@ -121,7 +121,7 @@ npm run build
 You will see something like...
 
 ```
-> wp@1.0.0 build C:\practice\wp
+> wp@1.0.0 build C:\webpack
 > webpack --config=webpack.config.js
 
 Hash: 78cc493c0b28897f196a
@@ -135,7 +135,7 @@ Entrypoint main = bundle.js
 [./src/index.js] 91 bytes {main} [built]
 ```
 
-Open your **index.html** and if you check the console you should see...
+Open your **index.html** and check the console. You should see:
 
 ```
 app.js app.js:1:1
@@ -143,7 +143,32 @@ index.js index.js:6:1
 app.js > someFunction app.js:4:3
 ```
 
-Also, a new static file will be hosted on your dist/, the file bundle.js
+A new static file will be hosted on your dist/; the file: bundle.js
+Open that file. Outside webpack code, you will find your transpiled and "bundled code".
+
+So... We have a configuration file, webpack.config.js, where we are defining our entry point, or the file which will wire (directly or indirectly) the other ones for the bundle. In our example, the output (bundle.js) contains the code of the entry or main file index.js and also app.js which is imported on index.js. However, we have the file other.js which was not included since it´s not part of the "cabling". As soon as we wire it up to index.js or app.js, it will be included in our bundle.
+
+We could also add it to our entry object
+
+webpack.config.js
+
+```javascript
+entry: {
+  main: './src/index.js',
+  other: './src/other.js'
+},
+```
+
+In this case, we are going to remove from output the following line `filename: 'bundle.js',` since, if not, once it generates the first bundle it will try to generate the second with the existing bundle name of bundle.js
+
+Now, after executing `npm run build` we will have 2 bundles:
+
+```
+Built at: 2018-11-02 18:30:48
+   Asset      Size  Chunks             Chunk Names
+ main.js  4.58 KiB    main  [emitted]  main
+other.js   3.8 KiB   other  [emitted]  other
+```
 
 What´s going on...? Explanation!
 
