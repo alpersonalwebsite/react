@@ -146,7 +146,7 @@ app.js > someFunction app.js:4:3
 A new static file will be hosted on your dist/; the file: bundle.js
 Open that file. Outside webpack code, you will find your transpiled and "bundled code".
 
-So... We have a configuration file, webpack.config.js, where we are defining our entry point, or the file which will wire (directly or indirectly) the other ones for the bundle. In our example, the output (bundle.js) contains the code of the entry or main file index.js and also app.js which is imported on index.js. However, we have the file other.js which was not included since it´s not part of the "cabling". As soon as we wire it up to index.js or app.js, it will be included in our bundle.
+So... We have a configuration file, webpack.config.js, where we are defining our entry point, or the file which will wire (directly or indirectly) the other ones resulting in webpack output: bundle.js; this bundle contains the code of the entry or main file index.js and also app.js which is imported on index.js. However, we have the file other.js which was not included since it´s not part of the "cabling". As soon as we wire it up to index.js or app.js, it will be included in our bundle.
 
 We could also add it to our entry object
 
@@ -180,7 +180,22 @@ If you do this, remember to update your `\*.html` file
 </body>
 ```
 
-Open the `other.js` file.
+Alternatively, if you want to be able to keep the `filename property` and/or rename the resulting files, you can use the `[name] namespace`
+Example:
+
+```javascript
+output: {
+  filename: '[name]-bundle.js',
+  path: path.resolve(__dirname, 'dist')
+}
+```
+
+If you do this, remember to update your `index.html` with the proper naming of the `*.js` files, in our case:
+
+* main-bundle.js
+* other-bundle.js
+
+Open `other.js` (or, other-bundle.js, or, whatever you decided to call this file).
 Remember that in our webpack configuration file we set the flag development...? Well, change it to production: `mode: 'production',`.
 
 Build the project again.
