@@ -201,7 +201,7 @@ Remember that in our webpack configuration file we set the flag development...? 
 Build the project again.
 
 Go to `other.js`.
-Yes... Webpack is concatenating, minifying and just bundling the code needed for production.
+Yes...! Webpack is concatenating, minifying and -just- bundling the code needed for production, preserving the order of execution of our files or modules.
 
 We can compare both builds...
 
@@ -221,6 +221,43 @@ other.js  962 bytes       1  [emitted]  other
 
 All this, just adding the webpack dependency to our project and setting a few options.
 Even when this configuration is probably the most basic one, you can start seeing the power and flexibility of webpack. Also, its discretion... Everything outside the entry points that´s not indexed as part of the project, will not be part of the output.
+
+---
+
+<!-- TODO:
+Module Systems...
+Differences, examples, encapsulation, dependency... revealing module pattern
+-->
+
+**CommonJS**: require/exports
+Sight: Server side development.
+Behavior: sync > modules are loaded in the consigned order and at the particular moment (on the next example > index.js, invert the order of the 2 first lines of code to illustrate the case).
+
+Example:
+
+index.js
+
+```javascript
+const app = require('./app.js');
+console.log('index.js');
+
+app.someFunction();
+```
+
+app.js
+
+```javaScript
+console.log('app.js');
+
+exports.someFunction = () => {
+  console.log('app.js > someFunction');
+};
+```
+
+**AMD (Asynchronous Module Definition)**
+The "evolution" of CommonJS: async module loading.
+
+---
 
 <!--TODO:
 What is
