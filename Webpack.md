@@ -232,6 +232,7 @@ Differences, examples, encapsulation, dependency... revealing module pattern
 **CommonJS**: require/exports
 Sight: Server side development.
 Behavior: sync > modules are loaded in the consigned order and at the particular moment (on the next example > index.js, invert the order of the 2 first lines of code to illustrate the case).
+`index.js | app.js | app.js > someFunction`
 
 Example:
 
@@ -254,8 +255,37 @@ exports.someFunction = () => {
 };
 ```
 
+<!-- TODO:
+Excluding for the moment AMD
 **AMD (Asynchronous Module Definition)**
 The "evolution" of CommonJS: async module loading.
+-->
+
+**ES2015 modules** (also known as ECMAScript 6)
+Sight: Standarization.
+Behavior: sync/async compatible.  
+As we did with CommonJS invert the order of the 2 first lines of code: results don´t change since import is static and we cannot define freely where to call it.
+`app.js | index.js | app.js > someFunction`
+
+index.js
+
+```javaScript
+import * as app from './app';
+
+console.log('index.js');
+
+app.someFunction();
+```
+
+app.js
+
+```javaScript
+console.log('app.js');
+
+export const someFunction = () => {
+  console.log('app.js > someFunction');
+};
+```
 
 ---
 
