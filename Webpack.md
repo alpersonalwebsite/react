@@ -234,15 +234,19 @@ Daily, we write logic (or logic plus UI). It´s not strange that, with some recu
 During your first steps, copying and pasting code between files was something forgivable: far away from a good practice, nor an useful methodology, but, in those moments you were struggling with bigger priorities. Now, however, having a deeper understanding imagine if every time you want to consume "x-function" you manually ad its code to the particular file, and, one day, you have to update or enhance your function. Yes, global search will help you but this approach will never scale.
 With this in mind, we could create a module (or package) use it, share it and re-use it. You have been doing it through React, but also, at the time of consuming `npm packages`: you import the entire package or part of it (x-function) and call it in as many places (aka, files) as necessary. And, if a new version is released, you just have to update the version of the packaging (having the possibility of anchor or lock to a particular version in case of issues related to compatibility).
 
+At a "high-level" Module Systems are "rules" to define how we are going to "include" files in our project or application.
+
 <!-- TODO:
 Module Systems...
 Differences, examples, encapsulation, dependency... revealing module pattern
 -->
 
-**CommonJS**: require/exports
-Sight: Server side development.
-Behavior: sync > modules are loaded in the consigned order and at the particular moment (on the next example > index.js, invert the order of the 2 first lines of code to illustrate the case).
-`index.js | app.js | app.js > someFunction`
+We have 3 main JS Module Systems: `CommonJS`, `AMD` and `ES2015 modules`.
+
+**CommonJS**: require/exports (module.exports)
+Sight: Server side development (Node´s default)
+Behavior: sync > modules are loaded in the consigned order and at the particular moment (on the next example, on index.js, invert the order of the 2 first lines of code to illustrate the case). Remember, no import on-demand/async/runtime.
+Result: `index.js | app.js | app.js > someFunction` Instead of: `app.js | index.js | app.js > someFunction`
 
 Example:
 
@@ -260,6 +264,7 @@ app.js
 ```javaScript
 console.log('app.js');
 
+// exports.fn is a shortcut of module.exports.fn
 exports.someFunction = () => {
   console.log('app.js > someFunction');
 };
