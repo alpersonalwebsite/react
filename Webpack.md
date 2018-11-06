@@ -270,17 +270,45 @@ exports.someFunction = () => {
 };
 ```
 
-<!-- TODO:
-Excluding for the moment AMD
-**AMD (Asynchronous Module Definition)**
-The "evolution" of CommonJS: async module loading.
--->
+**AMD: Async Module Definition**
+Sight: Client side (browser)
+Behavior: Async module loading.
+
+Example:
+
+index.js
+
+```javaScript
+console.log('index.js');
+
+require(['./app'], function(someModule) {
+  someModule.someFunction();
+});
+```
+
+app.js
+
+```javaScript
+console.log('app.js');
+
+define([], function() {
+  return {
+    someFunction: function() {
+      console.log('app.js > someFunction');
+    }
+  };
+});
+```
+
+Result: `index.js | app.js | app.js > someFunction`
 
 **ES2015 modules** (also known as ECMAScript 6)
 Sight: Standarization.
 Behavior: sync/async compatible.  
 As we did with CommonJS invert the order of the 2 first lines of code: results don´t change since import is static and we cannot define freely where to call it.
 `app.js | index.js | app.js > someFunction`
+
+Example:
 
 index.js
 
