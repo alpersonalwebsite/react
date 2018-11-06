@@ -303,7 +303,7 @@ define([], function() {
 Result: `index.js | app.js | app.js > someFunction`
 
 **ES2015 modules** (also known as ECMAScript 6)
-Sight: Standarization.
+Sight: Standarization. Both client and server side.
 Behavior: sync/async compatible.  
 As we did with CommonJS invert the order of the 2 first lines of code: results don´t change since import is static and we cannot define freely where to call it.
 `app.js | index.js | app.js > someFunction`
