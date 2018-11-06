@@ -220,9 +220,17 @@ other.js  962 bytes       1  [emitted]  other
 ```
 
 All this, just adding the webpack dependency to our project and setting a few options.
-Even when this configuration is probably the most basic one, you can start seeing the power and flexibility of webpack. Also, its discretion... Everything outside the entry points that´s not indexed as part of the project, will not be part of the output.
+Even when this configuration is probably the most basic one, you can start seeing the power and flexibility of webpack. Also, its "discernment"... Everything outside the entry points that´s not indexed as part of the project, will not be part of the output.
 
 ---
+
+### JS Module System
+
+At the beginning of the React´s Introduction, we saw how we could reuse and enhance our code through components and (forgive the redundancy) compose as a whole more complex units.
+
+This topic is extremely close to the compositional POV: just replace components with modules and you will have a clear inaugural understanding.
+
+Daily, we write logic (or logic plus UI). It´s not strange that, with some recurrence, if we architected our projects in the right way ("standardization") we
 
 <!-- TODO:
 Module Systems...
