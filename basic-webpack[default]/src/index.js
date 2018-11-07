@@ -1,5 +1,4 @@
-import App, { someFunction } from './app';
-
+const app = require('./app.js');
 console.log('index.js');
 
-someFunction();
+app.someFunction();

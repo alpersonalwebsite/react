@@ -1,1 +1,1 @@
-console.log('other.js dasdas');
+console.log('other.js');

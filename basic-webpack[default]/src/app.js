@@ -1,7 +1,6 @@
-//require('./other.js');
-
 console.log('app.js');
 
-module.exports.someFunction = () => {
+// exports.fn is a shortcut of module.exports.fn
+exports.someFunction = () => {
   console.log('app.js > someFunction');
 };

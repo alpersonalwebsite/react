@@ -1,5 +1,11 @@
 ## Webpack
 
+<!-- TODO:
+What is
+What´s a bundle.
+Others like Webpack >  Browserify
+-->
+
 Quoting Webpack documentation, "webpack is a static module bundler for modern JavaScript applications".
 It takes all the files (let´s just care, at least for the moment, only about `\*.js` and `\*.css`) that are wired up in our project and generates a bundle.
 
@@ -333,10 +339,6 @@ export const someFunction = () => {
 ---
 
 <!--TODO:
-What is
-What´s a bundle.
-Others like Webpack >  Browserify
-
 Code spliting and how to load bundle dynamically
 https://webpack.js.org/guides/code-splitting/
 
