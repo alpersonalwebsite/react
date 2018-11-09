@@ -74,16 +74,16 @@ import Layout from './layouts';
 ...
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Layout>
+  <Layout>
+    <Provider store={store}>
       <BrowserRouter>
         <div>
           <Route exact path="/" component={App} />
           <Route path="/about" component={About} />
         </div>
       </BrowserRouter>
-    </Layout>
-  </Provider>,
+    </Provider>
+  </Layout>,
   document.getElementById('root')
 );
 ```
