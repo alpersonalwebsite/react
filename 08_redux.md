@@ -201,34 +201,34 @@ Usually, the most common ways to organize our code is through:
 
 Personally, for "regular projects" I opt for the following structure...
 
-```javascript
-src;
-actions;
-components;
-Header;
-Footer;
-css;
-data;
-hoc;
-images;
-pages;
-Homepage;
-index.js;
-HomeAdvice;
-reducers;
-store;
+```
+/src
+  /actions
+  /components/
+    Header.js
+    Footer.js
+  /css
+  /data
+  /hoc
+  /images
+  /pages/
+    Homepage.js
+    index.js
+    HomeAdvice
+  /reducers
+  /store
 ```
 
 So, for example, inside `src/Homepage` (main route) I have my `index.js` where I import reusable components that I store inside `src/components`, but also, those which are particular tied to the `src/Homepage` one like `src/Homepage/HomeAdvice`.
 
 If you want to easily reuse your components in other projects, you should probably go with features. In this case, you will have everything that component needs inside it (aka, its folder).
 
-```javascript
-src;
-Menu;
-actions.js;
-index.js;
-reducers.js;
+```
+/src/
+  Menu.js
+  actions.js
+  index.js
+  reducers.js
 ```
 
 Sometimes (aka, generally) you are going to have deeply nested paths.
@@ -350,6 +350,27 @@ Until `this.props.comments[0]` is something (or, is different than `undefined`),
 
 Whether we use `export default connect(mapStateToProps, actions)(App);` (actions object) or `export default connect(mapStateToProps, mapDispatchToProps)(App);` (mapDispatchToProps method), `mapStateToProps` must be something. If we don´t need access to the store, just to `dispatch` we should set it as `null`
 Example: `export default connect(null, actions)(App);`
+
+Alternatively, you can replace mapStateToProps with an anonymous function.
+
+So this...
+
+```javascript
+export default connect(mapStateToProps, actions)(App);
+```
+
+Now would be...
+
+```javascript
+export default connect(
+  state => {
+    return { comments: state.comments };
+  },
+  { fetchComments }
+)(App);
+```
+
+If you follow this approach, remember to remove `mapStateToProps`
 
 ###### mapDispatchToProps()
 
