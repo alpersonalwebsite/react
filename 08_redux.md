@@ -662,6 +662,9 @@ case FETCH_COMMENTS:
   return [...state, ...action.payload];
 ```
 
+<!-- TODO: Explain WHY return [...state, ...action.payload];
+We are receiving an array of objects. That´s why in our test payload we use payload: [{}] -->
+
 with...
 
 ```javascript
@@ -878,6 +881,8 @@ with
 ```javascript
 return Object.assign({}, state, _.mapKeys(action.payload, 'id'));
 ```
+
+<!-- TODO: Explain return Object.assign({}, state, _.mapKeys(action.payload, 'id')); -->
 
 Go to your component, example: **src/App.js** and...
 
