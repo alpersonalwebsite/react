@@ -875,11 +875,9 @@ return [...state, ...action.payload];
 
 with
 
+```javascript
+return Object.assign({}, state, _.mapKeys(action.payload, 'id'));
 ```
-...
-```
-
-Working HEREEEE
 
 Go to your component, example: **src/App.js** and...
 
