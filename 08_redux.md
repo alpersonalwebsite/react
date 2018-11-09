@@ -463,7 +463,7 @@ import { FETCH_COMMENTS } from '../actions/types';
 export default (state = [], action) => {
   switch (action.type) {
     case FETCH_COMMENTS:
-      return action.payload;
+      return [...state, ...action.payload];
 
     default:
       return state;
@@ -650,6 +650,81 @@ const mapStateToProps = ({ comments }) => {
 
 ---
 
+Note: reducers immutability
+In our commentsReducer.js for the action.type "FETCH_COMMENTS" we are returning the previous state and appending the "new" payload.
+
+You could be tempted to do something like: return action.payload instead. however, through an easy example I will show you why you should not.
+
+In your commentsReducer.js change...
+
+```javascript
+case FETCH_COMMENTS:
+  return [...state, ...action.payload];
+```
+
+with...
+
+```javascript
+case FETCH_COMMENTS:
+  return action.payload;
+```
+
+Go to http://localhost:3000/
+
+You will see the list of comments.
+
+![Redux DevTools TEST](/images/redux-devTools-state-test.png)
+
+Now, open your `Dev console`; go to the `Redux tab` and click on `Dispatcher`.
+Copy and paste the following Action...
+
+```
+{
+type: 'FETCH_COMMENTS',
+payload: [{
+  postId: 1,
+  id: 1,
+  name: "TESTING",
+  email: "Eliseo@gardner.biz",
+  body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+}]
+}
+```
+
+... and click on Dispatch.
+
+![Redux DevTools Dispatching](/images/redux-devTools-state-dispatch.png)
+
+Dispatch as many times as you want. What is going on...? Every time you dispatch, you are "cleaning" the previous state and setting the payload as the new value of your state property, in our case, comments.
+
+Now, in your commentsReducer.js replace your return with the original one:
+
+```javascript
+case FETCH_COMMENTS:
+  return [...state, ...action.payload];
+```
+
+Using the same `Action`, dispatch. You can see the difference. Now, you are preserving the previous state appending the new Object. The more you dispatch the action we have in our Redux Dispatcher, the more times you will see the property of that object on screen. I did it 3 times and this is what my component is rendering...
+
+```
+List of comments
+id labore ex et quam laborum
+quo vero reiciendis velit similique earum
+odio adipisci rerum aut animi
+alias odio sit
+vero eaque aliquid doloribus et culpa
+et fugit eligendi deleniti quidem qui sint nihil autem
+repellat consequatur praesentium vel minus molestias voluptatum
+et omnis dolorem
+provident id voluptas
+eaque et deleniti atque tenetur ut quo ut
+TESTING
+TESTING
+TESTING
+```
+
+---
+
 #### Architectural advice...
 
 Currently, our `comments` piece of state is an array of objects. This is "good enough" for this App, however, it doesn´t scale neither perform properly for big projects. You should always opt for objects with IDs as keys (aka, normalized state) instead of array.
@@ -792,7 +867,19 @@ export const fetchComments = () => dispatch => {
 };
 ```
 
-Go to **src/reducers/commentsReducer.js** and replace `return action.payload.data;` with `return action.payload;`
+Go to **src/reducers/commentsReducer.js** and replace
+
+```javascript
+return [...state, ...action.payload];
+```
+
+with
+
+```
+...
+```
+
+Working HEREEEE
 
 Go to your component, example: **src/App.js** and...
 
