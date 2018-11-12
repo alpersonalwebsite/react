@@ -9,7 +9,7 @@ class App extends Component {
   }
 
   renderComments = () => {
-    return this.props.comments.slice(0, 10).map(comment => {
+    return this.props.comments.map(comment => {
       return <li key={comment.id}>{comment.name}</li>;
     });
   };
