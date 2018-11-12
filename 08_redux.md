@@ -463,7 +463,7 @@ import { FETCH_COMMENTS } from '../actions/types';
 export default (state = [], action) => {
   switch (action.type) {
     case FETCH_COMMENTS:
-      return [...state, ...action.payload];
+      return [...state, ...action.payload.data];
 
     default:
       return state;
@@ -653,23 +653,23 @@ const mapStateToProps = ({ comments }) => {
 Note: reducers immutability
 In our commentsReducer.js for the action.type "FETCH_COMMENTS" we are returning the previous state and appending the "new" payload.
 
-You could be tempted to do something like: return action.payload instead. however, through an easy example I will show you why you should not.
+You could be tempted to do something like: return action.payload.data instead. however, through an easy example I will show you why you should not.
 
 In your commentsReducer.js change...
 
 ```javascript
 case FETCH_COMMENTS:
-  return [...state, ...action.payload];
+  return [...state, ...action.payload.data];
 ```
 
-<!-- TODO: Explain WHY return [...state, ...action.payload];
+<!-- TODO: Explain WHY return [...state, ...action.payload.data];
 We are receiving an array of objects. That´s why in our test payload we use payload: [{}] -->
 
 with...
 
 ```javascript
 case FETCH_COMMENTS:
-  return action.payload;
+  return action.payload.data;
 ```
 
 Go to http://localhost:3000/
@@ -684,13 +684,14 @@ Copy and paste the following Action...
 ```
 {
 type: 'FETCH_COMMENTS',
-payload: [{
-  postId: 1,
-  id: 1,
-  name: "TESTING",
-  email: "Eliseo@gardner.biz",
-  body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
-}]
+payload: {
+  data: [{
+    postId: 1,
+    id: 1,
+    name: "TESTING",
+    email: "Eliseo@gardner.biz",
+    body: "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+  }]}
 }
 ```
 
@@ -704,7 +705,7 @@ Now, in your commentsReducer.js replace your return with the original one:
 
 ```javascript
 case FETCH_COMMENTS:
-  return [...state, ...action.payload];
+  return [...state, ...action.payload.data];
 ```
 
 Using the same `Action`, dispatch. You can see the difference. Now, you are preserving the previous state appending the new Object. The more you dispatch the action we have in our Redux Dispatcher, the more times you will see the property of that object on screen. I did it 3 times and this is what my component is rendering...
@@ -738,14 +739,14 @@ Old:
 
 ```javascript
 case FETCH_COMMENTS:
-  return action.payload;
+  return action.payload.data;
 ```
 
 New:
 
 ```javascript
 case FETCH_COMMENTS:
-  return _.mapKeys(action.payload, 'id');
+  return _.mapKeys(action.payload.data, 'id');
 ```
 
 So... We will pass from this...
