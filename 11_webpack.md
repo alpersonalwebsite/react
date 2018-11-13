@@ -433,7 +433,7 @@ Now, in our package.json we are going to add the following script...
 
 ```
 "scripts": {
-  "start": "webpack-dev-server --config config/webpack.config.js"
+  "start": "webpack-dev-server --config=config/webpack.config.js",
 },
 ```
 
@@ -455,8 +455,8 @@ module.exports = {
   mode: 'development',
   output: {
     path: path.resolve(__dirname, '../public'),
-    publicPath: '/',
-    filename: '[name]-bundle.js'
+    //  publicPath: '/',
+    filename: './bundle.js'
   },
   module: {
     rules: [
@@ -471,7 +471,6 @@ module.exports = {
       }
     ]
   },
-
   devServer: {
     contentBase: 'public'
   }
@@ -489,12 +488,84 @@ And create (as well) at the root level `.babelrc`
 
 Edit your public/index.html and add after your `<div id="root"></div>`
 
-```html
-<script src="/bundle.js"></script>
-```
-
-Now, let´s run our `webpack-dev-server`:
+Now, let´s run our `webpack-dev-server`
 
 ```
 npm start
 ```
+
+The App should be rendering the list of comments. Make a change for example in `src/App.js`.
+Webpack will re-compile (or re-generate) the bundle and reload our browser tab (through a `websocket` connection).
+
+If you go to your DevConsole and open the Network tab, these request will appear:
+
+![Webpack Network Requests](/images/webpack-network-requests.png)
+
+The current size of our bundle.js is: 1.49 MB
+
+Let´s go back to our package.json and add a build script
+
+```
+"build": "webpack --config=config/webpack.dev.js"
+```
+
+Now, instead of running `npm start` execute `npm run build`.
+
+1. We are running webpack instead of webpack-dev-server
+2. bundle.js is about 1.16 MB (before, 1.49 MB). It is not excluding "dev" functionality since our config file has `mode: 'development'`
+3. It will generate the bundle.js inside public/
+4. You will access to static content: file:///C:/nocra/public/index.html
+
+We will replace (on src/index.js) the route `<Route exact path="/" component={App} />` with `<App />`. We will come later and restore the routing; but, for the moment, we want to keep the focus on `Webpack`
+
+Rename public/index.html to public/template.html
+
+_Install_: html-webpack-plugin. It will automatically create an `index.html` (based on our template.html) and place the JS output (between <script>) on `public/`; in this case, `bundle.js`.
+
+```
+npm install --save-dev html-webpack-plugin
+```
+
+In your **webpack.config.js** add
+
+```javascript
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+```
+
+And after `devServer`
+
+```javascript
+plugins: [
+  new HTMLWebpackPlugin({
+    template: './public/template.html'
+  })
+];
+```
+
+Before proceeding, let´s add another "entry point".
+
+In webpack.config.js we are going to replace the value of entry with an object setting as many properties as entries we want.
+
+```javascript
+entry: {
+  main: './src/index.js',
+  other: './src/other.js'
+},
+```
+
+And, in output, for filename property add the "[name] namespace" as we saw in our first example:
+
+```javascript
+filename: './[name]-bundle.js';
+```
+
+Now, create the file: /src/other.js
+
+```javascript
+console.log('I´m the other entry!');
+```
+
+Let´s try both:
+
+* webpack-dev-server with npm start at http://localhost:8080/
+* webpack with npm run build at file:///C:/nocra/public/index.html
