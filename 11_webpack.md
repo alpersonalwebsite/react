@@ -370,3 +370,131 @@ button.addEventListener('click', event => {
 ```
 
 What happens behind the scenes is easy: we return a Promise that will be resolved on a certain time point, retrieving the module with its entire functionality.
+
+---
+
+Until now, our focus was only on the App (aka, our code)... `CRA` has been effectively in charge of the rest <!--TODO:; Extend what rest is --> A good way of having a "taste" of the big picture without compromising your current work, would be: create a new app with CRA, add one Component and eject your project: `npm run eject`
+
+Here´s a screen capture comparing both `package.json`: before and after ejecting just to delight your own curiosity in case you decided to not eject a project.
+![Redux DevTools Dispatching](/images/eject-comp.png)
+
+However, the "biggest change" will be inside `config/` and `scripts/`
+We are not analyzing the results of ejecting (just providing a high level illustration) but, opening the door to show you what are we going to do, which basically is, wire up what CRA was doing for us out-of-the-box.
+
+We are going to start from scratch.
+What we want...? Do what CRA does plus, add some extra functionality related to our needs. We will work with the example `[basic-redux-example[redux-thunk]`.
+
+<!-- TODO:; what CRA is doing for us... Explain --->
+
+```
+mkdir nocra
+cd nocra
+
+npm init -y
+```
+
+Time to install the dependencies that we are using in our redux-thunk example:
+
+```
+npm install --save axios lodash react react-dom react-redux react-router-dom redux redux-thunk
+```
+
+We are going to move the following folders/ and files from `[basic-redux-example[redux-thunk]` to `nocra`
+
+* public/
+* src/
+* .gitignore
+* README.md
+
+Now... Let´s install...
+
+* nodemon
+* webpack
+* babel-core
+* babel-loader
+* babel-plugin-async-to-promises
+* babel-plugin-syntax-dynamic-import
+* babel-plugin-transform-async-to-promises
+* babel-plugin-transform-runtime
+* babel-plugin-universal-import
+* babel-polyfill
+* babel-preset-env
+* babel-preset-es2015
+* babel-preset-react
+* babel-preset-stage-2
+
+npm install --save nodemon
+
+npm install --save-dev webpack webpack-cli webpack-dev-server
+
+npm install --save-dev @babel/core babel-loader babel-plugin-async-to-promises @babel/plugin-syntax-dynamic-import babel-plugin-transform-async-to-promises @babel/plugin-proposal-class-properties @babel/plugin-transform-runtime babel-plugin-universal-import @babel/polyfill @babel/preset-env @babel/preset-es2015 @babel/preset-react @babel/preset-stage-2
+
+Now, in our package.json we are going to add the following script...
+
+```
+"scripts": {
+  "start": "webpack-dev-server --config config/webpack.config.js"
+},
+```
+
+Create the folder `/config` at the root level and also the file `webpack.config.js`
+
+```
+mkdir config
+cd config  
+touch webpack.config.js
+```
+
+webpack.config.js
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  mode: 'development',
+  output: {
+    path: path.resolve(__dirname, '../public'),
+    publicPath: '/',
+    filename: '[name]-bundle.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader'
+          }
+        ]
+      }
+    ]
+  },
+
+  devServer: {
+    contentBase: 'public'
+  }
+};
+```
+
+And create (as well) at the root level `.babelrc`
+
+```
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
+  "plugins": ["@babel/plugin-proposal-class-properties"]
+}
+```
+
+Edit your public/index.html and add after your `<div id="root"></div>`
+
+```html
+<script src="/bundle.js"></script>
+```
+
+Now, let´s run our `webpack-dev-server`:
+
+```
+npm start
+```
