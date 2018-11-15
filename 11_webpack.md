@@ -569,3 +569,119 @@ Let´s try both:
 
 * webpack-dev-server with npm start at http://localhost:8080/
 * webpack with npm run build at file:///C:/nocra/public/index.html
+
+Check the "outputs" or "built assets"
+
+webpack-dev-server
+
+```
+Asset      Size  Chunks             Chunk Names
+./mainbundle.js  1.49 MiB    main  [emitted]  main
+./otherbundle.js   342 KiB   other  [emitted]  other
+index.html  1.75 KiB          [emitted]
+```
+
+webpack
+
+```
+Asset      Size  Chunks             Chunk Names
+./mainbundle.js  1.16 MiB    main  [emitted]  main
+./otherbundle.js   3.8 KiB   other  [emitted]  other
+index.html  1.75 KiB          [emitted]
+```
+
+BTW, if you are a fancy person and you want to see the same colorful output from `webpack-dev-server` when running `webpack`, add this property to the configuration file: **webpack.config.js**
+
+```javascript
+stats: {
+  colors: true;
+}
+```
+
+This new option should just be available for webpack (webpack-dev-server is doing by default). Something similar occurs for mode: webpack should take production and webpack-dev-server development.
+
+The temptation of cloning the file and setting one for dev and other for prod could be big. But, there´s a much better way to do it and without duplicating code.
+
+Install: webpack-merge
+npm install --save-dev webpack-merge
+
+Inside config/ create 2 new files
+
+```
+touch webpack.config.dev.js webpack.config.prod.js
+```
+
+Now, create the boilerplate for both files:
+
+```javascript
+const merge = require('webpack-merge');
+const commonConfig = require('./webpack.config.js');
+
+const config = {};
+
+module.exports = merge(commonConfig, config);
+```
+
+In webpack.config.dev.js we are going to add (inside config)
+
+```
+  mode: 'development'
+```
+
+In webpack.config.dev.js we are going to add
+
+```
+  stats: {
+    colors: true
+    },
+  mode: 'production'
+```
+
+On package.json we are going to update our scripts:
+
+```
+"scripts": {
+  "start": "webpack-dev-server --config config/webpack.config.dev.js",
+  "build": "webpack --config config/webpack.config.prod.js"
+},
+```
+
+And finally, on webpack.config.js we are going to remove (or comment)
+
+```
+  stats: {
+    colors: true
+    },
+  mode: 'development'
+```
+
+Now, run both commands (scripts) again.
+Everything should be working... And it should be working as before. However, if you compare the ouput (size of the bundled files)
+
+```
+./mainbundle.js > Now: 155 KB - Before: 1.16 MiB  
+./otherbundle.js > Now: 969 bytes - Before: 3.8 KiB
+```
+
+... and, if you check the files, you will see that files were optimized for production: replacing some namespaces, minifying the code...
+
+With the pass of the time, and after adding and removing several "entry points" you could have your public/ folder full of old and un-used bundles (aka, files).
+So, we are going to do the following: every time we build our project, we are going to delete ALL the files inside the dir public/ (also, if you have the folders dist/ and build/) excluding x-files. In our case, we want to preserver: template.html, manifest.json and favicon.ico.
+
+Install: clean-webpack-plugin
+
+```
+npm install --save-dev clean-webpack-plugin
+```
+
+Add a couple of dummy files to your public/
+
+```
+touch public/hello.js public/hello.html public/hello.h public/hi.js
+```
+
+<!-- TODO: Add Jest and Enzyme and wire them up -->
+
+---
+
+From a Client Side Rendering (Traditional React App) to Server Side rendering
