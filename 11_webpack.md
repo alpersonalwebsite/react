@@ -680,6 +680,44 @@ Add a couple of dummy files to your public/
 touch public/hello.js public/hello.html public/hello.h public/hi.js
 ```
 
+On webpack.config.prod.js, add...
+
+Outside the config object
+
+```javascript
+const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+let pathsToClean = ['dist/', 'build/', 'public/'];
+
+let cleanOptions = {
+  root: path.resolve(__dirname, '../'),
+  exclude: ['template.html', 'manifest.json', 'favicon.ico'],
+  verbose: true,
+  dry: false
+};
+```
+
+Inside out config/
+
+```javascript
+plugins: [new CleanWebpackPlugin(pathsToClean, cleanOptions)];
+```
+
+And execute: npm run build
+Note: It could take some time.
+
+The output will start with...
+
+```
+clean-webpack-plugin: C:\practice\nocra\dist has been removed.
+clean-webpack-plugin: C:\practice\nocra\build has been removed.
+clean-webpack-plugin: C:\practice\nocra\public has been removed.
+clean-webpack-plugin: 3 file(s) excluded - favicon.ico, manifest.json, template.html
+```
+
+And as you can see, all the dummy files were removed. Also, our bundles (\*.js) which were deleted (by clean-webpack-plugin) and re-generated (by webpack).
+
 <!-- TODO: Add Jest and Enzyme and wire them up -->
 
 ---
