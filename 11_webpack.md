@@ -718,6 +718,241 @@ clean-webpack-plugin: 3 file(s) excluded - favicon.ico, manifest.json, template.
 
 And as you can see, all the dummy files were removed. Also, our bundles (\*.js) which were deleted (by clean-webpack-plugin) and re-generated (by webpack).
 
+Let´s continue installing dependencies. Testing time:
+
+* jest
+* enzyme
+* enzyme-adapter-react-16
+* enzyme-to-json
+* babel-jest
+* identity-obj-proxy
+* react-test-renderer
+* regenerator-runtime
+
+```
+npm install --save-dev jest enzyme enzyme-adapter-react-16 enzyme-to-json babel-jest identity-obj-proxy react-test-renderer regenerator-runtime
+```
+
+Create src/tempPolyfills.js
+
+```
+const requestAnimationFrame = (global.requestAnimationFrame = callback => {
+  setTimeout(callback, 0);
+});
+export default requestAnimationFrame;
+```
+
+Create src/setupTests.js
+
+```
+import requestAnimationFrame from './tempPolyfills';
+
+import { configure } from 'enzyme';
+
+import Adapter from 'enzyme-adapter-react-16';
+configure({ adapter: new Adapter(), disableLifecycleMethods: true });
+```
+
+Note: We saw some of these configurations on `unit-tests` section. However, here, we will wire up the minimum just as proof of concept.
+
+Then, in package.json we will add a new script...
+
+```json
+"test": "jest"
+```
+
+... and also, `jest` configuration...
+
+```json
+"jest": {
+  "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}", "!**/node_modules/**"],
+  "moduleNameMapper": {
+    "\\.css$": "identity-obj-proxy"
+  },
+  "transform": {
+    "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
+  },
+  "coverageReporters": ["text-summary"],
+  "setupFiles": ["<rootDir>/src/setupTests.js"]
+}
+```
+
+Create a simple component (we don´t care about testing in this particular moment, if not, Jest and Enzyme functionalities)
+
+src/Intro.js
+
+```javascript
+import React, { Component } from 'react';
+
+const Intro = () => {
+  return <div>Intro</div>;
+};
+
+export default Intro;
+```
+
+... and its Unit Test: src/Intro.test.js
+
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Intro from './Intro';
+
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<Intro />, div);
+});
+```
+
+This is the basic test that `CRA` generates for the main component.
+
+Execute the test script: `npm run test`
+
+And you will receive the following error:
+
+```
+> nocra@1.0.0 test C:\practice\nocra
+> jest
+
+FAIL src/Intro.test.js
+  ● Test suite failed to run
+
+    Cannot find module 'babel-core'
+
+      at _load_babelCore (node_modules/babel-jest/build/index.js:32:24)
+
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        1.246s
+Ran all test suites.
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! nocra@1.0.0 test: `jest`
+npm ERR! Exit status 1
+npm ERR!
+npm ERR! Failed at the nocra@1.0.0 test script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+```
+
+If you are thinking... But... We have babel-core installed... Check again your package.json.
+We have `@babel/core`: https://www.npmjs.com/package/@babel/core
+And jest is requiring `babel-core`: https://www.npmjs.com/package/babel-core
+
+Execute the following command to dispel any doubt:
+
+```
+npm ls babel-core
+```
+
+Result:
+
+```
+nocra@1.0.0 C:\nocra
+`-- jest@23.6.0
+  `-- jest-cli@23.6.0
+    `-- jest-runtime@23.6.0
+      `-- babel-core@6.26.3
+```
+
+Add to your `package.json`, after `@babel/core`
+
+```
+"babel-core": "7.0.0-bridge.0"
+```
+
+Then, run: `npm install`
+
+Now, run again the test script: `npm run test`
+
+Result:
+
+```
+> nocra@1.0.0 test C:\practice\nocra
+> jest
+
+PASS src/Intro.test.js
+  √ renders without crashing (13ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1.9s
+```
+
+Now, let´s reformat our UT with Enzyme: Intro.test.js
+
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { mount } from 'enzyme';
+import Intro from './Intro';
+
+describe('<Intro />', () => {
+  const wrapper = mount(<Intro />);
+
+  it('matches the previous Snapshot', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+  it('has a h1 as title with class title', () => {
+    expect(wrapper.find('h1').exists()).toBe(true);
+  });
+});
+```
+
+Execute the tests: npm run test
+
+Result:
+
+```
+> nocra@1.0.0 test C:\practice\nocra
+> jest
+
+FAIL src/Intro.test.js
+  <Intro />
+    √ matches the previous Snapshot (7ms)
+    × has a h1 as title with class title (9ms)
+
+  ● <Intro /> › has a h1 as title with class title
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      22 |   });
+      23 |   it('has a h1 as title with class title', () => {
+    > 24 |     expect(wrapper.find('h1').exists()).toBe(true);
+         |                                         ^
+      25 |   });
+      26 | });
+      27 |
+
+      at Object.toBe (src/Intro.test.js:24:41)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 passed, 2 total
+Snapshots:   1 passed, 1 total
+Time:        1.842s, estimated 2s
+```
+
+One of our tests is failing. Add the following to `Intro.js`
+
+```html
+<h1>Hello</h1>
+```
+
+Run the test script again...
+
+Result:
+
+```
+× matches the previous Snapshot (16ms)
+√ has a h1 as title with class title (4ms)
+```
+
+We fix the previous issue... However, now, our Snapshots are different.
+
 <!-- TODO: Add Jest and Enzyme and wire them up -->
 
 ---
