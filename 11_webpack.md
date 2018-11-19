@@ -406,7 +406,7 @@ We are going to move the following folders/ and files from `[basic-redux-example
 * .gitignore
 * README.md
 
-Now... Let´s install...
+Now... Let´s install some dependencies:
 
 * nodemon
 * webpack
@@ -423,11 +423,17 @@ Now... Let´s install...
 * babel-preset-react
 * babel-preset-stage-2
 
+```
 npm install --save nodemon
+```
 
+```
 npm install --save-dev webpack webpack-cli webpack-dev-server
+```
 
+```
 npm install --save-dev @babel/core babel-loader babel-plugin-async-to-promises @babel/plugin-syntax-dynamic-import babel-plugin-transform-async-to-promises @babel/plugin-proposal-class-properties @babel/plugin-transform-runtime babel-plugin-universal-import @babel/polyfill @babel/preset-env @babel/preset-es2015 @babel/preset-react @babel/preset-stage-2
+```
 
 Now, in our package.json we are going to add the following script...
 
@@ -698,7 +704,7 @@ let cleanOptions = {
 };
 ```
 
-Inside out config/
+Inside our config/
 
 ```javascript
 plugins: [new CleanWebpackPlugin(pathsToClean, cleanOptions)];
@@ -953,7 +959,46 @@ Result:
 
 We fix the previous issue... However, now, our Snapshots are different.
 
-<!-- TODO: Add Jest and Enzyme and wire them up -->
+<!-- TODO: Add Jest and Enzyme and wire them up... Make the watch and input possible, ect -->
+
+<!-- TODO: CSS loaders
+
+-->
+
+<!-- TODO: ERROS overlaying page -->
+
+<!-- TODO: Loaders for HTML and images -->
+
+<!-- TODO:  Ver si necesito @babel/plugin-transform-arrow-functions: probar en viejo IE -->
+
+Our app works properly in Chrome and Firefox, but... If you try IE, you will see a blank page, and, if you go to the console, the following error will grab your attention:
+
+```
+var promise = Promise.resolve(config);
+'Promise' is undefined
+this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+```
+
+How we fix this...?
+
+1. We have installed the plugin to transpile promises: babel-plugin-async-to-promises
+2. We have installed babel-polyfill to make IE "understand promises"
+3. We also have installed @babel/preset-env
+
+So, in our main file (or top entry point) we are going to add
+src/index.js
+
+```
+import "@babel/polyfill";
+```
+
+And inside our package.json
+
+```
+  "browserslist": ["last 1 version", "> 1%", "IE 11", "IE 10", "IE 9"]
+```
+
+Refresh your browser... Great! Now we even support IE9!
 
 ---
 
