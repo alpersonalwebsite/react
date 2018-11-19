@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "jest",
     "start": "webpack-dev-server --config config/webpack.config.dev.js",
     "build": "webpack --config config/webpack.config.prod.js"
   },
@@ -31,15 +32,36 @@
     "@babel/preset-es2015": "^7.0.0-beta.53",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-stage-2": "^7.0.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-async-to-promises": "^1.0.5",
     "babel-plugin-transform-async-to-promises": "^0.7.1",
     "babel-plugin-universal-import": "^3.1.2",
     "clean-webpack-plugin": "^1.0.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "enzyme-to-json": "^3.3.4",
     "html-webpack-plugin": "^3.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^23.6.0",
+    "react-test-renderer": "^16.6.3",
+    "regenerator-runtime": "^0.12.1",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4"
-  }
+  },
+  "jest": {
+    "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}", "!**/node_modules/**"],
+    "moduleNameMapper": {
+      "\\.css$": "identity-obj-proxy"
+    },
+    "transform": {
+      "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
+    },
+    "coverageReporters": ["text-summary"],
+    "setupFiles": ["<rootDir>/src/setupTests.js"]
+  },
+  "browserslist": ["last 1 version", "> 1%", "IE 11", "IE 10", "IE 9"]
 }

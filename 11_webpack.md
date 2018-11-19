@@ -988,13 +988,13 @@ How we fix this...?
 So, in our main file (or top entry point) we are going to add
 src/index.js
 
-```
-import "@babel/polyfill";
+```javascript
+import '@babel/polyfill';
 ```
 
 And inside our package.json
 
-```
+```json
   "browserslist": ["last 1 version", "> 1%", "IE 11", "IE 10", "IE 9"]
 ```
 
