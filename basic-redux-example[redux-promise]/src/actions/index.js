@@ -12,7 +12,11 @@ export async function fetchComments() {
   const query = 'comments';
   const endPoint = `${api}${query}`;
 
-  const request = await axios.get(endPoint, { headers });
+  const request = await axios
+    .get(endPoint, { headers })
+    .then(
+      value => new Promise(resolve => setTimeout(() => resolve(value), 10000))
+    );
 
   return {
     type: FETCH_COMMENTS,
