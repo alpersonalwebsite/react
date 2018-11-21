@@ -6,16 +6,19 @@ import { fetchComments } from './actions';
 
 class App extends Component {
   componentDidMount() {
-    try {
-      this.props.fetchComments();
-    } catch (err) {
-      console.log('Something went bad!');
-    }
+    (async () => {
+      try {
+        await this.props.fetchComments();
+      } catch (err) {
+        console.log('Something went bad!');
+      }
+    })();
 
-    /* Or you can do this...
-      .then(data => data)
-      .catch(err => console.log('Something went bad!'));
-      */
+    /* Or, what´s the same...
+    this.props.fetchComments()
+    .then(data => data)
+    .catch(err => console.log('Something went bad!'));
+    */
   }
 
   renderComments = () => {
