@@ -1000,6 +1000,201 @@ And inside our package.json
 
 Refresh your browser... Great! Now we even support IE9!
 
+<!-- TODO: Better title and intro -->
+
+Server Part
+
+Let´s create the folder server
+
+```
+mkdir server && cd server
+```
+
+Init the server project and install express (plus body-parser)
+
+```
+npm init - y
+npm install express body-parser
+```
+
+Create the main server file: sever/index.js
+
+```javascript
+const express = require('express');
+
+const bodyParser = require('body-parser');
+
+class RouterAndMiddlewares {
+  constructor() {
+    this.app = express();
+    this.initExpress();
+    this.middlewaresExpress();
+    this.initControllers();
+    this.start();
+  }
+
+  initExpress() {
+    this.app.set('port', 8080);
+  }
+
+  middlewaresExpress() {
+    this.app.use(bodyParser.urlencoded({ extended: true }));
+    this.app.use(bodyParser.json());
+  }
+
+  initControllers() {
+    require('./BasicController.js')(this.app);
+  }
+  start() {
+    let self = this;
+    this.app.listen(this.app.get('port'), () => {
+      console.log(`Server Listening for port: ${self.app.get('port')}`);
+    });
+  }
+}
+
+new RouterAndMiddlewares();
+```
+
+Create file server/BasicController.js
+
+```
+
+```
+
+In our main package.json, src/package.json add a new script:
+
+```
+"dev": "node src/server/index.js"
+```
+
+We are going to install the following middle-wares:
+
+<!--TODO explain why -->
+
+src/
+
+1. webpack-dev-middleware
+2. webpack-hot-middleware
+
+server/
+
+```
+npm install webpack-dev-middleware webpack-hot-middleware --save-dev
+```
+
+Now, we are going to wire up webpack, these middle-wares and the express.static built-in middleware function in Express which will tell Express from where we want to serve our static content.
+
+server/index.js with new changes
+
+```javascript
+const express = require('express');
+
+const bodyParser = require('body-parser');
+
+const webpack = require('webpack');
+const config = require('../config/webpack.config.dev.js');
+const compiler = webpack(config);
+
+const webpackDevMiddleware = require('webpack-dev-middleware')(
+  compiler,
+  config.devServer
+);
+
+const webpackHotMiddlware = require('webpack-hot-middleware')(
+  compiler,
+  config.devServer
+);
+
+class RouterAndMiddlewares {
+  constructor() {
+    this.app = express();
+    this.initExpress();
+    this.middlewaresExpress();
+    this.initControllers();
+    this.start();
+  }
+
+  initExpress() {
+    this.app.set('port', 8080);
+  }
+
+  middlewaresExpress() {
+    this.app.use(bodyParser.urlencoded({ extended: true }));
+    this.app.use(bodyParser.json());
+
+    this.app.use(webpackDevMiddleware);
+    this.app.use(webpackHotMiddlware);
+
+    const staticMiddleware = express.static('public');
+    this.app.use(staticMiddleware);
+  }
+
+  initControllers() {
+    require('./BasicController.js')(this.app);
+  }
+  start() {
+    let self = this;
+    this.app.listen(this.app.get('port'), () => {
+      console.log(`Server Listening for port: ${self.app.get('port')}`);
+    });
+  }
+}
+
+new RouterAndMiddlewares();
+```
+
+Execute `npm run dev` and go to http://localhost:8080/
+
+If we make a change, for example, in src/App.js we modify the h1 text, webpack will re-compile...
+
+![webpack-dev-middleware re-compiling](/images/webpackDevMiddleware-reCompiles-express.png)
+
+However, we lost the socket connection and in consequence, the "hot reloading feature". Every time that you make a change, YOU have to reload the browser-tab manually.
+This is ok, but, impractical. So, let´s add hot-reloading through `webpack-hot-middleware`
+
+In webpack.config.js add at the top (aka, require webpack)
+
+```
+const webpack = require('webpack');
+```
+
+Then add to the devServer property:
+
+```
+devServer: {
+  contentBase: 'public',
+   hot: true
+},
+```
+
+Then inside plugins:
+
+```
+new webpack.HotModuleReplacementPlugin()
+```
+
+Next, in our main client file, in our case, src/index.js add at the top:
+
+```
+require('webpack-hot-middleware/client');
+```
+
 ---
+
+For hot reloading
+
+on main config agregre
+
+const webpack = require('webpack');
+
+    new webpack.HotModuleReplacementPlugin()
+
+
+    And inside devServer
+        hot: true
+
+And then on our main index (client) src/index.js at the top
+require('webpack-hot-middleware/client');
 
 From a Client Side Rendering (Traditional React App) to Server Side rendering
