@@ -5,7 +5,10 @@ import { fetchComments } from './actions';
 
 class App extends Component {
   componentDidMount() {
-    this.props.fetchComments();
+    this.props
+      .fetchComments()
+      .then(data => data)
+      .catch(err => console.log('Something went bad!'));
   }
 
   renderComments = () => {

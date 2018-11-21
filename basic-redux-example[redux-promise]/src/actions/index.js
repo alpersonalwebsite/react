@@ -8,13 +8,20 @@ const headers = {
   Accept: 'application/json'
 };
 
-export function fetchComments() {
+export async function fetchComments() {
   const query = 'comments';
   const endPoint = `${api}${query}`;
 
-  const request = axios.get(endPoint, { headers });
+  const request = await axios.get(endPoint, { headers });
+
   return {
     type: FETCH_COMMENTS,
     payload: request
   };
 }
+
+/* You can remove
+.then(
+  value => new Promise(resolve => setTimeout(() => resolve(value), 10000))
+);
+*/
