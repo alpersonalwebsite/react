@@ -476,9 +476,6 @@ module.exports = {
         ]
       }
     ]
-  },
-  devServer: {
-    contentBase: 'public'
   }
 };
 ```
@@ -512,7 +509,7 @@ The current size of our bundle.js is: 1.49 MB
 Let´s go back to our package.json and add a build script
 
 ```
-"build": "webpack --config=config/webpack.dev.js"
+"build": "webpack --config=config/webpack.config.js"
 ```
 
 Now, instead of running `npm start` execute `npm run build`.
@@ -582,8 +579,8 @@ webpack-dev-server
 
 ```
 Asset      Size  Chunks             Chunk Names
-./mainbundle.js  1.49 MiB    main  [emitted]  main
-./otherbundle.js   342 KiB   other  [emitted]  other
+./main-bundle.js  1.49 MiB    main  [emitted]  main
+./other-bundle.js   342 KiB   other  [emitted]  other
 index.html  1.75 KiB          [emitted]
 ```
 
@@ -591,8 +588,8 @@ webpack
 
 ```
 Asset      Size  Chunks             Chunk Names
-./mainbundle.js  1.16 MiB    main  [emitted]  main
-./otherbundle.js   3.8 KiB   other  [emitted]  other
+./main-bundle.js  1.16 MiB    main  [emitted]  main
+./other-bundle.js   3.8 KiB   other  [emitted]  other
 index.html  1.75 KiB          [emitted]
 ```
 
@@ -628,15 +625,18 @@ const config = {};
 module.exports = merge(commonConfig, config);
 ```
 
-In webpack.config.dev.js we are going to add (inside config)
+In **webpack.config.dev.js** we are going to add (inside config)
 
-```
-  mode: 'development'
+```javascript
+mode: 'development',
+devServer: {
+  contentBase: '../public'
+}
 ```
 
-In webpack.config.dev.js we are going to add
+In **webpack.config.prod.js** we are going to add
 
-```
+```javascript
   stats: {
     colors: true
     },
@@ -645,7 +645,7 @@ In webpack.config.dev.js we are going to add
 
 On package.json we are going to update our scripts:
 
-```
+```json
 "scripts": {
   "start": "webpack-dev-server --config config/webpack.config.dev.js",
   "build": "webpack --config config/webpack.config.prod.js"
@@ -654,7 +654,7 @@ On package.json we are going to update our scripts:
 
 And finally, on webpack.config.js we are going to remove (or comment)
 
-```
+```javascript
   stats: {
     colors: true
     },
@@ -710,8 +710,8 @@ Inside our config/
 plugins: [new CleanWebpackPlugin(pathsToClean, cleanOptions)];
 ```
 
-And execute: npm run build
-Note: It could take some time.
+And execute: `npm run build`
+_Note: It could take some time._
 
 The output will start with...
 
@@ -741,7 +741,7 @@ npm install --save-dev jest enzyme enzyme-adapter-react-16 enzyme-to-json babel-
 
 Create src/tempPolyfills.js
 
-```
+```javascript
 const requestAnimationFrame = (global.requestAnimationFrame = callback => {
   setTimeout(callback, 0);
 });
@@ -750,7 +750,7 @@ export default requestAnimationFrame;
 
 Create src/setupTests.js
 
-```
+```javascript
 import requestAnimationFrame from './tempPolyfills';
 
 import { configure } from 'enzyme';
@@ -863,7 +863,7 @@ nocra@1.0.0 C:\nocra
 
 Add to your `package.json`, after `@babel/core`
 
-```
+```json
 "babel-core": "7.0.0-bridge.0"
 ```
 
@@ -906,7 +906,7 @@ describe('<Intro />', () => {
 });
 ```
 
-Execute the tests: npm run test
+Execute the tests: `npm run test`
 
 Result:
 
@@ -957,7 +957,7 @@ Result:
 √ has a h1 as title with class title (4ms)
 ```
 
-We fix the previous issue... However, now, our Snapshots are different.
+We fixed the previous issue... However, now, our Snapshots are different.
 
 <!-- TODO: Add Jest and Enzyme and wire them up... Make the watch and input possible, ect -->
 
@@ -979,11 +979,11 @@ var promise = Promise.resolve(config);
 this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
 ```
 
-How we fix this...?
+**How we fix this...?**
 
-1. We have installed the plugin to transpile promises: babel-plugin-async-to-promises
-2. We have installed babel-polyfill to make IE "understand promises"
-3. We also have installed @babel/preset-env
+1. We have installed the plugin to transpile promises: `babel-plugin-async-to-promises`
+2. We have installed `babel-polyfill` to make IE "understand promises"
+3. We also have installed `@babel/preset-env`
 
 So, in our main file (or top entry point) we are going to add
 src/index.js
@@ -1153,48 +1153,56 @@ If we make a change, for example, in src/App.js we modify the h1 text, webpack w
 However, we lost the socket connection and in consequence, the "hot reloading feature". Every time that you make a change, YOU have to reload the browser-tab manually.
 This is ok, but, impractical. So, let´s add hot-reloading through `webpack-hot-middleware`
 
-In webpack.config.js add at the top (aka, require webpack)
+In webpack.config.dev.js add at the top (aka, require webpack)
 
-```
+```javascript
 const webpack = require('webpack');
 ```
 
 Then add to the devServer property:
 
-```
+```javascript
 devServer: {
-  contentBase: 'public',
-   hot: true
+  contentBase: '/..public',
+  hot: true
 },
 ```
 
-Then inside plugins:
+Then add plugins:
+
+```javascript
+plugins: [new webpack.HotModuleReplacementPlugin()];
+```
+
+Next, in our main client file, in our case **src/index.js** add at the top:
+
+```javascript
+require('webpack-hot-middleware/client?reload=true');
+```
+
+Run: `npm run dev`
+
+You will see in the browser´s console:
 
 ```
-new webpack.HotModuleReplacementPlugin()
+[HMR] connected | client.js:88:22
+[HMR] Checking for updates on the server... | process-update.js:39:22
 ```
 
-Next, in our main client file, in our case, src/index.js add at the top:
+Make a change, for example, on the text of the H1 tag that we have in `src/App.js`
+
+Now, you will see in the browser´s console:
 
 ```
-require('webpack-hot-middleware/client');
+[HMR] bundle rebuilding | client.js:230:9
+[HMR] bundle rebuilt in 242ms | client.js:238:9
+[HMR] Checking for updates on the server... | process-update.js:39:22
 ```
 
 ---
 
-For hot reloading
+And see, as well, your change on screen.
 
-on main config agregre
-
-const webpack = require('webpack');
-
-    new webpack.HotModuleReplacementPlugin()
-
-
-    And inside devServer
-        hot: true
-
-And then on our main index (client) src/index.js at the top
-require('webpack-hot-middleware/client');
+---
 
 From a Client Side Rendering (Traditional React App) to Server Side rendering
