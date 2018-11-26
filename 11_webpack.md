@@ -1199,9 +1199,25 @@ Now, you will see in the browser´s console:
 [HMR] Checking for updates on the server... | process-update.js:39:22
 ```
 
----
-
 And see, as well, your change on screen.
+
+We didn´t deal with CSS yet. So, create the file src/App.css
+
+```css
+h1 {
+  font-size: 20px;
+}
+```
+
+And then, import it into src/App.js
+
+```javascript
+import './App.css';
+```
+
+You should see the following error (in both, console and screen)
+
+![Missing CSS loadeR](/images/missing-css-loader.png)
 
 ---
 
