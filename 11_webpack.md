@@ -1201,6 +1201,24 @@ Now, you will see in the browser´s console:
 
 And see, as well, your change on screen.
 
+This works well as proof ocf concept. However, if you try to execute `npm run build` and load your built project you will see the following errors and a white page:
+
+```
+Firefox can’t establish a connection to the server at file:///__webpack_hmr. main-bundle.js:6:22162
+Error: [HMR] Hot Module Replacement is disabled. main-bundle.js:6:35349
+Firefox can’t establish a connection to the server at file:///__webpack_hmr. main-bundle.js:6:22162
+```
+
+To fix this, we are going to REMOVE `require('webpack-hot-middleware/client?reload=true');` from `src/index.js` and overwrite our main entry point in `webpack.config.dev.js`
+
+```javascript
+entry: {
+  main: ['webpack-hot-middleware/client?reload=true', './src/index.js']
+},
+```
+
+Now, everything should be working properly.
+
 We didn´t deal with CSS yet. So, create the file src/App.css
 
 ```css
@@ -1215,9 +1233,112 @@ And then, import it into src/App.js
 import './App.css';
 ```
 
-You should see the following error (in both, console and screen)
+You should see the following error (in both, console and screen and in your Node console if you are building your project with `npm run build`).
 
 ![Missing CSS loadeR](/images/missing-css-loader.png)
+
+The message is pretty clear: webpack needs the proper loader to process other files than \*.js.
+Let´s install:
+
+* style loader
+* css-loader
+
+```
+npm install --save-dev css-loader style-loader
+```
+
+And, in `webpack.config.js` add a new rule:
+
+```javascript
+{
+  test: /\.css$/,
+  use: [
+    { loader: 'style-loader' },
+    {
+      loader: 'css-loader',
+      query: {
+        modules: true,
+        localIdentName: '[name]__[local]__[hash:base64:5]'
+      }
+    }
+  ]
+}
+```
+
+Go to http://localhost:8080/ and you should see everything working as expected.
+
+Create a new css file, `src/index.css` with any rule you want and import it into `src/index.js`
+
+_Short explanation:_ When `css-loader` grabs all the local-imported \*.css files (like App.css, index.css) `style-loader` add those rules within `<style>`.
+Remember that webpack executes from right to left.
+
+In our example, if you inspect the markup you should see...
+
+```html
+<style type="text/css">h1 {
+  font-size: 20px;
+}
+</style>
+<style type="text/css">div {
+  margin: 20px;
+}
+</style>
+```
+
+One rule is coming from `src/App.css`, the other from `src/index.css`.
+
+Time for handling images.
+Let´s create a new dir `src/images/` and add any image. In my case, `rPI-400x400.jpg`.
+Now, let´s import that image in our `src/App.js`
+
+```javascript
+import rPI from './images/rPI-400x400.jpg';
+```
+
+We receive an error similar to the previous one:
+
+```html
+ERROR in ./src/images/rPI-400x400.jpg 1:0 Module parse failed: Unexpected character '�' (1:0) You may need an appropriate loader to handle this file type. (Source code omitted for this binary file)
+```
+
+And yes, it ´s indeed related to a missing loader.
+
+For this, we are going to install file-loader
+
+```
+npm install --save-dev file-loader
+```
+
+And add the proper rule inside webpack.config.js
+
+```javascript
+{
+  test: /\.jpg$/,
+  use: [
+    {
+      loader: 'file-loader',
+      options: {
+        name: 'images/[name].[ext]'
+      }
+    }
+  ]
+}
+```
+
+If you want to support multiple file ext (or types) you can use:
+
+```javascript
+test: /\.(png|jpg|gif)$/,
+```
+
+It should work properly, but... We are not rendering the image.
+Add to `src/App.js`.
+
+```javascript
+<img src={rPI} alt="Rasp. Pi Logo" />
+```
+
+Congratulations! You can check another important topic in your list of TODO!
 
 ---
 
