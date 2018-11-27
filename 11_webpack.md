@@ -6,10 +6,11 @@ What´s a bundle.
 Others like Webpack >  Browserify
 -->
 
-Quoting Webpack documentation, "webpack is a static module bundler for modern JavaScript applications".
-It takes all the files (let´s just care, at least for the moment, only about `\*.js` and `\*.css`) that are wired up in our project and generates a bundle.
+Quoting _Webpack_ documentation (which you should check regularly), "_webpack is a static module bundler for modern JavaScript applications_".
+It takes all the files (let´s just care, at least for the moment, only about `\*.js`) wired up in our project and generates a bundle(s) that will be used as our "static files or assets".
 
-As always, let´s use an example to illustrate the statement.
+As always, the best way to illustrate this statement is through a basic example.
+Hands at work!
 
 Create a new folder
 
@@ -18,31 +19,31 @@ mkdir webpack
 cd webpack
 ```
 
-Initiate our project (default flag)
+Initiate the project (`-y` is the default flag)
 
 ```
 npm init -y
 ```
 
-Install webpack and webpack-cli
+Install `webpack` and `webpack-cli`
 
 ```
 npm install --save-dev webpack webpack-cli
 ```
 
-Edit your package.json and add the following script:
+Edit your `package.json` and add the following script:
 
-```
+```json
   "build": "webpack --config=webpack.config.js"
 ```
 
-Create the file webpack.config.js
+Create the file `webpack.config.js`
 
 ```
 touch webpack.config.js
 ```
 
-webpack.config.js
+**webpack.config.js**
 
 ```javascript
 const path = require('path');
@@ -59,19 +60,19 @@ module.exports = {
 };
 ```
 
-Create the folder dist
+Create the `dist` folder
 
 ```
 mkdir dist
 ```
 
-Inside dist create the file index.html
+Inside dist create the file `index.html`
 
 ```
 touch index.html
 ```
 
-index.html
+**index.html**
 
 ```html
 <body>
@@ -80,19 +81,19 @@ index.html
 </body>
 ```
 
-Create the folder src
+Create the folder `src`
 
 ```
 mkdir src
 ```
 
-Inside src create the files app.js, index.js and other.js
+Inside `src` create the files `app.js`, `index.js` and `other.js`
 
 ```
 touch app.js index.js other.js
 ```
 
-index.js
+**index.js**
 
 ```javaScript
 import App, { someFunction } from './app';
@@ -102,7 +103,7 @@ console.log('index.js');
 someFunction();
 ```
 
-app.js
+**app.js**
 
 ```javaScript
 console.log('app.js');
@@ -112,19 +113,19 @@ module.exports.someFunction = () => {
 };
 ```
 
-other.js
+**other.js**
 
 ```javaScript
 console.log('other.js');
 ```
 
-Inside your root directory, **webpack**, run
+Inside your root directory, `webpack`, run...
 
 ```
 npm run build
 ```
 
-You will see something like...
+You will see the following output...
 
 ```
 > wp@1.0.0 build C:\webpack
@@ -141,7 +142,9 @@ Entrypoint main = bundle.js
 [./src/index.js] 91 bytes {main} [built]
 ```
 
-Open your **index.html** and check the console. You should see:
+Open your `index.html` and check the console.
+
+Result:
 
 ```
 app.js app.js:1:1
@@ -1238,7 +1241,8 @@ Then add to the devServer property:
 ```javascript
 devServer: {
   contentBase: '/..public',
-  hot: true
+  hot: true,
+  overlay: true
 },
 ```
 
@@ -1339,6 +1343,8 @@ And, in `webpack.config.js` add a new rule:
 }
 ```
 
+Note: `modules: true` enables `CSS modules` while `localIdentName` configures the generated ident (example: `App__rPi__3Noxh`; the hash "3Noxh", will be particular useful for caching purposes once we are in a `prod env`)
+
 Go to http://localhost:8080/ and you should see everything working as expected.
 
 Create a new css file, `src/index.css` with any rule you want and import it into `src/index.js`
@@ -1360,6 +1366,52 @@ In our example, if you inspect the markup you should see...
 ```
 
 One rule is coming from `src/App.css`, the other from `src/index.css`.
+
+We can (also) start using `in-line styling`, `CSS modules` and/or `CSS in JS`
+
+`in-line styling` example:
+
+```javascript
+<h1 style={{ textDecoration: 'underline' }}>List of comments 101</h1>
+```
+
+`CSS modules` example:
+
+In `src/App.css` add the rule
+
+```
+.rPi {
+  border: 1px solid black;
+}
+```
+
+Then in `src/App.js`
+
+* Import all the styles: `import styles from './App.css';`
+* Apply the style to the particular element: `<img src={rPI} alt="Rasp. Pi Logo" className={styles.rPi} />`
+
+`CSS in JS` example:
+
+Create the file `src/App.css.js`
+
+```javascript
+const settings = {
+  color: 'white'
+};
+
+const sectionTitle = {
+  color: settings.color,
+  backgroundColor: 'grey',
+  padding: '20px'
+};
+
+export default { sectionTitle };
+```
+
+Then in `src/App.js` we are going to add the following variable
+
+* Import: `import cssInJs from './App.css.js';`
+* Add the style tag: `<h1 style={cssInJs.sectionTitle}>List of comments 101</h1>`
 
 Time for handling images.
 Let´s create a new dir `src/images/` and add any image. In my case, `rPI-400x400.jpg`.
@@ -1413,6 +1465,8 @@ Add to `src/App.js`.
 ```
 
 Congratulations! You can check another important topic in your list of TODO!
+
+---
 
 ---
 
