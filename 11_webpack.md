@@ -734,9 +734,10 @@ Let´s continue installing dependencies. Testing time:
 * identity-obj-proxy
 * react-test-renderer
 * regenerator-runtime
+* jest-cli
 
 ```
-npm install --save-dev jest enzyme enzyme-adapter-react-16 enzyme-to-json babel-jest identity-obj-proxy react-test-renderer regenerator-runtime
+npm install --save-dev jest enzyme enzyme-adapter-react-16 enzyme-to-json babel-jest identity-obj-proxy react-test-renderer regenerator-runtime jest-cli
 ```
 
 Create src/tempPolyfills.js
@@ -891,11 +892,11 @@ Now, let´s reformat our UT with Enzyme: Intro.test.js
 ```javascript
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import Intro from './Intro';
 
 describe('<Intro />', () => {
-  const wrapper = mount(<Intro />);
+  const wrapper = shallow(<Intro />);
 
   it('matches the previous Snapshot', () => {
     expect(wrapper).toMatchSnapshot();
@@ -957,15 +958,88 @@ Result:
 √ has a h1 as title with class title (4ms)
 ```
 
-We fixed the previous issue... However, now, our Snapshots are different.
+Time to refactor.
+First, inside `config` we are going to create a new folder: `config/jest`.
+Move the following files inside config/jest
+
+* src\setupTests.js
+* src\tempPolyfills.js
+
+And inside our main package.json, replace...
+
+```json
+"setupFiles": ["<rootDir>/src/setupTests.js"]
+```
+
+with...
+
+```json
+"setupFiles": ["<rootDir>/config/jest/setupTests.js"]
+```
+
+Execute `npm test` or `npm run test`
+
+We should see the same as before:
+![Missing CSS loader](/images/jest-basic.png)
+
+Create the file `config/jest/jest.config.json`
+
+```
+touch config/jest/jest.config.json
+```
+
+Also, we are going to move the jest´s configuration that we have in `src/package.json` to `config/jest/jest.config.json`.
+
+```json
+{
+  "verbose": true,
+  "collectCoverageFrom": [
+    "<rootDir>/src/**/*.{js,jsx,mjs}",
+    "!**/node_modules/**"
+  ],
+  "moduleNameMapper": {
+    "\\.css$": "identity-obj-proxy"
+  },
+  "transform": {
+    "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
+  },
+  "setupFiles": ["<rootDir>/config/jest/setupTests.js"]
+}
+```
+
+Notes:
+We are...
+
+1. Removing the `jest` property.
+2. Changing the first element of the array-value of `collectCoverageFrom`
+3. Adding the `verbose` property.
+4. Removing `"coverageReporters": ["text-summary"]`
+
+Inside our package.json we are going to change our test script (currently, `"test": "jest"`)
+
+```json
+"test": "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
+```
+
+Quick comment: `--rootDir` flag will point to `.`
+
+Now, we can try (first)
+
+**npm test**
+
+![npm test](/images/npm-test.png)
+
+... then...
+
+**npm test -- --coverage**
+
+![npm --coverage](/images/npm-coverage.png)
+
+This will show you a table with the "testing coverage" of your tests.
+
+Note: If you are under Windows OS, use the CMD or PowerShell to avoid any kind of issue.
 
 <!-- TODO: Add Jest and Enzyme and wire them up... Make the watch and input possible, ect -->
-
-<!-- TODO: CSS loaders
-
--->
-
-<!-- TODO: ERROS overlaying page -->
 
 <!-- TODO: Loaders for HTML and images -->
 
