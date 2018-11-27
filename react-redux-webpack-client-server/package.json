@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
     "dev": "node server/index.js",
     "start": "webpack-dev-server --config config/webpack.config.dev.js",
     "build": "webpack --config config/webpack.config.prod.js"
@@ -41,38 +41,25 @@
     "babel-plugin-transform-async-to-promises": "^0.7.1",
     "babel-plugin-universal-import": "^3.1.2",
     "clean-webpack-plugin": "^1.0.0",
+    "css-loader": "^1.0.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "enzyme-to-json": "^3.3.4",
+    "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",
+    "jest-cli": "^23.6.0",
+    "jest-watch-typeahead": "^0.2.0",
     "react-test-renderer": "^16.6.3",
     "regenerator-runtime": "^0.12.1",
+    "style-loader": "^0.23.1",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-middleware": "^3.4.0",
     "webpack-dev-server": "^3.1.10",
     "webpack-hot-middleware": "^2.24.3",
     "webpack-merge": "^4.1.4"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}",
-      "!**/node_modules/**"
-    ],
-    "moduleNameMapper": {
-      "\\.css$": "identity-obj-proxy"
-    },
-    "transform": {
-      "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
-    },
-    "coverageReporters": [
-      "text-summary"
-    ],
-    "setupFiles": [
-      "<rootDir>/src/setupTests.js"
-    ]
   },
   "browserslist": [
     "last 1 version",

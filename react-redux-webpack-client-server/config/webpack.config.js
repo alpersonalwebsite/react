@@ -21,6 +21,30 @@ module.exports = {
             loader: 'babel-loader'
           }
         ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader' },
+          {
+            loader: 'css-loader',
+            query: {
+              modules: true,
+              localIdentName: '[name]__[local]__[hash:base64:5]'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'images/[name].[ext]'
+            }
+          }
+        ]
       }
     ]
   },

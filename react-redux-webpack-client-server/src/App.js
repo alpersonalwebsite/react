@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 
 import { fetchComments } from './actions';
 
+import './App.css';
+import rPI from './images/rPI-400x400.jpg';
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchComments();
@@ -19,6 +22,7 @@ class App extends Component {
       <div>
         <h1>List of comments 101</h1>
         <div>{this.renderComments()}</div>
+        <img src={rPI} alt="Rasp. Pi Logo" />
       </div>
     );
   }

@@ -11,11 +11,11 @@ it('renders without crashing', () => {
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import Intro from './Intro';
 
 describe('<Intro />', () => {
-  const wrapper = mount(<Intro />);
+  const wrapper = shallow(<Intro />);
 
   it('matches the previous Snapshot', () => {
     expect(wrapper).toMatchSnapshot();

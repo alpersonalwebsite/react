@@ -1,5 +1,5 @@
 //require('babel-runtime/regenerator');
-require('webpack-hot-middleware/client?reload=true');
+//require('webpack-hot-middleware/client?reload=true');
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom';
@@ -11,6 +11,8 @@ import '@babel/polyfill';
 
 import reduxThunk from 'redux-thunk';
 import App from './App';
+
+import './index.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
