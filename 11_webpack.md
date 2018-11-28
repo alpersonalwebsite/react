@@ -152,10 +152,11 @@ index.js index.js:6:1
 app.js > someFunction app.js:4:3
 ```
 
-A new static file will be hosted on your dist/; the file: bundle.js
-Open that file. Outside webpack code, you will find your transpiled and "bundled code".
+A new static file will be hosted on your `dist/`; the file: `bundle.js`
+Open that file. Among with webpack (and related dependencies) code, you will find our transpiled and "bundled code".
 
-So... We have a configuration file, webpack.config.js, where we are defining our entry point, or the file which will wire (directly or indirectly) the other ones resulting in webpack output: bundle.js; this bundle contains the code of the entry or main file index.js and also app.js which is imported on index.js. However, we have the file other.js which was not included since it´s not part of the "cabling". As soon as we wire it up to index.js or app.js, it will be included in our bundle.
+So...
+We have a configuration file, `webpack.config.js`, where we are defining our entry point, or the file which will wire (directly or indirectly) the other ones resulting in `bundle.js`; this bundle contains the code of the entry or main file `index.js` and also `app.js` which is imported on `index.js`. However, we have the file `other.js` which was not included since it´s not part of the "cabling". As soon as we wire it up to index.js or app.js, it will be included in our bundle.
 
 We could also add it to our entry object
 
