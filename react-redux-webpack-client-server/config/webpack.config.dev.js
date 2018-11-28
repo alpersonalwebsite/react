@@ -9,7 +9,8 @@ const config = {
   },
   devServer: {
     contentBase: '/..public',
-    hot: true
+    hot: true,
+    overlay: true
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]
 };

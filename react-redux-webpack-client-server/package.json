@@ -13,6 +13,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@emotion/core": "^10.0.0",
+    "@emotion/styled": "^10.0.0",
     "axios": "^0.18.0",
     "lodash": "^4.17.11",
     "nodemon": "^1.18.6",
@@ -38,6 +40,7 @@
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-async-to-promises": "^1.0.5",
+    "babel-plugin-emotion": "^10.0.0",
     "babel-plugin-transform-async-to-promises": "^0.7.1",
     "babel-plugin-universal-import": "^3.1.2",
     "clean-webpack-plugin": "^1.0.0",
