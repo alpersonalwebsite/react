@@ -527,7 +527,7 @@ We will replace (on src/index.js) the route `<Route exact path="/" component={Ap
 
 Rename public/index.html to public/template.html
 
-_Install_: html-webpack-plugin. It will automatically create an `index.html` (based on our template.html) and place the JS output (between <script>) on `public/`; in this case, `bundle.js`.
+_Install_: html-webpack-plugin. It will automatically create an `index.html` (based on our template.html) and place the JS output (between `<script>`) on `public/`; in this case, `bundle.js`.
 
 ```
 npm install --save-dev html-webpack-plugin
@@ -1413,6 +1413,52 @@ Then in `src/App.js` we are going to add the following variable
 
 * Import: `import cssInJs from './App.css.js';`
 * Add the style tag: `<h1 style={cssInJs.sectionTitle}>List of comments 101</h1>`
+
+There´re several CSS-in-JS libraries. Here is a graph showing the "trends" between 2017/2018 in relation to 4 of those dependencies.
+
+![Missing CSS loadeR](/images/cssInJs-trends.png)
+
+For more information: https://www.npmtrends.com/radium-vs-styled-components-vs-glamorous-vs-emotion
+
+Note: [npm trends](https://www.npmtrends.com/) is a pretty useful tool to compare "npm package´s popularity" on a certain period of time.
+
+We are going to try [emotion](https://github.com/emotion-js/emotion)
+
+* @emotion/core
+* @emotion/styled
+* babel-plugin-emotion: Babel plug-in for the minification and optimization of emotion styles. It is not mandatory but recommended.
+
+```
+npm install --save @emotion/core @emotion/styled
+npm install --save-dev babel-plugin-emotion
+```
+
+And we are going to add `emotion` plugin to `.babelrc` with some basic configuration:
+
+```
+["emotion", { "sourceMap": true, "autoLabel": true }]
+```
+
+In `src/App.js`
+
+1. Import: import styled from '@emotion/styled';
+2. Create the emotion Component:
+
+```javascript
+const CommentsBox = styled('div')`
+  background-color: lavender;
+`;
+```
+
+3. Replace (div) `<div>{this.renderComments()}</div>` with `<CommentsBox>{this.renderComments()}</CommentsBox>`
+
+<!-- TODO check and add more examples...
+https://emotion.sh/docs/migrating-to-emotion-10
+https://codesandbox.io/s/pk1qjqpw67
+https://emotion.sh/docs/styled
+
+Also add example with css``
+-->
 
 Time for handling images.
 Let´s create a new dir `src/images/` and add any image. In my case, `rPI-400x400.jpg`.
