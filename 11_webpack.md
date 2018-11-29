@@ -641,10 +641,7 @@ devServer: {
 In **webpack.config.prod.js** we are going to add
 
 ```javascript
-  stats: {
-    colors: true
-    },
-  mode: 'production'
+mode: 'production';
 ```
 
 On package.json we are going to update our scripts:
@@ -659,10 +656,7 @@ On package.json we are going to update our scripts:
 And finally, on webpack.config.js we are going to remove (or comment)
 
 ```javascript
-  stats: {
-    colors: true
-    },
-  mode: 'development'
+mode: 'development';
 ```
 
 Now, run both commands (scripts) again.
@@ -1512,6 +1506,78 @@ Add to `src/App.js`.
 ```
 
 Congratulations! You can check another important topic in your list of TODO!
+
+---
+
+At the moment, in our package.json we have the following scripts
+
+```json
+"test": "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
+"dev": "node server/index.js",
+"start": "webpack-dev-server --config config/webpack.config.dev.js",
+"build": "webpack --config config/webpack.config.prod.js"
+```
+
+We are going to add a new one, prod, setting production as "environment variable" and executing (aka, running) our server file...
+
+```
+"prod": "NODE_ENV=production node server/index.js"
+```
+
+Also, we are going to add `NODE_ENV=production` to our build script.
+
+```
+"build": "NODE_ENV=production webpack --config config/webpack.config.prod.js"
+```
+
+The ending result should be:
+
+```json
+"test": "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
+"start": "webpack-dev-server --config config/webpack.config.dev.js",
+"dev": "node server/index.js",
+"prod": "NODE_ENV=production node server/index.js",
+"build": "NODE_ENV=production webpack --config config/webpack.config.prod.js"
+```
+
+Now, before testing the scripts, add the following in `server/index.js`
+
+```javascript
+const isProd = process.env.NODE_ENV === 'production';
+```
+
+And wrap everything that we don´t need in `production` inside the condition: `!isProd` or `!this.isProd` inside the class, previously, passing `isProd` to the class and assigning it in the `constructor` as the value of `this.isProd`.
+
+In case of doubts, check: `server/index.js`
+
+Time to test our `scripts`!
+
+1. `npm test` >> OK
+2. `npm start` >> OK
+3. `npm run dev` >> OK
+4. `npm run prod` >> ERROR: 'NODE_ENV' is not recognized as an internal or external command (\* If you are under Windows OS)
+
+If this is your case, you can adapt the script to set the variable in the "Windows´way" (something like: `SET NODE_ENV=production & node server/index.js`), however, we want to be as agnostic as we can avoiding particular "blocks of code" for x-OSs.
+
+So... As you can imagine, we are going to install a new package: cross-env
+
+```
+npm install --save-dev cross-env
+```
+
+Once this is done, we are going to precede the commands of the prod and build scripts with cross-env
+
+```json
+"prod": "cross-env NODE_ENV=production node server/index.js",
+"build":
+  "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js"
+```
+
+Run again: `npm run prod` >> OK
+
+5. `npm run build` >> OK
+
+Check difference between files: production and development.
 
 ---
 

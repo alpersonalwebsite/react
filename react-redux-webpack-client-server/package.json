@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
-    "dev": "node server/index.js",
+    "test":
+      "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
     "start": "webpack-dev-server --config config/webpack.config.dev.js",
-    "build": "webpack --config config/webpack.config.prod.js"
+    "dev": "node server/index.js",
+    "prod": "cross-env NODE_ENV=production node server/index.js",
+    "build:dev": "webpack --config config/webpack.config.dev.js",
+    "build":
+      "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js"
   },
   "keywords": [],
   "author": "",
@@ -44,6 +48,7 @@
     "babel-plugin-transform-async-to-promises": "^0.7.2",
     "babel-plugin-universal-import": "^3.1.2",
     "clean-webpack-plugin": "^1.0.0",
+    "cross-env": "^5.2.0",
     "css-loader": "^1.0.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
@@ -64,11 +69,5 @@
     "webpack-hot-middleware": "^2.24.3",
     "webpack-merge": "^4.1.4"
   },
-  "browserslist": [
-    "last 1 version",
-    "> 1%",
-    "IE 11",
-    "IE 10",
-    "IE 9"
-  ]
+  "browserslist": ["last 1 version", "> 1%", "IE 11", "IE 10", "IE 9"]
 }

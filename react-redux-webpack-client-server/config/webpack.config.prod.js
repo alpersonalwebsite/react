@@ -14,9 +14,6 @@ let cleanOptions = {
 };
 
 const config = {
-  stats: {
-    colors: true
-  },
   mode: 'production',
   plugins: [new CleanWebpackPlugin(pathsToClean, cleanOptions)]
 };

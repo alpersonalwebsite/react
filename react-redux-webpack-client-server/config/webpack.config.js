@@ -11,6 +11,9 @@ module.exports = {
     //  publicPath: '/',
     filename: './[name]-bundle.js'
   },
+  stats: {
+    colors: true
+  },
   module: {
     rules: [
       {
