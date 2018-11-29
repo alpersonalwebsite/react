@@ -6,25 +6,26 @@ const bodyParser = require('body-parser');
 
 const isProd = process.env.NODE_ENV === 'production';
 
+let webpackDevMiddleware, webpackHotMiddlware;
+
 if (!isProd) {
   const webpack = require('webpack');
-  const config = require('../config/webpack.config.dev.js');
+  const config = require('../config/webpack.config.dev.server.js');
   const compiler = webpack(config);
 
-  const webpackDevMiddleware = require('webpack-dev-middleware')(
+  webpackDevMiddleware = require('webpack-dev-middleware')(
     compiler,
     config.devServer
   );
 
-  const webpackHotMiddlware = require('webpack-hot-middleware')(
+  webpackHotMiddlware = require('webpack-hot-middleware')(
     compiler,
     config.devServer
   );
 }
 
 class RouterAndMiddlewares {
-  constructor(isProd) {
-    this.isProd = isProd;
+  constructor() {
     this.app = express();
     this.initExpress();
     this.middlewaresExpress();
@@ -40,7 +41,7 @@ class RouterAndMiddlewares {
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json());
 
-    if (!this.isProd) {
+    if (!isProd) {
       this.app.use(webpackDevMiddleware);
       this.app.use(webpackHotMiddlware);
     }
@@ -59,4 +60,4 @@ class RouterAndMiddlewares {
   }
 }
 
-new RouterAndMiddlewares({ isProd });
+new RouterAndMiddlewares();

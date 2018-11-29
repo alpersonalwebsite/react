@@ -6,10 +6,10 @@
   "scripts": {
     "test":
       "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
-    "start": "webpack-dev-server --config config/webpack.config.dev.js",
+    "start": "webpack-dev-server --config config/webpack.config.dev.client.js",
     "dev": "node server/index.js",
     "prod": "cross-env NODE_ENV=production node server/index.js",
-    "build:dev": "webpack --config config/webpack.config.dev.js",
+    "build:dev": "webpack --config config/webpack.config.dev.client.js",
     "build":
       "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js"
   },

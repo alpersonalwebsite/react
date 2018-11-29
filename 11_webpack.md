@@ -1546,7 +1546,19 @@ Now, before testing the scripts, add the following in `server/index.js`
 const isProd = process.env.NODE_ENV === 'production';
 ```
 
-And wrap everything that we don´t need in `production` inside the condition: `!isProd` or `!this.isProd` inside the class, previously, passing `isProd` to the class and assigning it in the `constructor` as the value of `this.isProd`.
+And wrap everything that we don´t need in `production` inside the condition: `!isProd`. Also, declare the variables outside the if statement:
+
+```javascript
+let webpackDevMiddleware, webpackHotMiddlware;
+if (!isProd) {
+  ...
+  webpackDevMiddleware = require('webpack-dev-middleware')(
+    compiler,
+    config.devServer
+  );
+  ...
+}
+```
 
 In case of doubts, check: `server/index.js`
 
@@ -1577,7 +1589,84 @@ Run again: `npm run prod` >> OK
 
 5. `npm run build` >> OK
 
-Check difference between files: production and development.
+Now... Let´s check that "hot reload" functionality (libraries and code) are just included in "test environments".
+
+1. `npm start` >> Works, however, you will see in your browser console, example: `Firefox can’t establish a connection to the server at http://localhost:8080/__webpack_hmr.` Remember that we are not running the server (node + express >> node server/index.js) if not the client (webpack-dev-server --config config/webpack.config.dev.js).
+
+So, first, rename `webpack.config.dev.js` to `webpack.config.dev.server.js`
+
+Then, create a new file at the same level: `webpack.config.dev.client.js`
+
+```javascript
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const commonConfig = require('./webpack.config.js');
+
+const config = {
+  mode: 'development',
+  entry: {
+    main: ['./src/index.js']
+  },
+  devServer: {
+    contentBase: '/..public',
+    overlay: true
+  }
+};
+
+module.exports = merge(commonConfig, config);
+```
+
+And, replace the scripts:
+
+```json
+"start": "webpack-dev-server --config config/webpack.config.dev.client.js",
+"build:dev": "webpack --config config/webpack.config.dev.client.js",
+```
+
+And, inside `server/index.js`, `webpack.config.dev.js` with `webpack.config.dev.server.js`
+
+Try again: `npm start`. Voilà! Congratulations!
+
+2. `npm run dev` >> OK
+3. `npm run prod` >> OK (Remember that in prod you don´t have the hot reloader feature)
+4. `npm run build` >> OK
+5. `npm run build:dev` >> OK
+
+Previously, in our "basic example" we compared prod and dev outputs in relation to the mode property value (on our webpack config file).
+We are going to do the same for this project:
+
+Dev:
+
+* ./main-bundle.js 1.64 MiB
+* ./other-bundle.js 3.8 KiB
+* images/rPI-400x400.jpg 17.9 KiB
+* index.html 1.76 KiB
+
+Prod:
+
+* ./main-bundle.js 259 KiB
+* ./other-bundle.js 971 bytes
+* images/rPI-400x400.jpg 17.9 KiB
+* index.html 1.76 KiB
+
+Great! Even when `main-bundle.js` is much smaller in PROD, it will be flagged as big and you will see the following WARNING:
+
+```
+WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets:
+  ./main-bundle.js (259 KiB)
+
+WARNING in entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  main (259 KiB)
+      ./main-bundle.js
+
+
+WARNING in webpack performance recommendations:
+You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
+For more info visit https://webpack.js.org/guides/code-splitting/
+```
 
 ---
 
