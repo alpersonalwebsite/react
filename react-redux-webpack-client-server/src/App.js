@@ -39,7 +39,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1 style={cssInJs.sectionTitle}>List of comments 101a</h1>
+        <h1 style={cssInJs.sectionTitle}>List of comments 101</h1>
         <CommentsBox>{this.renderComments()}</CommentsBox>
         <img src={rPI} alt="Rasp. Pi Logo" className={styles.rPi} />
       </div>

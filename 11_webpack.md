@@ -1764,7 +1764,60 @@ module: {
 ```
 
 Try `npm start`. Everything should be working and the styles will be in the header.
-Try `npm run build`. You will see that we have a new \*.css file included in our header. Example: `<link href="main-50be1c23bed016f8c72b.css" rel="stylesheet">` If you open the file, you will find the styles of both files: `src/App.css` and `src/index.css`
+Try `npm run build`. You will see that we have a new \*.css file included in our header. Example: `<link href="main-50be1c23bed016f8c72b.css" rel="stylesheet">` If you open the file, you will find the styles of both files: `src/App.css` and `src/index.css`.
+
+This works well, however... We are duplicating code. We can fix this going back and doing the following...
+Remove what we add in both, `webpack.config.dev.client.js` and `webpack.config.dev.server.js` (module > rules > .css)
+
+In `webpack.config.prod.js` remove:
+
+```javascript
+module: {
+  rules: [
+    {
+      test: /\.css$/,
+      use: [MiniCssExtractPlugin.loader, 'css-loader']
+    }
+  ]
+},
+```
+
+And, inside `webpack.config.js`:
+
+Import MiniCssExtractPlugin: `const MiniCssExtractPlugin = require('mini-css-extract-plugin');`
+Declare a variable and initialize it with the result of checking if we are in prod env.
+`const isProd = process.env.NODE_ENV === 'production';`
+
+We are going to add other 2 variables with the configuration for `dev` and `prod`:
+
+```javascript
+const cssForDev = [
+  { loader: 'style-loader' },
+  {
+    loader: 'css-loader',
+    query: {
+      modules: true,
+      localIdentName: '[name]__[local]__[hash:base64:5]'
+    }
+  }
+];
+
+const cssForProd = [MiniCssExtractPlugin.loader, 'css-loader'];
+```
+
+And, finally, we are going to replace the rule for `\.css` with:
+
+```javascript
+{
+  test: /\.css$/,
+  use: isProd ? cssForProd : cssForDev
+},
+```
+
+Let´s test that everything is behaving properly:
+
+* `npm star`
+* `npm run build`
 
 ---
 

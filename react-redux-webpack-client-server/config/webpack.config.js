@@ -1,5 +1,24 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const isProd = process.env.NODE_ENV === 'production';
+console.log(isProd);
+
+const cssForDev = [
+  { loader: 'style-loader' },
+  {
+    loader: 'css-loader',
+    query: {
+      modules: true,
+      localIdentName: '[name]__[local]__[hash:base64:5]'
+    }
+  }
+];
+
+const cssForProd = [MiniCssExtractPlugin.loader, 'css-loader'];
+
+//// Here´s the config
 
 module.exports = {
   entry: {
@@ -25,21 +44,10 @@ module.exports = {
           }
         ]
       },
-      /*
       {
         test: /\.css$/,
-        use: [
-          { loader: 'style-loader' },
-          {
-            loader: 'css-loader',
-            query: {
-              modules: true,
-              localIdentName: '[name]__[local]__[hash:base64:5]'
-            }
-          }
-        ]
+        use: isProd ? cssForProd : cssForDev
       },
-      */
       {
         test: /\.(png|jpg|gif)$/,
         use: [

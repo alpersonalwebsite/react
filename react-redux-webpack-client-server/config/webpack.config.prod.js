@@ -16,14 +16,6 @@ let cleanOptions = {
 
 const config = {
   mode: 'production',
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
-      }
-    ]
-  },
   plugins: [
     new CleanWebpackPlugin(pathsToClean, cleanOptions),
     new MiniCssExtractPlugin({

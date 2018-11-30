@@ -7,23 +7,6 @@ const config = {
   entry: {
     main: ['./src/index.js']
   },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          { loader: 'style-loader' },
-          {
-            loader: 'css-loader',
-            query: {
-              modules: true,
-              localIdentName: '[name]__[local]__[hash:base64:5]'
-            }
-          }
-        ]
-      }
-    ]
-  },
   devServer: {
     contentBase: '/..public',
     overlay: true
