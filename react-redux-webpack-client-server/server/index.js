@@ -1,6 +1,7 @@
 //require('@babel/register');
 
 const express = require('express');
+const expressStaticGzip = require('express-static-gzip');
 
 const bodyParser = require('body-parser');
 
@@ -45,8 +46,18 @@ class RouterAndMiddlewares {
       this.app.use(webpackDevMiddleware);
       this.app.use(webpackHotMiddlware);
     }
+
+    /*
     const staticMiddleware = express.static('public');
     this.app.use(staticMiddleware);
+    */
+
+    this.app.use(
+      expressStaticGzip('public', {
+        enableBrotli: true,
+        prefere: ['br']
+      })
+    );
   }
 
   initControllers() {

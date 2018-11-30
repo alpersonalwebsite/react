@@ -1863,6 +1863,102 @@ Now, execute: `npm run build`
 Open the resulting \*.css
 `h1{font-size:20px}.rPi{border:1px solid #000}body{margin:30px}`
 
+webpack is minifying the resulting \*.js files for us when we execute: `npm run build`
+Nevertheless we are going to use `uglify-js` to improve the minification. Install: `uglifyjs-webpack-plugin`
+
+```
+npm install uglifyjs-webpack-plugin --save-dev
+```
+
+And in `webpack.config.prod.js`
+
+1. Import it: `const UglifyJsPlugin = require('uglifyjs-webpack-plugin');`
+2. Add it to our configuration object:
+
+```javascript
+optimization: {
+  minimizer: [new UglifyJsPlugin()]
+},
+```
+
+In our example we will go from 253 KiB to 252 KiB. Remember... Everything counts!
+
+---
+
+We are minifying and uglifying our CSS and JS. Now, let´s think about compression.
+
+Why brotli...? Mozilla here.
+
+Install: brotli-webpack-plugin
+
+```
+npm install --save-dev brotli-webpack-plugin
+```
+
+In webpack.config.prod.js we are going to...
+
+1. Import it: `const BrotliPlugin = require('brotli-webpack-plugin');`
+2. Add it to our plugins: `new BrotliPlugin()`
+
+Now, we are going to install express-static-gzip to server compressed files from our server.
+
+```
+npm install express-static-gzip
+```
+
+Then, in server/index.js we are going to...
+
+1. Import it: const expressStaticGzip = require('express-static-gzip');
+2. Inside middlewaresExpress() method we are going to replace...
+
+```javascript
+const staticMiddleware = express.static('public');
+this.app.use(staticMiddleware);
+```
+
+with this...
+
+```javascript
+this.app.use(
+  expressStaticGzip('public', {
+    enableBrotli: true,
+    prefere: ['br']
+  })
+);
+```
+
+We can also add `gzip`
+Install: compression-webpack-plugin
+
+```
+ npm install compression-webpack-plugin --save-dev
+```
+
+In webpack.config.prod.js we are going to...
+
+1. Import it: `const CompressionPlugin = require('compression-webpack-plugin');`
+2. Add it to our plugins:
+
+```javascript
+new CompressionPlugin({
+  algorithm: 'gzip'
+}),
+```
+
+Time to test it!
+First, we need to create all the compressed files (\*.br and \*.gz). For this, we have to execute `npm run build`.
+In your public folder you should see all these new files. BTW, the \*.css is so small that it is not going to be compressed.
+Now, execute `npm run prod` and do a `curl -i -H'Accept-Encoding: br' http://localhost:8080/other-bundle.js`
+
+Result:
+![Compressed version - br](/images/curl-response-br.png)
+
+Great! Everything is working!
+Comment `expressStaticGzip()` and uncomment `express.static()` to test the case without compression... And do again a `curl -i -H'Accept-Encoding: br' http://localhost:8080/other-bundle.js`
+
+Result:
+![Regular response](/images/curl-response.png)
+
 ---
 
 We have a "clear view" of what we want for `dev` and what for `prod`. However, we need to find a way to communicate to other libraries or dependencies which is the environment where we are. For this, we will use the plugin `DefinePlugin`.
