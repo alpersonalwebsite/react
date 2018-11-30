@@ -1887,7 +1887,11 @@ In our example we will go from 253 KiB to 252 KiB. Remember... Everything counts
 
 We are minifying and uglifying our CSS and JS. Now, let´s think about compression.
 
-Why brotli...? Mozilla here.
+Why Brotli...?
+For 5 paragraphs of lorem ipsum, Brotli beats gzip by 5%. If I run the same experiment with the front page of reddit.com from 10/01/2015, Brotli beats gzip by 22%! Note that both measurements were using the compressors out of the box without any tweaking of configuration values.
+
+Whether or not a significant portion of your userbase is using a browser that supports Brotli as a content encoding, whether the added latency and memory costs are worth it, and whether your HTTPS server or CDN support Brotli is another story. But if you’re looking for better than gzip performance, Brotli looks like a possible contender.
+More info: https://hacks.mozilla.org/2015/11/better-than-gzip-compression-with-brotli/
 
 Install: brotli-webpack-plugin
 
