@@ -25,6 +25,7 @@ module.exports = {
           }
         ]
       },
+      /*
       {
         test: /\.css$/,
         use: [
@@ -38,6 +39,7 @@ module.exports = {
           }
         ]
       },
+      */
       {
         test: /\.(png|jpg|gif)$/,
         use: [

@@ -1,5 +1,6 @@
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.config.js');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -15,7 +16,20 @@ let cleanOptions = {
 
 const config = {
   mode: 'production',
-  plugins: [new CleanWebpackPlugin(pathsToClean, cleanOptions)]
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
+      }
+    ]
+  },
+  plugins: [
+    new CleanWebpackPlugin(pathsToClean, cleanOptions),
+    new MiniCssExtractPlugin({
+      filename: '[name]-[contenthash].css'
+    })
+  ]
 };
 
 module.exports = merge(baseConfig, config);

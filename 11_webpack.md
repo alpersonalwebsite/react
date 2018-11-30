@@ -1668,6 +1668,104 @@ You can limit the size of your bundles by using import() or require.ensure to la
 For more info visit https://webpack.js.org/guides/code-splitting/
 ```
 
+Don´t worry about this for the moment... Soon we will fix it, but, before addressing this point, we are going to return to how we are handling styles.
+Now, all our styles are part of our header:
+
+```html
+<style type="text/css">h1 {
+  font-size: 20px;
+}
+
+.App__rPi__3Noxh {
+  border: 1px solid black;
+}
+</style>
+
+<style type="text/css">body {
+  margin: 30px;
+}
+</style>
+
+<style data-emotion="css">.css-1m4dovs-CommentsBox{background-color:lavender;}</style>
+```
+
+What we want...? To have a separate "CSS file per JS file which contains CSS".
+Yes, another dependency: `mini-css-extract-plugin`
+
+```
+npm install --save-dev mini-css-extract-plugin
+```
+
+We are going to use this library JUST in production.
+
+So, go to `webpack.config.prod.js` and import the dependency `const MiniCssExtractPlugin = require("mini-css-extract-plugin");`.
+
+Inside the config object add:
+
+```javascript
+module: {
+  rules: [
+    {
+      test: /\.css$/,
+      use: [MiniCssExtractPlugin.loader, 'css-loader']
+    }
+  ]
+},
+```
+
+And include it in the plugins array:
+
+```javascript
+new MiniCssExtractPlugin({
+  filename: '[name]-[contenthash].css'
+});
+```
+
+Great! Now we have to refactor our `webpack config` files...
+
+In `webpack.config.js` remove or comment:
+
+```javascript
+{
+  test: /\.css$/,
+  use: [
+    { loader: 'style-loader' },
+    {
+      loader: 'css-loader',
+      query: {
+        modules: true,
+        localIdentName: '[name]__[local]__[hash:base64:5]'
+      }
+    }
+  ]
+},
+```
+
+And inside the `config` object in both, `webpack.config.dev.client.js` and `webpack.config.dev.server.js`, add:
+
+```javascript
+module: {
+  rules: [
+    {
+      test: /\.css$/,
+      use: [
+        { loader: 'style-loader' },
+        {
+          loader: 'css-loader',
+          query: {
+            modules: true,
+            localIdentName: '[name]__[local]__[hash:base64:5]'
+          }
+        }
+      ]
+    }
+  ]
+},
+```
+
+Try `npm start`. Everything should be working and the styles will be in the header.
+Try `npm run build`. You will see that we have a new \*.css file included in our header. Example: `<link href="main-50be1c23bed016f8c72b.css" rel="stylesheet">` If you open the file, you will find the styles of both files: `src/App.css` and `src/index.css`
+
 ---
 
 ---

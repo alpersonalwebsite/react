@@ -7,6 +7,23 @@ const config = {
   entry: {
     main: ['webpack-hot-middleware/client?reload=true', './src/index.js']
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader' },
+          {
+            loader: 'css-loader',
+            query: {
+              modules: true,
+              localIdentName: '[name]__[local]__[hash:base64:5]'
+            }
+          }
+        ]
+      }
+    ]
+  },
   devServer: {
     contentBase: '/..public',
     hot: true,

@@ -4,14 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test":
-      "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
+    "test": "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
     "start": "webpack-dev-server --config config/webpack.config.dev.client.js",
     "dev": "node server/index.js",
     "prod": "cross-env NODE_ENV=production node server/index.js",
     "build:dev": "webpack --config config/webpack.config.dev.client.js",
-    "build":
-      "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js"
+    "build": "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js"
   },
   "keywords": [],
   "author": "",
@@ -59,6 +57,7 @@
     "jest": "^23.6.0",
     "jest-cli": "^23.6.0",
     "jest-watch-typeahead": "^0.2.0",
+    "mini-css-extract-plugin": "^0.4.5",
     "react-test-renderer": "^16.6.3",
     "regenerator-runtime": "^0.12.1",
     "style-loader": "^0.23.1",
@@ -69,5 +68,11 @@
     "webpack-hot-middleware": "^2.24.3",
     "webpack-merge": "^4.1.4"
   },
-  "browserslist": ["last 1 version", "> 1%", "IE 11", "IE 10", "IE 9"]
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "IE 11",
+    "IE 10",
+    "IE 9"
+  ]
 }
