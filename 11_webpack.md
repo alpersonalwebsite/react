@@ -1819,7 +1819,60 @@ Let´s test that everything is behaving properly:
 * `npm star`
 * `npm run build`
 
----
+Congratulations! But (and yes, always is a but) our `css outpout` is not optimized for a `prod env` (at least, we would want to minimize the code)
+If you open the \*.css file, you will see:
+
+```css
+h1 {
+  font-size: 20px;
+}
+
+.rPi {
+  border: 1px solid black;
+}
+
+body {
+  margin: 30px;
+}
+```
+
+Install: optimize-css-assets-webpack-plugin
+
+```
+npm install --save-dev optimize-css-assets-webpack-plugin
+```
+
+In `webpack.config.prod.js` import it and add it as a plugin with the default configuration:
+
+```javascript
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
+...
+...
+...
+
+new OptimizeCssAssetsPlugin({
+  assetNameRegExp: /\.css$/g,
+  cssProcessor: require('cssnano'),
+  cssProcessorOptions: { discardComments: { removeAll: true } },
+  canPrint: true
+});
+```
+
+Now, execute: `npm run build`
+Open the resulting \*.css
+
+```css
+h1 {
+  font-size: 20px;
+}
+.rPi {
+  border: 1px solid #000;
+}
+body {
+  margin: 30px;
+}
+```
 
 ---
 
