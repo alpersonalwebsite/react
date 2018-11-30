@@ -2,6 +2,8 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const webpack = require('webpack');
+
 const isProd = process.env.NODE_ENV === 'production';
 console.log(isProd);
 
@@ -64,6 +66,11 @@ module.exports = {
   plugins: [
     new HTMLWebpackPlugin({
       template: './public/template.html'
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     })
   ]
 };
+
+console.log('Environment', process.env.NODE_ENV);

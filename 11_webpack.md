@@ -1861,18 +1861,36 @@ new OptimizeCssAssetsPlugin({
 
 Now, execute: `npm run build`
 Open the resulting \*.css
+`h1{font-size:20px}.rPi{border:1px solid #000}body{margin:30px}`
 
-```css
-h1 {
-  font-size: 20px;
-}
-.rPi {
-  border: 1px solid #000;
-}
-body {
-  margin: 30px;
-}
+---
+
+We have a "clear view" of what we want for `dev` and what for `prod`. However, we need to find a way to communicate to other libraries or dependencies which is the environment where we are. For this, we will use the plugin `DefinePlugin`.
+
+First, import `webpack` in `webpack.config.js`
+
+```javascript
+const webpack = require('webpack');
 ```
+
+Also, in `webpack.config.js` add the plugin:
+
+```javascript
+new webpack.DefinePlugin({
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+});
+```
+
+... and `console.log('Environment', process.env.NODE_ENV);`
+(You can log from other \*.js files, example: `src/App.js`. In this case, you will see the output in your browser console)
+
+Then, remove `const webpack = require('webpack');` from `webpack.config.dev.client.js`.
+
+If you try `npm run build` you will see the proper output: `Environment production`
+However, `npm start`, `npm run dev`, `npm run build:dev` will show: `Environment undefined`.
+
+We are going to set the global variable (environment variable) `NODE_ENV` in our scripts as we did it for `npm run build`
+For the following scripts: `npm start`, `npm run dev`, `npm run build:dev` add `cross-env NODE_ENV=development`.
 
 ---
 
