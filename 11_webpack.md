@@ -2017,7 +2017,19 @@ https://www.npmjs.com/package/webpack-bundle-analyzer
 
 We are going to use `SplitChunksPlugin`
 
-In ...
+Before, let´s check the size of our `main-bundle.js`
+
+```
+npm run build
+```
+
+Result:
+
+```
+./main-bundle.js    252 KiB  
+```
+
+In `webpack.config.js` add a new property:
 
 ```javascript
 optimization: {
@@ -2033,6 +2045,28 @@ optimization: {
   }
 }
 ```
+
+Now we will have:
+
+```
+./main-bundle.js   4.93 KiB
+./vendors~main-bundle.js    248 KiB
+```
+
+You can generate the dev version (with all the dev added functionality) executing:
+
+```
+npm run build:dev
+```
+
+Result:
+
+```
+./main-bundle.js  27.5 KiB
+./vendors~main-bundle.js  1.61 MiB
+```
+
+Great! Everything is working properly and now, we have our code separated from vendor´s.
 
 ---
 

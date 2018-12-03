@@ -63,7 +63,6 @@ module.exports = {
       }
     ]
   },
-  /*
   optimization: {
     splitChunks: {
       chunks: 'all',
@@ -76,7 +75,6 @@ module.exports = {
       }
     }
   },
-  */
   plugins: [
     new HTMLWebpackPlugin({
       template: './public/template.html'
