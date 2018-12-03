@@ -1994,4 +1994,50 @@ For the following scripts: `npm start`, `npm run dev`, `npm run build:dev` add `
 
 ---
 
+If you open, for example, `main-bundle.js` (one of webpack´s output) you will see that we have both: `vendor` (or third party) code and our `application code`. To make this "human-readable" or "human-visible" we can install `webpack-bundle-analyzer` which allows us to "visualize size of webpack output files with an interactive zoomable treemap".
+
+```
+npm install --save-dev webpack-bundle-analyzer
+```
+
+In `webpack.config.dev.server.js`
+
+1. Import it: `const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;`
+2. Add it to the plugins section: `new BundleAnalyzerPlugin()`
+
+Now, execute: `npm run dev`
+Go to http://127.0.0.1:8888/
+
+Result:
+![webpack-bundle-analyzer](/images/webpack-bundle-analyzer.png)
+
+<!--TODO check more flags
+https://www.npmjs.com/package/webpack-bundle-analyzer
+-->
+
+We are going to use `SplitChunksPlugin`
+
+In ...
+
+```javascript
+optimization: {
+  splitChunks: {
+    chunks: 'all',
+    cacheGroups: {
+      vendor: {
+        filename: '[name].bundle.js'
+        chunks: 'initial',
+        minChunks: 2
+      }
+    }
+  }
+}
+```
+
+---
+
 From a Client Side Rendering (Traditional React App) to Server Side rendering
+
+```
+
+```

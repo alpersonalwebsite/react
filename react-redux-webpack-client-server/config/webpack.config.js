@@ -63,6 +63,20 @@ module.exports = {
       }
     ]
   },
+  /*
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          chunks: 'initial',
+          minChunks: 2
+        }
+      }
+    }
+  },
+  */
   plugins: [
     new HTMLWebpackPlugin({
       template: './public/template.html'

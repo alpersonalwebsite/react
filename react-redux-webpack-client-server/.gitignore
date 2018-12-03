@@ -36,3 +36,5 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
+
+*stats.*
