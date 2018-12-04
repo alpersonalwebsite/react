@@ -9,7 +9,6 @@ const isProd = process.env.NODE_ENV === 'production';
 
 require('dotenv').config();
 const isHtmlWebpackPlugin = process.env.WEBPACK_STATIC_HTML_BUILD;
-console.log(isHtmlWebpackPlugin);
 
 const cssForDev = [
   { loader: 'style-loader' },
@@ -25,7 +24,8 @@ const cssForDev = [
 const cssForProd = [MiniCssExtractPlugin.loader, 'css-loader'];
 
 // Plugins
-const generalPlugins = [
+
+let generalPlugins = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
   })
@@ -36,6 +36,10 @@ const htmlWebpackPlugin = [
     template: './public/template.html'
   })
 ];
+
+if (isHtmlWebpackPlugin == 'true') {
+  generalPlugins = generalPlugins.concat(htmlWebpackPlugin);
+}
 
 //// Here´s the config
 
@@ -92,7 +96,5 @@ module.exports = {
       }
     }
   },
-  plugins: isHtmlWebpackPlugin
-    ? generalPlugins.concat(htmlWebpackPlugin)
-    : generalPlugins
+  plugins: generalPlugins
 };

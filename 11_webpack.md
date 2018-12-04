@@ -2072,7 +2072,7 @@ Great! Everything is working properly and now, we have our code separated from v
 
 ---
 
-From a Client Side Rendering (Traditional React App) to Server Side rendering
+##From a Client Side Rendering (Traditional React App) to Server Side rendering
 
 At the moment, we have the following scripts
 
@@ -2085,36 +2085,53 @@ At the moment, we have the following scripts
 "build": "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js"
 ```
 
-From these, we have two (dev and prod) that start a basic express server.
-Currently, in all the cases, first we build the assets and then we serve them. This works great for a static site or a "traditional client side React App", but, if you need to have control over the markup or HTML (not the built resources like \*.css or \*.js) you will need a "render server" which basically, will take "data" and produce HTML.
-It can sounds a somewhat confusing, however, once we go through the proper steps and examples it will turn more clear.
+From these, we have two (dev and prod) that start a `basic express server` (these scripts need first to generate the assets through `npm run build:dev` or `npm run build`). _Remember_: first we build, then we serve.
 
-Before diving into SSR, I want to make a change to keep some of the current functionality if for x-reason is needed.
-Now, we are using HTMLWebpackPlugin, passing an HTML template and generating (thorugh this plugin) our HTML document, index.html, the one that we server as root access point of our statis site.
-As we said, we are going to delegate the creation and rendering of the markup (HTML) to the express server. In consequence, we are going to remove this plugin and NO index.html file will be generated for us... AT least, as we used to do!
+This works great for a `static site` or a "traditional client side React App (CRA)", but, if you need to have "dynamic control" over the markup or HTML (not the built resources like \*.css or \*.js) you will need a "render server" which basically, will take "data" and produce HTML that will be sent to the client across the express server.
+It can sound somewhat confusing, however, once we go through the proper steps and examples it will turn more clear.
 
-What happen if you want to make a build as we have been doing it...?
-Well, we are going to set an "environment variable" and some conditional logic.
+Before diving into SSR, I want to make a change to preserve the HTML build functionality in case I need it later (always keep doors open).
+Now, we are using `HTMLWebpackPlugin`, passing an HTML template and generating (via this plugin) our HTML document, `index.html`, the one that we serve as root access point of our `static site`.
+As we said, we are going to delegate the creation and rendering of the markup (HTML) to the express server.
 
-Let´s start!
+What happen if you want to make a build as we have been doing it previously...?
+Let´s use an "environment variable" and some conditional logic to satisfy the needs of both cases: static and dynamic HTML.
 
 Create at the root level the file `.env`
-Before proceeding, be sure that you are excluding that file from "version controlling" adding it to `.gitignore`
-Now we are going to set the constant `WEBPACK_STATIC_HTML_BUILD = false`
+Before proceeding, **be sure that you are excluding that file from "version controlling" adding it to `.gitignore`**
+Now we are going to set the constant `WEBPACK_STATIC_HTML_BUILD = true` which means, that we want to build an `index.html`
 
-Install: dotenv, which "loads environment variables from a .env file into process.env."
+Install: `dotenv`, which "loads environment variables from a `.env` file into `process.env.`"
 
 ```
 npm install dotenv --save
 ```
 
-In `webpack.config.js` move all the content of plugins to a new variable: `generalPlugins` excluding HTMLWebpackPlugin, which is going to be contained in the variable `htmlWebpackPlugin`
-Add the proper conditional to check if "webpack is building the HTML asset using HTMLWebpackPlugin" as the value of plugins property (as we did for the rule > \*.css)
+In `webpack.config.js` move all the content of plugins to a new variable: `generalPlugins` excluding `HTMLWebpackPlugin`, which is going to be contained in the variable `htmlWebpackPlugin`
+Add the proper conditional to check if `WEBPACK_STATIC_HTML_BUILD` is `true` or `false` (this is not going to be a Boolean value if not String data type). If it is "true", we are going to add `HTMLWebpackPlugin`.
 
 ```javascript
-plugins: isHtmlWebpackPlugin
-  ? generalPlugins.concat(htmlWebpackPlugin)
-  : generalPlugins;
+let generalPlugins = [
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+  })
+];
+
+const htmlWebpackPlugin = [
+  new HTMLWebpackPlugin({
+    template: './public/template.html'
+  })
+];
+
+if (isHtmlWebpackPlugin == 'true') {
+  generalPlugins = generalPlugins.concat(htmlWebpackPlugin);
+}
+```
+
+In `plugins` sections assign as value the variable `generalPlugins`
+
+```json
+plugins: generalPlugins
 ```
 
 At the top of this file (we are still in `webpack.config.js`) add...
@@ -2125,7 +2142,7 @@ const isHtmlWebpackPlugin = process.env.WEBPACK_STATIC_HTML_BUILD;
 console.log(isHtmlWebpackPlugin);
 ```
 
-In server/index.js
+In `server/index.js`
 
 1. At the top
 
@@ -2136,7 +2153,7 @@ const isHtmlWebpackPlugin = process.env.WEBPACK_STATIC_HTML_BUILD;
 
 2. Add after: `this.app.use(expressStaticGzip('public'...`
 
-```
+```javascript
 if (!isHtmlWebpackPlugin) {
   this.app.get('*', (req, res) => {
     res.send(`
@@ -2151,4 +2168,25 @@ if (!isHtmlWebpackPlugin) {
 ```
 
 Time to check!
-npm run dev
+
+```
+npm run build
+```
+
+We should have our `index.html` (example path: file:///C:/Users/yourUser/Desktop/react/react-redux-webpack-client-server/public/index.html)
+
+In `.env` change `WEBPACK_STATIC_HTML_BUILD` value to `false`
+
+```
+WEBPACK_STATIC_HTML_BUILD = false
+```
+
+Execute again:
+
+```
+npm run build
+```
+
+You are not going to have an `index.html`
+
+Great! It does work as we want!
