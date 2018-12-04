@@ -5,7 +5,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
 const isProd = process.env.NODE_ENV === 'production';
-console.log(isProd);
+//console.log(isProd);
+
+require('dotenv').config();
+const isHtmlWebpackPlugin = process.env.WEBPACK_STATIC_HTML_BUILD;
+console.log(isHtmlWebpackPlugin);
 
 const cssForDev = [
   { loader: 'style-loader' },
@@ -19,6 +23,19 @@ const cssForDev = [
 ];
 
 const cssForProd = [MiniCssExtractPlugin.loader, 'css-loader'];
+
+// Plugins
+const generalPlugins = [
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+  })
+];
+
+const htmlWebpackPlugin = [
+  new HTMLWebpackPlugin({
+    template: './public/template.html'
+  })
+];
 
 //// Here´s the config
 
@@ -75,14 +92,7 @@ module.exports = {
       }
     }
   },
-  plugins: [
-    new HTMLWebpackPlugin({
-      template: './public/template.html'
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    })
-  ]
+  plugins: isHtmlWebpackPlugin
+    ? generalPlugins.concat(htmlWebpackPlugin)
+    : generalPlugins
 };
-
-console.log('Environment', process.env.NODE_ENV);

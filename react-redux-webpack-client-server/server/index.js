@@ -7,6 +7,10 @@ const bodyParser = require('body-parser');
 
 const isProd = process.env.NODE_ENV === 'production';
 
+require('dotenv').config();
+const isHtmlWebpackPlugin = process.env.WEBPACK_STATIC_HTML_BUILD;
+console.log(isHtmlWebpackPlugin);
+
 let webpackDevMiddleware, webpackHotMiddlware;
 
 if (!isProd) {
@@ -58,6 +62,18 @@ class RouterAndMiddlewares {
         prefere: ['br']
       })
     );
+
+    if (!isHtmlWebpackPlugin) {
+      this.app.get('*', (req, res) => {
+        res.send(`
+       <html>
+         <body>
+           <div>Hello</div>
+         </body>
+       </html>
+     `);
+      });
+    }
   }
 
   initControllers() {
