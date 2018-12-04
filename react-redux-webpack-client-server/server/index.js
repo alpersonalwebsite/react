@@ -62,18 +62,6 @@ class RouterAndMiddlewares {
         prefere: ['br']
       })
     );
-
-    if (!isHtmlWebpackPlugin) {
-      this.app.get('*', (req, res) => {
-        res.send(`
-       <html>
-         <body>
-           <div>Hello</div>
-         </body>
-       </html>
-     `);
-      });
-    }
   }
 
   initControllers() {

@@ -2154,7 +2154,7 @@ const isHtmlWebpackPlugin = process.env.WEBPACK_STATIC_HTML_BUILD;
 2. Add after: `this.app.use(expressStaticGzip('public'...`
 
 ```javascript
-if (!isHtmlWebpackPlugin) {
+if (isHtmlWebpackPlugin != 'true') {
   this.app.get('*', (req, res) => {
     res.send(`
    <html>
@@ -2190,3 +2190,44 @@ npm run build
 You are not going to have an `index.html`
 
 Great! It does work as we want!
+Summarizing: Before serving we have to build. When we build, we can decide to build (WEBPACK_STATIC_HTML_BUILD = true) or not (WEBPACK_STATIC_HTML_BUILD = false) our static index.html or main HTML document. Then, once we execute the server, for example, `npm run prod`
+
+1. If we have index.html in public/, it is going to display this static HTML asset.
+2. If we DO NOT have it, it is going to render at the moment "Hello".
+
+Before ending this section, in server\BasicController.js
+
+1. Set up dotenv and process.env.WEBPACK_STATIC_HTML_BUILD
+
+```javascript
+require('dotenv').config();
+const isHtmlWebpackPlugin = process.env.WEBPACK_STATIC_HTML_BUILD;
+```
+
+2. Add allRoutes() to the class´s constructor.
+
+```javascript
+constructor(app) {
+  this.app = app;
+
+  this.allRoutes();
+}
+```
+
+3. Add the method allRoutes() and move the '\*' (at the moment unique and universal) within (and remove it from server/index.js)
+
+```javascript
+allRoutes() {
+  if (isHtmlWebpackPlugin != 'true') {
+    this.app.get('*', (req, res) => {
+      res.send(`
+     <html>
+       <body>
+         <div>Hellooooooooooooo</div>
+       </body>
+     </html>
+   `);
+    });
+  }
+}
+```
