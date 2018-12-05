@@ -2195,16 +2195,20 @@ Summarizing: Before serving we have to build. When we build, we can decide to bu
 1. If we have index.html in public/, it is going to display this static HTML asset.
 2. If we DO NOT have it, it is going to render at the moment "Hello".
 
-Before ending this section, in `server/index.js` we are going to include `@babel/register` with both presets: `env` and `react`, so
-we can use the last JavaScript and support JSX (through `react preset`)
+Before ending this section, we are going to copy the entire content of `server/index.js` and paste it in a new file called `server/server.js`
+
+In `server/index.js` (that now should be empty) we are going to include `@babel/register` with both presets: `env` and `react`, so
+we can use the last JavaScript and support JSX (through `react preset`). And, require the file `server.js`.
 
 ```javascript
 require('@babel/register')({
   presets: ['@babel/preset-env', '@babel/preset-react']
 });
+
+module.exports = require('./server.js');
 ```
 
-Also, in `server/BasicController.js`
+In `server/BasicController.js`
 
 1. Set up `dotenv` and `process.env.WEBPACK_STATIC_HTML_BUILD`
 
@@ -2223,7 +2227,7 @@ constructor(app) {
 }
 ```
 
-3. Add the method allRoutes() and move the '\*' (at the moment unique and universal) within (and remove it from server/index.js)
+3. Add the method allRoutes() and move the '\*' (at the moment unique and universal) within (and remove it from server/server.js)
 
 ```javascript
 allRoutes() {
@@ -2241,6 +2245,15 @@ allRoutes() {
     });
   }
 }
+```
+
+Earlier we said that we are using @babel/preset-env to support the last JavaScript; also, that we want an isomorphic application where we can write the same code for the "front" and the "back-end".
+So... Let´s refactor the server files: `index.js` and `BasicController.js`
+
+`server/index.js`
+
+```
+
 ```
 
 Now, we can start with the SSR part.
