@@ -13,28 +13,14 @@ class BasicController {
 
   allRoutes() {
     if (isHtmlWebpackPlugin != 'true') {
-      /*
       this.app.get('*', (req, res) => {
         res.send(`
        <html>
          <body>
          <div id="root">${renderToString(<TestingSSR />)}</div>
-         <script src='vendors~main-bundle.js'></script>
-         <script src='main-bundle.js'></script>
          </body>
        </html>
      `);
-      });
-      */
-      this.app.get('*', (req, res) => {
-        res.send(`
- <html>
-   <body>
-     <div id="root">Hello 1</div>
-     <script>console.log(1111111)</script>
-   </body>
- </html>
-`);
       });
     }
   }

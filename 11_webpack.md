@@ -2217,7 +2217,15 @@ require('dotenv').config();
 const isHtmlWebpackPlugin = process.env.WEBPACK_STATIC_HTML_BUILD;
 ```
 
-2. Add allRoutes() to the class´s constructor.
+2. ... We are going to import React, renderToString() from 'react-dom/server' and our test component which is going to play the role of placeholder.
+
+```
+const React = require('react');
+const renderToString = require('react-dom/server').renderToString;
+const TestingSSR = require('../src/TestingSSR').default;
+```
+
+3. Add allRoutes() to the class´s constructor.
 
 ```javascript
 constructor(app) {
@@ -2227,7 +2235,7 @@ constructor(app) {
 }
 ```
 
-3. Add the method allRoutes() and move the '\*' (at the moment unique and universal) within (and remove it from server/server.js)
+4. Add the method allRoutes() and move the '\*' (at the moment unique and universal) within (and remove it from server/server.js)
 
 ```javascript
 allRoutes() {
@@ -2236,9 +2244,7 @@ allRoutes() {
       res.send(`
      <html>
        <body>
-       <div id="root">Hello</div>
-       <script src='vendor-bundle.js'></script>
-       <script src='main-bundle.js'></script>
+        <div id="root">${renderToString(<TestingSSR />)}</div>
        </body>
      </html>
    `);
@@ -2247,27 +2253,35 @@ allRoutes() {
 }
 ```
 
+Create the file `src/TestingSSR.js`
+
+```javascript
+import React, { Component } from 'react';
+
+class TestingSSR extends Component {
+  state = {
+    label: 'SSR'
+  };
+
+  render() {
+    return (
+      <div>
+        <div>{`Testing ${this.state.label}`}</div>
+      </div>
+    );
+  }
+}
+
+export default TestingSSR;
+```
+
+Now execute: `npm run prod`
+
+You should see `Testing SSR.`
+
 Earlier we said that we are using @babel/preset-env to support the last JavaScript; also, that we want an isomorphic application where we can write the same code for the "front" and the "back-end".
 So... Let´s refactor the server files: `server.js` and `BasicController.js`
 
 `server/index.js`
 
-```
-
-```
-
-Now, we can start with the SSR part.
-In server/BasicController.js we are going to import
-
-```
-const React = require('react');
-const renderToString = require('react-dom/server').renderToString;
-const TestingSSR = require("../components/TestingSSR").default
-```
-
-We are going to create the component TestingSSR (as its name says it will be a dummy component that we will replace at future) which is going to play the role of placeholder.
-
-components/TestingSSR.js
-
-Important: To use import uncomment or add at the top of server/index.js
-require('@babel/register');
+I AM HERE...!
