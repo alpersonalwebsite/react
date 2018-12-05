@@ -4,18 +4,23 @@ import express from 'express';
 //const expressStaticGzip = require('express-static-gzip');
 import expressStaticGzip from 'express-static-gzip';
 
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
+import bodyParser from 'body-parser';
 
 const isProd = process.env.NODE_ENV === 'production';
 
-require('dotenv').config();
+//require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
+
 const isHtmlWebpackPlugin = process.env.WEBPACK_STATIC_HTML_BUILD;
 
 let webpackDevMiddleware, webpackHotMiddlware;
 
 if (!isProd) {
-  console.log('NO PROD');
-  const webpack = require('webpack');
+  //const webpack = require('webpack');
+  import('webpack');
+
   const config = require('../config/webpack.config.dev.server.js');
   const compiler = webpack(config);
 
