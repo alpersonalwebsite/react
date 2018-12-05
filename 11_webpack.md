@@ -1157,7 +1157,7 @@ npm install webpack-dev-middleware webpack-hot-middleware --save-dev
 
 Now, we are going to wire up webpack, these middle-wares and the express.static built-in middleware function in Express which will tell Express from where we want to serve our static content.
 
-server/index.js with new changes
+`server/index.js` with new changes
 
 ```javascript
 const express = require('express');
@@ -2195,9 +2195,18 @@ Summarizing: Before serving we have to build. When we build, we can decide to bu
 1. If we have index.html in public/, it is going to display this static HTML asset.
 2. If we DO NOT have it, it is going to render at the moment "Hello".
 
-Before ending this section, in server\BasicController.js
+Before ending this section, in `server/index.js` we are going to include `@babel/register` with both presets: `env` and `react`, so
+we can use the last JavaScript and support JSX (through `react preset`)
 
-1. Set up dotenv and process.env.WEBPACK_STATIC_HTML_BUILD
+```javascript
+require('@babel/register')({
+  presets: ['@babel/preset-env', '@babel/preset-react']
+});
+```
+
+Also, in `server/BasicController.js`
+
+1. Set up `dotenv` and `process.env.WEBPACK_STATIC_HTML_BUILD`
 
 ```javascript
 require('dotenv').config();
@@ -2223,7 +2232,9 @@ allRoutes() {
       res.send(`
      <html>
        <body>
-         <div>Hellooooooooooooo</div>
+       <div id="root">Hello</div>
+       <script src='vendor-bundle.js'></script>
+       <script src='main-bundle.js'></script>
        </body>
      </html>
    `);
@@ -2231,3 +2242,19 @@ allRoutes() {
   }
 }
 ```
+
+Now, we can start with the SSR part.
+In server/BasicController.js we are going to import
+
+```
+const React = require('react');
+const renderToString = require('react-dom/server').renderToString;
+const TestingSSR = require("../components/TestingSSR").default
+```
+
+We are going to create the component TestingSSR (as its name says it will be a dummy component that we will replace at future) which is going to play the role of placeholder.
+
+components/TestingSSR.js
+
+Important: To use import uncomment or add at the top of server/index.js
+require('@babel/register');

@@ -1,4 +1,6 @@
-//require('@babel/register');
+require('@babel/register')({
+  presets: ['@babel/preset-env', '@babel/preset-react']
+});
 
 const express = require('express');
 const expressStaticGzip = require('express-static-gzip');
@@ -9,11 +11,11 @@ const isProd = process.env.NODE_ENV === 'production';
 
 require('dotenv').config();
 const isHtmlWebpackPlugin = process.env.WEBPACK_STATIC_HTML_BUILD;
-console.log(isHtmlWebpackPlugin);
 
 let webpackDevMiddleware, webpackHotMiddlware;
 
 if (!isProd) {
+  console.log('NO PROD');
   const webpack = require('webpack');
   const config = require('../config/webpack.config.dev.server.js');
   const compiler = webpack(config);
