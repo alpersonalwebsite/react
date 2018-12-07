@@ -4,12 +4,12 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "react-loading": "^2.0.3",
-    "react-redux": "^5.0.7",
+    "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4",
+    "react-scripts": "2.1.1",
     "redux": "^4.0.0",
     "redux-promise": "^0.6.0"
   },
@@ -18,5 +18,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom --watchAll",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
