@@ -17,9 +17,9 @@ const isHtmlWebpackPlugin = process.env.WEBPACK_STATIC_HTML_BUILD;
 
 let webpackDevMiddleware, webpackHotMiddlware;
 
-if (!isProd) {
-  const webpack = require('webpack');
+const webpack = require('webpack');
 
+if (!isProd) {
   const config = require('../config/webpack.config.dev.server.js');
   const compiler = webpack(config);
 
@@ -32,6 +32,9 @@ if (!isProd) {
     compiler,
     config.devServer
   );
+} else {
+  const config = require('../config/webpack.config.prod.server.js');
+  webpack(config);
 }
 
 class RouterAndMiddlewares {

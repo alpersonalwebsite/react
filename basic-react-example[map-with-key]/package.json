@@ -5,7 +5,7 @@
   "dependencies": {
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4",
+    "react-scripts": "^2.1.1",
     "uuid": "^3.3.2"
   },
   "scripts": {
@@ -13,5 +13,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom --watchAll",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

@@ -4,12 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.config.dev.client.js",
+    "test":
+      "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
+    "start":
+      "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.config.dev.client.js",
     "dev": "cross-env NODE_ENV=development node server/index.js",
-    "prod": "cross-env NODE_ENV=production node server/index.js",
-    "build:dev": "cross-env NODE_ENV=development webpack --config config/webpack.config.dev.client.js",
-    "build": "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js"
+    "prod": "cross-env NODE_ENV=production node public/server.js",
+    "build:dev":
+      "cross-env NODE_ENV=development webpack --config config/webpack.config.dev.client.js",
+    "build":
+      "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js"
   },
   "keywords": [],
   "author": "",
@@ -75,11 +79,5 @@
     "webpack-hot-middleware": "^2.24.3",
     "webpack-merge": "^4.1.4"
   },
-  "browserslist": [
-    "last 1 version",
-    "> 1%",
-    "IE 11",
-    "IE 10",
-    "IE 9"
-  ]
+  "browserslist": ["last 1 version", "> 1%", "IE 11", "IE 10", "IE 9"]
 }

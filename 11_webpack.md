@@ -2192,8 +2192,8 @@ You are not going to have an `index.html`
 Great! It does work as we want!
 Summarizing: Before serving we have to build. When we build, we can decide to build (WEBPACK_STATIC_HTML_BUILD = true) or not (WEBPACK_STATIC_HTML_BUILD = false) our static index.html or main HTML document. Then, once we execute the server, for example, `npm run prod`
 
-1. If we have index.html in public/, it is going to display this static HTML asset.
-2. If we DO NOT have it, it is going to render at the moment "Hello".
+1. If "we have" index.html in public/, it is going to display this static HTML asset.
+2. If "we DO NOT have it", it is going to render at the moment "Hello".
 
 Before ending this section, we are going to copy the entire content of `server/index.js` and paste it in a new file called `server/server.js`
 
@@ -2217,7 +2217,7 @@ require('dotenv').config();
 const isHtmlWebpackPlugin = process.env.WEBPACK_STATIC_HTML_BUILD;
 ```
 
-2. ... We are going to import React, renderToString() from 'react-dom/server' and our test component which is going to play the role of placeholder.
+2. ... We are going to import/require `React`, `renderToString()` from 'react-dom/server' and our test component which is going to play the role of a placeholder.
 
 ```
 const React = require('react');
@@ -2279,9 +2279,29 @@ Now execute: `npm run prod`
 
 You should see `Testing SSR.`
 
+In our `server/server.js` we were loading `webpack` and a particular `webpack configuration` (among with some middle-wares) IF we were running in `development`. Now, we are going to add a webpack config file for production and in both, dev and prod (\*.server.js) define the target (where are we running the code) in our case `node` (this will also ignore built-in modules like path, fs...) and use a new library to `exclude node_modules` for our servers bundles: `webpack-node-externals`
+
+```
+npm install webpack-node-externals --save-dev
+```
+
+Create config/webpack.config.prod.server.js
+
+```
+touch config/webpack.config.prod.server.js
+```
+
+Content:
+
+```
+
+```
+
+---
+
 Earlier we said that we are using @babel/preset-env to support the last JavaScript; also, that we want an isomorphic application where we can write the same code for the "front" and the "back-end".
 So... Let´s refactor the server files: `server.js` and `BasicController.js`
 
 `server/index.js`
 
-I AM HERE...!
+TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
