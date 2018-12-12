@@ -4,23 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test":
-      "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
-    "start":
-      "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.config.dev.client.js",
+    "test": "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.config.dev.client.js",
     "dev": "cross-env NODE_ENV=development node server/index.js",
-    "prod": "cross-env NODE_ENV=production node public/server.js",
-    "build:dev":
-      "cross-env NODE_ENV=development webpack --config config/webpack.config.dev.client.js",
-    "build":
-      "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js"
+    "prod": "cross-env NODE_ENV=production node server/index.js",
+    "build:dev": "cross-env NODE_ENV=development webpack --config config/webpack.config.dev.client.js",
+    "build": "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js",
+    "build:server": "cross-env BABEL_ENV=production webpack --config=config/webpack.config.prod.server.js --env.NODE_ENV=production --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@emotion/core": "^10.0.0",
-    "@emotion/styled": "^10.0.0",
+    "@emotion/core": "^10.0.4",
+    "@emotion/styled": "^10.0.4",
     "axios": "^0.18.0",
     "dotenv": "^6.1.0",
     "express-static-gzip": "^1.1.3",
@@ -34,12 +31,12 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.6",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/polyfill": "^7.0.0",
-    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-env": "^7.2.0",
     "@babel/preset-es2015": "^7.0.0-beta.53",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-stage-2": "^7.0.0",
@@ -48,7 +45,7 @@
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-async-to-promises": "^1.0.5",
-    "babel-plugin-emotion": "^10.0.0",
+    "babel-plugin-emotion": "^10.0.4",
     "babel-plugin-transform-async-to-promises": "^0.7.2",
     "babel-plugin-universal-import": "^3.1.2",
     "brotli-webpack-plugin": "^1.0.0",
@@ -71,13 +68,20 @@
     "regenerator-runtime": "^0.12.1",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.0.1",
-    "webpack": "^4.26.1",
+    "webpack": "^4.27.1",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.1.2",
     "webpack-dev-middleware": "^3.4.0",
     "webpack-dev-server": "^3.1.10",
     "webpack-hot-middleware": "^2.24.3",
-    "webpack-merge": "^4.1.4"
+    "webpack-merge": "^4.1.5",
+    "webpack-node-externals": "^1.7.2"
   },
-  "browserslist": ["last 1 version", "> 1%", "IE 11", "IE 10", "IE 9"]
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "IE 11",
+    "IE 10",
+    "IE 9"
+  ]
 }
