@@ -475,7 +475,10 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env', '@babel/react']
+            }
           }
         ]
       }
@@ -2293,14 +2296,39 @@ touch config/webpack.config.prod.server.js
 
 Content:
 
+```javascript
+const path = require('path');
+const merge = require('webpack-merge');
+const commonConfig = require('./webpack.config.js');
+var nodeExternals = require('webpack-node-externals');
+
+const config = {
+  mode: 'production',
+  target: 'node',
+  externals: nodeExternals(),
+  entry: './server/index.js',
+  output: {
+    path: path.resolve(__dirname, '../build'),
+    filename: './server-prod-bundle.js'
+  }
+};
+
+module.exports = merge(commonConfig, config);
 ```
-conten here
-```
+
+_Note_: we are generating a new output `server-prod-bundle.js` in a new folder, `build`.
 
 Then, in server/server.js
 
-1. Move const webpack = require('webpack'); outside the conditional
-2. Create an else for production and
+1. Move `const webpack = require('webpack');` outside the conditional
+2. Create an `else` for production and require `../config/webpack.config.prod.server.js` executing `webpack()` method with it.
+
+```javascript
+else {
+  const config = require('../config/webpack.config.prod.server.js');
+  webpack(config);
+}
+```
 
 ---
 
