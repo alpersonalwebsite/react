@@ -2330,7 +2330,46 @@ else {
 }
 ```
 
+In our main `package.json`...
+
+Add the `build:server script`
+
+```json
+"cross-env NODE_ENV=production webpack --config config/webpack.config.prod.server.js --env.NODE_ENV=production"
+```
+
+Also, update the `prod script`
+
+Before (currently):
+
+```json
+"prod": "cross-env NODE_ENV=production node server/index.js",
+```
+
+After:
+
+```json
+"prod": "cross-env NODE_ENV=production node build/server-prod-bundle.js",
+```
+
+And try that everything is working properly...
+
+1. Generate bundle for the client side of our project: `npm run build`
+2. Generate the bundle for the server side of our project: `npm run build:server`
+3. Run our server: `npm run prod`
+4. Go to http://127.0.0.1:8080/ > You should see Testing SSR.
+
+Great! We are processing both, our client and server side code with `webpack`.
+
+And since we want to keep practicality, add the `flag --watch` to our `build:server` script, so, every time we make a change in our `entry point file server/index.js` or any file wired up through this one, `webpack` will re-generate the bundle. Once you do this, webpack will not exit and remain in watch mode (don´t close your terminal).
+
+```json
+"cross-env NODE_ENV=production webpack --config config/webpack.config.prod.server.js --env.NODE_ENV=production --watch"
+```
+
 ---
+
+TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 
 Earlier we said that we are using @babel/preset-env to support the last JavaScript; also, that we want an isomorphic application where we can write the same code for the "front" and the "back-end".
 So... Let´s refactor the server files: `server.js` and `BasicController.js`

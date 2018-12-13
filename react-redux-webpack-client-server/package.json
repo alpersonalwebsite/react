@@ -9,13 +9,13 @@
     "start":
       "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.config.dev.client.js",
     "dev": "cross-env NODE_ENV=development node server/index.js",
-    "prod": "cross-env NODE_ENV=production node server/index.js",
+    "prod": "cross-env NODE_ENV=production node build/server-prod-bundle.js",
     "build:dev":
       "cross-env NODE_ENV=development webpack --config config/webpack.config.dev.client.js",
     "build":
       "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js",
     "build:server":
-      "cross-env webpack --config config/webpack.config.prod.server.js --env.NODE_ENV=production"
+      "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.server.js --env.NODE_ENV=production --watch"
   },
   "keywords": [],
   "author": "",
