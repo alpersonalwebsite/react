@@ -2335,8 +2335,10 @@ In our main `package.json`...
 Add the `build:server script`
 
 ```json
-"cross-env NODE_ENV=production webpack --config config/webpack.config.prod.server.js --env.NODE_ENV=production"
+"cross-env NODE_ENV=production webpack --config config/webpack.config.prod.server.js --env.NODE_ENV=production --watch"
 ```
+
+Check that we are adding the `flag --watch` to our `build:server` script, so, every time we make a change in our `entry point file server/index.js` or any file wired up through this one, `webpack` will re-generate the bundle. Doing this, webpack will not exit and remain in watch mode (so, don´t close your terminal).
 
 Also, update the `prod script`
 
@@ -2361,11 +2363,38 @@ And try that everything is working properly...
 
 Great! We are processing both, our client and server side code with `webpack`.
 
-And since we want to keep practicality, add the `flag --watch` to our `build:server` script, so, every time we make a change in our `entry point file server/index.js` or any file wired up through this one, `webpack` will re-generate the bundle. Once you do this, webpack will not exit and remain in watch mode (don´t close your terminal).
+This could be a little controversial but... The why is self explanatory.
+We have 2 scripts related to our express server:
 
-```json
-"cross-env NODE_ENV=production webpack --config config/webpack.config.prod.server.js --env.NODE_ENV=production --watch"
+1. `npm run dev` > node runs server/index.js
+2. `npm run prod` > node runs our server/index.js bundle: build/server-prod-bundle.js
+
+However... We want to preserve practicality, so...
+We are going to create a new script for development in the server side which is going to watch for changes, re-build the bundle and re-start the server. Remember, this is not a dev server... It´s a server which is going to work/operate/execute with our production output letting us work without having to spend too much time in the console.
+For this reason we are going to call it `build:server:flex` to prevent confusions linked to the `dev` reference.
+
 ```
+"build:server:flex":"cross-env nodemon --watch build build/server-prod-bundle.js",
+```
+
+Let´s state again our workflow:
+
+1. Generate bundle for the client side of our project: `npm run build`
+2. Generate the bundle for the server side of our project: `npm run build:server` (process should remain active)
+3. Run flexible server: `npm run build:server:flex` (process should remain active)
+
+Now we can make a change in a server file, example, server/server.js...
+
+1. A new bundle will be generated: `./server-prod-bundle.js 6.63 KiB 0 [emitted] main`
+2. Nodemon will re-start the server
+
+```
+[nodemon] restarting due to changes...
+[nodemon] starting `node build/server-prod-bundle.js`
+Server Listening for port: 8080
+```
+
+Bravo!
 
 ---
 
