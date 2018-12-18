@@ -2396,6 +2396,22 @@ Server Listening for port: 8080
 
 Bravo!
 
+If you try to run `npm start` it is NOT going to work as you may expect if you don´t have the `index.html` file in `public/`
+There´re several ways to fix this. One, is passing in our script a global variable (cross-env makes the things easier for us)
+
+In our main `package.json`
+
+```json
+"start":
+  "cross-env START='true' NODE_ENV=development webpack-dev-server --config config/webpack.config.dev.client.js",
+```
+
+Then, we add another case to our `if(isHtmlWebpackPlugin) conditional`: so, `either isHtmlWebpackPlugin == 'true'` OR `process.env.START == 'true'` we are going to add the plugin `htmlWebpackPlugin`, which, as you recall, it will create an `index.html` based on our `template.html` and serve through it our webpack bundles.
+_Note_: to keep consistency, we are setting true as string NOT boolean.
+
+Now, run `npm start`, visit the provider endpoint http://localhost:8081/ and everything should be working properly.
+_Note_: If you have multiple instances running, you PORT may change. So, always check the output in your terminal.
+
 ---
 
 TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO

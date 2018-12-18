@@ -37,7 +37,7 @@ const htmlWebpackPlugin = [
   })
 ];
 
-if (isHtmlWebpackPlugin == 'true') {
+if (isHtmlWebpackPlugin == 'true' || process.env.START == 'true') {
   generalPlugins = generalPlugins.concat(htmlWebpackPlugin);
 }
 

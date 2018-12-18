@@ -4,13 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.config.dev.client.js",
-    "build:dev": "cross-env NODE_ENV=development webpack --config config/webpack.config.dev.client.js",
-    "build": "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js",
-    "build:server": "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.server.js --env.NODE_ENV=production --watch",
+    "test":
+      "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
+    "start":
+      "cross-env START='true' NODE_ENV=development webpack-dev-server --config config/webpack.config.dev.client.js",
+    "build:dev":
+      "cross-env NODE_ENV=development webpack --config config/webpack.config.dev.client.js",
+    "build":
+      "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js",
+    "build:server":
+      "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.server.js --env.NODE_ENV=production --watch",
     "dev": "cross-env NODE_ENV=development node server/index.js",
-    "build:server:flex": "cross-env nodemon --watch build build/server-prod-bundle.js",
+    "build:server:flex":
+      "cross-env nodemon --watch build build/server-prod-bundle.js",
     "prod": "cross-env NODE_ENV=production node build/server-prod-bundle.js"
   },
   "keywords": [],
@@ -78,11 +84,5 @@
     "webpack-merge": "^4.1.5",
     "webpack-node-externals": "^1.7.2"
   },
-  "browserslist": [
-    "last 1 version",
-    "> 1%",
-    "IE 11",
-    "IE 10",
-    "IE 9"
-  ]
+  "browserslist": ["last 1 version", "> 1%", "IE 11", "IE 10", "IE 9"]
 }
