@@ -1,0 +1,14 @@
+{
+  "verbose": true,
+  "collectCoverageFrom": [
+    "<rootDir>/src/**/*.{js,jsx,mjs}",
+    "!**/node_modules/**"
+  ],
+  "moduleNameMapper": {
+    "\\.css$": "identity-obj-proxy"
+  },
+  "transform": {
+    "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
+  },
+  "setupFiles": ["<rootDir>/config/jest/setupTests.js"]
+}
