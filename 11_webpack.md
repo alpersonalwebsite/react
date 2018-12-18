@@ -2426,11 +2426,11 @@ _Note_: We use the `flag -a` to preserve symlinks and file attributes.
 
 ---
 
-TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+TODOOOO
 
 Earlier we said that we are using @babel/preset-env to support the last JavaScript; also, that we want an isomorphic application where we can write the same code for the "front" and the "back-end".
 So... Let´s refactor the server files: `server.js` and `BasicController.js`
 
 `server/index.js`
 
-TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+TODOOOO
