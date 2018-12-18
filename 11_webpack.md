@@ -2409,8 +2409,20 @@ In our main `package.json`
 Then, we add another case to our `if(isHtmlWebpackPlugin) conditional`: so, `either isHtmlWebpackPlugin == 'true'` OR `process.env.START == 'true'` we are going to add the plugin `htmlWebpackPlugin`, which, as you recall, it will create an `index.html` based on our `template.html` and serve through it our webpack bundles.
 _Note_: to keep consistency, we are setting true as string NOT boolean.
 
-Now, run `npm start`, visit the provider endpoint http://localhost:8081/ and everything should be working properly.
+Now, run `npm start`, visit the provided endpoint http://localhost:8081/ and everything should be working properly.
 _Note_: If you have multiple instances running, you PORT may change. So, always check the output in your terminal.
+
+---
+
+At the moment we have 2 scripts running and watching for changes. This is a valid approach, however... We can simplify this to just 2 scripts: one for DEV, one for PROD (both, including the bundling and serving, or what´s the same, client and server part).
+
+Just in case you want to easily reuse the `react-redux-webpack-client-server` example, I will clone it and do the following changes in `react-redux-webpack-client-server-scripts`. All the upcoming topics, like imports, routing, etc, are going to be done in this folder.
+
+```
+cp -a react-redux-webpack-client-server react-redux-webpack-client-server-scripts
+```
+
+_Note_: We use the `flag -a` to preserve symlinks and file attributes.
 
 ---
 
