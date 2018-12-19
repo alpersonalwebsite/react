@@ -21,6 +21,10 @@ let cleanOptions = {
 
 const config = {
   mode: 'production',
+  entry: {
+    main: './src/index.js',
+    other: './src/other.js'
+  },
   optimization: {
     minimizer: [new UglifyJsPlugin()]
   },

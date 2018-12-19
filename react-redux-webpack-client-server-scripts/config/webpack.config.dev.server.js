@@ -1,26 +1,19 @@
-const webpack = require('webpack');
+const path = require('path');
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.config.js');
-
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
+var nodeExternals = require('webpack-node-externals');
 
 const config = {
   mode: 'development',
+  target: 'node',
+  externals: nodeExternals(),
   entry: {
-    main: ['webpack-hot-middleware/client?reload=true', './src/index.js']
+    main: './server/index.js'
   },
-  devServer: {
-    contentBase: '/..public',
-    hot: true,
-    overlay: true
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new BundleAnalyzerPlugin({
-      generateStatsFile: true
-    })
-  ]
+  output: {
+    path: path.resolve(__dirname, '../build'),
+    filename: './server-dev-bundle.js'
+  }
 };
 
 module.exports = merge(commonConfig, config);

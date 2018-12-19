@@ -632,10 +632,16 @@ const config = {};
 module.exports = merge(commonConfig, config);
 ```
 
+_IMPORTANT_: We are going to move the `entry` property from `webpack.config.js` (aka, our main configuration file) to each file. At future, once we have multiple configuration files taking different endpoints.
+
 In **webpack.config.dev.js** we are going to add (inside config)
 
 ```javascript
 mode: 'development',
+entry: {
+  main: './src/index.js',
+  other: './src/other.js'
+},
 devServer: {
   contentBase: '../public'
 }
@@ -644,7 +650,11 @@ devServer: {
 In **webpack.config.prod.js** we are going to add
 
 ```javascript
-mode: 'production';
+mode: 'production',
+entry: {
+  main: './src/index.js',
+  other: './src/other.js'
+}
 ```
 
 On package.json we are going to update our scripts:
@@ -656,10 +666,10 @@ On package.json we are going to update our scripts:
 },
 ```
 
-And finally, on webpack.config.js we are going to remove (or comment)
+And finally, on `webpack.config.js` we are going to remove (or comment)
 
 ```javascript
-mode: 'development';
+mode: 'development',
 ```
 
 Now, run both commands (scripts) again.
@@ -673,7 +683,7 @@ Everything should be working... And it should be working as before. However, if 
 ... and, if you check the files, you will see that files were optimized for production: replacing some namespaces, minifying the code...
 
 With the pass of the time, and after adding and removing several "entry points" you could have your public/ folder full of old and un-used bundles (aka, files).
-So, we are going to do the following: every time we build our project, we are going to delete ALL the files inside the dir public/ (also, if you have the folders dist/ and build/) excluding x-files. In our case, we want to preserver: template.html, manifest.json and favicon.ico.
+So, we are going to do the following: every time we build our project, we are going to delete ALL the files inside the dir public/ (also, if you have the folders dist/ and build/) excluding x-files. In our case, we want to preserve: `template.html`, `manifest.json` and `favicon.ico`.
 
 Install: clean-webpack-plugin
 
@@ -681,13 +691,13 @@ Install: clean-webpack-plugin
 npm install --save-dev clean-webpack-plugin
 ```
 
-Add a couple of dummy files to your public/
+Add a couple of dummy files to your `public/`
 
 ```
 touch public/hello.js public/hello.html public/hello.h public/hi.js
 ```
 
-On webpack.config.prod.js, add...
+On `webpack.config.prod.js`, add...
 
 Outside the config object
 
@@ -705,7 +715,7 @@ let cleanOptions = {
 };
 ```
 
-Inside our config/
+Inside our `config/`
 
 ```javascript
 plugins: [new CleanWebpackPlugin(pathsToClean, cleanOptions)];
@@ -741,7 +751,7 @@ Let´s continue installing dependencies. Testing time:
 npm install --save-dev jest enzyme enzyme-adapter-react-16 enzyme-to-json babel-jest identity-obj-proxy react-test-renderer regenerator-runtime jest-cli
 ```
 
-Create src/tempPolyfills.js
+Create `src/tempPolyfills.js`
 
 ```javascript
 const requestAnimationFrame = (global.requestAnimationFrame = callback => {
@@ -750,7 +760,7 @@ const requestAnimationFrame = (global.requestAnimationFrame = callback => {
 export default requestAnimationFrame;
 ```
 
-Create src/setupTests.js
+Create `src/setupTests.js`
 
 ```javascript
 import requestAnimationFrame from './tempPolyfills';
@@ -761,7 +771,7 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter(), disableLifecycleMethods: true });
 ```
 
-Note: We saw some of these configurations on `unit-tests` section. However, here, we will wire up the minimum just as proof of concept.
+_Note_: We saw some of these configurations on `unit-tests` section. However, here, we will wire up the minimum just as proof of concept.
 
 Then, in package.json we will add a new script...
 
@@ -963,8 +973,8 @@ Time to refactor.
 First, inside `config` we are going to create a new folder: `config/jest`.
 Move the following files inside config/jest
 
-* src\setupTests.js
-* src\tempPolyfills.js
+* `src\setupTests.js`
+* `src\tempPolyfills.js`
 
 And inside our main package.json, replace...
 
@@ -1008,7 +1018,7 @@ Also, we are going to move the jest´s configuration that we have in `src/packag
 }
 ```
 
-Notes:
+_Notes_:
 We are...
 
 1. Removing the `jest` property.
@@ -1077,7 +1087,7 @@ Refresh your browser... Great! Now we even support IE9!
 
 <!-- TODO: Better title and intro -->
 
-Server Part
+### Server Part
 
 Let´s create the folder server
 
@@ -1092,7 +1102,7 @@ npm init - y
 npm install express body-parser
 ```
 
-Create the main server file: sever/index.js
+Create the main server file: `sever/index.js`
 
 ```javascript
 const express = require('express');
@@ -1131,7 +1141,7 @@ class RouterAndMiddlewares {
 new RouterAndMiddlewares();
 ```
 
-Create file server/BasicController.js
+Create file `server/BasicController.js`
 
 ```
 
@@ -1275,8 +1285,9 @@ Now, you will see in the browser´s console:
 [HMR] Checking for updates on the server... | process-update.js:39:22
 ```
 
-And see, as well, your change on screen.
+And see, as well, your changes on screen.
 
+<!--
 This works well as proof ocf concept. However, if you try to execute `npm run build` and load your built project you will see the following errors and a white page:
 
 ```
@@ -1294,8 +1305,9 @@ entry: {
 ```
 
 Now, everything should be working properly.
+-->
 
-We didn´t deal with CSS yet. So, create the file src/App.css
+We didn´t deal with `CSS` yet. So, create the file `src/App.css`
 
 ```css
 h1 {
@@ -1479,7 +1491,7 @@ For this, we are going to install file-loader
 npm install --save-dev file-loader
 ```
 
-And add the proper rule inside webpack.config.js
+And add the proper rule inside `webpack.config.js`
 
 ```javascript
 {
@@ -1508,11 +1520,11 @@ Add to `src/App.js`.
 <img src={rPI} alt="Rasp. Pi Logo" />
 ```
 
-Congratulations! You can check another important topic in your list of TODO!
+**Congratulations!** You can check another important topic in your list of TODO!
 
 ---
 
-At the moment, in our package.json we have the following scripts
+At the moment, in our `package.json` we have the following scripts
 
 ```json
 "test": "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
@@ -1600,6 +1612,7 @@ So, first, rename `webpack.config.dev.js` to `webpack.config.dev.server.js`
 
 Then, create a new file at the same level: `webpack.config.dev.client.js`
 
+<!--
 ```javascript
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -1614,6 +1627,37 @@ const config = {
     contentBase: '/..public',
     overlay: true
   }
+};
+
+module.exports = merge(commonConfig, config);
+```
+-->
+
+```javascript
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const commonConfig = require('./webpack.config.js');
+
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
+
+const config = {
+  mode: 'development',
+  entry: {
+    main: ['webpack-hot-middleware/client?reload=true', './src/index.js'],
+    other: './src/other.js'
+  },
+  devServer: {
+    contentBase: '/..public',
+    hot: true,
+    overlay: true
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new BundleAnalyzerPlugin({
+      generateStatsFile: true
+    })
+  ]
 };
 
 module.exports = merge(commonConfig, config);
@@ -2423,6 +2467,84 @@ cp -a react-redux-webpack-client-server react-redux-webpack-client-server-script
 ```
 
 _Note_: We use the `flag -a` to preserve symlinks and file attributes.
+
+In our server/server.js we are going to make some changes to our if (!isProd) conditional. I will keep the previous code commented.
+In either case (if is prod or not) we are going to require the client and server configuration files, and, instead of passing one argument to webpack() method we are going to pass an array with both (client and server). The output that we are holding in the variable compiler will be an object; withing its properties, we will find compilers which data type is an array and it holds 2 elements. We can easily refer to each one doing: compiler.
+array with 2 elements: so we can easily refer to each one doing compiler.compilers[index].
+
+Let´s start with the first part of our condition if (!isProd), when we are in DEV mode.
+To webpack-dev-middleware we are going to pass both compilers.
+To webpack-hot-middleware, just the configuration related to our client.
+For both, we are going to use the devServer property configuratin that we have in ../config/webpack.config.dev.client.js
+
+In package.json replace the dev script with...
+
+```json
+"dev":"cross-env NODE_ENV=development nodemon --watch config --watch server",
+```
+
+Nodemon will run our server and will be watching for changes in both directories: config and server, and, if something changes, it will re-run.
+
+We are going to copy the content of `config\webpack.config.dev.server.js` and replace `config\webpack.config.dev.client.js` with it.
+
+```javascript
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const commonConfig = require('./webpack.config.js');
+
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
+
+const config = {
+  mode: 'development',
+  entry: {
+    main: ['webpack-hot-middleware/client?reload=true', './src/index.js']
+  },
+  devServer: {
+    contentBase: '/..public',
+    hot: true,
+    overlay: true
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new BundleAnalyzerPlugin({
+      generateStatsFile: true
+    })
+  ]
+};
+
+module.exports = merge(commonConfig, config);
+```
+
+We are going to do the same, but copying the content of config\webpack.config.prod.server.js and pasting it in config\webpack.config.dev.server.js replacing...
+
+* mode to development
+* filename tp server-dev-bundle.js
+
+```javascript
+const path = require('path');
+const merge = require('webpack-merge');
+const commonConfig = require('./webpack.config.js');
+var nodeExternals = require('webpack-node-externals');
+
+const config = {
+  mode: 'development',
+  target: 'node',
+  externals: nodeExternals(),
+  entry: './server/index.js',
+  output: {
+    path: path.resolve(__dirname, '../build'),
+    filename: './server-dev-bundle.js'
+  }
+};
+
+module.exports = merge(commonConfig, config);
+```
+
+Moment of the truth...
+npm run dev
+
+IMAGE here...
 
 ---
 

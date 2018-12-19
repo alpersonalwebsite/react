@@ -14,7 +14,8 @@
       "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js",
     "build:server":
       "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.server.js --env.NODE_ENV=production --watch",
-    "dev": "cross-env NODE_ENV=development node server/index.js",
+    "dev":
+      "cross-env NODE_ENV=development nodemon --watch config --watch server --inspect server/index.js",
     "build:server:flex":
       "cross-env nodemon --watch build build/server-prod-bundle.js",
     "prod": "cross-env NODE_ENV=production node build/server-prod-bundle.js"

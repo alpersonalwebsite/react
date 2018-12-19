@@ -4,13 +4,13 @@ const commonConfig = require('./webpack.config.js');
 var nodeExternals = require('webpack-node-externals');
 
 const config = {
-  mode: 'production',
+  mode: 'development',
   target: 'node',
   externals: nodeExternals(),
   entry: './server/index.js',
   output: {
     path: path.resolve(__dirname, '../build'),
-    filename: './server-prod-bundle.js'
+    filename: './server-dev-bundle.js'
   }
 };
 

@@ -44,10 +44,12 @@ if (isHtmlWebpackPlugin == 'true' || process.env.START == 'true') {
 //// Here´s the config
 
 module.exports = {
+  /*
   entry: {
     main: './src/index.js',
     other: './src/other.js'
   },
+  */
   output: {
     path: path.resolve(__dirname, '../public'),
     //  publicPath: '/',

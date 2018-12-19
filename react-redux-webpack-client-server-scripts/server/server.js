@@ -20,17 +20,27 @@ let webpackDevMiddleware, webpackHotMiddlware;
 const webpack = require('webpack');
 
 if (!isProd) {
-  const config = require('../config/webpack.config.dev.server.js');
-  const compiler = webpack(config);
+  //const config = require('../config/webpack.config.dev.server.js');
+  const devClientConfiguration = require('../config/webpack.config.dev.client.js');
+  const devServerConfiguration = require('../config/webpack.config.dev.server.js');
+
+  const compiler = webpack([devClientConfiguration, devServerConfiguration]);
+
+  //console.log(compiler);
 
   webpackDevMiddleware = require('webpack-dev-middleware')(
     compiler,
-    config.devServer
+    //config.devServer
+    devClientConfiguration.devServer
   );
 
   webpackHotMiddlware = require('webpack-hot-middleware')(
-    compiler,
-    config.devServer
+    //compiler,
+    // Remember that the first element of our array is ../config/webpack.config.dev.client.js
+    compiler.compilers[0],
+
+    //config.devServer
+    devClientConfiguration.devServer
   );
 } else {
   const config = require('../config/webpack.config.prod.server.js');
