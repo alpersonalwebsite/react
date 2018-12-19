@@ -2468,7 +2468,12 @@ cp -a react-redux-webpack-client-server react-redux-webpack-client-server-script
 
 _Note_: We use the `flag -a` to preserve symlinks and file attributes.
 
-In our server/server.js we are going to make some changes to our if (!isProd) conditional. I will keep the previous code commented.
+**IMPORTANT**
+We have been "playing" with our configuration files doing and undoing changes. To be sure that you have the proper setting, please, ensure that you have the same quantity, filenames and copy+paste the code from these files into yours (this last is really important to avoid any kind of inherited issue from our previous practice).
+
+* [config\webpack.config.js](./react-redux-webpack-client-server-scripts/config/webpack.config.js)
+
+In our `server/server.js` we are going to make some changes to our if (!isProd) conditional. I will keep the previous code commented.
 In either case (if is prod or not) we are going to require the client and server configuration files, and, instead of passing one argument to webpack() method we are going to pass an array with both (client and server). The output that we are holding in the variable compiler will be an object; withing its properties, we will find compilers which data type is an array and it holds 2 elements. We can easily refer to each one doing: compiler.
 array with 2 elements: so we can easily refer to each one doing compiler.compilers[index].
 
