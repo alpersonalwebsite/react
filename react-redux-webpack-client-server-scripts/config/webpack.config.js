@@ -49,12 +49,13 @@ module.exports = {
     main: './src/index.js',
     other: './src/other.js'
   },
-  */
+
   output: {
     path: path.resolve(__dirname, '../public'),
     //  publicPath: '/',
     filename: './[name]-bundle.js'
   },
+    */
   stats: {
     colors: true
   },

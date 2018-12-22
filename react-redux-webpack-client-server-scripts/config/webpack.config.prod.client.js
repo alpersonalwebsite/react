@@ -25,6 +25,11 @@ const config = {
     main: './src/index.js',
     other: './src/other.js'
   },
+  output: {
+    path: path.resolve(__dirname, '../public'),
+    //  publicPath: '/',
+    filename: './[name]-bundle.js'
+  },
   optimization: {
     minimizer: [new UglifyJsPlugin()]
   },

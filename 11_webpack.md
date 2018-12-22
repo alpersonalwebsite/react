@@ -2472,6 +2472,10 @@ _Note_: We use the `flag -a` to preserve symlinks and file attributes.
 We have been "playing" with our configuration files doing and undoing changes. To be sure that you have the proper setting, please, ensure that you have the same quantity, filenames and copy+paste the code from these files into yours (this last is really important to avoid any kind of inherited issue from our previous practice).
 
 * [config\webpack.config.js](./react-redux-webpack-client-server-scripts/config/webpack.config.js)
+* [config\webpack.config.dev.client.js](./react-redux-webpack-client-server-scripts/config/webpack.config.dev.client.js)
+* [config\webpack.config.dev.server.js](./react-redux-webpack-client-server-scripts/config/webpack.config.dev.server.js)
+* [config\webpack.config.prod.client.js](./react-redux-webpack-client-server-scripts/config/webpack.config.prod.client.js)
+* [config\webpack.config.prod.server.js](./react-redux-webpack-client-server-scripts/config/webpack.config.prod.server.js)
 
 In our `server/server.js` we are going to make some changes to our if (!isProd) conditional. I will keep the previous code commented.
 In either case (if is prod or not) we are going to require the client and server configuration files, and, instead of passing one argument to webpack() method we are going to pass an array with both (client and server). The output that we are holding in the variable compiler will be an object; withing its properties, we will find compilers which data type is an array and it holds 2 elements. We can easily refer to each one doing: compiler.
@@ -2489,62 +2493,6 @@ In package.json replace the dev script with...
 ```
 
 Nodemon will run our server and will be watching for changes in both directories: config and server, and, if something changes, it will re-run.
-
-We are going to copy the content of `config\webpack.config.dev.server.js` and replace `config\webpack.config.dev.client.js` with it.
-
-```javascript
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const commonConfig = require('./webpack.config.js');
-
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
-
-const config = {
-  mode: 'development',
-  entry: {
-    main: ['webpack-hot-middleware/client?reload=true', './src/index.js']
-  },
-  devServer: {
-    contentBase: '/..public',
-    hot: true,
-    overlay: true
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new BundleAnalyzerPlugin({
-      generateStatsFile: true
-    })
-  ]
-};
-
-module.exports = merge(commonConfig, config);
-```
-
-We are going to do the same, but copying the content of config\webpack.config.prod.server.js and pasting it in config\webpack.config.dev.server.js replacing...
-
-* mode to development
-* filename tp server-dev-bundle.js
-
-```javascript
-const path = require('path');
-const merge = require('webpack-merge');
-const commonConfig = require('./webpack.config.js');
-var nodeExternals = require('webpack-node-externals');
-
-const config = {
-  mode: 'development',
-  target: 'node',
-  externals: nodeExternals(),
-  entry: './server/index.js',
-  output: {
-    path: path.resolve(__dirname, '../build'),
-    filename: './server-dev-bundle.js'
-  }
-};
-
-module.exports = merge(commonConfig, config);
-```
 
 Moment of the truth...
 npm run dev

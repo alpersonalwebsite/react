@@ -13,38 +13,43 @@ const isProd = process.env.NODE_ENV === 'production';
 import dotenv from 'dotenv';
 dotenv.config();
 
+import webpackHotServerMiddleware from 'webpack-hot-server-middleware';
+
 const isHtmlWebpackPlugin = process.env.WEBPACK_STATIC_HTML_BUILD;
 
 let webpackDevMiddleware, webpackHotMiddlware;
 
 const webpack = require('webpack');
+import devClientConfiguration from '../config/webpack.config.dev.client.js';
+import devServerConfiguration from '../config/webpack.config.dev.server.js';
 
-if (!isProd) {
+import prodClientConfiguration from '../config/webpack.config.prod.client.js';
+import prodServerConfiguration from '../config/webpack.config.prod.server.js';
+
+console.log('ENNNNNNNNNNNNNNNNNNNNNNNNNNN', typeof isProd);
+
+if (isProd === false) {
   //const config = require('../config/webpack.config.dev.server.js');
-  const devClientConfiguration = require('../config/webpack.config.dev.client.js');
-  const devServerConfiguration = require('../config/webpack.config.dev.server.js');
+  //const devClientConfiguration = require('../config/webpack.config.dev.client.js');
+  //const devServerConfiguration = require('../config/webpack.config.dev.server.js');
 
   const compiler = webpack([devClientConfiguration, devServerConfiguration]);
 
   //console.log(compiler);
 
-  webpackDevMiddleware = require('webpack-dev-middleware')(
+  const webpackDevMiddleware = require('webpack-dev-middleware')(
     compiler,
-    //config.devServer
     devClientConfiguration.devServer
   );
 
-  webpackHotMiddlware = require('webpack-hot-middleware')(
-    //compiler,
-    // Remember that the first element of our array is ../config/webpack.config.dev.client.js
+  const webpackHotMiddlware = require('webpack-hot-middleware')(
     compiler.compilers[0],
-
-    //config.devServer
     devClientConfiguration.devServer
   );
 } else {
-  const config = require('../config/webpack.config.prod.server.js');
-  webpack(config);
+  console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW');
+  //const config = require();
+  webpack([prodClientConfiguration, prodServerConfiguration]);
 }
 
 class RouterAndMiddlewares {
@@ -67,6 +72,7 @@ class RouterAndMiddlewares {
     if (!isProd) {
       this.app.use(webpackDevMiddleware);
       this.app.use(webpackHotMiddlware);
+      this.app.use(webpackHotServerMiddleware(compiler));
     }
 
     /*
@@ -93,4 +99,8 @@ class RouterAndMiddlewares {
   }
 }
 
-new RouterAndMiddlewares();
+//new RouterAndMiddlewares();
+
+module.exports = app => {
+  return new RouterAndMiddlewares(app);
+};

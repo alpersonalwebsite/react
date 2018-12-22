@@ -7,9 +7,7 @@ const config = {
   mode: 'development',
   target: 'node',
   externals: nodeExternals(),
-  entry: {
-    main: './server/index.js'
-  },
+  entry: './server/index.js',
   output: {
     path: path.resolve(__dirname, '../build'),
     filename: './server-dev-bundle.js'
