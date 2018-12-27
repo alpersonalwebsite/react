@@ -17,7 +17,7 @@ import webpackHotServerMiddleware from 'webpack-hot-server-middleware';
 
 const isHtmlWebpackPlugin = process.env.WEBPACK_STATIC_HTML_BUILD;
 
-let webpackDevMiddleware, webpackHotMiddlware;
+let webpackDevMiddleware, webpackHotMiddlware, compiler;
 
 const webpack = require('webpack');
 import devClientConfiguration from '../config/webpack.config.dev.client.js';
@@ -33,16 +33,16 @@ if (isProd === false) {
   //const devClientConfiguration = require('../config/webpack.config.dev.client.js');
   //const devServerConfiguration = require('../config/webpack.config.dev.server.js');
 
-  const compiler = webpack([devClientConfiguration, devServerConfiguration]);
+  compiler = webpack([devClientConfiguration, devServerConfiguration]);
 
   //console.log(compiler);
 
-  const webpackDevMiddleware = require('webpack-dev-middleware')(
+  webpackDevMiddleware = require('webpack-dev-middleware')(
     compiler,
     devClientConfiguration.devServer
   );
 
-  const webpackHotMiddlware = require('webpack-hot-middleware')(
+  webpackHotMiddlware = require('webpack-hot-middleware')(
     compiler.compilers[0],
     devClientConfiguration.devServer
   );
@@ -70,6 +70,7 @@ class RouterAndMiddlewares {
     this.app.use(bodyParser.json());
 
     if (!isProd) {
+      console.log(1111111111111111111111, webpackDevMiddleware);
       this.app.use(webpackDevMiddleware);
       this.app.use(webpackHotMiddlware);
       this.app.use(webpackHotServerMiddleware(compiler));
@@ -99,8 +100,10 @@ class RouterAndMiddlewares {
   }
 }
 
-//new RouterAndMiddlewares();
+new RouterAndMiddlewares();
 
+/*
 module.exports = app => {
   return new RouterAndMiddlewares(app);
 };
+*/

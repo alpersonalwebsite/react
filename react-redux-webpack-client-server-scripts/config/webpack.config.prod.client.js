@@ -20,6 +20,8 @@ let cleanOptions = {
 };
 
 const config = {
+  name: 'client',
+  target: 'web',
   mode: 'production',
   entry: {
     main: './src/index.js',

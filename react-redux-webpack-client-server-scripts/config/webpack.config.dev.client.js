@@ -21,10 +21,14 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.config.js');
 
+/*
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
+*/
 
 const config = {
+  name: 'client',
+  target: 'web',
   mode: 'development',
   entry: {
     main: ['webpack-hot-middleware/client?reload=true', './src/index.js'],
@@ -32,7 +36,7 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, '../public'),
-    //  publicPath: '/',
+    //publicPath: '/',
     filename: './[name]-bundle.js'
   },
   devServer: {
@@ -41,10 +45,12 @@ const config = {
     overlay: true
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+    /*,
     new BundleAnalyzerPlugin({
       generateStatsFile: true
     })
+    */
   ]
 };
 
