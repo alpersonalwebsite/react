@@ -153,6 +153,33 @@ console.log(friendsFiltered);
 */
 ```
 
+**JS CallStack**
+High level intro: Remember, first, that JS is a single-threaded language (this basically means that it can only handle one task at the time).
+The JS engine (example: Google V8 or SpiderMonkey) defines the Global Execution Context (GEC) like "the browser or Node" (in relation to where the code is executed), sets the Global Memory or Scope) and creates the Call Stack, which allows the interpreter to keep track of what happened, what is happening and what is going to happen.
+
+An easy example to ilustrate:
+
+```javascript
+const name = 'Peter Pan';
+
+function salutation() {
+  alert(message());
+}
+
+function message() {
+  return 'Hello... ' + name;
+}
+
+salutation();
+```
+
+* Context: browser (Firefox)
+* Scope: name, salutation() and message() are Global
+* CallStack
+  1. salutation()
+  2. message()
+     As soon as message() resolves or finishes its execution, it´s removed from the stack (there´s no need to call what was executed) being salutation() the next function to call, resolve and then, remove from the stack which will result in an empty Stack.
+
 ### What´s JSX...?
 
 It´s an extension to JS syntax recommended by React to describe how our UI. It´s not mandatory; just a really convenient and standardized way of structure our component´s rendering.
