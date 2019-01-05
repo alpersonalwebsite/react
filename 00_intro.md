@@ -190,6 +190,8 @@ console.log(this);
 
 However, something important to remind is that each time one of our function is invoked, a new context (functional context) is created for that particular function.
 
+---
+
 ### What´s JSX...?
 
 It´s an extension to JS syntax recommended by React to describe how our UI. It´s not mandatory; just a really convenient and standardized way of structure our component´s rendering.
