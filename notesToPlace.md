@@ -5,8 +5,7 @@ Our "data" can be classified as Primitive or Reference in relation to _where_ an
 * Variables that hold "just one value" are stored in the "stack" (memory, faster but less storage) and every time we pass them to, for example a function, we pass the value.
 * Variables that hold "multiple values" (like objects) are stored in the "heap" (memory, slower but more storage) and are passed as reference: we don´t pass the value, if not, a pointer that is going to reference to that value.
 
-Primitive Types are immutable at difference of Reference Types.
-Here´s an easy example showing immutability and mutability.
+Primitive Types are copied by value (and they are immutable)
 
 Primitive Type: string
 We declare a variable and initialize it with the value of "Peter".
