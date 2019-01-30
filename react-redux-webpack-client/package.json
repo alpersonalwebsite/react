@@ -17,7 +17,7 @@
     "nodemon": "^1.18.9",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-redux": "^5.1.1",
+    "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
@@ -53,28 +53,15 @@
     "webpack-merge": "^4.1.5"
   },
   "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}",
-      "!**/node_modules/**"
-    ],
+    "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}", "!**/node_modules/**"],
     "moduleNameMapper": {
       "\\.css$": "identity-obj-proxy"
     },
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
     },
-    "coverageReporters": [
-      "text-summary"
-    ],
-    "setupFiles": [
-      "<rootDir>/src/setupTests.js"
-    ]
+    "coverageReporters": ["text-summary"],
+    "setupFiles": ["<rootDir>/src/setupTests.js"]
   },
-  "browserslist": [
-    "last 1 version",
-    "> 1%",
-    "IE 11",
-    "IE 10",
-    "IE 9"
-  ]
+  "browserslist": ["last 1 version", "> 1%", "IE 11", "IE 10", "IE 9"]
 }
