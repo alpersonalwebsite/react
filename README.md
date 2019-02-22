@@ -4,6 +4,8 @@ An easy way to learn through examples.
 
 ## Before starting
 
+_2/21/19 UPDATE_: Many things happened in React and its ecosystem. I will try to update the sections to React 16.\*.\* and go deeper in the “Life cycle” paragraph.\*
+
 After several years of contributing, mentoring and working with React and Redux (among other related technologies of `JAMStack`), I decided to “put together” some notes linked to recurrent doubts and contrarieties that friends and co-workers have faced.
 
 This is a pure practical guide: please, keep the `practical intention` present during the course of these "shared topics"; I don´t have the purpose of challenging the great and innumerous coaching classes, neither the books/"white papers" that you can find in the market (starting with the own Facebook´s proprietary documentation).
