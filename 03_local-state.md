@@ -292,7 +292,7 @@ class App extends Component {
 }
 ```
 
-... and, since in this tutorial we are using `create-react-app` you don´t have to worry about wiring up Babel. It´s part of the package!
+... and, since in this tutorial we are using `create-react-app` you don´t have to worry about wiring up Babel. It´s part of the package!!!
 
 ### Lifting state
 
