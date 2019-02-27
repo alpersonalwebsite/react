@@ -220,7 +220,42 @@ constructor(props) {
 First... Some contextual observations...
 
 * `Constructor` is a method for creating and initializing an object created with a class.
-* A constructor can use the super keyword to call the constructor of the `super` class.
+* A constructor can use the super keyword to call the constructor of the `super` class. What we are doing is initializing the `constructor of the parent class` as well.
+
+Look at this code:
+```javascript
+class Person {
+  constructor() {
+    this.name = "Default";
+  }
+}
+
+class Friend extends Person {
+  constructor() {
+    this.name = "Peter";
+  }
+}
+
+const newFriend = new Friend();
+console.log(newFriend.name);
+```
+
+If you try to run it with Babel+ES6 you will receive the following error:
+```
+ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor
+```
+
+This can be easily fixed adding the super() method at the top level of each child (aka extended) constructor.
+```javascript
+class Friend extends Person {
+  constructor() {
+    super();
+    this.name = "Peter";
+  }
+}
+```
+
+
 
 Among other upcoming changes in ES, we have the [Class field declarations for JavaScript](https://github.com/tc39/proposal-class-fields) which will allow us to define class properties.
 
