@@ -201,6 +201,7 @@ In this example, the `new function` that `.bind()` returns will have access to t
 
 You can see that we are **NOT initializing our state in the constructor** (as you will notice in several React tutorials).
 
+Example: *state*
 ```javascript
 import React, { Component } from 'react';
 
@@ -240,12 +241,12 @@ const newFriend = new Friend();
 console.log(newFriend.name);
 ```
 
-If you try to run it with Babel+ES6 you will receive the following error:
+If you try to run it with `ES5` you will receive the following error:
 ```
 ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor
 ```
 
-This can be easily fixed adding the super() method at the top level of each child (aka extended) constructor.
+This can be easily fixed adding the `super()` method at the top level of each child (aka `extended class`) constructor.
 ```javascript
 class Friend extends Person {
   constructor() {
@@ -255,13 +256,30 @@ class Friend extends Person {
 }
 ```
 
+If you are using `Babel+ES6` you can:
+1. Remove the `constructor()` method
+2. Remove the `super()` method
+3. Remove the `this` keyword from the properties
 
+The result would be clearer:
+```javascript
+class Person {
+  name = "Default";
+}
 
-Among other upcoming changes in ES, we have the [Class field declarations for JavaScript](https://github.com/tc39/proposal-class-fields) which will allow us to define class properties.
+class Friend extends Person {
+  name = "Peter";
+}
 
-Until it becomes part of the standard, we can use Babel to transpile code (which will add the constructor for us).
+const newFriend = new Friend();
+console.log(newFriend.name);
+```
 
-So, the previous example would be...
+I you review the `transpiled code` you will notice that `Babel` will set the constructor for us.
+
+For more information about this and other changes to the spec, check: [Class field declarations for JavaScript](https://github.com/tc39/proposal-class-fields)
+
+So, the *state* example would be:
 
 ```javascript
 import React, { Component } from 'react';
