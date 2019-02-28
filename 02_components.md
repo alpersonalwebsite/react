@@ -1,13 +1,18 @@
 ## Components or screens
 
-We use components to split our UI into reusable "blocks" that receive `props` (aka, data) and return, as we saw earlier, React elements.
+We use components to split our UI into reusable "blocks" that can receive `props` (aka, data) and return, as we saw earlier, React elements.
 
 You should name your component following the CamelCase (also called UpperCamelCase) convention. Example: `<ListOfRecords />`; use Lower Camel Case for DOM tags and HOC.
 
 In react there´re 2 types of Components:
 
-1. Class components
-2. Functional or Stateless components
+In relation to `paradigm`...
+1. Class components (Object Oriented Programing)
+2. Functional components (Functional Programing)
+
+In relation to internal or `local state`
+1. Stateful components
+2. Stateless, pure or presentational components (with no state management)
 
 If it´s possible (aka, no local state, no custom or life-cycle methods), use `functional components`
 
