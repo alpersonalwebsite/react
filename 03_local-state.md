@@ -1,6 +1,6 @@
 ## Local State
 
-Previously, we saw `props` as read-only or immutable data that we pass from a parent to a child component. Now, we are going to review data that can mutate inside the component: `state`.
+Previously, we saw `props` as read-only or immutable data (passed from a parent to a child component). Now, we are going to see data that can "mutate" inside the component: `state`.
 Let´s imagine for a moment a TODO list.
 We have several items and boxes to check as "done".
 The original state of each item would be `false` and, when the user or "some logic" clicks (aka, checks) on a particular "check-box" the property state associated to it would change its value to `true` (the process could be reversed un-checking the box what would set the state to its original value: `false`).
@@ -13,7 +13,7 @@ We set the state through the state class property and access to it via: this.sta
 
 We **NEVER** modify the state directly, if not, with `setState()`
 
-Wrong:
+REALLY Wrong:
 
 ```javascript
 this.state.name = 'Peter';
@@ -25,10 +25,7 @@ Right:
 this.setState({ name: 'Peter' });
 ```
 
-If you modify the property of the state directly **your component WILL not re-render**.
-
-What´s the difference between props and state...?
-Props is read-only data.
+If you modify the property of the state directly (as in the wrong example), React will not be aware of the change and it **will NOT re render your component**.
 
 ```
 class App extends Component {
@@ -123,13 +120,14 @@ componentDidMount() {
 ```
 
 Note: `setState()` will merge the object that we pass in into the current state.
+BTW, I´m using the lifecycle `componentDidMount()` to force a change in the state without any user interaction and just for demo purposes. In a *tiny app* where a call to an API is done in this "stage", a method or a callback to that API call could set the new data for the state properties through `this.setState()`.
 
 #### Basic difference between props and state
 
 * props: read-only data
 * state: mutable data
 
-Remember: in both cases, either when a Component receives props or the state is "updated", it will re-render.
+Remember: *in both cases, either when a Component receives props or the state is "updated", it will re-render*.
 
 Now, an example with several of the topics we covered.
 We have a local (or component) state property: `friends`
