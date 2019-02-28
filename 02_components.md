@@ -2,6 +2,8 @@
 
 We use components to split our UI into reusable "blocks" that can receive `props` (aka, data) and return, as we saw earlier, React elements.
 
+Note: Remember that `props` are inputs to the Components. We pass this data from parent to child.
+
 You should name your component following the CamelCase (also called UpperCamelCase) convention. Example: `<ListOfRecords />`; use Lower Camel Case for DOM tags and HOC.
 
 In react there´re 2 types of Components:
@@ -14,9 +16,7 @@ In relation to internal or `local state`
 1. Stateful components
 2. Stateless, pure or presentational components (with no state management)
 
-If it´s possible (aka, no local state, no custom or life-cycle methods), use `functional components`
-
-Note: Remember that `props` are inputs to the Components. We pass this data from parent to child.
+Before `React 16.8` (Hooks), functional components were not able to hold `local state`. Be particularly aware of this is you are following an outdated tutorial.
 
 ### Class Component
 
@@ -38,7 +38,7 @@ export default App;
 
 Note: Class components require `render()` method.
 
-### Functional or stateless Component
+### Functional Component
 
 They are regular JS functions that returns a React element.
 
@@ -69,7 +69,7 @@ const App = () => (
 export default App;
 ```
 
-We use functional components when we just care about `rendering JSX`. If we want to handle `local state` or work with custom methods we should opt for `Class Components`.
+Functional components *perform better* than class components.
 
 ---
 
