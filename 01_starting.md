@@ -238,9 +238,9 @@ You can destructure as we did with `{ sayHi, showHobbies }` resulting in `import
 
 So, technically there are 2 ways of exporting...
 1. `Default export` which allows you to set any placeholder. For example, we `export default data` and import like this: `import whatever from './model';`
+
 2. Name export where you import by the name of the variable. In this case, if we `export sayHi` and we want to change the placeholder, we have to do...
 a. `import { sayHi as otherThing } from './controller';`
 Here you will call the function `otherThing()`.
-
 b. `import * as functions from './controller';`
 Here you will call the method of functions as `functions.sayHi()`.
