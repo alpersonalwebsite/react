@@ -139,3 +139,66 @@ HelloWorld = () => element;
 
 ReactDOM.render(<HelloWorld />, document.getElementById('root'));
 ```
+
+---
+
+We are going to review `Modules Systems` in deep in a future lesson, however, if you are totally new to `Node.js` and `JS` in general... Having a vague idea of what´re we doing with "import/export" will make things easier.
+
+So... Let´s forget about `React` for a moment and create some `vanilla JS` files:
+
+**/test/model.js**
+
+```javascript
+const data = {
+  name: 'Peter',
+  lastName: 'Pan',
+  age: 33,
+  hobbies: ['fly', 'play', 'eat']
+};
+export default data;
+```
+
+**/test/controller.js**
+
+```javascript
+export const sayHi = (name) => {
+  return 'Hi... My name is ' + name;
+}
+
+export const showHobbies = (hobbies) => {
+  return 'Hi... My name is ' + hobbies;
+}
+```
+
+**/test/render.js**
+
+```javascript
+import data from './model';
+
+import { sayHi, showHobbies } from './controller';
+
+console.log(sayHi(data.name));
+```
+
+**Do you understand what´s going on here...?** If so, feel free to move to the next lesson. If not, let´s think together.
+
+You can see that we are separating concerns or "parts" of our code:
+1. *Model* holds the data
+2. *Controller* all the logic
+3. *Render* the rendering part
+
+This makes your code modular, understandable and easy to update and reuse.
+
+You can see that we have the following pipeline: `render` imports both, data and functionality and it renders through the functionality or logic (aka, `controller`) the formatted piece of `data`. We can say there isn´t a strict relation between data and render if not, a connection between some kind of middleware interpreted by controller. Don´t worry! We will come back to this.
+
+If you try to execute our tiny app with `node render`, you will be prompted with the following error:
+
+```
+$ node render
+C:\test\render.js:1
+(function (exports, require, module, __filename, __dirname) { import data from '
+./model';
+                                                              ^^^^^^
+```
+
+**What´s going on...?** Node uses `CommonJS` but we are utilizing `ES2015 modules`.
