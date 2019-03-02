@@ -220,3 +220,27 @@ Now, execute in your terminal: `node index` and you will receive the output:
 ```
 Hi... My name is Peter
 ```
+
+Great job! One more thing...
+You can see that we are exporting...
+1. Model: `export default data;`
+2. Controller: `export const sayHi = (name) => {...}`
+
+**Why are we doing this...?**
+Basically, with `export default` we can import what we are exporting in x-file (example: model.js) in the following way: `import data from './model';`
+If you remove the keyword default and export with this syntax: `export const data = {...}` as we are doing in controller.js, you will have to change the way that you import data or will receive an error like:
+```
+SyntaxError: The requested module 'file:///C:/test/model.js' does not provide a
+n export named 'default'
+```
+
+You can destructure as we did with `{ sayHi, showHobbies }` resulting in `import { data } from './model';`
+
+So, technically there are 2 ways of exporting...
+1. `Default export` which allows you to set any placeholder. For example, we `export default data` and import like this: `import whatever from './model';`
+2. Name export where you import by the name of the variable. In this case, if we `export sayHi` and we want to change the placeholder, we have to do...
+a. `import { sayHi as otherThing } from './controller';`
+Here you will call the function `otherThing()`.
+
+b. `import * as functions from './controller';`
+Here you will call the method of functions as `functions.sayHi()`.
