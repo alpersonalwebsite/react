@@ -201,4 +201,22 @@ C:\test\render.js:1
                                                               ^^^^^^
 ```
 
-**What´s going on...?** Node uses `CommonJS` but we are utilizing `ES2015 modules`.
+**What´s going on...?** Node uses `CommonJS` but we are utilizing `ES2015 modules` to "deal with our modules" (files).
+
+There are several ways of solving this issue. Since we will resume this topic at future, I´m picking the easiest one: `esm`
+
+1. Let´s init our project: `npm init -y`
+2. Install `esm`: `npm install --save esm`
+3. Create a new file as the `entrypoint` of our app. Example: `index.js`
+4. Add the following content to `index.js`
+
+```JavaScript
+require = require("esm")(module/*, options*/)
+module.exports = require("./render.js")
+```
+From now on, all the files linked directly or indirectly to the main file of our App, in our case, `render.js` will support `ES2015 modules`. And, you can still use `require()` if you want.
+
+Now, execute in your terminal: `node index` and you will receive the output:
+```
+Hi... My name is Peter
+```
