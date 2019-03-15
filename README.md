@@ -1,5 +1,7 @@
 # React and Redux
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/alpersonalwebsite/react.svg)](https://greenkeeper.io/)
+
 An easy way to learn through examples.
 
 ## Before starting
