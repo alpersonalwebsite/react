@@ -1,14 +1,62 @@
-We need to have installed...
+# First steps with React
 
-* node
-* npm or yarn
-* create-react-app: npm install -g create-react-app
+## Trying React online
+You can try React online through any of the major JS "sandboxes" or "playgrounds". I´m going to use [jsfiddle](https://jsfiddle.net), but, feel free to pick your favorite.
+
+*Note:* Remember you can also include the path (local if your are working locally or absolute/CDN) to `React` and `ReactDOM` using the `src attribute of the <script> tag` which, basically, is what *jsfiddle* does when we pick both libraries. If you inspect the output, inside the iframe > head you will find the 2 libraries plus `Babel`, needed for transpiling `ES* code` (aka, last JS code) into `browser-compatible JS`.
+
+In *jsfiddle* be sure that you are including `React` and `ReactDOM`. In the `JavaScript input`, under Language, select `Babel + JSX`.
+Great! You are ready to start playing!
+
+Add within the markup or HTML a div with the id `root` (it could be any name).
+
+```html
+<div id="root"></div>
+```
+
+Inside the JS text-area, place...
+```javascript
+function MyFriend() {
+  return(
+    <div>
+      <h1>Peter</h1>
+      <div>More...</div>
+    </div>
+  );
+}
+
+var app = (
+  <MyFriend />
+);
+
+ReactDOM.render(
+  app,
+  document.getElementById('root')
+);
+```
+
+The output will be:
+```
+Peter
+More...
+```
+
+Don´t worry too much about what´s going on! We will see it in detail during this and the upcoming lessons. For the moment, just remember that you can use `React + ReactDOM` with...
+* <script> tag: locally/externally
+* Node and npm
+
+## Setting your local dev environment
+
+We need to have -previously- installed...
+
+* Node.js
+* npm or yarn (npm is installed by default with Node.js)
+* create-react-app: `npm install -g create-react-app`
 (You can also use this to update a previous globally installed version of create-react-app)
 
-Then we have to create our App.
+Time to create our App.
 
 CMD: C:\practice
-
 ```
 create-react-app myapp
 ```
@@ -16,7 +64,6 @@ create-react-app myapp
 Enter to your app folder and let´s start cleaning...
 
 Delete...
-
 1. src/App.css
 2. src/Logo.svg
 
