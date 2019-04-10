@@ -96,6 +96,23 @@ You will see the following error:
 
 This is happening because React expects just one root element (and within it, zero or multiple adjacent child).
 
+There are several ways of fixing this...
+
+1. Wrap everything within a parent element:
+```javascript
+return <div><div>1</div><div>2</div></div>
+```
+
+2. Create a HOC (Higher Order Component)
+```
+
+```
+
+3. Use React.Fragment
+```javascript
+return <React.Fragment><div>1</div><div>2</div></React.Fragment>
+```
+
 
 
 
