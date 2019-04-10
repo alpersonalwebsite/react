@@ -77,6 +77,15 @@ Quick note about `return`.
 
 Each component must always return "something": JSX, plain JS Data Types like number, string, array or "null" if we explicitly "don't want to return". You cannot avoid the return statement or just "return implicitly": `return;`.
 
+All these (among others) are valid returns:
+* `return 1;`
+* `return [1,2,3,4]` OR `return [1,2,3,4].map(element => element)`
+* `return null;`
+* `return <div>{[1,2,3,4]}</div>;`
+* `return <div>Hi</div>;`
+
+
+
 
 
 ---
