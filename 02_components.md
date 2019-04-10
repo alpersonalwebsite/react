@@ -71,6 +71,12 @@ export default App;
 
 Functional components *perform better* than class components.
 
+Quick note about `return`.
+
+Each component must always return "something": JSX, plain JS Data Types like number, string, array or null, if we explicitly "don't want to return". You cannot avoid the return statement or just `return` implicitly: `return;`
+
+
+
 ---
 
 ### Composition
