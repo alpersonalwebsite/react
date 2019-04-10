@@ -84,6 +84,18 @@ All these (among others) are valid returns:
 * `return <div>{[1,2,3,4]}</div>;`
 * `return <div>Hi</div>;`
 
+As you can see, we are always returning one MAIN or root element (remember an array is a collection).
+
+However, what happens if you try something like...
+
+```javascript
+return <div>1</div><div>2</div>
+```
+You will see the following error: 
+`Parsing error: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>?`.
+
+This is happening because React expects just one root element (and within it, zero or multiple adjacent child).
+
 
 
 
