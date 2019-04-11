@@ -104,7 +104,7 @@ There are several ways to fix it...
 return <div><div>1</div><div>2</div></div>
 ```
 
-2. Create a HOC (Higher Order Component) returning what we are passing as children
+1. Create a HOC (Higher Order Component) returning what we are passing as children
 *Note: this HOC will just wrap our component.*  
 ```javascript
 const Wrapper = props => props.children;
@@ -118,9 +118,6 @@ const App = props => {
 ```javascript
 return <React.Fragment><div>1</div><div>2</div></React.Fragment>
 ```
-
-
-
 
 ---
 
