@@ -84,35 +84,39 @@ All these (among others) are valid returns:
 * `return <div>{[1,2,3,4]}</div>;`
 * `return <div>Hi</div>;`
 
-As you can see, we are always returning one MAIN or root element (remember an array is a collection).
+As you can see, we are always returning one MAIN or root element (remember an array is a collection of elements but ONE element in essence).
 
-However, what happens if you try something like...
+However, if you try something like...
 
 ```javascript
 return <div>1</div><div>2</div>
 ```
-You will see the following error: 
+... you will see the following error: 
 `Parsing error: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>?`.
 
 This is happening because React expects just one root element (and within it, zero or multiple adjacent child).
 
-There are several ways of fixing this...
+There are several ways to fix it...
 
 1. Wrap everything within a parent element:
+*IMPORTANT: With this solution you will have an extra div in your markup.*
 ```javascript
 return <div><div>1</div><div>2</div></div>
 ```
 
-2. Create a HOC (Higher Order Component)
-```
+2. Create a HOC (Higher Order Component) returning what we are passing as children
+```javascript
+const Wrapper = props => props.children;
 
+const App = props => {
+ return <Wrapper><div>1</div><div>2</div></Wrapper>
+}
 ```
 
 3. Use React.Fragment
 ```javascript
 return <React.Fragment><div>1</div><div>2</div></React.Fragment>
 ```
-
 
 
 
