@@ -98,14 +98,17 @@ This is happening because React expects just one root element (and within it, ze
 
 There are several ways to fix it...
 
-1. Wrap everything within a parent element (example: div):
+1. Wrap everything within a parent element (example: div)
 *IMPORTANT: With this solution you will have an extra div in your markup, which could force you to override default element behavior or styling.*
 ```javascript
 return <div><div>1</div><div>2</div></div>
 ```
 
-1. Create a HOC (Higher Order Component) returning what we are passing as children
-*Note: this HOC will just wrap our component.*  
+2. Create a HOC (Higher Order Component) returning what we are passing as children 
+
+    Notes:
+   * This HOC will just wrap our component.
+   * Children will be "whatever" we pass between yhe opening and closing tags> `<Wrapper>...</Wrapper>Wrapper>`
 ```javascript
 const Wrapper = props => props.children;
 
