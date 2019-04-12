@@ -128,6 +128,31 @@ If you checked our `intro`, an particularly, the appendix *Higher Order Function
 
 There's another way of creating and utilizing a *HOC*: *a regular JS function that takes a component as parameter and returns a functional component*.
 
+```javascript
+const App = props => {
+  return <div>Hi!</div>
+}
+
+const withWrapper = ComponentToWrap => {
+  return props => {
+    return (
+      <React.Fragment>
+        <h1>Welcome!</h1>
+        <ComponentToWrap {...props} />
+      </React.Fragment>
+    )
+  }
+}
+
+
+export default withWrapper(App);
+```
+
+*When should you use this approach...?* Whenever you want to execute some kind of logic. 
+For dealing with plain markup or JSX, you can opt for the previous approach. 
+
+**IMPORTANT:** Be sure to spread the props `<ComponentToWrap {...props} />` to avoid issues (not applicable for this example since we are not passing>receiving>rendering props).
+
 
 
 ---
