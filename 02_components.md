@@ -122,6 +122,14 @@ const App = props => {
 return <React.Fragment><div>1</div><div>2</div></React.Fragment>
 ```
 
+In the solution #2 we used a **HOC** 
+
+If you checked our `intro`, an particularly, the appendix *Higher Order Functions*, probably you can guess what *HOC* refers to: *a component that takes another component as parameter and returns a new component*.
+
+There's another way of creating and utilizing a *HOC*: *a regular JS function that takes a component as parameter and returns a functional component*.
+
+
+
 ---
 
 ### Composition
