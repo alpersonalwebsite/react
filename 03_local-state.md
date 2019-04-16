@@ -122,6 +122,27 @@ componentDidMount() {
 Note: `setState()` will merge the object that we pass in into the current state.
 BTW, I´m using the lifecycle `componentDidMount()` to force a change in the state without any user interaction and just for demo purposes. In a *tiny app* where a call to an API is done in this "stage", a method or a callback to that API call could set the new data for the state properties through `this.setState()`.
 
+With `react@16.8.0` (or higher) we **CAN** use `state` in `functional components` through `hooks`.
+
+Our previous example, utilizing the `useState()` hook would look like...
+
+```
+import React, { useState } from 'react';
+
+const App = props => {
+  const [yourNameState, setYourNameState] = useState('Peter Pan');
+  return (
+    <div className="App">
+      <h1>{`Hello ${yourNameState}`}</h1>
+    </div>
+  )
+}
+
+export default App;
+```
+
+
+
 #### Basic difference between props and state
 
 * props: read-only data
