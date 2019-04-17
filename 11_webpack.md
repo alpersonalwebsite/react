@@ -386,7 +386,7 @@ However, the "biggest change" will be inside `config/` and `scripts/`
 We are not analyzing the results of ejecting (just providing a high level illustration) but, opening the door to show you what are we going to do, which basically is, wire up what CRA was doing for us out-of-the-box.
 
 We are going to start from scratch.
-What we want...? Do what CRA does plus, add some extra functionality related to our needs. We will work with the example `[basic-redux-example[redux-thunk]`.
+What we want...? Do what CRA does plus, add some extra functionality related to our needs. We will work with the example `examples/[basic-redux-example[redux-thunk]`.
 
 <!-- TODO:; what CRA is doing for us... Explain --->
 
@@ -403,7 +403,7 @@ Time to install the dependencies that we are using in our redux-thunk example:
 npm install --save axios lodash react react-dom react-redux react-router-dom redux redux-thunk
 ```
 
-We are going to move the following folders/ and files from `[basic-redux-example[redux-thunk]` to `nocra`
+We are going to move the following folders/ and files from `examples/[basic-redux-example[redux-thunk]` to `nocra`
 
 * public/
 * src/
@@ -2220,7 +2220,7 @@ Time to check!
 npm run build
 ```
 
-We should have our `index.html` (example path: file:///C:/Users/yourUser/Desktop/react/react-redux-webpack-client-server/public/index.html)
+We should have our `index.html` (example path: file:///C:/Users/yourUser/Desktop/react/examples/react-redux-webpack-client-server/public/index.html)
 
 In `.env` change `WEBPACK_STATIC_HTML_BUILD` value to `false`
 
@@ -2460,7 +2460,7 @@ _Note_: If you have multiple instances running, you PORT may change. So, always 
 
 At the moment we have 2 scripts running and watching for changes. This is a valid approach, however... We can simplify this to just 2 scripts: one for DEV, one for PROD (both, including the bundling and serving, or what´s the same, client and server part).
 
-Just in case you want to easily reuse the `react-redux-webpack-client-server` example, I will clone it and do the following changes in `react-redux-webpack-client-server-scripts`. All the upcoming topics, like imports, routing, etc, are going to be done in this folder.
+Just in case you want to easily reuse the `/examples/react-redux-webpack-client-server` example, I will clone it and do the following changes in `examples/react-redux-webpack-client-server-scripts`. All the upcoming topics, like imports, routing, etc, are going to be done in this folder.
 
 ```
 cp -a react-redux-webpack-client-server react-redux-webpack-client-server-scripts
@@ -2471,10 +2471,10 @@ _Note_: We use the `flag -a` to preserve symlinks and file attributes.
 **IMPORTANT**
 We have been "playing" with our configuration files doing and undoing changes. To be sure that you have the proper setting, please, ensure that you have the same quantity, filenames and copy+paste the code from these files into yours (this last is really important to avoid any kind of inherited issue from our previous practice).
 
-* [config\webpack.config.js](./react-redux-webpack-client-server-scripts/config/webpack.config.js)
-* [config\webpack.config.dev.client.js](./react-redux-webpack-client-server-scripts/config/webpack.config.dev.client.js)
-* [config\webpack.config.dev.server.js](./react-redux-webpack-client-server-scripts/config/webpack.config.dev.server.js)
-* [config\webpack.config.prod.client.js](./react-redux-webpack-client-server-scripts/config/webpack.config.prod.client.js)
+* [config\webpack.config.js](./examples/react-redux-webpack-client-server-scripts/config/webpack.config.js)
+* [config\webpack.config.dev.client.js](./examples/react-redux-webpack-client-server-scripts/config/webpack.config.dev.client.js)
+* [config\webpack.config.dev.server.js](./examples/react-redux-webpack-client-server-scripts/config/webpack.config.dev.server.js)
+* [config\webpack.config.prod.client.js](./examples/react-redux-webpack-client-server-scripts/config/webpack.config.prod.client.js)
 * [config\webpack.config.prod.server.js](./react-redux-webpack-client-server-scripts/config/webpack.config.prod.server.js)
 
 In our `server/server.js` we are going to make some changes to our if (!isProd) conditional. I will keep the previous code commented.

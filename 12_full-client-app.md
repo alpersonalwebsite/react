@@ -59,7 +59,7 @@ Our skeleton...
   /index.js
 ```
 
-You can see the full example on [basic-react-redux-client-app]
+You can see the full example on examples/[basic-react-redux-client-app]
 Anyway, I will add the main parts of the needed code and files to highlight the layout´s implementation.
 
 src/index.js
