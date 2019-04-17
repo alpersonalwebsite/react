@@ -1,17 +1,1 @@
-{
-  "groups": {
-    "default": {
-      "packages": [
-        "basic-react-example[map-with-key]/package.json",
-        "basic-redux-example[redux-promise]/package.json",
-        "basic-redux-example[redux-thunk]/package.json",
-        "basic-webpack[default]/package.json",
-        "react-redux-webpack-client-server-scripts/package.json",
-        "react-redux-webpack-client-server-scripts/server/package.json",
-        "react-redux-webpack-client-server/package.json",
-        "react-redux-webpack-client-server/server/package.json",
-        "react-redux-webpack-client/package.json"
-      ]
-    }
-  }
-}
+{}
