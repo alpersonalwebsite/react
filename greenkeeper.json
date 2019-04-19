@@ -1,1 +1,19 @@
-{}
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "examples/basic-react-example-lifecycle/package.json",
+        "examples/basic-react-example-state/package.json",
+        "examples/basic-react-example[map-with-key]/package.json",
+        "examples/basic-redux-example[redux-promise]/package.json",
+        "examples/basic-redux-example[redux-thunk]/package.json",
+        "examples/basic-webpack[default]/package.json",
+        "examples/react-redux-webpack-client-server-scripts/package.json",
+        "examples/react-redux-webpack-client-server-scripts/server/package.json",
+        "examples/react-redux-webpack-client-server/package.json",
+        "examples/react-redux-webpack-client-server/server/package.json",
+        "examples/react-redux-webpack-client/package.json"
+      ]
+    }
+  }
+}
