@@ -10,3 +10,4 @@ branches:
 before_install:
   - cd ./examples/basic-react-example-state
   - npm install
+  - npm run build
