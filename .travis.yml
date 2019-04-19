@@ -6,6 +6,7 @@ sudo: false
 branches:
   only:
   - master
+  - /^greenkeeper/.*$/
 
 before_install:
   - cd ./examples/basic-react-example-state
