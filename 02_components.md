@@ -27,23 +27,26 @@ const Items = () => <Item />
 
 ---
 
-In react there´re 2 types of Components:
+In `react` we have *2 types of Components*:
 
 In relation to `paradigm`...
-1. Class components (Object Oriented Programing)
+1. Class components (**pseudo** Object Oriented Programing)
 2. Functional components (Functional Programing)
 
 In relation to internal or `local state`
 1. Stateful components
 2. Stateless, pure or presentational components (with no state management)
 
-Before `React 16.8` (Hooks), functional components were not able to hold `local state`. Be particularly aware of this is you are following an outdated tutorial.
+Before `React 16.8` (aka, before `Hooks`), functional components were not able to hold `state`. Be particularly aware of this if you are following an outdated tutorial or working with "legacy code".
 
 ### Class Component
 
 ```javascript
 import React, { Component } from 'react';
 
+/* Or, if you don't 'destructure' 
+class App extends React.Component {}
+*/
 class App extends Component {
   render() {
     return (
@@ -57,13 +60,13 @@ class App extends Component {
 export default App;
 ```
 
-Note: Class components require `render()` method.
+*Note:* Class components require `render()` method.
 
 ### Functional Component
 
-They are regular JS functions that returns a React element.
+Regular JS functions that return a `React element` or `Component`.
 
-Example: pre ES6
+Example: **pre ES6**
 
 ```javascript
 function App() {
@@ -75,7 +78,7 @@ function App() {
 }
 ```
 
-Example: ES6
+Example: **ES6**
 (...with implicit return)
 
 ```javascript
@@ -90,13 +93,13 @@ const App = () => (
 export default App;
 ```
 
-Functional components *perform better* than class components.
+**Functional components** *perform better* than class components and, after the release of `Hooks`, in "90%" of the cases you should go with this approach.
 
 ---
 
 Quick note about `return`.
 
-Each component must always return "something": JSX, plain JS Data Types like number, string, array or "null" if we explicitly "don't want to return". You cannot avoid the return statement or just "return implicitly": `return;`.
+Each component must always return "something": JSX, plain JS Data Types like number, string, array, or "null" if we explicitly "don't want to return". You cannot avoid the return statement or "return implicitly": `return;`.
 
 All these (among others) are valid returns:
 * `return 1;`
@@ -105,7 +108,8 @@ All these (among others) are valid returns:
 * `return <div>{[1,2,3,4]}</div>;`
 * `return <div>Hi</div>;`
 
-As you can see, we are always returning one MAIN or root element (remember an array is a collection of elements but ONE element in essence).
+As you can see, we are always returning one MAIN or root element.
+*Note:* an array is a collection of elements, but *ONE element* in essence.
 
 However, if you try something like...
 
@@ -119,13 +123,13 @@ This is happening because React expects just one root element (and within it, ze
 
 There are several ways to fix it...
 
-1. Wrap everything within a parent element (example: div)
-*IMPORTANT: With this solution you will have an extra div in your markup, which could force you to override default element behavior or styling.*
+1. Wrap everything within a *parent/root element* (example: div)
+*IMPORTANT: With this solution you will have an extra div in your markup, which could force you to have to override default element's behavior or styling for "presentational purposes".*
 ```javascript
 return <div><div>1</div><div>2</div></div>
 ```
 
-2. Create a HOC (Higher Order Component) returning what we are passing as children 
+2. Create a *HOC* (Higher Order Component) returning what we are passing as `children` 
 
     Notes:
    * This HOC will just wrap our component.
@@ -138,7 +142,7 @@ const App = props => {
 }
 ```
 
-3. Use React.Fragment
+3. Use *React.Fragment*
 ```javascript
 return <React.Fragment><div>1</div><div>2</div></React.Fragment>
 ```
