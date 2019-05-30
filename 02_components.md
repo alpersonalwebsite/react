@@ -1,10 +1,31 @@
-## Components or screens
+## Components
 
-We use components to split our UI into reusable "blocks" that can receive `props` (aka, data) and return, as we saw earlier, React elements.
+We use components to split our UI into reusable "blocks" that can receive `props` (aka, read-only data), hold `state` (aka, mutable data) and return, as we saw earlier, `React elements`.
 
-Note: Remember that `props` are inputs to the Components. We pass this data from parent to child.
+*Note*: Remember that `props` are inputs to Components. We pass them from parent to child. This is the *unidirectional data flow* pattern.
 
-You should name your component following the CamelCase (also called UpperCamelCase) convention. Example: `<ListOfRecords />`; use Lower Camel Case for DOM tags and HOC.
+You should name your component following the *CamelCase* (also called *UpperCamelCase*) convention. 
+
+Example: `<ListOfRecords />`; use *lowerCamelCase* for `DOM elements`, `HOC`/`HOF` and `methods` in general.
+
+*Note:* Some people also name *functional components* following the *lowerCamelCase* standard, but, once they import them they rename them switching to *CamelCase*. They keep the filename with *CamelCase*
+
+Example:
+
+**Item.js**
+```javascript
+const item = () => 'This is an item'
+export default item
+```
+
+**ListOfItems.js**
+```javascript
+import Item from './Item'
+
+const Items = () => <Item />
+```
+
+---
 
 In react there´re 2 types of Components:
 
