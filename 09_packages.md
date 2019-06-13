@@ -3,7 +3,9 @@
 ### PropTypes
 
 Used to check props passed to our components against definitions.
-More info: https://www.npmjs.com/package/prop-types
+This dependency works just in `development`
+If *we want* to use validation in `production` (we should not), we can choose to use the development version by importing/requiring prop-types/prop-types instead of prop-types.
+*More info:* https://www.npmjs.com/package/prop-types
 
 CMD or terminal:
 
@@ -53,7 +55,7 @@ If you don´t have installed React Developer Tools, please, install it now:
 Refresh the page and open your Browser Developer Tools.
 Click in the React tab and expand your App view.
 
-![React DevTools: Checking props](/images/react-devTools-propTypes.png)
+![React DevTools: Checking props](images/react-devTools-propTypes.png)
 
 You can see that the App component has the following properties in its State:
 
@@ -114,7 +116,7 @@ optionalString: PropTypes.string,
 optionalSymbol: PropTypes.symbol
 ```
 
-You can define IF a property is required with .isRequired
+You can define IF a property is required with `.isRequired`
 
 ```javascript
 Child.propTypes = {
@@ -130,6 +132,21 @@ In this case, if you don´t have that property you console will show something l
 Warning: Failed prop type: The prop `yourAge` is marked as required in `Child`, but its value is `undefined`.
     in Child (at App.js:17)
     in App (at index.js:7)
+```
+
+For `class-based` components, usually you will see `propTypes` as a *static property* of the class.
+
+```javascript
+class Child extends Component {
+  static propTypes = {
+    yourName: PropTypes.string,
+    yourAge: PropTypes.number.isRequired,
+    yourNumbers: PropTypes.array
+  }
+  render() {
+    return ...
+  }
+}
 ```
 
 ---
@@ -332,7 +349,7 @@ Note: When we use ReactRouter we are rendering a Router component and passing to
 
 If you open the React DevTools you will see something like this...
 
-![React DevTools: Router and Routes](/images/react-devTools-reactRouter.png)
+![React DevTools: Router and Routes](images/react-devTools-reactRouter.png)
 
 Route component takes a path and renders its proper UI.
 
@@ -428,7 +445,7 @@ const store = createStore(
 
 If you check your console you will see...
 
-![Browser console: Logger logs](/images/logger-logs.png)
+![Browser console: Logger logs](images/logger-logs.png)
 
 ---
 
