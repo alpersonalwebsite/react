@@ -48,7 +48,3 @@ Note: packages, dependencies, libraries are going to be referenced on-demand. Th
 
 Clone the project
 git clone https://github.com/alpersonalwebsite/react.git
-
-## Tests
-
-## License

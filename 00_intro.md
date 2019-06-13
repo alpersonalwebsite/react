@@ -12,9 +12,10 @@ More than 5 years have passed since the official React´s release (*Facebook - M
 * **[130_395]** [facebook/react](https://github.com/facebook/react)
 * **[59_562]**[angular/angular.js](https://github.com/angular/angular.js)
 * **[51_687]** [jquery/jquery](https://github.com/jquery/jquery)
-* **[48767]** [angular/angular](https://github.com/angular/angular)
+* **[48_767]** [angular/angular](https://github.com/angular/angular)
 
-*Metric 2:* `dependent repositories`
+*Metric 2:* `dependent repositories` - 06/02/2019
+
 * **[2_037_095]** [facebook/react](https://github.com/facebook/react)
 * **[862_083]** [vuejs/vue](https://github.com/vuejs/vue)
 * **[330_978]** [jquery/jquery](https://github.com/jquery/jquery)
