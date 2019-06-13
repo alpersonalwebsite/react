@@ -215,9 +215,9 @@ However, something important to remind is that each time one of our function is 
 
 It´s an extension to JS syntax recommended by React to describe how our UI. It´s not mandatory; just a really convenient and standardized way of structure our component´s rendering.
 
-Note: It´s important to remember React´s motto: `A JavaScript library for building user interfaces.` Following this notion, you will find coherent to have a strict relation between `logic` and `markup` in the same small unit or component.
+*Note:* It´s important to remember React´s motto: `A JavaScript library for building user interfaces.` Following this notion, you will find coherent to have a strict relation between `logic` and `markup` in the same small unit or component.
 
-Here´s and example using JSX
+Here´s and example using `JSX`
 
 ```javascript
 class SayHi extends React.Component {
@@ -229,7 +229,7 @@ class SayHi extends React.Component {
 ReactDOM.render(<SayHi hisName="Peter" />, document.getElementById('root'));
 ```
 
-And the same example (compiled with Babel) with plain or vanilla JavaScript
+And the same example (transpiled with Babel) with `plain or vanilla JavaScript`
 
 ```javascript
 class SayHi extends React.Component {

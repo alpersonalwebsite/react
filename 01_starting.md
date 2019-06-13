@@ -1,9 +1,9 @@
 # First steps with React
 
 ## Trying React online
-You can try React online through any of the major JS "sandboxes" or "playgrounds". I´m going to use [jsfiddle](https://jsfiddle.net), but, feel free to pick your favorite.
+You can try React online through any of the major JS "sandboxes" or "playgrounds". I´m going to use [jsfiddle](https://jsfiddle.net), but, feel free to adopt whichever pleases you better. 
 
-*Note:* Remember you can also include the path (local if your are working locally or absolute/CDN) to `React` and `ReactDOM` using the `src attribute of the <script> tag` which, basically, is what *jsfiddle* does when we pick both libraries. If you inspect the output, inside the iframe > head you will find the 2 libraries plus `Babel`, needed for transpiling `ES* code` (aka, last JS code) into `browser-compatible JS`.
+*Note:* Remember you can also include the path (relative if your are working locally or absolute/CDN) to `React` and `ReactDOM` using the `src attribute of the <script> tag` which, basically, is what *jsfiddle* does when we add both libraries. If you inspect the output, inside the iframe -> head you will find the 2 libraries plus `Babel`, needed for transpiling `ES* code` (aka, last JS code) into `browser-compatible JS`.
 
 In *jsfiddle* be sure that you are including `React` and `ReactDOM`. In the `JavaScript input`, under Language, select `Babel + JSX`.
 Great! You are ready to start playing!
@@ -35,14 +35,32 @@ ReactDOM.render(
 );
 ```
 
-The output will be:
+*The output will be:*
 ```
 Peter
 More...
 ```
 
+... "same" as doing, with `plain JS` ...
+
+```javascript
+function MyFriend() {
+  return(`
+    <div>
+      <h1>Peter</h1>
+      <div>More...</div>
+    </div>`
+  );
+}
+
+const app = MyFriend();
+const root = document.getElementById('root');
+root.insertAdjacentHTML('beforeend', app)
+```
+
+
 Don´t worry too much about what´s going on! We will see it in detail during this and the upcoming lessons. For the moment, just remember that you can use `React + ReactDOM` with...
-* <script> tag: locally/externally
+* `<script>` tag: locally/externally
 * Node and npm
 
 ## Setting your local dev environment
@@ -104,7 +122,7 @@ Note about render() method: It should only be used to render or display data; ne
 Returns a JavaScript object
 It takes 3 arguments:
 
-1. tag
+1. element
 2. attributes
 3. content or element´s children
 
@@ -115,6 +133,35 @@ const element = React.createElement(
   'div',
   null,
   React.createElement('strong', null, 'Hello world!')
+);
+```
+
+*Note:* We can pass multiple parameters as the last argument. Behind the scenes, `React` will "wrap them" in an array. 
+
+Example: 
+```javascript
+...   
+React.createElement('div', null, 'Hello world!', ' More 1...', ' More 2...') 
+...
+```
+
+In our examples, if we log `element` we will have one case where the value of the key `children` will be a `string` and the other an `array of strings`
+
+```javascript
+props:
+  children: "Hello world!"
+
+props:
+  children: (3) ["Hello world!", " More 1...", " More 2..."]
+```
+
+Alternatively, we can pass an `object` as the *second argument* containing: `attributes` and the own `content` as the `value` of the children's key.
+Example:
+```javascript
+const element = React.createElement(
+  'div',
+  null,
+  React.createElement('div', { role: 'contentinfo', className: 'this-is-a-div', children: ['Hi',' Hola'] })
 );
 ```
 
@@ -142,9 +189,9 @@ If we inspect our `html` we will see our DOM node...
 </body>
 ```
 
-Another example (with components not elements)
+Another example (with `components` not elements)
 
-Example: src/index.js
+Example: `src/index.js`
 
 ```javascript
 ReactDOM.render(
@@ -155,9 +202,9 @@ ReactDOM.render(
 );
 ```
 
-Note: Remember React Apps usually have a single root element.
+*Note:* Remember `React Apps` **usually** have a `single root element`.
 
-public/index.html
+File: `public/index.html`
 
 ```html
 <div id="root"></div>
@@ -240,7 +287,7 @@ You can see that we have the following pipeline: `render` imports both, data and
 
 If you try to execute our tiny app with `node render`, you will be prompted with the following error:
 
-```
+```console
 $ node render
 C:\test\render.js:1
 (function (exports, require, module, __filename, __dirname) { import data from '
