@@ -13,7 +13,7 @@ We set the state through the state class property and access to it via: this.sta
 
 We **NEVER** modify the state directly, if not, with `setState()`
 
-REALLY Wrong:
+**REALLY Wrong:** 
 
 ```javascript
 this.state.name = 'Peter';
@@ -27,7 +27,7 @@ this.setState({ name: 'Peter' });
 
 If you modify the property of the state directly (as in the wrong example), React will not be aware of the change and it **will NOT re render your component**.
 
-```
+```javascript
 class App extends Component {
   state = {
     yourName: 'Peter Pan'
@@ -50,7 +50,7 @@ We enclose the entire content between back-ticks (\`\`).
 Expressions are defined with ${yourExpression}.
 They can be single or multi-line. Spaces, tabs and break-lines are preserved.
 
-Pre-ES6: string and variable concatenation
+*Pre-ES6:* string and variable concatenation
 
 ```javascript
 var name = 'Peter';
@@ -99,40 +99,43 @@ We can freely pass down `state` as `props`.
 
 ### How to "update" or set new state Value
 
-If we don´t care about the previous state, we can do the following...
+If we *don´t care* about the previous state, we can do the following...
 
 ```javascript
 componentDidMount() {
   this.setState({
     yourName: 'Wendy'
-  });
-}
-```
-
-If we care or the "new state" depends in the previous one...
-
-```javascript
-componentDidMount() {
-  this.setState(prevState => ({
-    yourName: `Wendy, ex ${prevState.yourName}!`
-  }));
+  })
 }
 ```
 
 Note: `setState()` will merge the object that we pass in into the current state.
 BTW, I´m using the lifecycle `componentDidMount()` to force a change in the state without any user interaction and just for demo purposes. In a *tiny app* where a call to an API is done in this "stage", a method or a callback to that API call could set the new data for the state properties through `this.setState()`.
 
+
+If the "new state" depends in the "previous one" (like `booleans` or `adding/subtracting`)
+
+```javascript
+this.setState(prevState => {
+  return {
+  ...prevState,
+  initial: prevState.initial + 1
+}
+})
+
+```
+
 With `react@16.8.0` (or higher) we **CAN** use `state` in `functional components` through `hooks`.
 
 Our previous example, utilizing the `useState()` hook would look like...
 
-```
+```javascript
 import React, { useState } from 'react';
 
-const App = props => {
+const App = () => {
   const [yourNameState, setYourNameState] = useState('Peter Pan');
   return (
-    <div className="App">
+    <div>
       <h1>{`Hello ${yourNameState}`}</h1>
     </div>
   )
@@ -140,7 +143,7 @@ const App = props => {
 
 export default App;
 ```
-
+<!-- TODO: Explain useState -->
 
 
 #### Basic difference between props and state
