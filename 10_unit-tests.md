@@ -115,7 +115,7 @@ You can also use yarn (yarn test)
 
 The result will be...
 
-![Unit Test: Snapshot](/images/unit-test-snapshot.png)
+![Unit Test: Snapshot](images/unit-test-snapshot.png)
 
 You will see in your root dir, in our case, src a new folder **\_\_snapshots\_\_**
 If you are going to be working with several people, exclude this folder from Git. In this case, add the following rule to your **.gitignore**
@@ -130,7 +130,7 @@ Feel free to check the structure of your Snapshot. Go to **src/\_\_snapshots/App
 Now, make a small change in your App Component. Just add a comment inside your class.
 If you check your console you will see something like...
 
-![Unit Test: Snapshot not matching previous one](/images/unit-test-diff-snapshot.png)
+![Unit Test: Snapshot not matching previous one](images/unit-test-diff-snapshot.png)
 
 As it says, just hit u (update) and all your test will be green (status = passed) again.
 
@@ -145,7 +145,7 @@ npm test -- --coverage
 ```
 
 Result:
-![Unit Test: Jest Coverage](/images/jest-coverage.png)
+![Unit Test: Jest Coverage](images/jest-coverage.png)
 
 ### Structural Testing
 
@@ -246,7 +246,7 @@ describe('<App />', () => {
 
 And, the SC of our console...
 
-![Unit Test: Snapshot not matching previous one](/images/unit-test-structure.png)
+![Unit Test: Snapshot not matching previous one](images/unit-test-structure.png)
 
 Great job!
 
@@ -338,7 +338,7 @@ describe('<App />', () => {
 
 Now, if you run the tests your console will look like...
 
-![Unit Test: Behavior testing](/images/unit-test-behavior-1.png)
+![Unit Test: Behavior testing](images/unit-test-behavior-1.png)
 
 Notes:
 
@@ -490,7 +490,7 @@ We tested the structural and behavioral part earlier. However, try to run the te
 
 You will see...
 
-![Unit Test: Store issue](/images/unit-test-redux-app.png)
+![Unit Test: Store issue](images/unit-test-redux-app.png)
 
 So first, let´s delimit the context changing (in our test) mount with shallow.
 Now, we are going to export our class (or function) to test the component itself rather than the connected component.
@@ -526,7 +526,7 @@ import { App } from './App';
 Hit `u` to update your Snapshot.
 Your console will look like...
 
-![Unit Test: Store issue 1](/images/unit-test-redux-app1.png)
+![Unit Test: Store issue 1](images/unit-test-redux-app1.png)
 
 As you can see, we are getting closer to the solution.
 Now, replace the UT...
@@ -551,7 +551,7 @@ beforeEach(() => {
 
 Your tests should be green again...
 
-![Unit Test: Store issue - Fix](/images/unit-test-redux-app3.png)
+![Unit Test: Store issue - Fix](images/unit-test-redux-app3.png)
 
 Remember that we exported the class to fix the issue related with the context of our store.
 

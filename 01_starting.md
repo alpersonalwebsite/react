@@ -338,3 +338,4 @@ a. `import { sayHi as otherThing } from './controller';`
 Here you will call the function `otherThing()`.
 b. `import * as functions from './controller';`
 Here you will call the method of functions as `functions.sayHi()`.
+
