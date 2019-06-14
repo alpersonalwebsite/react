@@ -7,7 +7,8 @@ An easy way to learn through examples.
 
 ## Before starting
 
-_2/21/19 UPDATE_: Many things happened in React and its ecosystem. I will try to update the sections to React 16.\*.\* and go deeper in the “Life cycle” paragraph.\*
+_2/21/19 UPDATE_: 
+Many things happened in React and its ecosystem. I will try to update the sections to React 16.\*.\* and go deeper in the “Life cycle” paragraph.\* Also, I will be splitting sections in sub-sections for better understanding and organization. 
 
 After several years of contributing, mentoring and working with React and Redux (among other related technologies of `JAMStack`), I decided to “put together” some notes linked to recurrent doubts and contrarieties that friends and co-workers have faced.
 
@@ -31,7 +32,7 @@ Before proceeding with the tutorial, please, be sure that you have installed or,
 * Node.js: https://nodejs.org/en/download/
 * Package manager (npm or yarn)
 
-Note: packages, dependencies, libraries are going to be referenced on-demand. Those whose scope is bigger (or represent some kind of particular difficulty) will be addressed in [Packages.md](Packages.md)
+*Note:* packages, dependencies, libraries are going to be referenced on-demand. Those whose scope is bigger (or represent some kind of particular difficulty) will be addressed in [09_packages](09_packages.md)
 
 **Recommended**
 
@@ -43,8 +44,3 @@ Note: packages, dependencies, libraries are going to be referenced on-demand. Th
 **Alternatives**
 
 * yarn (alternative to npm): https://yarnpkg.com/lang/en/docs/install/
-
-### Installing
-
-Clone the project
-git clone https://github.com/alpersonalwebsite/react.git
