@@ -380,7 +380,7 @@ What happens behind the scenes is easy: we return a Promise that will be resolve
 Until now, our focus was only on the App (aka, our code)... `CRA` has been effectively in charge of the rest <!--TODO:; Extend what rest is --> A good way of having a "taste" of the big picture without compromising your current work, would be: create a new app with CRA, add one Component and eject your project: `npm run eject`
 
 Here´s a screen capture comparing both `package.json`: before and after ejecting just to delight your own curiosity in case you decided to not eject a project.
-![Redux DevTools Dispatching](/images/eject-comp.png)
+![Redux DevTools Dispatching](images/eject-comp.png)
 
 However, the "biggest change" will be inside `config/` and `scripts/`
 We are not analyzing the results of ejecting (just providing a high level illustration) but, opening the door to show you what are we going to do, which basically is, wire up what CRA was doing for us out-of-the-box.
@@ -509,7 +509,7 @@ Webpack will re-compile (or re-generate) the bundle and reload our browser tab (
 
 If you go to your DevConsole and open the Network tab, these request will appear:
 
-![Webpack Network Requests](/images/webpack-network-requests.png)
+![Webpack Network Requests](images/webpack-network-requests.png)
 
 The current size of our bundle.js is: 1.49 MB
 
@@ -991,7 +991,7 @@ with...
 Execute `npm test` or `npm run test`
 
 We should see the same as before:
-![Missing CSS loader](/images/jest-basic.png)
+![Missing CSS loader](images/jest-basic.png)
 
 Create the file `config/jest/jest.config.json`
 
@@ -1038,13 +1038,13 @@ Now, we can try (first)
 
 **npm test**
 
-![npm test](/images/npm-test.png)
+![npm test](images/npm-test.png)
 
 ... then...
 
 **npm test -- --coverage**
 
-![npm --coverage](/images/npm-coverage.png)
+![npm --coverage](images/npm-coverage.png)
 
 This will show you a table with the "testing coverage" of your tests.
 
@@ -1233,7 +1233,7 @@ Execute `npm run dev` and go to http://localhost:8080/
 
 If we make a change, for example, in src/App.js we modify the h1 text, webpack will re-compile...
 
-![webpack-dev-middleware re-compiling](/images/webpackDevMiddleware-reCompiles-express.png)
+![webpack-dev-middleware re-compiling](images/webpackDevMiddleware-reCompiles-express.png)
 
 However, we lost the socket connection and in consequence, the "hot reloading feature". Every time that you make a change, YOU have to reload the browser-tab manually.
 This is ok, but, impractical. So, let´s add hot-reloading through `webpack-hot-middleware`
@@ -1323,7 +1323,7 @@ import './App.css';
 
 You should see the following error (in both, console and screen and in your Node console if you are building your project with `npm run build`).
 
-![Missing CSS loadeR](/images/missing-css-loader.png)
+![Missing CSS loadeR](images/missing-css-loader.png)
 
 The message is pretty clear: webpack needs the proper loader to process other files than \*.js.
 Let´s install:
@@ -1425,7 +1425,7 @@ Then in `src/App.js` we are going to add the following variable
 
 There´re several CSS-in-JS libraries. Here is a graph showing the "trends" between 2017/2018 in relation to 4 of those dependencies.
 
-![Missing CSS loadeR](/images/cssInJs-trends.png)
+![Missing CSS loadeR](images/cssInJs-trends.png)
 
 For more information: https://www.npmtrends.com/radium-vs-styled-components-vs-glamorous-vs-emotion
 
@@ -1470,17 +1470,17 @@ Also add example with css``
 -->
 
 Time for handling images.
-Let´s create a new dir `src/images/` and add any image. In my case, `rPI-400x400.jpg`.
+Let´s create a new dir `srcimages/` and add any image. In my case, `rPI-400x400.jpg`.
 Now, let´s import that image in our `src/App.js`
 
 ```javascript
-import rPI from './images/rPI-400x400.jpg';
+import rPI from '.images/rPI-400x400.jpg';
 ```
 
 We receive an error similar to the previous one:
 
 ```html
-ERROR in ./src/images/rPI-400x400.jpg 1:0 Module parse failed: Unexpected character '�' (1:0) You may need an appropriate loader to handle this file type. (Source code omitted for this binary file)
+ERROR in ./srcimages/rPI-400x400.jpg 1:0 Module parse failed: Unexpected character '�' (1:0) You may need an appropriate loader to handle this file type. (Source code omitted for this binary file)
 ```
 
 And yes, it ´s indeed related to a missing loader.
@@ -2002,13 +2002,13 @@ In your public folder you should see all these new files. BTW, the \*.css is so 
 Now, execute `npm run prod` and do a `curl -i -H'Accept-Encoding: br' http://localhost:8080/other-bundle.js`
 
 Result:
-![Compressed version - br](/images/curl-response-br.png)
+![Compressed version - br](images/curl-response-br.png)
 
 Great! Everything is working!
 Comment `expressStaticGzip()` and uncomment `express.static()` to test the case without compression... And do again a `curl -i -H'Accept-Encoding: br' http://localhost:8080/other-bundle.js`
 
 Result:
-![Regular response](/images/curl-response.png)
+![Regular response](images/curl-response.png)
 
 ---
 
@@ -2056,7 +2056,7 @@ Now, execute: `npm run dev`
 Go to http://127.0.0.1:8888/
 
 Result:
-![webpack-bundle-analyzer](/images/webpack-bundle-analyzer.png)
+![webpack-bundle-analyzer](images/webpack-bundle-analyzer.png)
 
 <!--TODO check more flags
 https://www.npmjs.com/package/webpack-bundle-analyzer

@@ -279,7 +279,7 @@ export default App;
 
 ... and it works, however, if you check your `dev console` you will see the following warning...
 
-![React DevTools: Checking props](/images/map-array-warning.png)
+![React DevTools: Checking props](images/map-array-warning.png)
 
 What´s going on...?
 When we are looping an array, each child (no matter the element) must have a **UNIQUE key** property which will allow React to preserve the Component>DOM relation used in the reconciliation process, letting React know which element changed. Having a key is a stable way of referring to x-element (see it ad your Passport ID).
@@ -288,7 +288,7 @@ When we are looping an array, each child (no matter the element) must have a **U
 
 If we try to use the own element/item, like "Hi", and, if our array has the element twice: `['Hi', 'Hello', 'Hola', 'Hi']` we will end with a similar warning but now referring to "key duplication".
 
-![React DevTools: Checking props](/images/map-array-duplicated-key.png)
+![React DevTools: Checking props](images/map-array-duplicated-key.png)
 
 However, you should remember that index is -still- potentially dangerous and it can produce "unexpected side effects".
 

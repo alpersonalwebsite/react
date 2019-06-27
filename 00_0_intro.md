@@ -1,16 +1,18 @@
 # React
 
-A JavaScript library for building user interfaces.
+**A JavaScript library for building user interfaces.**
 
 More than 5 years have passed since the official React´s release (*Facebook - March 2013*); nevertheless, the community interest and adoption are in constant growth.
 
 ---
 
+The following *information* is only illustrative. 
+
 *Metric 1:* `github` stars - 06/02/2019
 
 * **[140_271]** [vuejs/vue](https://github.com/vuejs/vue)
 * **[130_395]** [facebook/react](https://github.com/facebook/react)
-* **[59_562]**[angular/angular.js](https://github.com/angular/angular.js)
+* **[59_562]** [angular/angular.js](https://github.com/angular/angular.js)
 * **[51_687]** [jquery/jquery](https://github.com/jquery/jquery)
 * **[48_767]** [angular/angular](https://github.com/angular/angular)
 
@@ -22,50 +24,52 @@ More than 5 years have passed since the official React´s release (*Facebook - M
 
 ---
 
-Every time I talked with young DEVs, the React´s stamp widely extends its real existence… For the new rows of builders, handling UIs without a solid framework (we can also modestly include Angular, Vue.js…) is something unthinkable and, perhaps, fumes of an old-past ready to be forgotten.
-No matter the tool that you pick to support your work (here´s an elder Angular´s patron) we all want the same:
+Every time I talked with `young DEVs` (youth here's not more than a short term of exposure or lack "production experience"), the React´s stamp seems to widely extend its real existence... For the new rows of builders, handling `UIs` without a solid `library` (like React) or `framework` (Angular or Vue.js) is something unthinkable and, perhaps, fumes of an old-past ready to be forgotten.
+
+No matter the tool that you pick to support your work (here´s an elder AngularJS´s patron) we all want the same:
 
 * Simplicity
 * Scalability
-* Security (everything is converted into a string before render). This prevents XSS.
+* Performance
+* Security
+
+(I will also include *Community*, which undoubtedly made `React` what it's today. In a `View library` where everything has to be added: `routing`, `validation`, `global state`, etc, plurality is a must that comes from the hand of popular adoption: the bigger the Community, the more versatile the ecosystem will be)
 
 ## Why React...?
 
-* Composition: small integrated pieces of code (components) that allow us to build complex UI.
-* Use of objects to build the UI.
-* Declarative approach: we "tell" what we want not "how/steps to" obtain what we want (imperative)
-* Unidirectional data flow (from parent to child component) or "one way binding"
-* JavaScript logic: we use just JS (not a particular templating library)
-* Server Side Integration (SSR as first render)
-* Mobile Apps Development with React Native
-
-We are going to follow [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
+* *Composition:* small pieces of code (components) that allow us to build complex UIs as if we were playing with *LEGOs*
+* Use of *objects* to build the Views.
+* *Declarative approach:* we "define" what we want not "how" (steps) to obtain what we want (imperative)
+* *Unidirectional data flow* (from parent to child component)
+* *JavaScript logic*: we use just *JS* (not a particular "template language")
+* *Server Side Integration* (SSR as first render)
+* Easy *Mobile Apps Development* with `React Native`
 
 ---
 
-### SPA: Single Page Applications
+### *SPA:* Single Page Applications
 
-The idea under SPA is having a single HTML document using JS to change what the user sees on the screen, avoiding, in consequence, having to refresh the page.
-So, if the user clicks on x-link, x-data (remember that we have everything downloaded on the "first load": HTML/CSS/JS) is going to be requested asynchronously showing the proper view for that particular set of data.
+The idea behind `SPA` is having a single `HTML document` using `JS` to change what the user sees on the screen, avoiding -in consequence- having to refresh the page.
 
-React does not require a SPA implementation or approach. You can mix React with other JS libraries, use it partially (for certain features) and combine it with `Server Side Logic`.
+*Example:* if a user clicks on x-link (which is going to be prevented of its default behavior and it will act as a "toggler"), x-data (all the needed assets were downloaded on the *first load*: `HTML/CSS/JS`) is going to be requested `asynchronously` showing the proper view for that particular "model".
 
-At future we are going to see...
+`React` does not require a SPA implementation or approach. You can mix React with other JS libraries, use it partially (for certain features) and combine it with `Server Side Logic`. Most of the examples I'll provide are `SPAs`.
 
-1. Routing
-2. Keep UI and URL in sync: particular content for each route (allowing you to copy and paste a URL on the browser´s address bar, or, interact with other of its control elements like the "Go back" arrow).
-
-For this, we are going to use `react-router-dom` package. I strongly encourage you to read **React Router** [documentation](https://github.com/ReactTraining/react-router).
+At future, we are going to address `routing` and how to keep *UI and URL in sync* with `react-router` package. I strongly encourage you to read **React Router** [documentation](https://github.com/ReactTraining/react-router).
 
 ---
 
 ### What´s JSX...?
 
-It´s an extension to JS syntax recommended by React to describe how our UI. It´s not mandatory; just a really convenient and standardized way of structure our component´s rendering.
+It´s an extension to `JS syntax` recommended by React to describe *how our UI should look like*. It´s not mandatory; just a really convenient and standardized way of writing our components.
 
 *Note:* It´s important to remember React´s motto: `A JavaScript library for building user interfaces.` Following this notion, you will find coherent to have a strict relation between `logic` and `markup` in the same small unit or component.
 
-Here´s and example using `JSX`
+Or, as `React docs` describe...
+> React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display.
+
+
+Here´s and example of a class-based component using `JSX`
 
 ```javascript
 class SayHi extends React.Component {
@@ -77,7 +81,7 @@ class SayHi extends React.Component {
 ReactDOM.render(<SayHi hisName="Peter" />, document.getElementById('root'));
 ```
 
-And the same example (transpiled with Babel) with `plain or vanilla JavaScript`
+... and the same example (transpiled with `Babel`) with `plain or vanilla JavaScript`
 
 ```javascript
 class SayHi extends React.Component {
@@ -92,4 +96,59 @@ ReactDOM.render(
 );
 ```
 
-*Note:* Babel is used to compile or transpile ES6 code into syntax that old browsers can interpret.
+*Note:* `Babel` is used to transpile `es2015 (ES6)` code into syntax that old browsers can interpret.
+
+---
+
+We are going to follow [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
+
+---
+
+### React and DOM operations: **re-rendering**
+
+We are going to see this closely in future lessons, however, one of the *key* features of `React` (and what you should definitely take at the moment) is its efficiency.
+
+![updating DOM](images/updating-DOM.png)
+
+As you can see, `React` is just updating the nodes, and
+
+
+
+Code:
+```javascript
+import React, { Component } from 'react';
+
+const displayTime = () => {
+  return new Date().toLocaleString()
+}
+
+class App extends Component {
+
+  state = {
+    time: 'Initializing timer...'
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(
+      () => this.setState({ time: displayTime() }), 1000
+    )
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <div>Hi</div>
+        <div className="something">{this.state.time}</div>
+        <div>Hello</div>
+      </React.Fragment>
+    )
+  }
+}
+
+
+export default App;
+```

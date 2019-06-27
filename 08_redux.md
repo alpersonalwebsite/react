@@ -210,7 +210,7 @@ Personally, for "regular projects" I opt for the following structure...
   /css
   /data
   /hoc
-  /images
+  images
   /pages/
     Homepage.js
     index.js
@@ -613,7 +613,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 If we check our Redux DevTools console...
 
-![Redux DevTools SC](/images/redux-devTools-state.png)
+![Redux DevTools SC](images/redux-devTools-state.png)
 
 Note: remember that we can destructure or pull properties from objects.
 So...
@@ -676,7 +676,7 @@ Go to http://localhost:3000/
 
 You will see the list of comments.
 
-![Redux DevTools TEST](/images/redux-devTools-state-test.png)
+![Redux DevTools TEST](images/redux-devTools-state-test.png)
 
 Now, open your `Dev console`; go to the `Redux tab` and click on `Dispatcher`.
 Copy and paste the following Action...
@@ -697,7 +697,7 @@ payload: {
 
 ... and click on Dispatch.
 
-![Redux DevTools Dispatching](/images/redux-devTools-state-dispatch.png)
+![Redux DevTools Dispatching](images/redux-devTools-state-dispatch.png)
 
 Dispatch as many times as you want. What is going on...? Every time you dispatch, you are "cleaning" the previous state and setting the payload as the new value of your state property, in our case, comments.
 
