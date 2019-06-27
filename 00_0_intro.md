@@ -26,14 +26,15 @@ The following *information* is only illustrative.
 
 Every time I talked with `young DEVs` (youth here's not more than a short term of exposure or lack "production experience"), the React´s stamp seems to widely extend its real existence... For the new rows of builders, handling `UIs` without a solid `library` (like React) or `framework` (Angular or Vue.js) is something unthinkable and, perhaps, fumes of an old-past ready to be forgotten.
 
-No matter the tool that you pick to support your work (here´s an elder AngularJS´s patron) we all want the same:
+No matter the appliance you pick to support your work (here´s an elder AngularJS´s patron) we all want the same:
 
-* Simplicity
+* Simplicity (Abstraction)
 * Scalability
 * Performance
 * Security
+* Friendly debugging tools
 
-(I will also include *Community*, which undoubtedly made `React` what it's today. In a `View library` where everything has to be added: `routing`, `validation`, `global state`, etc, plurality is a must that comes from the hand of popular adoption: the bigger the Community, the more versatile the ecosystem will be)
+(I would also include *Community*, which -undoubtedly- made `React` what it's today. In a `View library` where everything has to be added: `routing`, `validation`, `global state`, etc, plurality is a must that comes from the hand of popular adoption: *the bigger the Community, the more versatile the ecosystem will be*)
 
 ## Why React...?
 
@@ -43,6 +44,7 @@ No matter the tool that you pick to support your work (here´s an elder AngularJ
 * *Unidirectional data flow* (from parent to child component)
 * *JavaScript logic*: we use just *JS* (not a particular "template language")
 * *Server Side Integration* (SSR as first render)
+* *Selective re-render* (Virtual DOM)
 * Easy *Mobile Apps Development* with `React Native`
 
 ---
@@ -53,20 +55,19 @@ The idea behind `SPA` is having a single `HTML document` using `JS` to change wh
 
 *Example:* if a user clicks on x-link (which is going to be prevented of its default behavior and it will act as a "toggler"), x-data (all the needed assets were downloaded on the *first load*: `HTML/CSS/JS`) is going to be requested `asynchronously` showing the proper view for that particular "model".
 
-`React` does not require a SPA implementation or approach. You can mix React with other JS libraries, use it partially (for certain features) and combine it with `Server Side Logic`. Most of the examples I'll provide are `SPAs`.
+`React` does not require a SPA implementation or approach. You can mix React with other JS libraries, use it partially (for certain features) and combine it with `Server Side Logic`. Most of the examples I'll provide are `SPAs` given that are focus is on the features, not the application. 
 
-At future, we are going to address `routing` and how to keep *UI and URL in sync* with `react-router` package. I strongly encourage you to read **React Router** [documentation](https://github.com/ReactTraining/react-router).
+Later, we are going to address `routing` and how to keep *UI and URL in sync* with `react-router` package. I strongly encourage you to read **React Router** [documentation](https://github.com/ReactTraining/react-router).
 
 ---
 
 ### What´s JSX...?
 
-It´s an extension to `JS syntax` recommended by React to describe *how our UI should look like*. It´s not mandatory; just a really convenient and standardized way of writing our components.
+It´s an extension to `JS syntax` recommended by React to describe *how our UI should look like*. It´s not mandatory; just a really convenient,standardized and abstract way of writing our components.
 
-*Note:* It´s important to remember React´s motto: `A JavaScript library for building user interfaces.` Following this notion, you will find coherent to have a strict relation between `logic` and `markup` in the same small unit or component.
+*Note:* It´s important to remember React´s motto: `A JavaScript library for building user interfaces.` Following this premise, you will find coherent to have a strict relation between `logic` and `markup` in the same small unit or component, r, as `React docs` describe...
 
-Or, as `React docs` describe...
-> React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display.
+> "React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display".
 
 
 Here´s and example of a class-based component using `JSX`
@@ -81,7 +82,7 @@ class SayHi extends React.Component {
 ReactDOM.render(<SayHi hisName="Peter" />, document.getElementById('root'));
 ```
 
-... and the same example (transpiled with `Babel`) with `plain or vanilla JavaScript`
+... and the same example (*transpiled* with `Babel`) with `plain JavaScript syntax`
 
 ```javascript
 class SayHi extends React.Component {
@@ -96,23 +97,22 @@ ReactDOM.render(
 );
 ```
 
-*Note:* `Babel` is used to transpile `es2015 (ES6)` code into syntax that old browsers can interpret.
+*Note:* `Babel` is used to transpile `es2015 or ES6` code into syntax that old browsers can interpret.
+
+
+Before leaving the `JSX` introductory annex, I should advice you we are going to follow [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
 
 ---
 
-We are going to follow [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
-
----
-
-### React and DOM operations: **re-rendering**
+### React and DOM operations: **re-rendering** and the **Virtual DOM**
 
 We are going to see this closely in future lessons, however, one of the *key* features of `React` (and what you should definitely take at the moment) is its efficiency.
 
+`React` keeps track of previous stages or *how the UI looked before*. The `Virtual DOM` is a tree composed of nodes. Each element is represented by one of these nodes. When something changes, a new `Virtual DOM` is generated and compared with the "snapshot" of the previous stage through the "diffing algorithm" performing, as the result, the minimal operations in the real `DOM`.
+
+In the following SC you can easily see HOW `React` is just updating the "textContent" of the div element without even affecting the class attribute of that node. That's efficiency! 
+
 ![updating DOM](images/updating-DOM.png)
-
-As you can see, `React` is just updating the nodes, and
-
-
 
 Code:
 ```javascript
