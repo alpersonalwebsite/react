@@ -1,3 +1,5 @@
+## JS beyond JavaScript
+
 **JS CallStack**
 High level intro: Remember, first, that JS is a single-threaded language (this basically means that it can only handle one task at the time).
 The JS engine (example: Google V8 or SpiderMonkey) defines the Global Execution Context (GEC) like "the browser or Node" (in relation to where the code is executed), sets the Global Memory or Scope) and creates the Call Stack, which allows the interpreter to keep track of what happened, what is happening and what is going to happen. For more information about this abstract Data Type: [Stack](<https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>)

@@ -1,7 +1,9 @@
-**HOF: Higher Order Function**
-Is a function that takes a function as an argument or returns a function.
+## Functional Programming
 
-Basic example: function that returns (or creates) a new function.
+**HOF: Higher Order Function**
+Is a function that takes a function as an argument AND/OR returns a function.
+
+*Basic example:* function that returns (or creates) a new function.
 
 ```javascript
 multiplyNumbers = theFirstNumber => {
