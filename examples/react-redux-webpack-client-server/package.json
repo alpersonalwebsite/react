@@ -24,7 +24,7 @@
   "license": "ISC",
   "dependencies": {
     "@emotion/core": "^10.0.15",
-    "@emotion/styled": "^10.0.5",
+    "@emotion/styled": "^10.0.15",
     "axios": "^0.18.0",
     "dotenv": "^8.0.0",
     "express-static-gzip": "^1.1.3",
