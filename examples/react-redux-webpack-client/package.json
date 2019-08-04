@@ -36,7 +36,7 @@
     "babel-jest": "^24.3.1",
     "babel-loader": "^8.0.4",
     "babel-plugin-async-to-promises": "^1.0.5",
-    "babel-plugin-transform-async-to-promises": "^0.8.5",
+    "babel-plugin-transform-async-to-promises": "^0.8.14",
     "babel-plugin-universal-import": "^4.0.0",
     "clean-webpack-plugin": "^3.0.0",
     "enzyme": "^3.8.0",
