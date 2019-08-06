@@ -68,7 +68,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "react-test-renderer": "^16.6.3",
     "regenerator-runtime": "^0.13.1",
-    "style-loader": "^0.23.1",
+    "style-loader": "^1.0.0",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.27.1",
     "webpack-bundle-analyzer": "^3.0.3",
