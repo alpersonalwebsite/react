@@ -14,7 +14,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "lodash": "^4.17.11",
-    "nodemon": "^2.0.0",
+    "nodemon": "^2.0.17",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^7.0.0",
