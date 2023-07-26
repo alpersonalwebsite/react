@@ -14,7 +14,7 @@
 *2/21/19 UPDATE*: 
 Many things happened in `React` and its ecosystem. I will try to update the sections to `React 16.8.\*` (`Hooks` and some interesting `new APIs`) and go deeper in the “Life cycle” paragraph for class-based Components. Also, I will be splitting sections in sub-sections for better understanding and proper grouping.
 
----
+--
 
 After several years of contributing, mentoring and working with `JS` and `React`, I decided to “put together” some notes linked to recurrent doubts and obstacles that friends and co-workers have to face daily.
 
@@ -52,3 +52,4 @@ Before proceeding with the tutorial, be sure that you have installed or, install
   (At the moment of writing this `doc` there are no major differences between the two, as it used to...)
 
   Learn more about the [npm registry](https://docs.npmjs.com/misc/registry) consumed by both, `yarn` and `npm`
+  Rohith is making the changes in this File.........NAKKA ROHITH BABU
