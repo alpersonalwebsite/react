@@ -60,7 +60,7 @@ Our skeleton...
 ```
 
 You can see the full example on examples/[basic-react-redux-client-app]
-Anyway, I will add the main parts of the needed code and files to highlight the layout´s implementation.
+Anyway, I will add the main parts of the needed code and files to highlight the layout's implementation.
 
 src/index.js
 
@@ -110,7 +110,7 @@ export default Header;
 ```
 
 src/layouts/index.js
-I´m using a class component since I´ll be adding logic and some life cycles hooks/methods.
+I'm using a class component since I'll be adding logic and some life cycles hooks/methods.
 
 ```javaScript
 import Header from '../components/Header';
@@ -151,4 +151,4 @@ const About = () => {
 export default About;
 ```
 
-Now, run you project and go to http://localhost:3000/about
+Now, run your project and go to http://localhost:3000/about

@@ -1,18 +1,18 @@
 ## Redux
 
-<!-- What´s Redux
+<!-- What's Redux
 State in a predictable way.
 -->
 
 <!-- TODO: First we should define the store. We have to think how the app will use that data -->
 
-In Redux there´s a single Source of Truth: the store.
+In Redux there's a single Source of Truth: the store.
 The state is read-only (immutable); components cannot write directly into the state.
 Reducers create and return a new copy of the state.
 
 When to use Redux...
 
-1. Shared state through multiple Components. Let´s say that we have ComponentA with one child, ComponentB. We can easily pass data down with props. But, if we need to pass the data across several components (example of "prop threading": from A->B->-C->D) we should consider the global state or Redux store so we can instruct (without nesting) which components will have access to that data.
+1. Shared state through multiple Components. Let's say that we have ComponentA with one child, ComponentB. We can easily pass data down with props. But, if we need to pass the data across several components (example of "prop threading": from A->B->-C->D) we should consider the global state or Redux store so we can instruct (without nesting) which components will have access to that data.
 2. Caching: when we want to cache API requests/responses.
 
 For other cases, we should opt for Local State.
@@ -25,7 +25,7 @@ What are Pure Functions...?
 
 1. They depend just in the arguments that we pass.
 2. Same arguments should return same results (this makes pure functions easy to test).
-3. They don´t produce side effects (aka, NO interaction between the function and its outside scope. Example: HTTP calls)
+3. They don't produce side effects (aka, NO interaction between the function and its outside scope. Example: HTTP calls)
 
 One common example of pure and impure functions...
 
@@ -75,7 +75,7 @@ const ADD_TO_TOTAL = 'ADD_TO_TOTAL';
 
 const addToTotal = amount => ({
   type: ADD_TO_TOTAL,
-  amount: 10
+  amount
 });
 ```
 
@@ -117,7 +117,7 @@ export default (state = 0, action) => {
 
 ###### Root reducer
 
-`createStore(reducer, [enhancer)` takes a single reducer, so... If we need to pass more than one, we should create a `rootReducer`, a reducer that utilize composition ("combined reducers") to call more than one reducer.
+`createStore(reducer, [enhancer])` takes a single reducer, so... If we need to pass more than one, we should create a `rootReducer`, a reducer that utilizes composition ("combined reducers") to call more than one reducer.
 
 Example:
 
@@ -145,7 +145,7 @@ So for the previous reducers the shape of the store will be...
 }
 ```
 
-`createStore()` recives as second argument an enhancer. We can provide our `middlewares` using `applyMiddleware()`; this method accept multiple arguments (aka, middlewares)
+`createStore()` receives as second argument an enhancer. We can provide our `middlewares` using `applyMiddleware()`; this method accepts multiple arguments (aka, middlewares)
 
 ##### Store
 
@@ -160,7 +160,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import rootReducer from './reducers';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 import App from './App';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -188,7 +188,7 @@ The `Store` has the following methods:
 
 <!-- TODO: add example for store.replaceReducer(reducer) --->
 
-IMPORTANT: In Redux (as in React or programming in general) you don´t duplicate data. Remember that you have `once Source of Truth`: the Store. Also, put special attention to the shape of the Store... Try to keep it as simple and shallow as you can obviating complex nested structures.
+IMPORTANT: In Redux (as in React or programming in general) you don't duplicate data. Remember that you have `one Source of Truth`: the Store. Also, put special attention to the shape of the Store... Try to keep it as simple and shallow as you can obviating complex nested structures.
 
 ---
 
@@ -232,7 +232,7 @@ If you want to easily reuse your components in other projects, you should probab
 ```
 
 Sometimes (aka, generally) you are going to have deeply nested paths.
-Let´s think in the following case.
+Let's think in the following case.
 We are working in our `Homepage`: `/home/yourUser/yourProject/src/pages/Homepage/index.js` and we want to include our `Footer`: `/home/yourUser/yourProject/src/components/Footer/index.js`
 
 We would do something like...
@@ -243,17 +243,17 @@ import Footer from '../../components/Footer/index.js';
 
 In big projects this can generate confusion. But, you have other option: use `'absolute paths'` instead of `'relative'`.
 
-For this, we are going to create an environment file:`src/.env`
+For this, we are going to create an environment file at the **project root**: `.env` (Create React App reads `.env` from the project root, not from `src/`).
 
 ```javascript
 NODE_PATH=src/
 ```
 
-Note: Check in your .gitignore that you are not excluding this file from versioning.
+Note about `.gitignore`: a `.env` file commonly contains secrets (API keys, tokens, database URLs), so by default you **should** exclude it from version control. The recommended pattern is to commit a `.env.example` file with placeholder values and keep the real `.env` out of git. The file in our example does not contain secrets — it only sets `NODE_PATH` — so committing it is harmless, but get into the habit of excluding `.env` so secrets cannot leak by accident later.
 
 Now, rather than using `../../components/Footer/index.js` we will use `./components/Footer/index.js` starting always from our `src/`
 
-If we place our Components in different folders (let´s say that we move Homepage to `/home/yourUser/yourProject/src/pages/main/Homepage/index.js`) our import statements will not be affected.
+If we place our Components in different folders (let's say that we move Homepage to `/home/yourUser/yourProject/src/pages/main/Homepage/index.js`) our import statements will not be affected.
 
 <!-- TODO: A little more about .env file -->
 
@@ -266,8 +266,8 @@ If we place our Components in different folders (let´s say that we move Homepag
 It allows us to dispatch actions and access to our Store from inside our components.
 For this, we use the Provider tag and the connect() method.
 
-* Provider wraps our application taking the store as prop, settings the store context and passing it down to child components.
-* Connect we can dispatch actions and access to specific parts of our state. It returns a `curried function`.
+* Provider wraps our application taking the store as prop, setting the store context and passing it down to child components.
+* With Connect we can dispatch actions and access specific parts of our state. It returns a `curried function`.
 
 ```javascript
 ...
@@ -325,9 +325,9 @@ Remember that you can `destructure`
 Example for **Functional Component**
 
 ```javascript
-const App = ({ comments }) => {
-  <div>{`Comment with id 1: ${JSON.stringify(comments[0])}`}</div>;
-};
+const App = ({ comments }) => (
+  <div>{`Comment with id 1: ${JSON.stringify(comments[0])}`}</div>
+);
 ```
 
 Note: Once you load the page, for a fraction of seconds you will see
@@ -346,9 +346,9 @@ Example:
 
 Until `this.props.comments[0]` is something (or, is different than `undefined`), we show the `'I am loading...'` message. It is not a must, but, it offers a better "contextual" interaction.
 
-<!-- TODO: Add `ownProps` fromn React Notes 7 -->
+<!-- TODO: Add `ownProps` from React Notes 7 -->
 
-Whether we use `export default connect(mapStateToProps, actions)(App);` (actions object) or `export default connect(mapStateToProps, mapDispatchToProps)(App);` (mapDispatchToProps method), `mapStateToProps` must be something. If we don´t need access to the store, just to `dispatch` we should set it as `null`
+Whether we use `export default connect(mapStateToProps, actions)(App);` (actions object) or `export default connect(mapStateToProps, mapDispatchToProps)(App);` (mapDispatchToProps method), `mapStateToProps` must be something. If we don't need access to the store, just to `dispatch` we should set it as `null`
 Example: `export default connect(null, actions)(App);`
 
 Alternatively, you can replace mapStateToProps with an anonymous function.
@@ -376,12 +376,16 @@ If you follow this approach, remember to remove `mapStateToProps`
 
 Allows us to bind dispatch() to our action creators before they hit the component.
 
-<!-- TODO: Add `mapDispatchToProps()` fromn React Notes 7 -->
+<!-- TODO: Add `mapDispatchToProps()` from React Notes 7 -->
 
 ---
 
-What is a `curried or partial app`...?
-It happens when we call a function without ALL its argument. The result will be a new function which will be waiting for the next argument.
+What is `currying`...?
+Currying is a transformation: a function that takes multiple arguments — `f(a, b, c)` — is rewritten as a chain of functions that each take exactly one argument: `f(a)(b)(c)`. Each call returns a new function waiting for the next argument, and the final call returns the result.
+
+It is closely related to, but **not the same as**, `partial application`. Partial application takes a function of N arguments and pre-fills some of them, returning a new function that takes the remaining ones — it does not require the underlying function to be one-argument-at-a-time.
+
+In React-Redux, `connect(mapStateToProps, mapDispatchToProps)(Component)` is a curried function: the first call returns a new function, which we then call with the component.
 
 Example:
 
@@ -422,11 +426,11 @@ console.log(addition(3));
 //4
 ```
 
-Note: We have 3 functions and we are returning 2 (take this as a general rule)
+Note: In this example we have 2 functions (the outer `a => ...` and the inner `b => ...`); the outer call returns the inner function, which when called returns the value.
 
 ---
 
-Now... Let´s install some libraries.
+Now... Let's install some libraries.
 
 ```
 npm install axios react-redux redux-promise redux --save
@@ -663,7 +667,7 @@ case FETCH_COMMENTS:
 ```
 
 <!-- TODO: Explain WHY return [...state, ...action.payload.data];
-We are receiving an array of objects. That´s why in our test payload we use payload: [{}] -->
+We are receiving an array of objects. That's why in our test payload we use payload: [{}] -->
 
 with...
 
@@ -710,6 +714,8 @@ case FETCH_COMMENTS:
 
 Using the same `Action`, dispatch. You can see the difference. Now, you are preserving the previous state appending the new Object. The more you dispatch the action we have in our Redux Dispatcher, the more times you will see the property of that object on screen. I did it 3 times and this is what my component is rendering...
 
+*Note*: the duplication you see when dispatching the same action repeatedly is intentional in this demo — we want to *show* that `[...state, ...action.payload.data]` appends rather than replaces. In a real reducer fetching the same list from an API you would normally replace the slice (`return action.payload.data;`) or normalize by id so that re-fetching produces the same shape.
+
 ```
 List of comments
 id labore ex et quam laborum
@@ -731,7 +737,7 @@ TESTING
 
 #### Architectural advice...
 
-Currently, our `comments` piece of state is an array of objects. This is "good enough" for this App, however, it doesn´t scale neither perform properly for big projects. You should always opt for objects with IDs as keys (aka, normalized state) instead of array.
+Currently, our `comments` piece of state is an array of objects. This is "good enough" for this App, however, it doesn't scale neither perform properly for big projects. You should always opt for objects with IDs as keys (aka, normalized state) instead of array.
 
 Using `lodash`, we can take advantage of `_.mapKeys(object, key)`. So, in our reducer first we will import `import _ from "lodash";` and then, we will change...
 
@@ -797,7 +803,7 @@ Note: `key` is the property of the object that we want for our new object proper
 
 At this point -probably- you are thinking... How will I map that object state...?
 
-And here´s where we use `lodash` (or `_`) again.
+And here's where we use `lodash` (or `_`) again.
 Having the piece of state with a new shape we can use `_.map(object)`
 So, for example, in our `App.js` we are going to include as first step. Next, we will create a method for render our comments and we will call that function from our JSX.
 
@@ -916,6 +922,6 @@ Several times we referred to Middlewares...
 In Redux we use Middlewares to intercept dispatched
 actions modifying them (or not) before they hit the reducers. We can also dispatch other actions or execute some logic at the dispatching time or layer.
 
-What is `redux-thunk`...? It´s a thunk middleware for Redux. We can use it for async HTTP requests (Redux only supports synchronous data flow) for example, when we are dealing/interacting with a server, delaying, dispatching, or dispatching if certain condition is met (like a response to our request).
+What is `redux-thunk`...? It's a thunk middleware for Redux. We can use it for async HTTP requests (Redux only supports synchronous data flow) for example, when we are dealing/interacting with a server, delaying, dispatching, or dispatching if certain condition is met (like a response to our request).
 
 With thunks we can return from the action creator a function instead of an object and intercept these actions before dispatching.

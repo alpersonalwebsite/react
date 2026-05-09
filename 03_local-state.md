@@ -1,17 +1,17 @@
 ## Local State
 
 Previously, we saw `props` as read-only or immutable data (passed from a parent to a child component). Now, we are going to see data that can "mutate" inside the component: `state`.
-Let´s imagine for a moment a TODO list.
+Let's imagine for a moment a TODO list.
 We have several items and boxes to check as "done".
 The original state of each item would be `false` and, when the user or "some logic" clicks (aka, checks) on a particular "check-box" the property state associated to it would change its value to `true` (the process could be reversed un-checking the box what would set the state to its original value: `false`).
 
-Remember: our `state` defines the UI of our App. Any "change" on the update will impact the UI. Also, that `state` is something related to the component which has and sets it, that´s why we talk about `local state`.
+Remember: our `state` defines the UI of our App. Any "change" on the update will impact the UI. Also, that `state` is something related to the component which has and sets it, that's why we talk about `local state`.
 
 ### Set state
 
 We set the state through the state class property and access to it via: this.state.theSelectedProperty.
 
-We **NEVER** modify the state directly, if not, with `setState()`
+We **NEVER** modify the state directly, but rather, with `setState()`
 
 **REALLY Wrong:** 
 
@@ -65,7 +65,7 @@ ES6: string and variable concatenation
 ```javascript
 const name = 'Peter';
 
-// Here we don´t care about single or double quotes
+// Here we don't care about single or double quotes
 console.log(`His 'name' is "${name}"`);
 ```
 
@@ -99,7 +99,7 @@ We can freely pass down `state` as `props`.
 
 ### How to "update" or set new state Value
 
-If we *don´t care* about the previous state, we can do the following...
+If we *don't care* about the previous state, we can do the following...
 
 ```javascript
 componentDidMount() {
@@ -109,11 +109,11 @@ componentDidMount() {
 }
 ```
 
-Note: `setState()` will merge the object that we pass in into the current state.
-BTW, I´m using the lifecycle `componentDidMount()` to force a change in the state without any user interaction and just for demo purposes. In a *tiny app* where a call to an API is done in this "stage", a method or a callback to that API call could set the new data for the state properties through `this.setState()`.
+Note: `setState()` will merge the object that we pass in into the current state. The merge is **shallow** — it only merges the top level. If you have a nested object in state and only pass one of its inner keys, the rest of the nested object is replaced, not merged. For nested updates you must spread the existing nested object yourself: `this.setState({ user: { ...this.state.user, name: 'Wendy' } })`.
+BTW, I'm using the lifecycle `componentDidMount()` to force a change in the state without any user interaction and just for demo purposes. In a *tiny app* where a call to an API is done in this "stage", a method or a callback to that API call could set the new data for the state properties through `this.setState()`.
 
 
-If the "new state" depends in the "previous one" (like `booleans` or `adding/subtracting`)
+If the "new state" depends on the "previous one" (like `booleans` or `adding/subtracting`)
 
 ```javascript
 this.setState(prevState => {
@@ -196,7 +196,7 @@ class App extends Component {
 export default App;
 ```
 
-Maybe you are thinking... Why do we use `() => this.deleteFriend('Wendy')`...? Simple answer: Just to avoid context issues. We want to be sure that we are referring to the Component´s context. For this, we have 2 options...
+Maybe you are thinking... Why do we use `() => this.deleteFriend('Wendy')`...? Simple answer: Just to avoid context issues. We want to be sure that we are referring to the Component's context. For this, we have 2 options...
 
 1. Wrap our event handler inside a fat arrow function (previous example)
 2. Binding the context of `deleteFriend()` at the time we reference it.
@@ -215,9 +215,9 @@ With...
 <button onClick={this.deleteFriend.bind(null, 'Wendy')}>Delete friend!</button>
 ```
 
-In this example, the `new function` that `.bind()` returns will have access to the `global context` (since we are using `null`) and will receive `'Wendy'` as parameter or argument.
+In this example, the `new function` that `.bind()` returns has its `this` set to whatever the first argument was — `null` in our case. Two caveats: with `.bind(null)`, `this` inside the bound function is literally `null` (in non-strict mode it would only be coerced to the global object for *implicit* `this`, not for explicit binding), and in this particular code `deleteFriend` is defined as a class field arrow function, so `this` is already lexically bound to the component and the value passed to `.bind()` is irrelevant. We are really only using `bind` for its second job: pre-filling `'Wendy'` as the first argument.
 
-... there´re others but these two are the most used ones.
+... there're others but these two are the most used ones.
 
 ---
 
@@ -297,7 +297,7 @@ const newFriend = new Friend();
 console.log(newFriend.name);
 ```
 
-I you review the `transpiled code` you will notice that `Babel` will set the constructor for us.
+If you review the `transpiled code` you will notice that `Babel` will set the constructor for us.
 
 For more information about this and other changes to the spec, check: [Class field declarations for JavaScript](https://github.com/tc39/proposal-class-fields)
 
@@ -314,14 +314,14 @@ class App extends Component {
 }
 ```
 
-... and, since in this tutorial we are using `create-react-app` you don´t have to worry about wiring up Babel. It´s part of the package!!!
+... and, since in this tutorial we are using `create-react-app` you don't have to worry about wiring up Babel. It's part of the package!!!
 
 ### Lifting state
 
 Sometimes, you will have more than one component trying to access to the same "piece of data".
-If you know `redux` or `react context API` (among others) forget them for a moment. Think about hard-coded data (as initial properties state) or an user supplying info through a form. Yo don´t need to make a long persistence... Just share that data between components.
+If you know `redux` or `react context API` (among others) forget them for a moment. Think about hard-coded data (as initial properties state) or a user supplying info through a form. You don't need to make a long persistence... Just share that data between components.
 
-If there´s no deeply nested need (ComponentA -> ComponentB -> ComponentC -> CompnentD) a good approach would be "host" that state on the nearest parent.
+If there's no deeply nested need (ComponentA -> ComponentB -> ComponentC -> ComponentD) a good approach would be to "host" that state on the nearest parent.
 Example:
 
 ```javascript
@@ -344,7 +344,7 @@ const ListOfBook = props => {
 const RandomBook = props => {
   return (
     <div>
-      <h2>Random book (strig object)</h2>
+      <h2>Random book (string object)</h2>
       <div>
         {props &&
           JSON.stringify(props.books[Math.floor(Math.random() * 3 + 0)])}

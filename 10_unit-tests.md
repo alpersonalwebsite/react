@@ -1,6 +1,6 @@
 ## Unit Tests
 
-<!-- TODO: What´s Unit Test -->
+<!-- TODO: What's Unit Test -->
 
 I recommend you to follow the TDD (Test Driven Development)
 You start writing the boiler-plate of your Unit Test, then you run the test which will fail and it will determine the feature that you should add to your script/program... and so on.
@@ -28,7 +28,7 @@ Yes... We are saving it as a dev dependency. So, if you go to your package.json 
 }
 ```
 
-Note: At the moment I´m writing this tutorial the last Jest version is 23.4.1, however, react-scripts is locked at 20.0.4 so other will not work.
+Note: At the moment I'm writing this tutorial the last Jest version is 23.4.1, however, react-scripts is locked at 20.0.4 so other will not work.
 
 We are going to create **src/tempPolyfills.js**
 
@@ -100,7 +100,7 @@ describe('<App />', () => {
 ---
 
 Notes:
-We use `describe` to group test. We can nest describes to tie (as well) sub-groups. We will see this in behavioral tests.
+We use `describe` to group tests. We can nest describes to tie (as well) sub-groups. We will see this in behavioral tests.
 We use `it` for each test.
 
 ---
@@ -136,7 +136,7 @@ As it says, just hit u (update) and all your test will be green (status = passed
 
 ### Coverage
 
-We can use Jest´s functionality to corroborate the coverage (%) of our UT.
+We can use Jest's functionality to corroborate the coverage (%) of our UT.
 
 CMD or terminal:
 
@@ -212,7 +212,7 @@ I will start testing...
 * That I have an input which type is text
 * That I have JUST ONE button
 
-You can also check the existence of the form tag. I´m letting this one as homework :)
+You can also check the existence of the form tag. I'm letting this one as homework :)
 
 **src/App.test.js**
 
@@ -258,11 +258,11 @@ We have to test the behavior or functionality.
 <!-- TODO: pollution issues
 -->
 
-Note: beforeEach(() => {} and afterEach(() => {} will execute functionality before/ater each IT on their scope.
+Note: `beforeEach(() => {})` and `afterEach(() => {})` execute functionality before/after each `it` in their scope.
 
 <!-- TODO: Maybe an example can clarify the scope -->
 
-Let´s include the new tests to **src/App.test.js**
+Let's include the new tests to **src/App.test.js**
 
 ```javascript
 import React from 'react';
@@ -296,9 +296,9 @@ describe('<App />', () => {
     // Initial state
     console.log(wrapper.state());
 
-    // We add to the peter to the `friend` state´s property
+    // We add to the peter to the `friend` state's property
     beforeEach(() => {
-      // I´m adding the name to keep the behavior of my method: updateStateProperty
+      // I'm adding the name to keep the behavior of my method: updateStateProperty
       wrapper.find('input').simulate('change', {
         target: { name: 'friend', value: theFriend }
       });
@@ -306,7 +306,7 @@ describe('<App />', () => {
       wrapper.update();
     });
 
-    it('updates the value of `friend` state´s property', () => {
+    it('updates the value of `friend` state's property', () => {
       console.log(wrapper.state());
       expect(wrapper.state().friend).toEqual(theFriend);
     });
@@ -318,15 +318,15 @@ describe('<App />', () => {
     describe('and adding the new friend to the list', () => {
       beforeEach(() => {
         // Yes... We simulate the event from the button
-        // Our submit handler will clear as well `friend` state´s property
+        // Our submit handler will clear as well `friend` state's property
         wrapper.find('button').simulate('submit');
       });
 
-      it('adds the new friend to `friends` state´s property', () => {
+      it('adds the new friend to `friends` state's property', () => {
         console.log(wrapper.state());
         expect(wrapper.state().friends[0]).toEqual(theFriend);
       });
-      // Now we want to clear our `friends` state´s property or set it to the initial state
+      // Now we want to clear our `friends` state's property or set it to the initial state
       afterEach(() => {
         wrapper.setState({ friends: [] });
         console.log(wrapper.state());
@@ -344,7 +344,7 @@ Notes:
 
 ```javascript
 beforeEach(() => {
-  // I´m adding the name to keep the behavior of my method: updateStateProperty
+  // I'm adding the name to keep the behavior of my method: updateStateProperty
   wrapper.find('input').simulate('change', {
     target: { name: 'friend', value: theFriend }
   });
@@ -386,7 +386,7 @@ it('renders an h1 title', () => {
 
 #### Shallow Rendering (Shallow), Full Rendering (Mount) and Static Rendering (Render)
 
-Let´s add first a functional component to the previous **src/App.js** code
+Let's add first a functional component to the previous **src/App.js** code
 
 ```javascript
 const Child = () => {
@@ -400,7 +400,7 @@ It uses a third party HTML parsing and traversal library [cheerio](https://cheer
 
 <!-- TODO: When to use each one, particularly Render -->
 
-Now, let´s console the structure of the Component using `shallow` and `mount`
+Now, let's console the structure of the Component using `shallow` and `mount`
 
 **Shallow**
 It renders the provided Component but NOT its children.
@@ -438,7 +438,7 @@ Result:
 </div>
 ```
 
-Note: Remember that console.log(wrapper.debug()); prints in the console (aka, your CMD or terminal) the component´s structure.
+Note: Remember that console.log(wrapper.debug()); prints in the console (aka, your CMD or terminal) the component's structure.
 
 **Render**
 
@@ -492,7 +492,7 @@ You will see...
 
 ![Unit Test: Store issue](images/unit-test-redux-app.png)
 
-So first, let´s delimit the context changing (in our test) mount with shallow.
+So first, let's delimit the context changing (in our test) mount with shallow.
 Now, we are going to export our class (or function) to test the component itself rather than the connected component.
 
 We will have 2 exports (one by default, the connected component)
@@ -534,7 +534,7 @@ Now, replace the UT...
 ```javascript
 beforeEach(() => {
   // Yes... We simulate the event from the button
-  // Our submit handler will clear as well `friend` state´s property
+  // Our submit handler will clear as well `friend` state's property
   wrapper.find('button').simulate('submit');
   wrapper.update();
 });
@@ -557,7 +557,7 @@ Remember that we exported the class to fix the issue related with the context of
 
 We can also create a separated component for our store (initializing it with the `Provider` tag or Component) and including it in both, our main file, example `src/index.js` and the "connected component tests".
 
-In this case (aka, how to fix the issue with the store´s context option b) we can enhance `Provider`.
+In this case (aka, how to fix the issue with the store's context option b) we can enhance `Provider`.
 
 <!-- TODO: HOC of a HOC -->
 
