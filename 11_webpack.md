@@ -108,7 +108,7 @@ someFunction();
 ```javaScript
 console.log('app.js');
 
-module.exports.someFunction = () => {
+export const someFunction = () => {
   console.log('app.js > someFunction');
 };
 ```
@@ -999,7 +999,7 @@ Create the file `config/jest/jest.config.json`
 touch config/jest/jest.config.json
 ```
 
-Also, we are going to move the jest's configuration that we have in `src/package.json` to `config/jest/jest.config.json`.
+Also, we are going to move the jest's configuration that we have in the project-root `package.json` to `config/jest/jest.config.json`.
 
 ```json
 {
@@ -1147,9 +1147,9 @@ Create file `server/BasicController.js`
 
 ```
 
-In our main package.json, src/package.json add a new script:
+In our main `package.json` (at the project root), add a new script:
 
-```
+```json
 "dev": "node src/server/index.js"
 ```
 
@@ -2084,14 +2084,18 @@ optimization: {
     chunks: 'all',
     cacheGroups: {
       vendor: {
+        test: /[\\/]node_modules[\\/]/,
+        name: 'vendors',
         filename: '[name].bundle.js',
         chunks: 'initial',
-        minChunks: 2
+        minChunks: 1
       }
     }
   }
 }
 ```
+
+Note the `test: /[\\/]node_modules[\\/]/` — without it, the `vendor` group would also pick up app code shared between chunks. Pinning the matcher to `node_modules` is what isolates third-party libraries.
 
 Now we will have:
 
@@ -2417,7 +2421,7 @@ However... We want to preserve practicality, so...
 We are going to create a new script for development in the server side which is going to watch for changes, re-build the bundle and re-start the server. Remember, this is not a dev server... It's a server which is going to work/operate/execute with our production output letting us work without having to spend too much time in the console.
 For this reason we are going to call it `build:server:flex` to prevent confusions linked to the `dev` reference.
 
-```
+```json
 "build:server:flex":"cross-env nodemon --watch build build/server-prod-bundle.js",
 ```
 

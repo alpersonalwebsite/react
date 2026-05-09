@@ -50,7 +50,7 @@ Many things happened in `React` and its ecosystem. I will try to update the sect
 
 After several years of contributing, mentoring and working with `JS` and `React`, I decided to “put together” some notes linked to recurrent doubts and obstacles that friends and co-workers have to face daily.
 
-This is a pure practical guide (*ps*, it was at the beginning): please, keep the `practical intention` present during the course of these "shared notes"; I don't have the intent of challenging the great and plentiful coaching classes, nor the books/"white papers" that today, you can easily find anywhere (starting with Facebook's own proprietary documentation).
+This is a pure practical guide (*ps*, it was at the beginning): please, keep the `practical intention` present throughout these "shared notes"; I don't have the intent of challenging the great and plentiful coaching classes, nor the books/"white papers" that today, you can easily find anywhere (starting with Facebook's own proprietary documentation).
 
 My aim, as I stated before (even with the latest add-ons and updates), is -still- clearly pragmatic. You will see some concepts and technicalities (as general and well-needed context), but you should (perhaps must) complement this "joint exercise" with other materials. I try to avoid quoting or referencing, given that an important part of your training is discovering good sources and picking those that satisfy your own and extremely personal "way to learn". However, taking a look at the mother source will not hurt you: [react](https://github.com/facebook/react).
 
