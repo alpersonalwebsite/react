@@ -1,5 +1,5 @@
 # dependencies
-/node_modules
+node_modules/
 
 # logs
 logs
@@ -11,16 +11,15 @@ yarn-error.log*
 # misc
 .DS_Store
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
 
-#npm cache dir
+# npm cache dir
 .npm
 
-# production
-/build
+# build output
+build/
+dist/
 
 # Runtime data
 pids
@@ -29,7 +28,7 @@ pids
 *.pid.lock
 
 # testing
-/coverage
+coverage/
 **/__snapshots__
 
 # TS v1 declarations files

@@ -70,7 +70,7 @@ export default App;
 ![React DevTools: Checking props](images/map-array-warning.png)
 
 What´s going on...?
-When we are looping an array, each child (no matter the element) must have a **UNIQUE key** property which will allow React to preserve the Component>DOM relation used in the reconciliation process, letting React know which element changed. Having a key is a stable way of referring to x-element (see it ad your Passport ID).
+When we are looping an array, each child (no matter the element) must have a **UNIQUE key** property which will allow React to preserve the Component>DOM relation used in the reconciliation process, letting React know which element changed. Having a key is a stable way of referring to x-element (see it as your Passport ID).
 
 **We can "fix" this adding a key to the element**. For our example, we are going to use the `item index` since we don´t have other "stable value" (I don´t recommend using it in a real project).
 
@@ -89,8 +89,8 @@ import React, { Component } from 'react';
 
 const Child = props => (
   <div>
-    <div>
-      I´m receiving...{' '}
+    <div>I´m receiving...</div>
+    <ul>
       {props.onShowingHello.map((eachGreeting, index) => (
         <li key={index}>
           <input
@@ -102,7 +102,7 @@ const Child = props => (
           <label htmlFor={eachGreeting}>{eachGreeting}</label>
         </li>
       ))}
-    </div>
+    </ul>
   </div>
 );
 
@@ -231,7 +231,7 @@ export default App;
 **src/Child.js**
 If we are using a Functional Component we will access to props through `props`, for example, `props.onPassingMessage`
 
-If we are using a Class Component, thorugh `this.props.onPassingMessage`
+If we are using a Class Component, through `this.props.onPassingMessage`
 
 ##### Dynamic values passed as props and rendering
 
@@ -243,7 +243,7 @@ state = {
 };
 ```
 
-However, in practice, usually our data is going to be dynamic. Think in an input where the user introduce some value (for example message) which is going to be passed down as prop. We would start with an empty string (`message: ''`), then a Controlled Form would update the value of the state property (`message: 'Hola'`) what would result in... `I´m receiving... Hola`
+However, in practice, usually our data is going to be dynamic. Think of an input where the user introduces some value (for example message) which is going to be passed down as prop. We would start with an empty string (`message: ''`), then a Controlled Form would update the value of the state property (`message: 'Hola'`) what would result in... `I´m receiving... Hola`
 But, until your parent Component pass "something" down, different than the default empty string, the Child one will render: `I´m receiving...`
 Not a great user experience... I´m rendering... Nothing...?
 
@@ -277,7 +277,7 @@ One of the most common cases is...
 
 4. You know how are you going to display or show the data (and local state related views if they are needed). Example: We are going to show all the users including (in our render) just `username` and `email`.
 
-5. You know related functionality. Example: We are going to sort by id DESC (you also know if you are going to use third-party functionality; in this case, `sort-by` package); so from 10 to 1.
+5. You know related functionality. Example: We are going to sort by id DESC (you also know if you are going to use third-party functionality; in this case, the `sort-by` package); so from 10 to 1.
 
 Example:
 
@@ -303,7 +303,10 @@ class App extends Component {
   }
 
   renderUsers = () => {
-    return this.state.users.sort(sortBy('-id')).map(user => {
+    // Important: copy the array before sorting. `Array.prototype.sort()` sorts
+    // in place, and mutating `this.state.users` directly would bypass `setState`
+    // and break React's change detection.
+    return [...this.state.users].sort(sortBy('-id')).map(user => {
       return (
         <li key={user.id}>{`Username: ${user.username}
         Email: ${user.email}`}</li>
@@ -377,12 +380,14 @@ Of course, you can move each component to a new file and make the proper `import
 
 #### Props and document.title
 
-If you go to your public (or dist) folder, the one where you have the boilerplate `index.html`, you will see that CRA set a "static title" for your App: `<title>React App</title>`. With one screen (in this case the root one) you could replace and set the title there without bigger issues; however, as you application starts to scale (or grow) a pre-harcoded title will not always satisfy your needs.
+If you go to your public (or dist) folder, the one where you have the boilerplate `index.html`, you will see that CRA set a "static title" for your App: `<title>React App</title>`. With one screen (in this case the root one) you could replace and set the title there without bigger issues; however, as your application starts to scale (or grow) a pre-hardcoded title will not always satisfy your needs.
 Later, we will try a more complex way of dealing with `HTML header´s tags`, but for the moment, we can add some code to our `componentDidMount()` lifecycle method utilizing as well, the `componentDidUpdate()`.
 
 We have a list of users where we are rendering just emails; so, we can set a title like: `E-mail list: x results` where x is a dynamic number.
 
-One more thing... Even when we did not see (yet) the Local State lesson, we are going to double the bet and not only use the setState() async method if not, also, take advantage of its second parameter or argument: a `callback` or a function to execute once the state property is updated.
+One more thing... Even when we did not see (yet) the Local State lesson, we are going to double the bet and not only use the setState() async method but also take advantage of its second parameter or argument: a `callback` or a function to execute once the state property is updated.
+
+*Note (modern React):* The `setState` callback is still supported in class components, but for new code the React docs recommend reacting to a state change in `componentDidUpdate` (class components) or `useEffect` (function components / hooks) instead. Both run after the DOM has been updated and are easier to reason about.
 
 ```javascript
 componentDidMount() {
@@ -396,7 +401,7 @@ componentDidMount() {
 }
 ```
 
-Open you Web Developer Console, inspect the DOM and... Yes... You will see the proper title.
+Open your Web Developer Console, inspect the DOM and... Yes... You will see the proper title.
 
 ```html
 <title>E-mail list: 10 results</title>
@@ -418,7 +423,7 @@ We use a conditional to be sure that, if other state property is updated or prop
 <!-- TODO:
 Add more about this... Composition... PureComponent...
 Im using local state before explaining it... Check if I should move to other page
-->
+-->
 
 <!-- TODO:
 Talk about callbacks

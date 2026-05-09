@@ -2,7 +2,7 @@
 
 **A JavaScript library for building user interfaces.**
 
-More than 5 years have passed since the official React´s release (*Facebook - March 2013*); nevertheless, the community interest and adoption are in constant growth.
+More than 5 years have passed since React´s official release (*Facebook - March 2013*); nevertheless, the community interest and adoption are in constant growth.
 
 ---
 
@@ -34,7 +34,7 @@ No matter the appliance you pick to support your work (here´s an elder AngularJ
 * Security
 * Friendly debugging tools
 
-(I would also include *Community*, which -undoubtedly- made `React` what it's today. In a `View library` where everything has to be added: `routing`, `validation`, `global state`, etc, plurality is a must that comes from the hand of popular adoption: *the bigger the Community, the more versatile the ecosystem will be*)
+(I would also include *Community*, which -undoubtedly- made `React` what it is today. In a `View library` where everything has to be added: `routing`, `validation`, `global state`, etc., plurality is a must that comes from the hand of popular adoption: *the bigger the Community, the more versatile the ecosystem will be*)
 
 ## Why React...?
 
@@ -55,7 +55,7 @@ The idea behind `SPA` is having a single `HTML document` using `JS` to change wh
 
 *Example:* if a user clicks on x-link (which is going to be prevented of its default behavior and it will act as a "toggler"), x-data (all the needed assets were downloaded on the *first load*: `HTML/CSS/JS`) is going to be requested `asynchronously` showing the proper view for that particular "model".
 
-`React` does not require a SPA implementation or approach. You can mix React with other JS libraries, use it partially (for certain features) and combine it with `Server Side Logic`. Most of the examples I'll provide are `SPAs` given that are focus is on the features, not the application. 
+`React` does not require a SPA implementation or approach. You can mix React with other JS libraries, use it partially (for certain features) and combine it with `Server Side Logic`. Most of the examples I'll provide are `SPAs` given that our focus is on the features, not the application. 
 
 Later, we are going to address `routing` and how to keep *UI and URL in sync* with `react-router` package. I strongly encourage you to read **React Router** [documentation](https://github.com/ReactTraining/react-router).
 
@@ -63,14 +63,14 @@ Later, we are going to address `routing` and how to keep *UI and URL in sync* wi
 
 ### What´s JSX...?
 
-It´s an extension to `JS syntax` recommended by React to describe *how our UI should look like*. It´s not mandatory; just a really convenient,standardized and abstract way of writing our components.
+It´s an extension to `JS syntax` recommended by React to describe *how our UI should look like*. It´s not mandatory; just a really convenient, standardized and abstract way of writing our components.
 
-*Note:* It´s important to remember React´s motto: `A JavaScript library for building user interfaces.` Following this premise, you will find coherent to have a strict relation between `logic` and `markup` in the same small unit or component, r, as `React docs` describe...
+*Note:* It´s important to remember React´s motto: `A JavaScript library for building user interfaces.` Following this premise, you will find it coherent to have a strict relation between `logic` and `markup` in the same small unit or component, or, as `React docs` describe...
 
 > "React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display".
 
 
-Here´s and example of a class-based component using `JSX`
+Here´s an example of a class-based component using `JSX`
 
 ```javascript
 class SayHi extends React.Component {
@@ -100,7 +100,7 @@ ReactDOM.render(
 *Note:* `Babel` is used to transpile `es2015 or ES6` code into syntax that old browsers can interpret.
 
 
-Before leaving the `JSX` introductory annex, I should advice you we are going to follow [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
+Before leaving the `JSX` introductory annex, I should advise you we are going to follow [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
 
 ---
 

@@ -1,7 +1,7 @@
 ## Functional Programming
 
 ### HOF: Higher Order Function
-Is a `function` that takes a function as an argument AND/OR returns a function.
+It is a `function` that takes a function as an argument AND/OR returns a function.
 
 *Basic example:* function that returns (or creates) a new function.
 
@@ -72,7 +72,7 @@ false
 *Important note*: You will find several tutorials (and libraries) offering methods to avoid mutating data. Some of them, using the same naming (`push`) which can be confusing, especially at the beginning. Let's see this case to dispel any possible doubt during your research.
 
 ```javascript
-/* If your prefer fat arrow fn
+/* If you prefer fat arrow fn
 const push = element => arr => {
   let tempArr = [...arr]
   tempArr.push(element)
@@ -102,9 +102,9 @@ Result:
 [1, 2, 3, 5]
 ```
 
-The method `push()()` is a `curried function` (*a function that takes multiple arguments one at the time: btw, we will see this topic in depth*). First, we are passing the element that we want to append in our new array; second, the original array.
+The method `push()()` is a `curried function` (*a function that takes multiple arguments one at a time: btw, we will see this topic in depth*). First, we are passing the element that we want to append in our new array; second, the original array.
 
-Here's the important part. In our example, `push()` is a function defined in the `global scope` while `[].push` a method of the Array data type.
+Here's the important part. In our example, `push()` is a function defined in the `global scope` while `[].push` is a method of the Array data type.
 
 Try...
 ```javascript

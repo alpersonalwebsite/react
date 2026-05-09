@@ -11,7 +11,7 @@ Remember: our `state` defines the UI of our App. Any "change" on the update will
 
 We set the state through the state class property and access to it via: this.state.theSelectedProperty.
 
-We **NEVER** modify the state directly, if not, with `setState()`
+We **NEVER** modify the state directly, but rather, with `setState()`
 
 **REALLY Wrong:** 
 
@@ -109,11 +109,11 @@ componentDidMount() {
 }
 ```
 
-Note: `setState()` will merge the object that we pass in into the current state.
+Note: `setState()` will merge the object that we pass in into the current state. The merge is **shallow** — it only merges the top level. If you have a nested object in state and only pass one of its inner keys, the rest of the nested object is replaced, not merged. For nested updates you must spread the existing nested object yourself: `this.setState({ user: { ...this.state.user, name: 'Wendy' } })`.
 BTW, I´m using the lifecycle `componentDidMount()` to force a change in the state without any user interaction and just for demo purposes. In a *tiny app* where a call to an API is done in this "stage", a method or a callback to that API call could set the new data for the state properties through `this.setState()`.
 
 
-If the "new state" depends in the "previous one" (like `booleans` or `adding/subtracting`)
+If the "new state" depends on the "previous one" (like `booleans` or `adding/subtracting`)
 
 ```javascript
 this.setState(prevState => {
@@ -215,7 +215,7 @@ With...
 <button onClick={this.deleteFriend.bind(null, 'Wendy')}>Delete friend!</button>
 ```
 
-In this example, the `new function` that `.bind()` returns will have access to the `global context` (since we are using `null`) and will receive `'Wendy'` as parameter or argument.
+In this example, the `new function` that `.bind()` returns has its `this` set to whatever the first argument was — `null` in our case. Two caveats: in strict mode (which ES modules use by default) `this` ends up as `undefined`, not the global object, and in this particular code `deleteFriend` is defined as a class field arrow function, so `this` is already lexically bound to the component and the value passed to `.bind()` is irrelevant. We are really only using `bind` for its second job: pre-filling `'Wendy'` as the first argument.
 
 ... there´re others but these two are the most used ones.
 
@@ -297,7 +297,7 @@ const newFriend = new Friend();
 console.log(newFriend.name);
 ```
 
-I you review the `transpiled code` you will notice that `Babel` will set the constructor for us.
+If you review the `transpiled code` you will notice that `Babel` will set the constructor for us.
 
 For more information about this and other changes to the spec, check: [Class field declarations for JavaScript](https://github.com/tc39/proposal-class-fields)
 
@@ -319,9 +319,9 @@ class App extends Component {
 ### Lifting state
 
 Sometimes, you will have more than one component trying to access to the same "piece of data".
-If you know `redux` or `react context API` (among others) forget them for a moment. Think about hard-coded data (as initial properties state) or an user supplying info through a form. Yo don´t need to make a long persistence... Just share that data between components.
+If you know `redux` or `react context API` (among others) forget them for a moment. Think about hard-coded data (as initial properties state) or a user supplying info through a form. You don´t need to make a long persistence... Just share that data between components.
 
-If there´s no deeply nested need (ComponentA -> ComponentB -> ComponentC -> CompnentD) a good approach would be "host" that state on the nearest parent.
+If there´s no deeply nested need (ComponentA -> ComponentB -> ComponentC -> ComponentD) a good approach would be to "host" that state on the nearest parent.
 Example:
 
 ```javascript
@@ -344,7 +344,7 @@ const ListOfBook = props => {
 const RandomBook = props => {
   return (
     <div>
-      <h2>Random book (strig object)</h2>
+      <h2>Random book (string object)</h2>
       <div>
         {props &&
           JSON.stringify(props.books[Math.floor(Math.random() * 3 + 0)])}

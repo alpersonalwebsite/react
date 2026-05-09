@@ -4,11 +4,11 @@ We use components to split our UI into reusable "blocks" that can receive `props
 
 *Note*: Remember that `props` are inputs to Components. We pass them from parent to child. This is the *unidirectional data flow* pattern.
 
-You should name your component following the *CamelCase* (also called *UpperCamelCase*) convention. 
+You should name your component following the *PascalCase* (sometimes called *UpperCamelCase*) convention — i.e. each word starts with a capital, including the first one.
 
-Example: `<ListOfRecords />`; use *lowerCamelCase* for `DOM elements`, `HOC`/`HOF` and `methods` in general.
+Example: `<ListOfRecords />`; use *camelCase* (sometimes called *lowerCamelCase*) for `DOM elements`, `HOC`/`HOF` and `methods` in general.
 
-*Note:* Some people also name *functional components* following the *lowerCamelCase* standard, but, once they import them they rename them switching to *CamelCase*. They keep the filename with *CamelCase*
+*Note:* Some people also name *functional components* following the *camelCase* standard, but, once they import them they rename them switching to *PascalCase*. They keep the filename with *PascalCase*
 
 Example:
 
@@ -30,8 +30,8 @@ const Items = () => <Item />
 In `react` we have *2 types of Components*:
 
 In relation to `paradigm`...
-1. Class components (**pseudo** Object Oriented Programing)
-2. Functional components (Functional Programing)
+1. Class components (**pseudo** Object Oriented Programming)
+2. Functional components (Functional Programming)
 
 In relation to internal or `local state`
 1. Stateful components
@@ -93,7 +93,7 @@ const App = () => (
 export default App;
 ```
 
-**Functional components** *perform better* than class components and, after the release of `Hooks`, in "90%" of the cases you should go with this approach.
+**Functional components** are the recommended default for new code since the release of `Hooks` (`React 16.8`). The reasons are not raw performance — the React team has explicitly said function and class components have similar runtime cost — but rather: less boilerplate, no `this`-binding edge cases, easier composition, and access to the `Hooks` API (`useState`, `useEffect`, `useMemo`, custom hooks, etc.).
 
 ---
 
@@ -119,7 +119,7 @@ return <div>1</div><div>2</div>
 ... you will see the following error: 
 `Parsing error: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>?`.
 
-This is happening because React expects just one root element (and within it, zero or multiple adjacent child).
+This is happening because React expects just one root element (and within it, zero or multiple adjacent children).
 
 There are several ways to fix it...
 
@@ -133,7 +133,7 @@ return <div><div>1</div><div>2</div></div>
 
     Notes:
    * This HOC will just wrap our component.
-   * Children will be "whatever" we pass between yhe opening and closing tags> `<Wrapper>...</Wrapper>Wrapper>`
+   * Children will be "whatever" we pass between the opening and closing tags: `<Wrapper>...</Wrapper>`
 ```javascript
 const Wrapper = props => props.children;
 
@@ -149,11 +149,13 @@ return <React.Fragment><div>1</div><div>2</div></React.Fragment>
 
 In the solution #2 we used a **HOC** 
 
-If you checked our `intro`, an particularly, the appendix *Higher Order Functions*, probably you can guess what *HOC* refers to: *a component that takes another component as parameter and returns a new component*.
+If you checked our `intro`, and particularly, the appendix *Higher Order Functions*, probably you can guess what *HOC* refers to: *a component that takes another component as parameter and returns a new component*.
 
 There's another way of creating and utilizing a *HOC*: *a regular JS function that takes a component as parameter and returns a functional component*.
 
 ```javascript
+import React from 'react';
+
 const App = props => {
   return <div>Hi!</div>
 }
@@ -193,8 +195,8 @@ const App = () => (
   <div className="App">
     <h1>Hello World!</h1>
     <IntroComponent />
-    <LanguageComponent default="en">
-    <ContactComponent>
+    <LanguageComponent default="en" />
+    <ContactComponent />
   </div>
 );
 ```
@@ -208,4 +210,4 @@ Example:
 
 Nevertheless, we are not going to dissect the door-lock until we have screws, metal, plastic and paint... Even when (for example) screws are going to be used in several elements.
 
-Think in elements as words and components as phrases.
+Think of elements as words and components as phrases.

@@ -28,7 +28,7 @@ export default App;
 ```
 
 You can use React Developer Tools to check the state of your Component.
-Open your browser Developer Tools, click in React tab and select your Component, in this case <App />
+Open your browser Developer Tools, click on the React tab and select your Component, in this case <App />
 At the right you will find:
 
 * props
@@ -56,7 +56,7 @@ Same example but using the ternary operator:
 </div>
 ```
 
-At future we will other ways of `conditional rendering`.
+In the future we will see other ways of `conditional rendering`.
 
 Note: The same criteria can be used to enable/disable "elements".
 
@@ -65,7 +65,7 @@ Before proceeding, you should know that `Controlled Components` refer to:
 * inputs
 * selects
 * textareas
-  ... all of them, have their own state which is based on the user´s action (the information he provides, the option that he selects, the checkbox that he checks, et).
+  ... all of them, have their own state which is based on the user´s action (the information he provides, the option that he selects, the checkbox that he checks, etc.).
 
 Selects: To avoid the warning, `` Warning: Use the`defaultValue`or`value`props on <select> instead of setting `selected`on <option>. ``, we use the attribute value on select instead of the selected one on the particular option. Remember that there´s a strict relation between state and element, so if you want to start showing (aka, selecting) a particular option, you should initialize your state with it.
 
@@ -150,7 +150,7 @@ export default App;
 #### .map() and key attribute
 
 Before jumping to other topic, let´s address one possible issue in our code setting a context.
-Daily, we interact with lists that filters (aka, update) its composition or results. Example: Amazon searcher and suggested keys/terms/products. However, as you probably noticed, there´s "some kind of delay" that allows you to receive suggestions per words or terms and not per letters.
+Daily, we interact with lists that filter (aka, update) their composition or results. Example: Amazon search and suggested keys/terms/products. However, as you probably noticed, there´s "some kind of delay" that allows you to receive suggestions per words or terms and not per letters.
 
 Let´s modify our previous example.
 Before closing the div, add...
@@ -176,7 +176,7 @@ For more information (also Throttling): https://www.npmjs.com/package/react-thro
 1. Install `react-throttle` package
 2. Destructure and import Debounce
 3. Add the Debounce component with the proper configuration wrapping the input
-   (... and remover `value={yourName}` from your input, if not, it will not work. Don´t worry, Debounce will take care of showing the proper data/value)
+   (... and remove `value={yourName}` from your input, if not, it will not work. Don´t worry, Debounce will take care of showing the proper data/value)
 
 ```javascript
 <Debounce time="400" handler="onChange">
@@ -192,9 +192,9 @@ Try now to type your name... A lot better, no...?
 
 #### Destructuring
 
-In React you will use destructuring (ES6) a lot. Even when it´s not a functional requisite, it makes your code look cleaner and it follows the Community´s standards.
+In React you will use destructuring (ES6) a lot. Even when it´s not a functional requirement, it makes your code look cleaner and it follows the Community´s standards.
 
-So... What is Destructure...?
+So... What is Destructuring...?
 Just a convenient way of pulling out values from object and array objects.
 
 Examples:
@@ -216,7 +216,7 @@ Then, use yourName or yourAge instead of this.props.yourName or this.props.yourA
 
 ##### One note about working with forms
 
-By default, when you submit a form, the fields (name and value) are serialized in the URL:
+By default, an HTML form uses `method="GET"`, and a GET submission serializes the fields (name and value) into the URL as query string parameters. (With `method="POST"` the fields go in the request body instead, not the URL.) The form in our snippet does not specify a method, so it falls back to GET — which is why the example URL contains the field names and values.
 
 Example:
 http://localhost:3000/?name=Peter&lastName=Pan&age=30
@@ -414,6 +414,6 @@ class App extends Component {
 export default App;
 ```
 
-Probably, uncontrolled forms elements will remember you the `old vanilla JavaScript or jQuery way` of grabbing and interacting with data: someone provides information and through a particular `event` we collect and process that data.
+Probably, uncontrolled forms elements will remind you of the `old vanilla JavaScript or jQuery way` of grabbing and interacting with data: someone provides information and through a particular `event` we collect and process that data.
 
 So, if you are just planning to pull data from "elements" and submit it... Well, you could technically use "uncontrolled components" without major damage. Remind that you can also utilize "controlled" ones and take advantage of real-time elements validation, UI or screen for particular states, among others features.

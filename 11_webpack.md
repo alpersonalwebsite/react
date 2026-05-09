@@ -96,7 +96,7 @@ touch app.js index.js other.js
 **index.js**
 
 ```javaScript
-import App, { someFunction } from './app';
+import { someFunction } from './app';
 
 console.log('index.js');
 
@@ -241,8 +241,8 @@ At the beginning of the React´s Introduction, we saw how we could reuse and enh
 This topic (JS Module Systems) is extremely close to the compositional POV: just replace components with modules and you will have a clear inaugural understanding.
 
 Daily, we write logic (or logic plus UI). It´s not strange that, with some recurrence, if we architected our projects in the right way ("standardization") we will find ourselves reusing previous code.
-During your first steps, copying and pasting code between files was something forgivable: far away from a good practice, nor an useful methodology, but, in those moments you were struggling with bigger priorities. Now, however, having a deeper understanding imagine if every time you want to consume "x-function" you manually ad its code to the particular file, and, one day, you have to update or enhance your function. Yes, global search will help you but this approach will never scale.
-With this in mind, we could create a module (or package) use it, share it and re-use it. You have been doing it through React, but also, at the time of consuming `npm packages`: you import the entire package or part of it (x-function) and call it in as many places (aka, files) as necessary. And, if a new version is released, you just have to update the version of the packaging (having the possibility of anchor or lock to a particular version in case of issues related to compatibility).
+During your first steps, copying and pasting code between files was something forgivable: far away from a good practice, nor a useful methodology, but, in those moments you were struggling with bigger priorities. Now, however, having a deeper understanding imagine if every time you want to consume "x-function" you manually add its code to the particular file, and, one day, you have to update or enhance your function. Yes, global search will help you but this approach will never scale.
+With this in mind, we could create a module (or package) use it, share it and re-use it. You have been doing it through React, but also, at the time of consuming `npm packages`: you import the entire package or part of it (x-function) and call it in as many places (aka, files) as necessary. And, if a new version is released, you just have to update the version of the packaging (having the possibility of anchoring or locking to a particular version in case of issues related to compatibility).
 
 At a "high-level" Module Systems are "rules" to define how we are going to "include" files in our project or application.
 
@@ -313,7 +313,7 @@ define([], function() {
 Result: `index.js | app.js | app.js > someFunction`
 
 **ES2015 modules** (also known as ECMAScript 6)
-Sight: Standarization. Both client and server side.
+Sight: Standardization. Both client and server side.
 Behavior: sync/async compatible.  
 As we did with CommonJS invert the order of the 2 first lines of code: results don´t change since import is static and we cannot define freely where to call it.
 `app.js | index.js | app.js > someFunction`
@@ -477,7 +477,7 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env', '@babel/react']
+              presets: ['@babel/preset-env', '@babel/preset-react']
             }
           }
         ]
@@ -673,7 +673,7 @@ mode: 'development',
 ```
 
 Now, run both commands (scripts) again.
-Everything should be working... And it should be working as before. However, if you compare the ouput (size of the bundled files)
+Everything should be working... And it should be working as before. However, if you compare the output (size of the bundled files)
 
 ```
 ./mainbundle.js > Now: 155 KB - Before: 1.16 MiB  
@@ -1098,7 +1098,7 @@ mkdir server && cd server
 Init the server project and install express (plus body-parser)
 
 ```
-npm init - y
+npm init -y
 npm install express body-parser
 ```
 
@@ -1186,7 +1186,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware')(
   config.devServer
 );
 
-const webpackHotMiddlware = require('webpack-hot-middleware')(
+const webpackHotMiddleware = require('webpack-hot-middleware')(
   compiler,
   config.devServer
 );
@@ -1209,7 +1209,7 @@ class RouterAndMiddlewares {
     this.app.use(bodyParser.json());
 
     this.app.use(webpackDevMiddleware);
-    this.app.use(webpackHotMiddlware);
+    this.app.use(webpackHotMiddleware);
 
     const staticMiddleware = express.static('public');
     this.app.use(staticMiddleware);
@@ -1470,17 +1470,17 @@ Also add example with css``
 -->
 
 Time for handling images.
-Let´s create a new dir `srcimages/` and add any image. In my case, `rPI-400x400.jpg`.
+Let´s create a new dir `src/images/` and add any image. In my case, `rPI-400x400.jpg`.
 Now, let´s import that image in our `src/App.js`
 
 ```javascript
-import rPI from '.images/rPI-400x400.jpg';
+import rPI from './images/rPI-400x400.jpg';
 ```
 
 We receive an error similar to the previous one:
 
 ```html
-ERROR in ./srcimages/rPI-400x400.jpg 1:0 Module parse failed: Unexpected character '�' (1:0) You may need an appropriate loader to handle this file type. (Source code omitted for this binary file)
+ERROR in ./src/images/rPI-400x400.jpg 1:0 Module parse failed: Unexpected character '�' (1:0) You may need an appropriate loader to handle this file type. (Source code omitted for this binary file)
 ```
 
 And yes, it ´s indeed related to a missing loader.
@@ -1564,7 +1564,7 @@ const isProd = process.env.NODE_ENV === 'production';
 And wrap everything that we don´t need in `production` inside the condition: `!isProd`. Also, declare the variables outside the if statement:
 
 ```javascript
-let webpackDevMiddleware, webpackHotMiddlware;
+let webpackDevMiddleware, webpackHotMiddleware;
 if (!isProd) {
   ...
   webpackDevMiddleware = require('webpack-dev-middleware')(
@@ -1863,10 +1863,10 @@ And, finally, we are going to replace the rule for `\.css` with:
 
 Let´s test that everything is behaving properly:
 
-* `npm star`
+* `npm start`
 * `npm run build`
 
-Congratulations! But (and yes, always is a but) our `css outpout` is not optimized for a `prod env` (at least, we would want to minimize the code)
+Congratulations! But (and yes, always is a but) our `css output` is not optimized for a `prod env` (at least, we would want to minimize the code)
 If you open the \*.css file, you will see:
 
 ```css
@@ -1973,7 +1973,7 @@ with this...
 this.app.use(
   expressStaticGzip('public', {
     enableBrotli: true,
-    prefere: ['br']
+    orderPreference: ['br']
   })
 );
 ```
@@ -2084,7 +2084,7 @@ optimization: {
     chunks: 'all',
     cacheGroups: {
       vendor: {
-        filename: '[name].bundle.js'
+        filename: '[name].bundle.js',
         chunks: 'initial',
         minChunks: 2
       }
@@ -2119,7 +2119,7 @@ Great! Everything is working properly and now, we have our code separated from v
 
 ---
 
-##From a Client Side Rendering (Traditional React App) to Server Side rendering
+## From a Client Side Rendering (Traditional React App) to Server Side rendering
 
 At the moment, we have the following scripts
 
@@ -2141,7 +2141,7 @@ Before diving into SSR, I want to make a change to preserve the HTML build funct
 Now, we are using `HTMLWebpackPlugin`, passing an HTML template and generating (via this plugin) our HTML document, `index.html`, the one that we serve as root access point of our `static site`.
 As we said, we are going to delegate the creation and rendering of the markup (HTML) to the express server.
 
-What happen if you want to make a build as we have been doing it previously...?
+What happens if you want to make a build as we have been doing it previously...?
 Let´s use an "environment variable" and some conditional logic to satisfy the needs of both cases: static and dynamic HTML.
 
 Create at the root level the file `.env`
@@ -2478,13 +2478,12 @@ We have been "playing" with our configuration files doing and undoing changes. T
 * [config\webpack.config.prod.server.js](./react-redux-webpack-client-server-scripts/config/webpack.config.prod.server.js)
 
 In our `server/server.js` we are going to make some changes to our if (!isProd) conditional. I will keep the previous code commented.
-In either case (if is prod or not) we are going to require the client and server configuration files, and, instead of passing one argument to webpack() method we are going to pass an array with both (client and server). The output that we are holding in the variable compiler will be an object; withing its properties, we will find compilers which data type is an array and it holds 2 elements. We can easily refer to each one doing: compiler.
-array with 2 elements: so we can easily refer to each one doing compiler.compilers[index].
+In either case (if is prod or not) we are going to require the client and server configuration files, and, instead of passing one argument to webpack() method we are going to pass an array with both (client and server). The output that we are holding in the variable compiler will be an object; within its properties, we will find compilers which data type is an array and it holds 2 elements. We can easily refer to each one doing: compiler.compilers[index].
 
 Let´s start with the first part of our condition if (!isProd), when we are in DEV mode.
 To webpack-dev-middleware we are going to pass both compilers.
 To webpack-hot-middleware, just the configuration related to our client.
-For both, we are going to use the devServer property configuratin that we have in ../config/webpack.config.dev.client.js
+For both, we are going to use the devServer property configuration that we have in ../config/webpack.config.dev.client.js
 
 In package.json replace the dev script with...
 

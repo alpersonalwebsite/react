@@ -2,12 +2,11 @@
 
 **createElement()**
 
-Returns a JavaScript object
-It takes 3 arguments:
+Returns a JavaScript object that describes what should be rendered. Its signature is `React.createElement(type, [props], [...children])`:
 
-1. element
-2. attributes
-3. content or element´s children
+1. `type` — a string for a DOM element (e.g. `'div'`) or a reference to a React component
+2. `props` — an object of props/attributes (or `null` if none)
+3. `...children` — zero or more child elements/strings (variadic: you can pass as many as you need)
 
 Example:
 
@@ -96,8 +95,7 @@ File: `public/index.html`
 ### Elements
 
 As we saw previously, we create elements through `React.createElement()`.
-An element is an object that describes what we want to show in the screen.
-Well, it is (in fact) an object representation of a DOM node.
+An element is a plain JavaScript object that describes what we want to show on the screen — either a DOM node (when `type` is a string like `'div'`) or another React component (when `type` is a component reference). Elements are immutable and cheap to create; React uses them as the input to its reconciliation algorithm.
 
 ```javascript
 const element = <div>Im an element!</div>;
@@ -112,7 +110,7 @@ const element = React.createElement(
   React.createElement('strong', null, 'Hello world!')
 );
 
-HelloWorld = () => element;
+const HelloWorld = () => element;
 
 ReactDOM.render(<HelloWorld />, document.getElementById('root'));
 ```

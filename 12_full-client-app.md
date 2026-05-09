@@ -151,4 +151,4 @@ const About = () => {
 export default About;
 ```
 
-Now, run you project and go to http://localhost:3000/about
+Now, run your project and go to http://localhost:3000/about

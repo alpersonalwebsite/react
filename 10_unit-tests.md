@@ -100,7 +100,7 @@ describe('<App />', () => {
 ---
 
 Notes:
-We use `describe` to group test. We can nest describes to tie (as well) sub-groups. We will see this in behavioral tests.
+We use `describe` to group tests. We can nest describes to tie (as well) sub-groups. We will see this in behavioral tests.
 We use `it` for each test.
 
 ---
@@ -258,7 +258,7 @@ We have to test the behavior or functionality.
 <!-- TODO: pollution issues
 -->
 
-Note: beforeEach(() => {} and afterEach(() => {} will execute functionality before/ater each IT on their scope.
+Note: beforeEach(() => {} and afterEach(() => {} will execute functionality before/after each `it` on their scope.
 
 <!-- TODO: Maybe an example can clarify the scope -->
 

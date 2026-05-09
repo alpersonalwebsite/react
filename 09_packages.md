@@ -3,8 +3,8 @@
 ### PropTypes
 
 Used to check props passed to our components against definitions.
-This dependency works just in `development`
-If *we want* to use validation in `production` (we should not), we can choose to use the development version by importing/requiring prop-types/prop-types instead of prop-types.
+This dependency works just in `development`.
+If you want to use validation in `production` as well (we generally do not recommend it), you can opt in to the development bundle by importing `prop-types/prop-types` instead of `prop-types`.
 *More info:* https://www.npmjs.com/package/prop-types
 
 CMD or terminal:
@@ -290,7 +290,7 @@ ReactDOM.render(
 );
 ```
 
-Why we use exact for "/"...?
+Why do we use exact for "/"...?
 If we don´t add the exact attribute, both screens will render when we go to the main route "/".
 
 An example to clarify.
@@ -343,7 +343,7 @@ Now...
 What happens if we try: http://localhost:3000/animals/cat...?
 It will render **App0**.
 
-Add `<Route path="/animals/:animal" component={App1} />` at the top. Now, everything that matches the patten `/animals/:animal` (including `/animals/dogs`) will render **App1**.
+Add `<Route path="/animals/:animal" component={App1} />` at the top. Now, everything that matches the pattern `/animals/:animal` (including `/animals/dogs`) will render **App1**.
 
 Note: When we use ReactRouter we are rendering a Router component and passing to it a history prop.
 
@@ -353,7 +353,7 @@ If you open the React DevTools you will see something like this...
 
 Route component takes a path and renders its proper UI.
 
-Let´s go back to our `<Switch>` example for a moment. Through the URI we can get the `animal` that the user is passing (`/animals/:animal`) and execute some operation. For example, make a request to x-API to retrieve all the information related to that animal. To ilustrate the point, in **App1** I´m, adding...
+Let´s go back to our `<Switch>` example for a moment. Through the URI we can get the `animal` that the user is passing (`/animals/:animal`) and execute some operation. For example, make a request to x-API to retrieve all the information related to that animal. To illustrate the point, in **App1** I´m adding...
 
 ```javascript
 class App1 extends Component {
@@ -389,7 +389,7 @@ In the JSX, I´m printing as well the `match` property which its parsed-value wo
 
 ---
 
-We don´t use <a> if not Link which keeps sync with BrowserRouter; Link renders an anchor tag.
+We don´t use <a> but rather, Link which keeps sync with BrowserRouter; Link renders an anchor tag.
 We can pass parameters to Link using an object instead of a string as value.
 
 ```javascript
@@ -486,6 +486,8 @@ Example:
 **Action creator**
 
 ```javascript
+import axios from 'axios';
+
 export const FETCH_COMMENTS = 'FETCH_COMMENTS';
 
 export const fetchComments = () => {
@@ -493,7 +495,7 @@ export const fetchComments = () => {
   const request = axios.get(api);
 
   return {
-    type: FETCH_WEATHER,
+    type: FETCH_COMMENTS,
     payload: request
   };
 };
@@ -517,4 +519,6 @@ export default (state = [], action) => {
 
 Remember that `axios` returns a `promise` (in our example passed it as the value of payload property) that we have to resolve.
 
-Note: In some of our examples we use `redux-promise` which, with `axios`, it "checks" the `payload` property of the `actions`, and if this payload is a `promise`, redux-promise (middleware) stops the action, wait until the request finishes and **then** dispatches a **NEW action** but with the **same type** property and for payload, the request properly resolved. This new action will follow its logic course and hit the reducers.
+Note: In some of our examples we use `redux-promise` which, with `axios`, it "checks" the `payload` property of the `actions`, and if this payload is a `promise`, redux-promise (middleware) stops the action, waits until the request finishes and **then** dispatches a **NEW action** but with the **same type** property and for payload, the request properly resolved. This new action will follow its logic course and hit the reducers.
+
+*Heads up*: `redux-promise` is archived/unmaintained. The standard alternative for async work in classic Redux is `redux-thunk` (covered later in the Redux chapter). For new projects, the canonical recommendation is **Redux Toolkit** (`@reduxjs/toolkit`) with `createAsyncThunk` or `RTK Query`.

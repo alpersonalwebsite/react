@@ -3,7 +3,7 @@
 ## Trying React online
 You can try `React online` through any of the major JS "sandboxes" or "playgrounds". I´m going to use [jsfiddle](https://jsfiddle.net), but, feel free to employ your favorite one. *PS*: Another great service is [codesandbox](https://codesandbox.io/) which allows you to download a compressed file with all the assets and code to run it locally once you are done.
 
-*Note:* Remember you can also include the path (relative if your are working locally or absolute/CDN) to `React` and `ReactDOM` using the `src attribute of the <script> tag` which, basically, is what *jsfiddle* does when we add both libraries. 
+*Note:* Remember you can also include the path (relative if you are working locally or absolute/CDN) to `React` and `ReactDOM` using the `src attribute of the <script> tag` which, basically, is what *jsfiddle* does when we add both libraries. 
 
 ---
 
