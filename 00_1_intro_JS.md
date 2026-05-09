@@ -25,11 +25,11 @@ salutation();
 * _CallStack_
   1. salutation()
   2. message()
-     As soon as message() resolves or finishes its execution, it´s removed from the stack (there´s no need to call what was executed) being salutation() the next function to be called, resolved and then, removed from the stack which will result in an empty Stack.
+     As soon as message() resolves or finishes its execution, it's removed from the stack (there's no need to call what was executed) being salutation() the next function to be called, resolved and then, removed from the stack which will result in an empty Stack.
 
 One quick note about scope:
 Both, the functions and the variables of our example are part of the Window (global) context.
-You can check the Window´s context executing:
+You can check the Window's context executing:
 
 ```console
 console.log(this);
@@ -41,11 +41,11 @@ However, something important to remember is that each time one of our functions 
 
 ### Primitive and reference types
 
-I´m going to suppose that you are familiar with the concept of "Data Types" (string, number, array, boolean, null, undefined, symbol, object).
-Our "data" can be classified as Primitive or Reference in relation to _where_ and _how_ it´s stored in memory.
+I'm going to suppose that you are familiar with the concept of "Data Types" (string, number, array, boolean, null, undefined, symbol, object).
+Our "data" can be classified as Primitive or Reference in relation to _where_ and _how_ it's stored in memory.
 
 * Variables that hold "just one value" are stored in the "stack" (memory, faster but less storage) and every time we pass them to, for example a function, we pass the value.
-* Variables that hold "multiple values" (like objects and arrays) are stored in the "heap" (memory, slower but more storage) and are passed as reference: we don´t pass the value, but rather, a pointer that is going to reference that value.
+* Variables that hold "multiple values" (like objects and arrays) are stored in the "heap" (memory, slower but more storage) and are passed as reference: we don't pass the value, but rather, a pointer that is going to reference that value.
 
 **Primitive Types are copied by value**
 
@@ -72,7 +72,7 @@ name1 Peter
 
 Remember: we are copying the value that we stored in `name` and set it as the value of `name1`. Two different variables holding two different values.
 
-Now, let´s try to do something similar with a Reference Type.
+Now, let's try to do something similar with a Reference Type.
 
 ```javascript
 let person = { name: "Peter" };

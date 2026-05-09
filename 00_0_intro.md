@@ -2,7 +2,7 @@
 
 **A JavaScript library for building user interfaces.**
 
-More than 5 years have passed since React´s official release (*Facebook - March 2013*); nevertheless, the community interest and adoption are in constant growth.
+Since React's official release (*Facebook - March 2013*), the community interest and adoption have been in constant growth.
 
 ---
 
@@ -24,9 +24,9 @@ The following *information* is only illustrative.
 
 ---
 
-Every time I talked with `young DEVs` (youth here's not more than a short term of exposure or lack "production experience"), the React´s stamp seems to widely extend its real existence... For the new rows of builders, handling `UIs` without a solid `library` (like React) or `framework` (Angular or Vue.js) is something unthinkable and, perhaps, fumes of an old-past ready to be forgotten.
+Every time I talked with `young DEVs` (youth here's not more than a short term of exposure or lack "production experience"), the React's stamp seems to widely extend its real existence... For the new rows of builders, handling `UIs` without a solid `library` (like React) or `framework` (Angular or Vue.js) is something unthinkable and, perhaps, fumes of an old-past ready to be forgotten.
 
-No matter the appliance you pick to support your work (here´s an elder AngularJS´s patron) we all want the same:
+No matter the appliance you pick to support your work (here's an elder AngularJS's patron) we all want the same:
 
 * Simplicity (Abstraction)
 * Scalability
@@ -61,16 +61,16 @@ Later, we are going to address `routing` and how to keep *UI and URL in sync* wi
 
 ---
 
-### What´s JSX...?
+### What's JSX...?
 
-It´s an extension to `JS syntax` recommended by React to describe *how our UI should look like*. It´s not mandatory; just a really convenient, standardized and abstract way of writing our components.
+It's an extension to `JS syntax` recommended by React to describe *how our UI should look like*. It's not mandatory; just a really convenient, standardized and abstract way of writing our components.
 
-*Note:* It´s important to remember React´s motto: `A JavaScript library for building user interfaces.` Following this premise, you will find it coherent to have a strict relation between `logic` and `markup` in the same small unit or component, or, as `React docs` describe...
+*Note:* It's important to remember React's motto: `A JavaScript library for building user interfaces.` Following this premise, you will find it coherent to have a strict relation between `logic` and `markup` in the same small unit or component, or, as `React docs` describe...
 
 > "React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display".
 
 
-Here´s an example of a class-based component using `JSX`
+Here's an example of a class-based component using `JSX`
 
 ```javascript
 class SayHi extends React.Component {

@@ -104,4 +104,4 @@ const App = () => (
 export default App;
 ```
 
-Note: You will see that some people return empty elements like `<span>` or `<div>`. This is totally valid, however, in most cases you don´t want to "return something" (aka, add some element to the DOM) so, start always returning `null`, and switch to elements in case you want to render and show a particular message to the user.
+Note: You will see that some people return empty elements like `<span>` or `<div>`. This is totally valid, however, in most cases you don't want to "return something" (aka, add some element to the DOM) so, start always returning `null`, and switch to elements in case you want to render and show a particular message to the user.

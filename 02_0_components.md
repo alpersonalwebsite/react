@@ -6,7 +6,7 @@ We use components to split our UI into reusable "blocks" that can receive `props
 
 You should name your component following the *PascalCase* (sometimes called *UpperCamelCase*) convention — i.e. each word starts with a capital, including the first one.
 
-Example: `<ListOfRecords />`; use *camelCase* (sometimes called *lowerCamelCase*) for `DOM elements`, `HOC`/`HOF` and `methods` in general.
+Example: `<ListOfRecords />`. Intrinsic DOM elements are written in **lowercase** (`<div>`, `<section>`, `<input>` …) — that's how JSX tells them apart from components. Use *camelCase* (sometimes called *lowerCamelCase*) for `HOC`/`HOF`, methods, event handlers (`onClick`, `onSubmit`) and prop names in general.
 
 *Note:* Some people also name *functional components* following the *camelCase* standard, but, once they import them they rename them switching to *PascalCase*. They keep the filename with *PascalCase*
 
@@ -201,7 +201,7 @@ const App = () => (
 );
 ```
 
-Remember that **small components** contribute to the re-usable nature of React and its compositional view. However, try to avoid being extremely granular and always preserve the logic´s context and usage.
+Remember that **small components** contribute to the re-usable nature of React and its compositional view. However, try to avoid being extremely granular and always preserve the logic's context and usage.
 Example:
 
 * A Car could be the main (or App) component

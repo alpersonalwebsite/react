@@ -2,12 +2,12 @@
 
 <!-- TODO:
 What is
-What´s a bundle.
+What's a bundle.
 Others like Webpack >  Browserify
 -->
 
 Quoting _Webpack_ documentation (which you should check regularly), "_webpack is a static module bundler for modern JavaScript applications_".
-It takes all the files (let´s just care, at least for the moment, only about `\*.js`) wired up in our project and generates a bundle(s) that will be used as our "static files or assets".
+It takes all the files (let's just care, at least for the moment, only about `\*.js`) wired up in our project and generates a bundle(s) that will be used as our "static files or assets".
 
 As always, the best way to illustrate this statement is through a basic example.
 Hands at work!
@@ -156,7 +156,7 @@ A new static file will be hosted on your `dist/`; the file: `bundle.js`
 Open that file. Among with webpack (and related dependencies) code, you will find our transpiled and "bundled code".
 
 So...
-We have a configuration file, `webpack.config.js`, where we are defining our entry point, or the file which will wire (directly or indirectly) the other ones resulting in `bundle.js`; this bundle contains the code of the entry or main file `index.js` and also `app.js` which is imported on `index.js`. However, we have the file `other.js` which was not included since it´s not part of the "cabling". As soon as we wire it up to index.js or app.js, it will be included in our bundle.
+We have a configuration file, `webpack.config.js`, where we are defining our entry point, or the file which will wire (directly or indirectly) the other ones resulting in `bundle.js`; this bundle contains the code of the entry or main file `index.js` and also `app.js` which is imported on `index.js`. However, we have the file `other.js` which was not included since it's not part of the "cabling". As soon as we wire it up to index.js or app.js, it will be included in our bundle.
 
 We could also add it to our entry object
 
@@ -230,17 +230,17 @@ other.js  962 bytes       1  [emitted]  other
 ```
 
 All this, just adding the webpack dependency to our project and setting a few options.
-Even when this configuration is probably the most basic one, you can start seeing the power and flexibility of webpack. Also, its "discernment"... Everything outside the entry points that´s not indexed as part of the project, will not be part of the output.
+Even when this configuration is probably the most basic one, you can start seeing the power and flexibility of webpack. Also, its "discernment"... Everything outside the entry points that's not indexed as part of the project, will not be part of the output.
 
 ---
 
 ### JS Module Systems
 
-At the beginning of the React´s Introduction, we saw how we could reuse and enhance our code through components and (forgive the redundancy) compose "as a whole" more complex units. Anew, the idea of blocks of different shapes, colors and sizes encasing with each other (in a direct or intermediate relation) comes to our attention.
+At the beginning of the React's Introduction, we saw how we could reuse and enhance our code through components and (forgive the redundancy) compose "as a whole" more complex units. Anew, the idea of blocks of different shapes, colors and sizes encasing with each other (in a direct or intermediate relation) comes to our attention.
 
 This topic (JS Module Systems) is extremely close to the compositional POV: just replace components with modules and you will have a clear inaugural understanding.
 
-Daily, we write logic (or logic plus UI). It´s not strange that, with some recurrence, if we architected our projects in the right way ("standardization") we will find ourselves reusing previous code.
+Daily, we write logic (or logic plus UI). It's not strange that, with some recurrence, if we architected our projects in the right way ("standardization") we will find ourselves reusing previous code.
 During your first steps, copying and pasting code between files was something forgivable: far away from a good practice, nor a useful methodology, but, in those moments you were struggling with bigger priorities. Now, however, having a deeper understanding imagine if every time you want to consume "x-function" you manually add its code to the particular file, and, one day, you have to update or enhance your function. Yes, global search will help you but this approach will never scale.
 With this in mind, we could create a module (or package) use it, share it and re-use it. You have been doing it through React, but also, at the time of consuming `npm packages`: you import the entire package or part of it (x-function) and call it in as many places (aka, files) as necessary. And, if a new version is released, you just have to update the version of the packaging (having the possibility of anchoring or locking to a particular version in case of issues related to compatibility).
 
@@ -254,7 +254,7 @@ Differences, examples, encapsulation, dependency... revealing module pattern
 We have 3 main JS Module Systems: `CommonJS`, `AMD` and `ES2015 modules`.
 
 **CommonJS**: require/exports (module.exports)
-Sight: Server side development (Node´s default)
+Sight: Server side development (Node's default)
 Behavior: sync > modules are loaded in the consigned order and at the particular moment (on the next example, on index.js, invert the order of the 2 first lines of code to illustrate the case). Remember, no import on-demand/async/runtime.
 Result: `index.js | app.js | app.js > someFunction` Instead of: `app.js | index.js | app.js > someFunction`
 
@@ -315,7 +315,7 @@ Result: `index.js | app.js | app.js > someFunction`
 **ES2015 modules** (also known as ECMAScript 6)
 Sight: Standardization. Both client and server side.
 Behavior: sync/async compatible.  
-As we did with CommonJS invert the order of the 2 first lines of code: results don´t change since import is static and we cannot define freely where to call it.
+As we did with CommonJS invert the order of the 2 first lines of code: results don't change since import is static and we cannot define freely where to call it.
 `app.js | index.js | app.js > someFunction`
 
 Example:
@@ -379,7 +379,7 @@ What happens behind the scenes is easy: we return a Promise that will be resolve
 
 Until now, our focus was only on the App (aka, our code)... `CRA` has been effectively in charge of the rest <!--TODO:; Extend what rest is --> A good way of having a "taste" of the big picture without compromising your current work, would be: create a new app with CRA, add one Component and eject your project: `npm run eject`
 
-Here´s a screen capture comparing both `package.json`: before and after ejecting just to delight your own curiosity in case you decided to not eject a project.
+Here's a screen capture comparing both `package.json`: before and after ejecting just to delight your own curiosity in case you decided to not eject a project.
 ![Redux DevTools Dispatching](images/eject-comp.png)
 
 However, the "biggest change" will be inside `config/` and `scripts/`
@@ -410,7 +410,7 @@ We are going to move the following folders/ and files from `examples/[basic-redu
 * .gitignore
 * README.md
 
-Now... Let´s install some dependencies:
+Now... Let's install some dependencies:
 
 * nodemon
 * webpack
@@ -498,7 +498,7 @@ And create (as well) at the root level `.babelrc`
 
 Edit your public/index.html and add after your `<div id="root"></div>`
 
-Now, let´s run our `webpack-dev-server`
+Now, let's run our `webpack-dev-server`
 
 ```
 npm start
@@ -513,7 +513,7 @@ If you go to your DevConsole and open the Network tab, these request will appear
 
 The current size of our bundle.js is: 1.49 MB
 
-Let´s go back to our package.json and add a build script
+Let's go back to our package.json and add a build script
 
 ```
 "build": "webpack --config=config/webpack.config.js"
@@ -552,7 +552,7 @@ plugins: [
 ];
 ```
 
-Before proceeding, let´s add another "entry point".
+Before proceeding, let's add another "entry point".
 
 In webpack.config.js we are going to replace the value of entry with an object setting as many properties as entries we want.
 
@@ -572,10 +572,10 @@ filename: './[name]-bundle.js';
 Now, create the file: /src/other.js
 
 ```javascript
-console.log('I´m the other entry!');
+console.log('I'm the other entry!');
 ```
 
-Let´s try both:
+Let's try both:
 
 * webpack-dev-server with npm start at http://localhost:8080/
 * webpack with npm run build at file:///C:/nocra/public/index.html
@@ -610,7 +610,7 @@ stats: {
 
 This new option should just be available for webpack (webpack-dev-server is doing by default). Something similar occurs for mode: webpack should take production and webpack-dev-server development.
 
-The temptation of cloning the file and setting one for dev and other for prod could be big. But, there´s a much better way to do it and without duplicating code.
+The temptation of cloning the file and setting one for dev and other for prod could be big. But, there's a much better way to do it and without duplicating code.
 
 Install: webpack-merge
 npm install --save-dev webpack-merge
@@ -735,7 +735,7 @@ clean-webpack-plugin: 3 file(s) excluded - favicon.ico, manifest.json, template.
 
 And as you can see, all the dummy files were removed. Also, our bundles (\*.js) which were deleted (by clean-webpack-plugin) and re-generated (by webpack).
 
-Let´s continue installing dependencies. Testing time:
+Let's continue installing dependencies. Testing time:
 
 * jest
 * enzyme
@@ -795,7 +795,7 @@ Then, in package.json we will add a new script...
 }
 ```
 
-Create a simple component (we don´t care about testing in this particular moment, if not, Jest and Enzyme functionalities)
+Create a simple component (we don't care about testing in this particular moment, if not, Jest and Enzyme functionalities)
 
 src/Intro.js
 
@@ -898,7 +898,7 @@ Snapshots:   0 total
 Time:        1.9s
 ```
 
-Now, let´s reformat our UT with Enzyme: Intro.test.js
+Now, let's reformat our UT with Enzyme: Intro.test.js
 
 ```javascript
 import React from 'react';
@@ -999,7 +999,7 @@ Create the file `config/jest/jest.config.json`
 touch config/jest/jest.config.json
 ```
 
-Also, we are going to move the jest´s configuration that we have in `src/package.json` to `config/jest/jest.config.json`.
+Also, we are going to move the jest's configuration that we have in `src/package.json` to `config/jest/jest.config.json`.
 
 ```json
 {
@@ -1089,7 +1089,7 @@ Refresh your browser... Great! Now we even support IE9!
 
 ### Server Part
 
-Let´s create the folder server
+Let's create the folder server
 
 ```
 mkdir server && cd server
@@ -1236,7 +1236,7 @@ If we make a change, for example, in src/App.js we modify the h1 text, webpack w
 ![webpack-dev-middleware re-compiling](images/webpackDevMiddleware-reCompiles-express.png)
 
 However, we lost the socket connection and in consequence, the "hot reloading feature". Every time that you make a change, YOU have to reload the browser-tab manually.
-This is ok, but, impractical. So, let´s add hot-reloading through `webpack-hot-middleware`
+This is ok, but, impractical. So, let's add hot-reloading through `webpack-hot-middleware`
 
 In webpack.config.dev.js add at the top (aka, require webpack)
 
@@ -1268,7 +1268,7 @@ require('webpack-hot-middleware/client?reload=true');
 
 Run: `npm run dev`
 
-You will see in the browser´s console:
+You will see in the browser's console:
 
 ```
 [HMR] connected | client.js:88:22
@@ -1277,7 +1277,7 @@ You will see in the browser´s console:
 
 Make a change, for example, on the text of the H1 tag that we have in `src/App.js`
 
-Now, you will see in the browser´s console:
+Now, you will see in the browser's console:
 
 ```
 [HMR] bundle rebuilding | client.js:230:9
@@ -1307,7 +1307,7 @@ entry: {
 Now, everything should be working properly.
 -->
 
-We didn´t deal with `CSS` yet. So, create the file `src/App.css`
+We didn't deal with `CSS` yet. So, create the file `src/App.css`
 
 ```css
 h1 {
@@ -1326,7 +1326,7 @@ You should see the following error (in both, console and screen and in your Node
 ![Missing CSS loadeR](images/missing-css-loader.png)
 
 The message is pretty clear: webpack needs the proper loader to process other files than \*.js.
-Let´s install:
+Let's install:
 
 * style loader
 * css-loader
@@ -1423,13 +1423,13 @@ Then in `src/App.js` we are going to add the following variable
 * Import: `import cssInJs from './App.css.js';`
 * Add the style tag: `<h1 style={cssInJs.sectionTitle}>List of comments 101</h1>`
 
-There´re several CSS-in-JS libraries. Here is a graph showing the "trends" between 2017/2018 in relation to 4 of those dependencies.
+There're several CSS-in-JS libraries. Here is a graph showing the "trends" between 2017/2018 in relation to 4 of those dependencies.
 
 ![Missing CSS loadeR](images/cssInJs-trends.png)
 
 For more information: https://www.npmtrends.com/radium-vs-styled-components-vs-glamorous-vs-emotion
 
-Note: [npm trends](https://www.npmtrends.com/) is a pretty useful tool to compare "npm package´s popularity" on a certain period of time.
+Note: [npm trends](https://www.npmtrends.com/) is a pretty useful tool to compare "npm package's popularity" on a certain period of time.
 
 We are going to try [emotion](https://github.com/emotion-js/emotion)
 
@@ -1470,8 +1470,8 @@ Also add example with css``
 -->
 
 Time for handling images.
-Let´s create a new dir `src/images/` and add any image. In my case, `rPI-400x400.jpg`.
-Now, let´s import that image in our `src/App.js`
+Let's create a new dir `src/images/` and add any image. In my case, `rPI-400x400.jpg`.
+Now, let's import that image in our `src/App.js`
 
 ```javascript
 import rPI from './images/rPI-400x400.jpg';
@@ -1483,7 +1483,7 @@ We receive an error similar to the previous one:
 ERROR in ./src/images/rPI-400x400.jpg 1:0 Module parse failed: Unexpected character '�' (1:0) You may need an appropriate loader to handle this file type. (Source code omitted for this binary file)
 ```
 
-And yes, it ´s indeed related to a missing loader.
+And yes, it 's indeed related to a missing loader.
 
 For this, we are going to install file-loader
 
@@ -1561,7 +1561,7 @@ Now, before testing the scripts, add the following in `server/index.js`
 const isProd = process.env.NODE_ENV === 'production';
 ```
 
-And wrap everything that we don´t need in `production` inside the condition: `!isProd`. Also, declare the variables outside the if statement:
+And wrap everything that we don't need in `production` inside the condition: `!isProd`. Also, declare the variables outside the if statement:
 
 ```javascript
 let webpackDevMiddleware, webpackHotMiddleware;
@@ -1584,7 +1584,7 @@ Time to test our `scripts`!
 3. `npm run dev` >> OK
 4. `npm run prod` >> ERROR: 'NODE_ENV' is not recognized as an internal or external command (\* If you are under Windows OS)
 
-If this is your case, you can adapt the script to set the variable in the "Windows´way" (something like: `SET NODE_ENV=production & node server/index.js`), however, we want to be as agnostic as we can avoiding particular "blocks of code" for x-OSs.
+If this is your case, you can adapt the script to set the variable in the "Windows'way" (something like: `SET NODE_ENV=production & node server/index.js`), however, we want to be as agnostic as we can avoiding particular "blocks of code" for x-OSs.
 
 So... As you can imagine, we are going to install a new package: cross-env
 
@@ -1604,7 +1604,7 @@ Run again: `npm run prod` >> OK
 
 5. `npm run build` >> OK
 
-Now... Let´s check that "hot reload" functionality (libraries and code) are just included in "test environments".
+Now... Let's check that "hot reload" functionality (libraries and code) are just included in "test environments".
 
 1. `npm start` >> Works, however, you will see in your browser console, example: `Firefox can’t establish a connection to the server at http://localhost:8080/__webpack_hmr.` Remember that we are not running the server (node + express >> node server/index.js) if not the client (webpack-dev-server --config config/webpack.config.dev.js).
 
@@ -1675,7 +1675,7 @@ And, inside `server/index.js`, `webpack.config.dev.js` with `webpack.config.dev.
 Try again: `npm start`. Voilà! Congratulations!
 
 2. `npm run dev` >> OK
-3. `npm run prod` >> OK (Remember that in prod you don´t have the hot reloader feature)
+3. `npm run prod` >> OK (Remember that in prod you don't have the hot reloader feature)
 4. `npm run build` >> OK
 5. `npm run build:dev` >> OK
 
@@ -1715,7 +1715,7 @@ You can limit the size of your bundles by using import() or require.ensure to la
 For more info visit https://webpack.js.org/guides/code-splitting/
 ```
 
-Don´t worry about this for the moment... Soon we will fix it, but, before addressing this point, we are going to return to how we are handling styles.
+Don't worry about this for the moment... Soon we will fix it, but, before addressing this point, we are going to return to how we are handling styles.
 Now, all our styles are part of our header:
 
 ```html
@@ -1861,7 +1861,7 @@ And, finally, we are going to replace the rule for `\.css` with:
 },
 ```
 
-Let´s test that everything is behaving properly:
+Let's test that everything is behaving properly:
 
 * `npm start`
 * `npm run build`
@@ -1932,7 +1932,7 @@ In our example we will go from 253 KiB to 252 KiB. Remember... Everything counts
 
 ---
 
-We are minifying and uglifying our CSS and JS. Now, let´s think about compression.
+We are minifying and uglifying our CSS and JS. Now, let's think about compression.
 
 Why Brotli...?
 For 5 paragraphs of lorem ipsum, Brotli beats gzip by 5%. If I run the same experiment with the front page of reddit.com from 10/01/2015, Brotli beats gzip by 22%! Note that both measurements were using the compressors out of the box without any tweaking of configuration values.
@@ -2041,7 +2041,7 @@ For the following scripts: `npm start`, `npm run dev`, `npm run build:dev` add `
 
 ---
 
-If you open, for example, `main-bundle.js` (one of webpack´s output) you will see that we have both: `vendor` (or third party) code and our `application code`. To make this "human-readable" or "human-visible" we can install `webpack-bundle-analyzer` which allows us to "visualize size of webpack output files with an interactive zoomable treemap".
+If you open, for example, `main-bundle.js` (one of webpack's output) you will see that we have both: `vendor` (or third party) code and our `application code`. To make this "human-readable" or "human-visible" we can install `webpack-bundle-analyzer` which allows us to "visualize size of webpack output files with an interactive zoomable treemap".
 
 ```
 npm install --save-dev webpack-bundle-analyzer
@@ -2064,7 +2064,7 @@ https://www.npmjs.com/package/webpack-bundle-analyzer
 
 We are going to use `SplitChunksPlugin`
 
-Before, let´s check the size of our `main-bundle.js`
+Before, let's check the size of our `main-bundle.js`
 
 ```
 npm run build
@@ -2113,7 +2113,7 @@ Result:
 ./vendors~main-bundle.js  1.61 MiB
 ```
 
-Great! Everything is working properly and now, we have our code separated from vendor´s.
+Great! Everything is working properly and now, we have our code separated from vendor's.
 
 ---
 
@@ -2142,7 +2142,7 @@ Now, we are using `HTMLWebpackPlugin`, passing an HTML template and generating (
 As we said, we are going to delegate the creation and rendering of the markup (HTML) to the express server.
 
 What happens if you want to make a build as we have been doing it previously...?
-Let´s use an "environment variable" and some conditional logic to satisfy the needs of both cases: static and dynamic HTML.
+Let's use an "environment variable" and some conditional logic to satisfy the needs of both cases: static and dynamic HTML.
 
 Create at the root level the file `.env`
 Before proceeding, **be sure that you are excluding that file from "version controlling" adding it to `.gitignore`**
@@ -2272,7 +2272,7 @@ const renderToString = require('react-dom/server').renderToString;
 const TestingSSR = require('../src/TestingSSR').default;
 ```
 
-3. Add allRoutes() to the class´s constructor.
+3. Add allRoutes() to the class's constructor.
 
 ```javascript
 constructor(app) {
@@ -2382,7 +2382,7 @@ Add the `build:server script`
 "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.server.js --env.NODE_ENV=production --watch"
 ```
 
-Check that we are adding the `flag --watch` to our `build:server` script, so, every time we make a change in our `entry point file server/index.js` or any file wired up through this one, `webpack` will re-generate the bundle. Doing this, webpack will not exit and remain in watch mode (so, don´t close your terminal).
+Check that we are adding the `flag --watch` to our `build:server` script, so, every time we make a change in our `entry point file server/index.js` or any file wired up through this one, `webpack` will re-generate the bundle. Doing this, webpack will not exit and remain in watch mode (so, don't close your terminal).
 
 Also, update the `prod script`
 
@@ -2414,14 +2414,14 @@ We have 2 scripts related to our express server:
 2. `npm run prod` > node runs our server/index.js bundle: build/server-prod-bundle.js
 
 However... We want to preserve practicality, so...
-We are going to create a new script for development in the server side which is going to watch for changes, re-build the bundle and re-start the server. Remember, this is not a dev server... It´s a server which is going to work/operate/execute with our production output letting us work without having to spend too much time in the console.
+We are going to create a new script for development in the server side which is going to watch for changes, re-build the bundle and re-start the server. Remember, this is not a dev server... It's a server which is going to work/operate/execute with our production output letting us work without having to spend too much time in the console.
 For this reason we are going to call it `build:server:flex` to prevent confusions linked to the `dev` reference.
 
 ```
 "build:server:flex":"cross-env nodemon --watch build build/server-prod-bundle.js",
 ```
 
-Let´s state again our workflow:
+Let's state again our workflow:
 
 1. Generate bundle for the client side of our project: `npm run build`
 2. Generate the bundle for the server side of our project: `npm run build:server` (process should remain active)
@@ -2440,8 +2440,8 @@ Server Listening for port: 8080
 
 Bravo!
 
-If you try to run `npm start` it is NOT going to work as you may expect if you don´t have the `index.html` file in `public/`
-There´re several ways to fix this. One, is passing in our script a global variable (cross-env makes the things easier for us)
+If you try to run `npm start` it is NOT going to work as you may expect if you don't have the `index.html` file in `public/`
+There're several ways to fix this. One, is passing in our script a global variable (cross-env makes the things easier for us)
 
 In our main `package.json`
 
@@ -2458,7 +2458,7 @@ _Note_: If you have multiple instances running, you PORT may change. So, always 
 
 ---
 
-At the moment we have 2 scripts running and watching for changes. This is a valid approach, however... We can simplify this to just 2 scripts: one for DEV, one for PROD (both, including the bundling and serving, or what´s the same, client and server part).
+At the moment we have 2 scripts running and watching for changes. This is a valid approach, however... We can simplify this to just 2 scripts: one for DEV, one for PROD (both, including the bundling and serving, or what's the same, client and server part).
 
 Just in case you want to easily reuse the `/examples/react-redux-webpack-client-server` example, I will clone it and do the following changes in `examples/react-redux-webpack-client-server-scripts`. All the upcoming topics, like imports, routing, etc, are going to be done in this folder.
 
@@ -2480,7 +2480,7 @@ We have been "playing" with our configuration files doing and undoing changes. T
 In our `server/server.js` we are going to make some changes to our if (!isProd) conditional. I will keep the previous code commented.
 In either case (if is prod or not) we are going to require the client and server configuration files, and, instead of passing one argument to webpack() method we are going to pass an array with both (client and server). The output that we are holding in the variable compiler will be an object; within its properties, we will find compilers which data type is an array and it holds 2 elements. We can easily refer to each one doing: compiler.compilers[index].
 
-Let´s start with the first part of our condition if (!isProd), when we are in DEV mode.
+Let's start with the first part of our condition if (!isProd), when we are in DEV mode.
 To webpack-dev-middleware we are going to pass both compilers.
 To webpack-hot-middleware, just the configuration related to our client.
 For both, we are going to use the devServer property configuration that we have in ../config/webpack.config.dev.client.js
@@ -2503,7 +2503,7 @@ IMAGE here...
 TODOOOO
 
 Earlier we said that we are using @babel/preset-env to support the last JavaScript; also, that we want an isomorphic application where we can write the same code for the "front" and the "back-end".
-So... Let´s refactor the server files: `server.js` and `BasicController.js`
+So... Let's refactor the server files: `server.js` and `BasicController.js`
 
 `server/index.js`
 

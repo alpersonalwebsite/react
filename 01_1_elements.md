@@ -49,7 +49,7 @@ const element = React.createElement(
 
 **ReactDOM.render()**
 
-Let´s first `render` our previous element.
+Let's first `render` our previous element.
 
 ```javascript
 const element = React.createElement(
@@ -101,7 +101,7 @@ An element is a plain JavaScript object that describes what we want to show on t
 const element = <div>Im an element!</div>;
 ```
 
-Through components (we will cover this on the next chapter) we return the created elements. Let´s go back to our `Hello world!` example...
+Through components (we will cover this on the next chapter) we return the created elements. Let's go back to our `Hello world!` example...
 
 ```javascript
 const element = React.createElement(

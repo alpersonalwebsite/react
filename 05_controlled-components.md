@@ -28,7 +28,7 @@ export default App;
 ```
 
 You can use React Developer Tools to check the state of your Component.
-Open your browser Developer Tools, click on the React tab and select your Component, in this case <App />
+Open your browser Developer Tools, click on the React tab and select your Component, in this case `<App />`.
 At the right you will find:
 
 * props
@@ -65,14 +65,14 @@ Before proceeding, you should know that `Controlled Components` refer to:
 * inputs
 * selects
 * textareas
-  ... all of them, have their own state which is based on the user´s action (the information he provides, the option that he selects, the checkbox that he checks, etc.).
+  ... all of them, have their own state which is based on the user's action (the information he provides, the option that he selects, the checkbox that he checks, etc.).
 
-Selects: To avoid the warning, `` Warning: Use the`defaultValue`or`value`props on <select> instead of setting `selected`on <option>. ``, we use the attribute value on select instead of the selected one on the particular option. Remember that there´s a strict relation between state and element, so if you want to start showing (aka, selecting) a particular option, you should initialize your state with it.
+Selects: To avoid the warning, `` Warning: Use the`defaultValue`or`value`props on <select> instead of setting `selected`on <option>. ``, we use the attribute value on select instead of the selected one on the particular option. Remember that there's a strict relation between state and element, so if you want to start showing (aka, selecting) a particular option, you should initialize your state with it.
 
 For easy handling of "radio" and "check-boxes" you can use `react-radio-group` and `react-checkbox-group`.
 
 Quick radio example: `react-radio-group`
-With this dependency you will avoid: code duplication, repetitive in-line conditional to determine if input should be checked, complex logic to update state in relation to user´s selection.
+With this dependency you will avoid: code duplication, repetitive in-line conditional to determine if input should be checked, complex logic to update state in relation to user's selection.
 
 ```javascript
 import React, { Component } from 'react';
@@ -149,10 +149,10 @@ export default App;
 
 #### .map() and key attribute
 
-Before jumping to other topic, let´s address one possible issue in our code setting a context.
-Daily, we interact with lists that filter (aka, update) their composition or results. Example: Amazon search and suggested keys/terms/products. However, as you probably noticed, there´s "some kind of delay" that allows you to receive suggestions per words or terms and not per letters.
+Before jumping to other topic, let's address one possible issue in our code setting a context.
+Daily, we interact with lists that filter (aka, update) their composition or results. Example: Amazon search and suggested keys/terms/products. However, as you probably noticed, there's "some kind of delay" that allows you to receive suggestions per words or terms and not per letters.
 
-Let´s modify our previous example.
+Let's modify our previous example.
 Before closing the div, add...
 
 ```javascript
@@ -176,7 +176,7 @@ For more information (also Throttling): https://www.npmjs.com/package/react-thro
 1. Install `react-throttle` package
 2. Destructure and import Debounce
 3. Add the Debounce component with the proper configuration wrapping the input
-   (... and remove `value={yourName}` from your input, if not, it will not work. Don´t worry, Debounce will take care of showing the proper data/value)
+   (... and remove `value={this.state.yourName}` from your input, otherwise it will not work. Don't worry, Debounce will take care of showing the proper data/value)
 
 ```javascript
 <Debounce time="400" handler="onChange">
@@ -192,7 +192,7 @@ Try now to type your name... A lot better, no...?
 
 #### Destructuring
 
-In React you will use destructuring (ES6) a lot. Even when it´s not a functional requirement, it makes your code look cleaner and it follows the Community´s standards.
+In React you will use destructuring (ES6) a lot. Even when it's not a functional requirement, it makes your code look cleaner and it follows the Community's standards.
 
 So... What is Destructuring...?
 Just a convenient way of pulling out values from object and array objects.
@@ -386,7 +386,7 @@ Well, since there is not another way than the own user selecting the file and in
 
 You will find some tutorials explaining the agnostic benefits (cases like when you are using multiple frameworks and libraries) of turning all elements into uncontrolled components. However, remember that this goes against React nature: taking as "Source of Truth" the DOM node instead of a particular state tied to the element.
 
-Try to avoid as much as you can the use of "uncontrolled components"... However, if you are thinking what would be an "uncontrolled component" with an "input of type text element"... Here´s your answer...
+Try to avoid as much as you can the use of "uncontrolled components"... However, if you are thinking what would be an "uncontrolled component" with an "input of type text element"... Here's your answer...
 
 Example:
 

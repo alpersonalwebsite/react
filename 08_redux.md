@@ -1,18 +1,18 @@
 ## Redux
 
-<!-- What´s Redux
+<!-- What's Redux
 State in a predictable way.
 -->
 
 <!-- TODO: First we should define the store. We have to think how the app will use that data -->
 
-In Redux there´s a single Source of Truth: the store.
+In Redux there's a single Source of Truth: the store.
 The state is read-only (immutable); components cannot write directly into the state.
 Reducers create and return a new copy of the state.
 
 When to use Redux...
 
-1. Shared state through multiple Components. Let´s say that we have ComponentA with one child, ComponentB. We can easily pass data down with props. But, if we need to pass the data across several components (example of "prop threading": from A->B->-C->D) we should consider the global state or Redux store so we can instruct (without nesting) which components will have access to that data.
+1. Shared state through multiple Components. Let's say that we have ComponentA with one child, ComponentB. We can easily pass data down with props. But, if we need to pass the data across several components (example of "prop threading": from A->B->-C->D) we should consider the global state or Redux store so we can instruct (without nesting) which components will have access to that data.
 2. Caching: when we want to cache API requests/responses.
 
 For other cases, we should opt for Local State.
@@ -25,7 +25,7 @@ What are Pure Functions...?
 
 1. They depend just in the arguments that we pass.
 2. Same arguments should return same results (this makes pure functions easy to test).
-3. They don´t produce side effects (aka, NO interaction between the function and its outside scope. Example: HTTP calls)
+3. They don't produce side effects (aka, NO interaction between the function and its outside scope. Example: HTTP calls)
 
 One common example of pure and impure functions...
 
@@ -188,7 +188,7 @@ The `Store` has the following methods:
 
 <!-- TODO: add example for store.replaceReducer(reducer) --->
 
-IMPORTANT: In Redux (as in React or programming in general) you don´t duplicate data. Remember that you have `one Source of Truth`: the Store. Also, put special attention to the shape of the Store... Try to keep it as simple and shallow as you can obviating complex nested structures.
+IMPORTANT: In Redux (as in React or programming in general) you don't duplicate data. Remember that you have `one Source of Truth`: the Store. Also, put special attention to the shape of the Store... Try to keep it as simple and shallow as you can obviating complex nested structures.
 
 ---
 
@@ -232,7 +232,7 @@ If you want to easily reuse your components in other projects, you should probab
 ```
 
 Sometimes (aka, generally) you are going to have deeply nested paths.
-Let´s think in the following case.
+Let's think in the following case.
 We are working in our `Homepage`: `/home/yourUser/yourProject/src/pages/Homepage/index.js` and we want to include our `Footer`: `/home/yourUser/yourProject/src/components/Footer/index.js`
 
 We would do something like...
@@ -253,7 +253,7 @@ Note about `.gitignore`: a `.env` file commonly contains secrets (API keys, toke
 
 Now, rather than using `../../components/Footer/index.js` we will use `./components/Footer/index.js` starting always from our `src/`
 
-If we place our Components in different folders (let´s say that we move Homepage to `/home/yourUser/yourProject/src/pages/main/Homepage/index.js`) our import statements will not be affected.
+If we place our Components in different folders (let's say that we move Homepage to `/home/yourUser/yourProject/src/pages/main/Homepage/index.js`) our import statements will not be affected.
 
 <!-- TODO: A little more about .env file -->
 
@@ -348,7 +348,7 @@ Until `this.props.comments[0]` is something (or, is different than `undefined`),
 
 <!-- TODO: Add `ownProps` from React Notes 7 -->
 
-Whether we use `export default connect(mapStateToProps, actions)(App);` (actions object) or `export default connect(mapStateToProps, mapDispatchToProps)(App);` (mapDispatchToProps method), `mapStateToProps` must be something. If we don´t need access to the store, just to `dispatch` we should set it as `null`
+Whether we use `export default connect(mapStateToProps, actions)(App);` (actions object) or `export default connect(mapStateToProps, mapDispatchToProps)(App);` (mapDispatchToProps method), `mapStateToProps` must be something. If we don't need access to the store, just to `dispatch` we should set it as `null`
 Example: `export default connect(null, actions)(App);`
 
 Alternatively, you can replace mapStateToProps with an anonymous function.
@@ -430,7 +430,7 @@ Note: In this example we have 2 functions (the outer `a => ...` and the inner `b
 
 ---
 
-Now... Let´s install some libraries.
+Now... Let's install some libraries.
 
 ```
 npm install axios react-redux redux-promise redux --save
@@ -667,7 +667,7 @@ case FETCH_COMMENTS:
 ```
 
 <!-- TODO: Explain WHY return [...state, ...action.payload.data];
-We are receiving an array of objects. That´s why in our test payload we use payload: [{}] -->
+We are receiving an array of objects. That's why in our test payload we use payload: [{}] -->
 
 with...
 
@@ -737,7 +737,7 @@ TESTING
 
 #### Architectural advice...
 
-Currently, our `comments` piece of state is an array of objects. This is "good enough" for this App, however, it doesn´t scale neither perform properly for big projects. You should always opt for objects with IDs as keys (aka, normalized state) instead of array.
+Currently, our `comments` piece of state is an array of objects. This is "good enough" for this App, however, it doesn't scale neither perform properly for big projects. You should always opt for objects with IDs as keys (aka, normalized state) instead of array.
 
 Using `lodash`, we can take advantage of `_.mapKeys(object, key)`. So, in our reducer first we will import `import _ from "lodash";` and then, we will change...
 
@@ -803,7 +803,7 @@ Note: `key` is the property of the object that we want for our new object proper
 
 At this point -probably- you are thinking... How will I map that object state...?
 
-And here´s where we use `lodash` (or `_`) again.
+And here's where we use `lodash` (or `_`) again.
 Having the piece of state with a new shape we can use `_.map(object)`
 So, for example, in our `App.js` we are going to include as first step. Next, we will create a method for render our comments and we will call that function from our JSX.
 
@@ -922,6 +922,6 @@ Several times we referred to Middlewares...
 In Redux we use Middlewares to intercept dispatched
 actions modifying them (or not) before they hit the reducers. We can also dispatch other actions or execute some logic at the dispatching time or layer.
 
-What is `redux-thunk`...? It´s a thunk middleware for Redux. We can use it for async HTTP requests (Redux only supports synchronous data flow) for example, when we are dealing/interacting with a server, delaying, dispatching, or dispatching if certain condition is met (like a response to our request).
+What is `redux-thunk`...? It's a thunk middleware for Redux. We can use it for async HTTP requests (Redux only supports synchronous data flow) for example, when we are dealing/interacting with a server, delaying, dispatching, or dispatching if certain condition is met (like a response to our request).
 
 With thunks we can return from the action creator a function instead of an object and intercept these actions before dispatching.

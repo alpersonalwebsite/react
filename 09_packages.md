@@ -3,7 +3,7 @@
 ### PropTypes
 
 Used to check props passed to our components against definitions.
-This dependency works just in `development`.
+This dependency works only in `development`.
 If you want to use validation in `production` as well (we generally do not recommend it), you can opt in to the development bundle by importing `prop-types/prop-types` instead of `prop-types`.
 *More info:* https://www.npmjs.com/package/prop-types
 
@@ -47,7 +47,7 @@ Child.propTypes = {
 export default App;
 ```
 
-If you don´t have installed React Developer Tools, please, install it now:
+If you don't have installed React Developer Tools, please, install it now:
 
 * Firefox:https://addons.mozilla.org/en-US/firefox/addon/react-devtools/
 * Chrome: https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en
@@ -102,7 +102,7 @@ Warning: Failed prop type: Invalid prop `yourAge` of type `number` supplied to `
     in App (at index.js:7)
 ```
 
-Excellent! Everything is working as expected (aka, every time you use a type different than the one defined, you will see a warning in your console). Change other properties and ensure that you understand what´s happening. Once you finish, please, be sure that you are setting the right types.
+Excellent! Everything is working as expected (aka, every time you use a type different than the one defined, you will see a warning in your console). Change other properties and ensure that you understand what's happening. Once you finish, please, be sure that you are setting the right types.
 
 ##### Most used types...
 
@@ -126,7 +126,7 @@ Child.propTypes = {
 };
 ```
 
-In this case, if you don´t have that property you console will show something like...
+In this case, if you don't have that property you console will show something like...
 
 ```javascript
 Warning: Failed prop type: The prop `yourAge` is marked as required in `Child`, but its value is `undefined`.
@@ -291,7 +291,7 @@ ReactDOM.render(
 ```
 
 Why do we use exact for "/"...?
-If we don´t add the exact attribute, both screens will render when we go to the main route "/".
+If we don't add the exact attribute, both screens will render when we go to the main route "/".
 
 An example to clarify.
 All these routes will match http://localhost:3000/animals/dogs
@@ -353,7 +353,7 @@ If you open the React DevTools you will see something like this...
 
 Route component takes a path and renders its proper UI.
 
-Let´s go back to our `<Switch>` example for a moment. Through the URI we can get the `animal` that the user is passing (`/animals/:animal`) and execute some operation. For example, make a request to x-API to retrieve all the information related to that animal. To illustrate the point, in **App1** I´m adding...
+Let's go back to our `<Switch>` example for a moment. Through the URI we can get the `animal` that the user is passing (`/animals/:animal`) and execute some operation. For example, make a request to x-API to retrieve all the information related to that animal. To illustrate the point, in **App1** I'm adding...
 
 ```javascript
 class App1 extends Component {
@@ -374,7 +374,7 @@ class App1 extends Component {
 
 In the Lifecycle `componentDidMount()` we are making the request via `this.props.fetchPost(animal);`.
 
-In the JSX, I´m printing as well the `match` property which its parsed-value would be:
+In the JSX, I'm printing as well the `match` property which its parsed-value would be:
 
 ```javascript
 {
@@ -389,7 +389,7 @@ In the JSX, I´m printing as well the `match` property which its parsed-value wo
 
 ---
 
-We don´t use <a> but rather, Link which keeps sync with BrowserRouter; Link renders an anchor tag.
+We don't use <a> but rather, Link which keeps sync with BrowserRouter; Link renders an anchor tag.
 We can pass parameters to Link using an object instead of a string as value.
 
 ```javascript

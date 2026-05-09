@@ -1,7 +1,7 @@
 # First steps with React
 
 ## Trying React online
-You can try `React online` through any of the major JS "sandboxes" or "playgrounds". I´m going to use [jsfiddle](https://jsfiddle.net), but, feel free to employ your favorite one. *PS*: Another great service is [codesandbox](https://codesandbox.io/) which allows you to download a compressed file with all the assets and code to run it locally once you are done.
+You can try `React online` through any of the major JS "sandboxes" or "playgrounds". I'm going to use [jsfiddle](https://jsfiddle.net), but, feel free to employ your favorite one. *PS*: Another great service is [codesandbox](https://codesandbox.io/) which allows you to download a compressed file with all the assets and code to run it locally once you are done.
 
 *Note:* Remember you can also include the path (relative if you are working locally or absolute/CDN) to `React` and `ReactDOM` using the `src attribute of the <script> tag` which, basically, is what *jsfiddle* does when we add both libraries. 
 
@@ -77,7 +77,7 @@ root.insertAdjacentHTML('beforeend', app)
 ```
 
 
-Don´t worry too much about what´s going on! We will see it in detail during this and the upcoming lessons. For the moment, just remember that you can use `React + ReactDOM` with...
+Don't worry too much about what's going on! We will see it in detail during this and the upcoming lessons. For the moment, just remember that you can use `React + ReactDOM` with...
 * `<script>` tag: locally/externally
 * Node and npm
 
@@ -97,7 +97,7 @@ CMD: C:\practice
 create-react-app myapp
 ```
 
-Enter to your app folder and let´s start cleaning...
+Enter to your app folder and let's start cleaning...
 
 Delete...
 1. src/App.css

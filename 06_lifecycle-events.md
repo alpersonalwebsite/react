@@ -1,6 +1,6 @@
 ## Life-cycle events
 
-These are methods that allow us to execute certain functionality during the Component´s life-cycle (this is for `Class-based Components`. We will see as well `hooks` which are the "equivalent" for `Functional Components`). 
+These are methods that allow us to execute certain functionality during the Component's life-cycle (this is for `Class-based Components`. We will see as well `hooks` which are the "equivalent" for `Functional Components`). 
 
 A Component goes through three phases — **Mounting**, **Updating** and **Unmounting** — and the methods called in each phase are different. The lists below are split that way; do not assume the methods always run in the same order across phases.
 
@@ -14,7 +14,7 @@ A Component goes through three phases — **Mounting**, **Updating** and **Unmou
 **Updating** (every render after the first one — triggered by new props, `setState()`, or `forceUpdate()`):
 
 1. `static getDerivedStateFromProps(props, state)`
-2. `shouldComponentUpdate(nextProps, nextState)` > We can stop or prevent unnecessary re-renders improving performance.
+2. `shouldComponentUpdate(nextProps, nextState)` > We can stop or prevent unnecessary re-renders improving performance. *(Skipped when the update is triggered by `forceUpdate()`.)*
 3. `render()`
 4. `getSnapshotBeforeUpdate(prevProps, prevState)` > Returns a snapshot (object) handed to `componentDidUpdate` as its third argument.
 5. `componentDidUpdate(prevProps, prevState, snapshot)` > Side-effects in response to a prop/state change (e.g. fetching data when the URL params change). Always guard with a comparison or you will loop.
