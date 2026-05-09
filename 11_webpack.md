@@ -1150,7 +1150,7 @@ Create file `server/BasicController.js`
 In our main `package.json` (at the project root), add a new script:
 
 ```json
-"dev": "node src/server/index.js"
+"dev": "node server/index.js"
 ```
 
 We are going to install the following middle-wares:
@@ -2422,7 +2422,7 @@ We are going to create a new script for development in the server side which is 
 For this reason we are going to call it `build:server:flex` to prevent confusions linked to the `dev` reference.
 
 ```json
-"build:server:flex":"cross-env nodemon --watch build build/server-prod-bundle.js",
+"build:server:flex":"cross-env NODE_ENV=production nodemon --watch build build/server-prod-bundle.js",
 ```
 
 Let's state again our workflow:
@@ -2492,7 +2492,7 @@ For both, we are going to use the devServer property configuration that we have 
 In package.json replace the dev script with...
 
 ```json
-"dev":"cross-env NODE_ENV=development nodemon --watch config --watch server",
+"dev":"cross-env NODE_ENV=development nodemon --watch config --watch server server/index.js",
 ```
 
 Nodemon will run our server and will be watching for changes in both directories: config and server, and, if something changes, it will re-run.
