@@ -414,18 +414,19 @@ Now... Let's install some dependencies:
 
 * nodemon
 * webpack
-* babel-core
+* @babel/core
 * babel-loader
 * babel-plugin-async-to-promises
-* babel-plugin-syntax-dynamic-import
+* @babel/plugin-syntax-dynamic-import
 * babel-plugin-transform-async-to-promises
-* babel-plugin-transform-runtime
+* @babel/plugin-proposal-class-properties
+* @babel/plugin-transform-runtime
 * babel-plugin-universal-import
-* babel-polyfill
-* babel-preset-env
-* babel-preset-es2015
-* babel-preset-react
-* babel-preset-stage-2
+* @babel/polyfill
+* @babel/preset-env
+* @babel/preset-es2015
+* @babel/preset-react
+* @babel/preset-stage-2
 
 ```
 npm install --save nodemon
@@ -699,17 +700,18 @@ touch public/hello.js public/hello.html public/hello.h public/hi.js
 
 On `webpack.config.prod.js`, add...
 
-Outside the config object
+Outside the config object — note we are on `clean-webpack-plugin` v3, which dropped the positional-args / `root` / `exclude` API of v1/v2 in favor of a single options object. The plugin now resolves paths from your `output.path` automatically, so we just tell it which patterns to preserve.
 
 ```javascript
-const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-let pathsToClean = ['dist/', 'build/', 'public/'];
-
-let cleanOptions = {
-  root: path.resolve(__dirname, '../'),
-  exclude: ['template.html', 'manifest.json', 'favicon.ico'],
+const cleanOptions = {
+  cleanOnceBeforeBuildPatterns: [
+    '**/*',
+    '!template.html',
+    '!manifest.json',
+    '!favicon.ico'
+  ],
   verbose: true,
   dry: false
 };
@@ -718,19 +720,18 @@ let cleanOptions = {
 Inside our `config/`
 
 ```javascript
-plugins: [new CleanWebpackPlugin(pathsToClean, cleanOptions)];
+plugins: [new CleanWebpackPlugin(cleanOptions)];
 ```
+
+Note the named import (`{ CleanWebpackPlugin }`) — v3 switched from a default export to a named one.
 
 And execute: `npm run build`
 _Note: It could take some time._
 
-The output will start with...
+The output will look like...
 
 ```
-clean-webpack-plugin: C:\practice\nocra\dist has been removed.
-clean-webpack-plugin: C:\practice\nocra\build has been removed.
-clean-webpack-plugin: C:\practice\nocra\public has been removed.
-clean-webpack-plugin: 3 file(s) excluded - favicon.ico, manifest.json, template.html
+clean-webpack-plugin: removed files inside C:\practice\nocra\public
 ```
 
 And as you can see, all the dummy files were removed. Also, our bundles (\*.js) which were deleted (by clean-webpack-plugin) and re-generated (by webpack).
@@ -1181,15 +1182,18 @@ const webpack = require('webpack');
 const config = require('../config/webpack.config.dev.js');
 const compiler = webpack(config);
 
-const webpackDevMiddleware = require('webpack-dev-middleware')(
-  compiler,
-  config.devServer
-);
+// webpack-dev-middleware takes its own options object (publicPath, stats,
+// mimeTypes, etc.) — NOT webpack-dev-server's `devServer` block. Passing
+// `config.devServer` here would silently ignore everything inside it
+// (contentBase, hot, overlay are all webpack-dev-server options).
+const webpackDevMiddleware = require('webpack-dev-middleware')(compiler, {
+  publicPath: config.output.publicPath || '/',
+  stats: 'minimal'
+});
 
-const webpackHotMiddleware = require('webpack-hot-middleware')(
-  compiler,
-  config.devServer
-);
+// webpack-hot-middleware also has its own options object (path, log, heartbeat).
+// We accept the defaults here.
+const webpackHotMiddleware = require('webpack-hot-middleware')(compiler);
 
 class RouterAndMiddlewares {
   constructor() {
@@ -1344,9 +1348,10 @@ And, in `webpack.config.js` add a new rule:
     { loader: 'style-loader' },
     {
       loader: 'css-loader',
-      query: {
-        modules: true,
-        localIdentName: '[name]__[local]__[hash:base64:5]'
+      options: {
+        modules: {
+          localIdentName: '[name]__[local]__[hash:base64:5]'
+        }
       }
     }
   ]
@@ -1567,10 +1572,10 @@ And wrap everything that we don't need in `production` inside the condition: `!i
 let webpackDevMiddleware, webpackHotMiddleware;
 if (!isProd) {
   ...
-  webpackDevMiddleware = require('webpack-dev-middleware')(
-    compiler,
-    config.devServer
-  );
+  webpackDevMiddleware = require('webpack-dev-middleware')(compiler, {
+    publicPath: config.output.publicPath || '/',
+    stats: 'minimal'
+  });
   ...
 }
 ```
@@ -1779,9 +1784,10 @@ In `webpack.config.js` remove or comment:
     { loader: 'style-loader' },
     {
       loader: 'css-loader',
-      query: {
-        modules: true,
-        localIdentName: '[name]__[local]__[hash:base64:5]'
+      options: {
+        modules: {
+          localIdentName: '[name]__[local]__[hash:base64:5]'
+        }
       }
     }
   ]
@@ -1799,9 +1805,10 @@ module: {
         { loader: 'style-loader' },
         {
           loader: 'css-loader',
-          query: {
-            modules: true,
-            localIdentName: '[name]__[local]__[hash:base64:5]'
+          options: {
+            modules: {
+              localIdentName: '[name]__[local]__[hash:base64:5]'
+            }
           }
         }
       ]
@@ -1842,9 +1849,10 @@ const cssForDev = [
   { loader: 'style-loader' },
   {
     loader: 'css-loader',
-    query: {
-      modules: true,
-      localIdentName: '[name]__[local]__[hash:base64:5]'
+    options: {
+      modules: {
+        localIdentName: '[name]__[local]__[hash:base64:5]'
+      }
     }
   }
 ];
@@ -1972,11 +1980,12 @@ with this...
 ```javascript
 this.app.use(
   expressStaticGzip('public', {
-    enableBrotli: true,
-    orderPreference: ['br']
+    enableBrotli: true
   })
 );
 ```
+
+With `enableBrotli: true`, `express-static-gzip` v1 serves the pre-compressed `.br` file when the request's `Accept-Encoding` includes `br`, falling back to `.gz` (when the client only accepts gzip) and then the uncompressed asset. We don't need to spell out a preference order in v1.
 
 We can also add `gzip`
 Install: compression-webpack-plugin

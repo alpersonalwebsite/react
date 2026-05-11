@@ -265,7 +265,7 @@ npm install --save react-router-dom
 
 Example use:
 
-```
+```javascript
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import ReactDOM from 'react-dom';
@@ -517,8 +517,6 @@ export default (state = [], action) => {
 };
 ```
 
-Remember that `axios` returns a `promise` (in our example passed it as the value of payload property) that we have to resolve.
+Remember that `axios` returns a `promise` (in our example passed it as the value of `payload`) that we have to resolve. **The reducer above assumes `redux-promise` is applied to the store** — without it, `action.payload` arrives at the reducer as the unresolved Promise, and `action.payload.data` would be `undefined`.
 
-Note: In some of our examples we use `redux-promise` which, with `axios`, it "checks" the `payload` property of the `actions`, and if this payload is a `promise`, redux-promise (middleware) stops the action, waits until the request finishes and **then** dispatches a **NEW action** but with the **same type** property and for payload, the request properly resolved. This new action will follow its logic course and hit the reducers.
-
-*Heads up*: `redux-promise` is archived/unmaintained. The standard alternative for async work in classic Redux is `redux-thunk` (covered later in the Redux chapter). For new projects, the canonical recommendation is **Redux Toolkit** (`@reduxjs/toolkit`) with `createAsyncThunk` or `RTK Query`.
+How `redux-promise` works: it inspects each dispatched action's `payload`. If `payload` is a Promise, the middleware halts the action, waits for the Promise to resolve, then dispatches a **new action with the same `type`** but `payload` set to the resolved value (here, the axios response object — which is why the reducer reads `action.payload.data`). The Redux chapter walks through this end-to-end and also shows the equivalent setup with `redux-thunk`.
