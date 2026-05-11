@@ -844,9 +844,19 @@ Title: provident id voluptas
 
 Now, instead of dispatching in our Component we are going to resolve the promise and dispatch from our action creator using `redux-thunk` (we were using `redux-promise` to return an action with the payload property and a promise as value).
 
-We have to add redux-thunk middleware to our **src/index.js**
+First, install `redux-thunk`:
+
+```
+npm install --save redux-thunk
+```
+
+Then, in **src/index.js**, swap the middleware. Note the new import — `redux-thunk` exports a default function, so we import it as `reduxThunk`.
 
 ```javascript
+import reduxThunk from 'redux-thunk';
+// (you can keep the existing `import ReduxPromise from 'redux-promise';`
+// commented out for now, or remove it entirely — we are no longer using it)
+
 const store = createStore(
   rootReducer,
   //composeEnhancers(applyMiddleware(ReduxPromise))
@@ -877,19 +887,21 @@ export const fetchComments = () => dispatch => {
 };
 ```
 
-Go to **src/reducers/commentsReducer.js** and replace
+Now go to **src/reducers/commentsReducer.js**. With `redux-promise` the reducer was reading `action.payload.data` (because `payload` was the whole axios response). With the thunk above we are dispatching `payload: response.data` directly, so the reducer no longer needs the `.data` hop.
+
+Change your current reducer body...
 
 ```javascript
-return [...state, ...action.payload];
+return _.mapKeys(action.payload.data, 'id');
 ```
 
-with
+... to:
 
 ```javascript
 return Object.assign({}, state, _.mapKeys(action.payload, 'id'));
 ```
 
-<!-- TODO: Explain return Object.assign({}, state, _.mapKeys(action.payload, 'id')); -->
+(`Object.assign({}, state, ...)` merges the newly normalized batch into the existing state instead of replacing it; useful if you fetch more comments later without throwing away what you already have.)
 
 Go to your component, example: **src/App.js** and...
 

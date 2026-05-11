@@ -15,20 +15,19 @@ First, install enzyme and the proper adapter (we are using React 16).
 CMD or terminal:
 
 ```
-npm install enzyme enzyme-adapter-react-16 jest-cli@20.0.4 --save-dev  
+npm install enzyme enzyme-adapter-react-16 --save-dev
 ```
 
-Yes... We are saving it as a dev dependency. So, if you go to your package.json you will see something like:
+Yes... We are saving them as dev dependencies. So, if you go to your package.json you will see something like:
 
 ```json
 "devDependencies": {
-  "enzyme": "^3.3.0",
-  "enzyme-adapter-react-16": "^1.1.1",
-  "jest-cli": "^20.0.4"
+  "enzyme": "^3.8.0",
+  "enzyme-adapter-react-16": "^1.7.1"
 }
 ```
 
-Note: At the moment I'm writing this tutorial the last Jest version is 23.4.1, however, react-scripts is locked at 20.0.4 so other will not work.
+Note: `create-react-app` already ships `jest` (currently in the 23/24 series, depending on your CRA version) — there's no need to install Jest yourself, and you should *not* pin `jest-cli` to an older version: the bundled Jest is what `react-scripts test` invokes.
 
 We are going to create **src/tempPolyfills.js**
 

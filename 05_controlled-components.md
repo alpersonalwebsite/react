@@ -173,13 +173,18 @@ However, we can agree in two things.
 **One solution** for this is `Debounce` which ensures that a `handler` is not fire or called so often.
 For more information (also Throttling): https://www.npmjs.com/package/react-throttle
 
-1. Install `react-throttle` package
-2. Destructure and import Debounce
-3. Add the Debounce component with the proper configuration wrapping the input
-   (... and remove `value={this.state.yourName}` from your input, otherwise it will not work. Don't worry, Debounce will take care of showing the proper data/value)
+1. Install `react-throttle` package: `npm install --save react-throttle`
+2. Import `Debounce` (named export):
 
 ```javascript
-<Debounce time="400" handler="onChange">
+import { Debounce } from 'react-throttle';
+```
+
+3. Add the Debounce component with the proper configuration wrapping the input
+   (... and remove `value={this.state.yourName}` from your input, otherwise it will not work. The input becomes uncontrolled while Debounce manages when the `onChange` is allowed to fire.)
+
+```javascript
+<Debounce time={400} handler="onChange">
   <input
     type="text"
     style={{ display: 'block' }}
