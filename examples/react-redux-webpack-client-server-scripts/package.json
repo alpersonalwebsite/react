@@ -8,7 +8,7 @@
     "test": "jest --env=jsdom --watchAll --colors --config=config/jest/jest.config.json  --rootDir",
     "start": "cross-env START='true' NODE_ENV=development webpack-dev-server --config config/webpack.config.dev.client.js",
     "build:dev": "cross-env NODE_ENV=development webpack --config config/webpack.config.dev.client.js",
-    "build": "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.js",
+    "build": "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.client.js",
     "build:server": "cross-env NODE_ENV=production webpack --config config/webpack.config.prod.server.js --env.NODE_ENV=production --watch",
     "dev": "cross-env NODE_ENV=development nodemon --watch config --watch server --inspect server/index.js",
     "build:server:flex": "cross-env nodemon --watch build build/server-prod-bundle.js",
