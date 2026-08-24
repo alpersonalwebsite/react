@@ -1,14 +1,25 @@
 {
+  "rootDir": "../..",
   "verbose": true,
   "collectCoverageFrom": [
     "<rootDir>/src/**/*.{js,jsx,mjs}",
     "!**/node_modules/**"
   ],
   "moduleNameMapper": {
-    "\\.css$": "identity-obj-proxy"
+    "\\.css$": "identity-obj-proxy",
+    "\\.(jpg|jpeg|png|gif|svg|ico|webp)$": "<rootDir>/config/jest/fileMock.js"
   },
   "transform": {
     "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
   },
-  "setupFiles": ["<rootDir>/config/jest/setupTests.js"]
+  "setupFiles": [
+    "<rootDir>/config/jest/setupTests.js"
+  ],
+  "testPathIgnorePatterns": [
+    "/node_modules/",
+    "<rootDir>/server/"
+  ],
+  "snapshotSerializers": [
+    "enzyme-to-json/serializer"
+  ]
 }
