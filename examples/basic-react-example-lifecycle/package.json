@@ -1,5 +1,5 @@
 {
-  "name": "BasicReactMapWithState",
+  "name": "basic-react-example-lifecycle",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
