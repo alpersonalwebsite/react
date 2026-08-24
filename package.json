@@ -1,0 +1,31 @@
+{
+  "name": "learning-react",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Learning React topic by topic: elements, components, props, local state, controlled components, lifecycle, conditional rendering, Redux, unit tests, Webpack and a full client app.",
+  "keywords": [
+    "react",
+    "redux",
+    "webpack",
+    "notes",
+    "tutorial"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "test": "node scripts/check-snippets.mjs && node scripts/check-links.mjs",
+    "test:snippets": "node scripts/check-snippets.mjs",
+    "test:links": "node scripts/check-links.mjs",
+    "test:links:external": "node scripts/check-links.mjs --external"
+  },
+  "devDependencies": {
+    "@babel/parser": "7.9.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alpersonalwebsite/react.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alpersonalwebsite/react/issues"
+  },
+  "homepage": "https://github.com/alpersonalwebsite/react#readme"
+}

@@ -2190,7 +2190,7 @@ if (isHtmlWebpackPlugin == 'true') {
 
 In `plugins` sections assign as value the variable `generalPlugins`
 
-```json
+```javascript
 plugins: generalPlugins
 ```
 
@@ -2381,6 +2381,7 @@ Then, in server/server.js
 2. Create an `else` for production and require `../config/webpack.config.prod.server.js` executing `webpack()` method with it.
 
 ```javascript
+// check: skip the else branch to add, whose if is described in the prose above
 else {
   const config = require('../config/webpack.config.prod.server.js');
   webpack(config);
@@ -2488,7 +2489,7 @@ We have been "playing" with our configuration files doing and undoing changes. T
 * [config\webpack.config.dev.client.js](./examples/react-redux-webpack-client-server-scripts/config/webpack.config.dev.client.js)
 * [config\webpack.config.dev.server.js](./examples/react-redux-webpack-client-server-scripts/config/webpack.config.dev.server.js)
 * [config\webpack.config.prod.client.js](./examples/react-redux-webpack-client-server-scripts/config/webpack.config.prod.client.js)
-* [config\webpack.config.prod.server.js](./react-redux-webpack-client-server-scripts/config/webpack.config.prod.server.js)
+* [config\webpack.config.prod.server.js](./examples/react-redux-webpack-client-server-scripts/config/webpack.config.prod.server.js)
 
 In our `server/server.js` we are going to make some changes to our if (!isProd) conditional. I will keep the previous code commented.
 In either case (if is prod or not) we are going to require the client and server configuration files, and, instead of passing one argument to webpack() method we are going to pass an array with both (client and server). The output that we are holding in the variable compiler will be an object; within its properties, we will find compilers which data type is an array and it holds 2 elements. We can easily refer to each one doing: compiler.compilers[index].

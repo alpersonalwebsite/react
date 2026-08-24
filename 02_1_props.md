@@ -174,6 +174,7 @@ Second, install the package `uuid` and use the `version 1` (aka, timestamp). The
 Before:
 
 ```javascript
+// check: skip the opening tag only, shown as the "before" of a before-and-after pair
 <button
 onClick={() =>
   this.setState({
@@ -185,6 +186,7 @@ onClick={() =>
 After:
 
 ```javascript
+// check: skip the "after" half of a before-and-after pair: an opening tag on its own
 <button
   onClick={() =>
     this.setState({

@@ -14,7 +14,7 @@ You can try `React online` through any of the major JS "sandboxes" or "playgroun
 ```
 
 **For production:** @16.x.x
-```javascript
+```html
 <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
 ```

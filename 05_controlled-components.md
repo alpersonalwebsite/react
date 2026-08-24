@@ -380,7 +380,7 @@ export default App;
 
 Result: (check your Dev Tools Console)
 
-```javascript
+```
 Object { name: "Peter", lastName: "Pan", age: "30" }      App.js:18
 ```
 

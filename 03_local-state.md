@@ -39,6 +39,7 @@ class App extends Component {
       </div>
     );
   }
+}
 ```
 
 **What are Template literals...?**
