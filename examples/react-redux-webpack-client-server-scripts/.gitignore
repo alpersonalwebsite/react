@@ -30,7 +30,6 @@ pids
 
 # testing
 /coverage
-**/__snapshots__
 
 # TS v1 declarations files
 typings/
@@ -39,3 +38,14 @@ typings/
 .yarn-integrity
 
 *stats.*
+
+# NOTE ON A RULE THAT USED TO BE HERE: the snapshot ignore.
+#
+# Jest snapshots belong in version control. Ignored, a snapshot test has nothing
+# to compare against, so it writes a new one and passes outside CI and refuses to
+# write and fails inside it. Neither is a check.
+#
+# The root .gitignore had the same rule and was fixed first; this file kept it, so
+# the snapshots stayed untracked and CI failed with "New snapshot was not written"
+# on a branch where they had been generated locally. Sweep every ignore file in a
+# repository, not just the one at the top.
