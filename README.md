@@ -47,9 +47,9 @@ why they are listed here.
 | project | what it shows |
 | --- | --- |
 | [basic-react-example-state](./examples/basic-react-example-state) | the same UI as a class component with state and as a functional component with props |
-| [basic-react-example\[map-with-key\]](./examples/basic-react-example%5Bmap-with-key%5D) | the `key` prop, and why a stable one matters |
+| [basic-react-example-map-with-key](./examples/basic-react-example-map-with-key) | the `key` prop, and why a stable one matters |
 | [basic-react-example-lifecycle](./examples/basic-react-example-lifecycle) | every lifecycle method logging as it fires |
-| [basic-webpack\[default\]](./examples/basic-webpack%5Bdefault%5D) | webpack with no configuration at all |
+| [basic-webpack-default](./examples/basic-webpack-default) | webpack with no configuration at all |
 | [react-redux-webpack-client](./examples/react-redux-webpack-client) | React and Redux built with webpack directly, no create-react-app |
 | [react-redux-webpack-client-server](./examples/react-redux-webpack-client-server) | the same, plus server-side rendering with express |
 | [react-redux-webpack-client-server-scripts](./examples/react-redux-webpack-client-server-scripts) | the same again, with client and server builds split apart |

@@ -54,9 +54,9 @@ jobs:
       matrix:
         example:
           - basic-react-example-state
-          - basic-react-example[map-with-key]
+          - basic-react-example-map-with-key
           - basic-react-example-lifecycle
-          - basic-webpack[default]
+          - basic-webpack-default
           - react-redux-webpack-client
           - react-redux-webpack-client-server
           - react-redux-webpack-client-server-scripts
