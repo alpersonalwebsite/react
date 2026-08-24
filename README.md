@@ -39,6 +39,38 @@
 - [11 Webpack (custom toolchain, SSR)](./11_webpack.md)
 - [12 Full client app — layouts](./12_full-client-app.md)
 
+### Examples
+
+Seven runnable projects, each with its own README. Four of them were not linked from anywhere before, which is
+why they are listed here.
+
+| project | what it shows |
+| --- | --- |
+| [basic-react-example-state](./examples/basic-react-example-state) | the same UI as a class component with state and as a functional component with props |
+| [basic-react-example\[map-with-key\]](./examples/basic-react-example%5Bmap-with-key%5D) | the `key` prop, and why a stable one matters |
+| [basic-react-example-lifecycle](./examples/basic-react-example-lifecycle) | every lifecycle method logging as it fires |
+| [basic-webpack\[default\]](./examples/basic-webpack%5Bdefault%5D) | webpack with no configuration at all |
+| [react-redux-webpack-client](./examples/react-redux-webpack-client) | React and Redux built with webpack directly, no create-react-app |
+| [react-redux-webpack-client-server](./examples/react-redux-webpack-client-server) | the same, plus server-side rendering with express |
+| [react-redux-webpack-client-server-scripts](./examples/react-redux-webpack-client-server-scripts) | the same again, with client and server builds split apart |
+
+**One flag for the webpack projects.** webpack 4 hashes with md4, which OpenSSL 3 removed from its default
+provider, so on Node 17 and later a build fails with `ERR_OSSL_EVP_UNSUPPORTED` before it starts. Prefix the
+build with `NODE_OPTIONS=--openssl-legacy-provider`. Each README says so where it is needed.
+
+## Checking the notes
+
+The code in these lessons is checked rather than trusted:
+
+```sh
+npm install
+npm test
+```
+
+That parses every JavaScript and JSON snippet in the lesson files, and resolves every relative link, image and
+anchor. `npm run test:links:external` also checks the outbound URLs, which CI does monthly rather than on
+every push, because a link to somebody else's site rots on a clock rather than on commits.
+
 ## Before starting
 
 ---
