@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Intro /> matches the previous Snapshot 1`] = `
+<Intro>
+  <div>
+    <h1>
+      Hello
+    </h1>
+    Intro
+  </div>
+</Intro>
+`;

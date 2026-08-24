@@ -1,5 +1,5 @@
 {
-  "name": "BasicReactMapWithState",
+  "name": "basic-react-example-state",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,8 +11,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom --watchAll",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "test:watch": "react-scripts test --env=jsdom --watchAll"
   },
   "browserslist": [
     ">0.2%",

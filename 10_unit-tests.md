@@ -31,7 +31,7 @@ Note: `create-react-app` already ships `jest` (currently in the 23/24 series, de
 
 We are going to create **src/tempPolyfills.js**
 
-```javascript
+```
 const requestAnimationFrame = (global.requestAnimationFrame = callback => {
   setTimeout(callback, 0);
 });
@@ -305,7 +305,7 @@ describe('<App />', () => {
       wrapper.update();
     });
 
-    it('updates the value of `friend` state's property', () => {
+    it("updates the value of the `friend` state property", () => {
       console.log(wrapper.state());
       expect(wrapper.state().friend).toEqual(theFriend);
     });
@@ -321,7 +321,7 @@ describe('<App />', () => {
         wrapper.find('button').simulate('submit');
       });
 
-      it('adds the new friend to `friends` state's property', () => {
+      it("adds the new friend to the `friends` state property", () => {
         console.log(wrapper.state());
         expect(wrapper.state().friends[0]).toEqual(theFriend);
       });
@@ -421,7 +421,7 @@ describe('<App />', () => {
 
 Result:
 
-```javascript
+```
 <div>
   <h1 className="title">Add your friends!</h1>
   <form onSubmit={[Function]}>
@@ -456,7 +456,7 @@ Just replace shallow with mount.
 
 Result:
 
-```javascript
+```
 <App>
   <div>
     <h1 className="title">Add your friends!</h1>

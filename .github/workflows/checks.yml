@@ -1,0 +1,88 @@
+# Three kinds of check, split by what each one can actually go wrong from.
+#
+#   notes           parses every snippet in the lesson files and resolves every relative link and image.
+#                   Offline, seconds, so it runs on every push.
+#   examples        installs, tests and builds each example project. This is the job that matters: every
+#                   defect fixed in this branch was in the examples, and none of them was visible from the
+#                   markdown. Three of the seven could not even be installed on a current npm.
+#   external-links  fetches the outbound URLs. Scheduled monthly rather than per push, because a link to
+#                   somebody else's site rots on a clock rather than on commits, and this repository went
+#                   from 2020 to 2026 almost untouched: a push-triggered check would have looked on the few
+#                   days it was edited and never in between.
+#
+# NODE_OPTIONS=--openssl-legacy-provider is set for the example jobs because webpack 4 hashes modules with
+# md4 and OpenSSL 3 removed md4 from its default provider. Without it every webpack build here fails with
+# ERR_OSSL_EVP_UNSUPPORTED before it starts. That is the era-appropriate answer for notes pinned to 2019
+# tooling; upgrading webpack would fix it and would stop these being notes about the toolchain they describe.
+#
+# `npm install`, not `npm ci`: every example carries a yarn.lock and no package-lock.json.
+
+name: checks
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  schedule:
+    # 06:00 UTC on the first of each month.
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+
+# Read-only. Nothing here writes anything, and the default token grants more than these need.
+permissions:
+  contents: read
+
+jobs:
+  notes:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install --no-audit --no-fund
+      - run: npm run test:snippets
+      - run: npm run test:links
+
+  examples:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    strategy:
+      # Report every example rather than stopping at the first failure: the point is to know which ones work.
+      fail-fast: false
+      matrix:
+        example:
+          - basic-react-example-state
+          - basic-react-example-map-with-key
+          - basic-react-example-lifecycle
+          - basic-webpack-default
+          - react-redux-webpack-client
+          - react-redux-webpack-client-server
+          - react-redux-webpack-client-server-scripts
+    defaults:
+      run:
+        working-directory: examples/${{ matrix.example }}
+    env:
+      # webpack 4 needs md4; see the note at the top of this file.
+      NODE_OPTIONS: --openssl-legacy-provider
+      CI: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install --no-audit --no-fund
+      - run: npm test
+      - run: npm run build
+
+  external-links:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install --no-audit --no-fund
+      - run: npm run test:links:external

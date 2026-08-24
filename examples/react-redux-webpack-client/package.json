@@ -1,6 +1,7 @@
 {
-  "name": "nocra",
+  "name": "react-redux-webpack-client",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -29,9 +30,7 @@
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.2.0",
-    "@babel/preset-es2015": "^7.0.0-beta.53",
     "@babel/preset-react": "^7.0.0",
-    "@babel/preset-stage-2": "^7.0.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^24.3.1",
     "babel-loader": "^8.0.4",
@@ -53,15 +52,31 @@
     "webpack-merge": "^4.1.5"
   },
   "jest": {
-    "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}", "!**/node_modules/**"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,mjs}",
+      "!**/node_modules/**"
+    ],
     "moduleNameMapper": {
       "\\.css$": "identity-obj-proxy"
     },
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
     },
-    "coverageReporters": ["text-summary"],
-    "setupFiles": ["<rootDir>/src/setupTests.js"]
+    "coverageReporters": [
+      "text-summary"
+    ],
+    "setupFiles": [
+      "<rootDir>/src/setupTests.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
-  "browserslist": ["last 1 version", "> 1%", "IE 11", "IE 10", "IE 9"]
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "IE 11",
+    "IE 10",
+    "IE 9"
+  ]
 }

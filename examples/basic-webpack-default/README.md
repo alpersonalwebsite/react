@@ -1,8 +1,8 @@
-# Redux and webpack, client and server, split scripts
+# webpack, with no configuration
 
-The same application as the client-and-server example, with the build split into separate client and
-server webpack configs and driven by more granular npm scripts. Useful for seeing which parts of a build
-belong to which target.
+The smallest webpack project there is: two source files, no config file, and the defaults. It exists to
+show what webpack does before you tell it anything, which is to read `src/index.js` and write
+`dist/main.js`.
 
 Part of the [webpack](../../11_webpack.md) lesson.
 
@@ -10,10 +10,7 @@ Part of the [webpack](../../11_webpack.md) lesson.
 
 ```sh
 npm install
-npm test
-NODE_OPTIONS=--openssl-legacy-provider npm run build
-npm run build:server
-npm run dev
+NODE_OPTIONS=--openssl-legacy-provider npx webpack
 ```
 
 ## One flag you will need

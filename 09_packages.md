@@ -144,7 +144,7 @@ class Child extends Component {
     yourNumbers: PropTypes.array
   }
   render() {
-    return ...
+    return null; // the render body is not the point on this page
   }
 }
 ```

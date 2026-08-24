@@ -424,9 +424,7 @@ Now... Let's install some dependencies:
 * babel-plugin-universal-import
 * @babel/polyfill
 * @babel/preset-env
-* @babel/preset-es2015
 * @babel/preset-react
-* @babel/preset-stage-2
 
 ```
 npm install --save nodemon
@@ -437,8 +435,37 @@ npm install --save-dev webpack webpack-cli webpack-dev-server
 ```
 
 ```
-npm install --save-dev @babel/core babel-loader babel-plugin-async-to-promises @babel/plugin-syntax-dynamic-import babel-plugin-transform-async-to-promises @babel/plugin-proposal-class-properties @babel/plugin-transform-runtime babel-plugin-universal-import @babel/polyfill @babel/preset-env @babel/preset-es2015 @babel/preset-react @babel/preset-stage-2
+npm install --save-dev @babel/core babel-loader babel-plugin-async-to-promises @babel/plugin-syntax-dynamic-import babel-plugin-transform-async-to-promises @babel/plugin-proposal-class-properties @babel/plugin-transform-runtime babel-plugin-universal-import @babel/polyfill @babel/preset-env @babel/preset-react
 ```
+
+**Two notes on that command, both about time rather than about babel.**
+
+`@babel/preset-es2015` and `@babel/preset-stage-2` used to be in this list and are gone. Neither was ever
+used: the babel config further down this page, and every `.babelrc` in `examples/`, lists only
+`@babel/preset-env` and `@babel/preset-react`. And `preset-es2015` never had a stable 7.x release, so
+installing it pulls `7.0.0-beta.53`, which peer-requires a beta `@babel/core` and makes the whole install fail
+on npm 7 and later:
+
+```
+npm error ERESOLVE unable to resolve dependency tree
+npm error peer @babel/core@">=7.0.0-beta.50 <7.0.0-rc.0" from @babel/preset-es2015@7.0.0-beta.53
+```
+
+`preset-stage-2` was removed from Babel 7 before release, so it is a leftover from Babel 6 as well.
+
+The command above still will not resolve today, and that is worth knowing rather than discovering. It names no
+versions, so it installs whatever is current, and the current set is not internally consistent:
+
+```
+npm error Conflicting peer dependency: @babel/core@8.0.1
+npm error   peer @babel/core@"^8.0.0" from @babel/plugin-transform-runtime@8.0.1
+npm error   peer @babel/core@"^7.0.0-0" from @babel/plugin-proposal-class-properties@7.18.6
+```
+
+That is what an unversioned install command becomes years later, and it is a good argument for pinning in a
+tutorial. For a set that does work, copy the `devDependencies` from
+[examples/react-redux-webpack-client/package.json](./examples/react-redux-webpack-client/package.json), which
+is pinned to this era and installs cleanly.
 
 Now, in our package.json we are going to add the following script...
 
@@ -2190,7 +2217,7 @@ if (isHtmlWebpackPlugin == 'true') {
 
 In `plugins` sections assign as value the variable `generalPlugins`
 
-```json
+```javascript
 plugins: generalPlugins
 ```
 
@@ -2381,6 +2408,7 @@ Then, in server/server.js
 2. Create an `else` for production and require `../config/webpack.config.prod.server.js` executing `webpack()` method with it.
 
 ```javascript
+// check: skip the else branch to add, whose if is described in the prose above
 else {
   const config = require('../config/webpack.config.prod.server.js');
   webpack(config);
@@ -2488,7 +2516,7 @@ We have been "playing" with our configuration files doing and undoing changes. T
 * [config\webpack.config.dev.client.js](./examples/react-redux-webpack-client-server-scripts/config/webpack.config.dev.client.js)
 * [config\webpack.config.dev.server.js](./examples/react-redux-webpack-client-server-scripts/config/webpack.config.dev.server.js)
 * [config\webpack.config.prod.client.js](./examples/react-redux-webpack-client-server-scripts/config/webpack.config.prod.client.js)
-* [config\webpack.config.prod.server.js](./react-redux-webpack-client-server-scripts/config/webpack.config.prod.server.js)
+* [config\webpack.config.prod.server.js](./examples/react-redux-webpack-client-server-scripts/config/webpack.config.prod.server.js)
 
 In our `server/server.js` we are going to make some changes to our if (!isProd) conditional. I will keep the previous code commented.
 In either case (if is prod or not) we are going to require the client and server configuration files, and, instead of passing one argument to webpack() method we are going to pass an array with both (client and server). The output that we are holding in the variable compiler will be an object; within its properties, we will find compilers which data type is an array and it holds 2 elements. We can easily refer to each one doing: compiler.compilers[index].

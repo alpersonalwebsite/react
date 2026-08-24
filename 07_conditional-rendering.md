@@ -47,7 +47,6 @@ render() {
     </div>
   );
 }
-}
 ```
 
 **Ternary operator**
@@ -75,7 +74,6 @@ render() {
       {conditionIs && `I've a crystal clear state... I'm ${conditionIs}`}
     </div>
   );
-}
 }
 ```
 

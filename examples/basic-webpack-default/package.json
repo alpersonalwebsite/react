@@ -1,9 +1,10 @@
 {
-  "name": "webpack",
+  "name": "basic-webpack-default",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run build && node -e \"require('assert').ok(require('fs').existsSync('dist/bundle.js'), 'webpack did not produce dist/bundle.js')\"",
     "build": "webpack --config=webpack.config.js"
   },
   "keywords": [],

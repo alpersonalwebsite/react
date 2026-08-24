@@ -1,9 +1,10 @@
-# Local state
+# Mapping with a key
 
-A create-react-app project with the same UI built twice, once as a class component holding state and once
-as a functional component receiving props, so the two sit side by side in one page.
+A create-react-app project for the `key` prop: it renders a list from state and gives each item a stable
+key, which is what stops React from reusing the wrong DOM node when the list changes. The lesson walks
+through what goes wrong with an index as the key and what a timestamp fixes.
 
-Part of the [local state](../../03_local-state.md) lesson.
+Part of the [props](../../02_1_props.md) lesson.
 
 ## Run it
 

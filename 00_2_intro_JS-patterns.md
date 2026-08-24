@@ -114,6 +114,7 @@ console.log([].push)
 
 Result:
 ```javascript
+// check: skip the returned function on its own, shown as the result of the call above
 function (arr) {
   let tempArr = [...arr]
   tempArr.push(element)

@@ -174,6 +174,7 @@ Second, install the package `uuid` and use the `version 1` (aka, timestamp). The
 Before:
 
 ```javascript
+// check: skip the opening tag only, shown as the "before" of a before-and-after pair
 <button
 onClick={() =>
   this.setState({
@@ -185,6 +186,7 @@ onClick={() =>
 After:
 
 ```javascript
+// check: skip the "after" half of a before-and-after pair: an opening tag on its own
 <button
   onClick={() =>
     this.setState({
@@ -200,7 +202,7 @@ After:
 Third, in your `Child component` destructure the object and use `timestamp` as value for the `key`.
 Now, try again checking x-checkbox and clicking on Add.
 
-I'm attaching the entire example with all the needed code in the folder: `examples/basic-react-example[map-with-key]`
+I'm attaching the entire example with all the needed code in the folder: `examples/basic-react-example-map-with-key`
 
 _Remember_: each key should be `unique` and `static` in the `context` of x-array. This means that if we have 2 different arrays that we are mapping, we can have same key values since these "IDs" are referring to elements of different array (just a shared addresses but on different States).
 

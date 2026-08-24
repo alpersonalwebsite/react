@@ -10,9 +10,45 @@ yarn-error.log*
 
 # misc
 .DS_Store
-.env
-.env.*
+
+# Environment files. BOTH glob forms, because neither implies the other. `.env*`
+# is a prefix glob and catches .env, .env.local and .envrc, the last of which
+# direnv reads and people export credentials from. `*.env` is a suffix glob, for
+# names like audit.env or production.env. This file used to list `.env` plus
+# `.env.*`, and the dot is not cosmetic: `.env.*` requires a SECOND dot, so it
+# never matched .envrc and nothing matched the suffix form at all.
+#
+# The negation re-includes the one file in this family you are meant to commit,
+# and it has to come after the patterns it undoes, since the last matching rule
+# wins.
+.env*
+*.env
 !.env.example
+
+# Credentials and secrets. None of these examples need any, which is exactly when
+# an accidental commit happens.
+secrets/
+credentials*
+*.pem
+*.key
+
+# SSH private keys, which *.pem and *.key do not cover: a key in its default
+# filename has no extension at all. `id_rsa*` alone is not enough either, because
+# ssh-keygen's default type is ed25519 now rather than rsa (man ssh-keygen:
+# "ed25519 (the default)"). Enumerated rather than globbed as `id_*`, which would
+# also match ordinary source files.
+id_rsa*
+id_ed25519*
+id_ecdsa*
+id_dsa*
+*.ppk
+.ssh/
+
+# Local databases. Both sqlite spellings: the extension is a convention rather
+# than a rule.
+*.sqlite
+*.sqlite3
+*.db
 
 # npm cache dir
 .npm
@@ -20,6 +56,17 @@ yarn-error.log*
 # build output
 build/
 dist/
+
+# Generated bundles inside the examples' public/ directories. `public/` cannot be
+# ignored wholesale, because it also holds template.html, manifest.json,
+# favicon.ico and an image, which are sources. These patterns are the webpack
+# output that used to be committed alongside them, including the pre-compressed
+# copies that express-static-gzip serves and the content-hashed CSS.
+**/public/*bundle.js
+**/public/*bundle.js.map
+**/public/*bundle.js.gz
+**/public/*bundle.js.br
+**/public/*-[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]*.css
 
 # Runtime data
 pids
@@ -29,7 +76,21 @@ pids
 
 # testing
 coverage/
-**/__snapshots__
+
+# NOTE ON A RULE THAT USED TO BE HERE: `**/__snapshots__`.
+#
+# Jest snapshots belong in version control. With them ignored, a snapshot test
+# has nothing to compare against on a fresh clone, and what it does instead
+# depends on where it runs: measured on this repository's own Intro.test.js,
+# jest WRITES a new snapshot and passes when it does not think it is in CI, and
+# refuses to write and FAILS when it does. Neither outcome verifies anything, and
+# the passing one is worse, because `toMatchSnapshot()` reads like an assertion
+# while recording whatever it was handed.
+
+# Editor and OS noise.
+.idea/
+.vscode/
+__pycache__/
 
 # TS v1 declarations files
 typings/
@@ -37,6 +98,7 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
+# webpack bundle stats
 *stats.*
 
 *-old*
